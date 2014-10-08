@@ -6,7 +6,7 @@ USING_NS_CC;
 
 bool Minimap::init()
 {
-	auto sprMinimap = Sprite::create("Minimap_Fake.png");
+	auto sprMinimap = Sprite::create("Minimap_Frame.png");
 	sprMinimap->setAnchorPoint(Point(0, 1));
 	sprMinimap->setOpacity(120);
 	sprMinimap->setPosition(Point(m_WinWidth - 200, m_WinHeight - 15));
