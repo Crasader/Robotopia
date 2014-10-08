@@ -5,7 +5,7 @@ USING_NS_CC;
 bool ResourceManager::init()
 {
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Robotopia.plist");
-
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ETLinearMissileCollision.plist");
 	return true;
 }
 
