@@ -41,6 +41,7 @@ bool GameLayer::initWorldFromData()
 		this->removeChild( object );
 	}
 	m_InteractiveObjects.clear();
+
 	//월드 데이터를 본래는 리소스 메니저에게 키값을 넘겨서 받아와야 한다.
 	//받아야 하는 데이터들 BoxSize MapSize MapData(값)
 

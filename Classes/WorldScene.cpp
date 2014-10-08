@@ -30,7 +30,8 @@ bool WorldScene::init()
 	this->addChild( m_GameLayer , WorldScene::ZOrder::GAMELAYER , TAG_GAME_LAYER );
 	this->addChild( m_BackgroundLayer , WorldScene::ZOrder::BACKGROUND , "TAG_BACKGROUND_LAYER" );
 	this->addChild( m_UILayer , WorldScene::ZOrder::UILAYER , "TAG_UI_LAYER" );
-
+	
+	m_UILayer->initializeUILayer();
 	return true;
 }
 
