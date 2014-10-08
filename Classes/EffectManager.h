@@ -16,11 +16,11 @@ public:
 	bool init();
 
 	void useEffect(EffectType selectedEffect, cocos2d::Rect obRect, int effectPlayNum, cocos2d::Point AnchorPoint);
-	void useEffect(EffectType selectedEffect, cocos2d::Rect effectRect, int effectPlayNum, cocos2d::Point AnchorPoint);
+	//void useEffect(EffectType selectedEffect, cocos2d::Rect effectRect, int effectPlayNum, cocos2d::Point AnchorPoint);
 	void useEffect(EffectType selectedEffect, cocos2d::Point obPoint, cocos2d::Size obSize, int effectPlayNum, cocos2d::Point AnchorPoint);
 
 private:
-	void useEffectLinearMissileCollision(cocos2d::Rect obRect, int effectPlayNum, Point AnchorPoint);
+	void useEffectLinearMissileCollision(cocos2d::Rect obRect, int effectPlayNum, cocos2d::Point AnchorPoint);
 	cocos2d::Sprite*	m_MainSprite;
 	cocos2d::Animation* m_MainAnimation;
 };
