@@ -98,9 +98,6 @@
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes\App</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\InteractiveObject.h">
       <Filter>Classes\InteractiveObject</Filter>
     </ClInclude>
@@ -154,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\LandGateway.h">
       <Filter>Classes\InteractiveObject\Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Classes\App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
