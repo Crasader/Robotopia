@@ -11,9 +11,9 @@ proj.android/
 proj.ios_mac/
 proj.linux/
 proj.wp8-xaml/
+proj.win32/
 cocos2d/
 [Dd]ebug.win32/
-proj.win32/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -65,6 +65,7 @@ dlldata.c
 *.pidb
 *.svclog
 *.scc
+*.filters
 
 # Chutzpah Test files
 _Chutzpah*
