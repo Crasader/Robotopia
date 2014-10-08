@@ -79,7 +79,29 @@ void EffectManager::useEffect(EffectType selectedEffect, cocos2d::Point obPoint,
 	return;
 }
 
+void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Rect effectRect, int effectPlayNum, cocos2d::Point AnchorPoint)
+{
+	switch (selectedEffect)
+	{
+	case ET_LINEAR_MISSILE_COLLISION:
+		//useEffectLinearMissileCollision(obRect, effectPlayNum, AnchorPoint);
+		break;
+	case ET_AIMING_MISSILE_COLLISION:
+		break;
+	case ET_PLAYER_FLOOR_COLLISION:
+		break;
 
+	}
+	return;
+}
+
+void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Point effectPoint, 
+												cocos2d::Size effectSize, int effectPlayNum, cocos2d::Point AnchorPoint)
+{
+	Rect effectRect(effectPoint.x, effectPoint.y, effectSize.width, effectSize.height);
+	useEffectSelectedSizeByUser(selectedEffect, effectRect, effectPlayNum, AnchorPoint);
+	return;
+}
 
 
 void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int effectPlayNum, Point AnchorPoint)
@@ -93,10 +115,13 @@ void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int ef
 	//이게 좀 앞에서 Rect값을 이용해서 터지면 좋겠다. 
 	float ratioX = obRect.size.width / m_MainSprite->getContentSize().width;
 	float ratioY = obRect.size.height / m_MainSprite->getContentSize().height;
+	
+	m_MainSprite->setScaleX(ratioX * needEffectScale);
+	m_MainSprite->setScaleY(ratioY * needEffectScale);
 
-
-	//auto animation = m_ETAnimations[ET_LINEAR_MISSILE_COLLISION];
 	m_MainSprite->runAction(Repeat::create(Animate::create(m_MainAnimation), effectPlayNum));
 
 	return;
 }
+
+
