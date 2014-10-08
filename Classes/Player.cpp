@@ -2,6 +2,7 @@
 #include "GameLayer.h"
 #include "AimingMissile.h"
 #include "LinearMissile.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
@@ -80,14 +81,14 @@ void Player::update(float dTime)
 	pos.y += m_Velocity.y*dTime;
 	
 	//키, 상태 처리
-	KeyState leftState = KeyStateManager::getKeyState(KC_LEFT);
-	KeyState rightState = KeyStateManager::getKeyState(KC_RIGHT);
+	KeyState leftState = InputManager::getKeyState(KC_LEFT);
+	KeyState rightState = InputManager::getKeyState(KC_RIGHT);
 
-	if (KeyStateManager::getKeyState(KC_TEST1) == KS_PRESS)
+	if (InputManager::getKeyState(KC_TEST1) == KS_PRESS)
 	{
 		m_Hp += 20;
 	}
-	if (KeyStateManager::getKeyState(KC_TEST2) == KS_PRESS)
+	if (InputManager::getKeyState(KC_TEST2) == KS_PRESS)
 	{
 		m_Hp -= 20;
 	}
@@ -116,7 +117,7 @@ void Player::update(float dTime)
 	}
 	else
 	{
-		if (KeyStateManager::getKeyState(KC_ATTACK) && (m_State == PS_STAND || m_State == PS_WALK))
+		if (InputManager::getKeyState(KC_ATTACK) && (m_State == PS_STAND || m_State == PS_WALK))
 		{
 			changeState(PS_ATTACK);
 			m_Velocity.x = 0;
@@ -124,7 +125,7 @@ void Player::update(float dTime)
 
 		if (m_State != PS_ATTACK)
 		{
-			if (KeyStateManager::getKeyState(KC_JUMP))
+			if (InputManager::getKeyState(KC_JUMP))
 			{
 				m_Velocity.y = 400;
 			}

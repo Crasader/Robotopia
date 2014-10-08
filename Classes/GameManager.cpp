@@ -19,17 +19,25 @@ void GameManager::releaseInstance()
 	if (m_pInstance)
 	{
 		delete m_pInstance;
-
 		m_pInstance = nullptr;
 	}
 }
 
 GameManager::GameManager()
 {
+	m_pInputManager = new InputManager();
 
 }
 
 GameManager::~GameManager()
 {
+	if (m_pInputManager != nullptr)
+	{
+		delete m_pInputManager;
+	}
+}
 
+InputManager* GameManager::getInputManagerInstance()
+{
+	return m_pInputManager;
 }

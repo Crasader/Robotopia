@@ -9,16 +9,18 @@
 #include "cocos2d.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
-
+#define GET_GAME_MANAGER() GameManager::getInstance()
+#define GET_INPUT_MANAGER() GameManager::getInstance()->getInputManagerInstance()
 
 class GameManager
 {
 public:
-	GameManager* getInstance();
+	static GameManager* getInstance();
 	void releaseInstance();
+	InputManager* getInputManagerInstance();
 private:
 	static GameManager* m_pInstance;
-	static InputManager* m_pInputManager;
+	InputManager* m_pInputManager;
 	GameManager();
 	~GameManager();
 };
