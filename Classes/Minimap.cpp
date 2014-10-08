@@ -6,6 +6,8 @@ USING_NS_CC;
 
 bool Minimap::init()
 {
+	this->scheduleUpdate();
+
 	return true;
 
 }

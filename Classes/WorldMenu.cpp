@@ -5,6 +5,8 @@ USING_NS_CC;
 
 bool WorldMenu::init()
 {
+	this->scheduleUpdate();
+
 	return true;
 }
 

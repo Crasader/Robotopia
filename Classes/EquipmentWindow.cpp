@@ -5,6 +5,7 @@ USING_NS_CC;
 
 bool EquipmentWindow::init()
 {
+	this->scheduleUpdate();
 
 	return true;
 }
