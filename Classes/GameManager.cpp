@@ -10,6 +10,8 @@ GameManager* GameManager::getInstance()
 	{
 		m_pInstance = new GameManager();
 	}
+
+	return m_pInstance;
 }
 
 void GameManager::releaseInstance()

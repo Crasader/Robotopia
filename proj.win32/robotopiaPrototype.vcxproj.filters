@@ -96,7 +96,7 @@
     <ClCompile Include="..\Classes\LandGateway.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
+    <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>Classes\Core\Manager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,7 +161,7 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes\App</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
+    <ClInclude Include="..\Classes\GameManager.h">
       <Filter>Classes\Core\Manager</Filter>
     </ClInclude>
   </ItemGroup>
