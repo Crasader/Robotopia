@@ -24,4 +24,12 @@ void GameManager::releaseInstance()
 	}
 }
 
+GameManager::GameManager()
+{
 
+}
+
+GameManager::~GameManager()
+{
+
+}
