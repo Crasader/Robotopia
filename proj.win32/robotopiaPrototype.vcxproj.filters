@@ -31,6 +31,9 @@
     <Filter Include="Classes\InteractiveObject\Missile">
       <UniqueIdentifier>{b757040d-808b-4ada-9bbb-34d9fccee41e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Core\Manager">
+      <UniqueIdentifier>{bb7be262-280a-45f4-a9c4-8808a9fb9501}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\InteractiveObject.cpp">
       <Filter>Classes\InteractiveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Utils.cpp">
+      <Filter>Classes\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LandFloor.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
@@ -90,8 +96,8 @@
     <ClCompile Include="..\Classes\LandGateway.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Utils.cpp">
-      <Filter>Classes\Core</Filter>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Classes\Core\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes\App</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Classes\Core\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
