@@ -1,5 +1,5 @@
 #include "EffectManager.h"
-
+#include "GameManager.h"
 USING_NS_CC;
 
 
@@ -109,8 +109,8 @@ void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int ef
 	float needEffectScale = 0.5;
 
 	//현욱이가 만들어 주면 여기 해제
-	//m_MainSprite = GET_RESOURCE_MANAGER()->createAnimation("ETLinearMissileCollision1.png");
-	//m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
+	m_MainSprite = GET_RESOURCE_MANAGER()->createAnimation("ETLinearMissileCollision1.png");
+	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
 
 	//이게 좀 앞에서 Rect값을 이용해서 터지면 좋겠다. 
 	float ratioX = obRect.size.width / m_MainSprite->getContentSize().width;
