@@ -21,5 +21,7 @@ public:
 
 private:
 
+	bool							m_WindowOn;
+	void							showEquipWindow();
 
 };

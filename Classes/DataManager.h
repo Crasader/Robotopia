@@ -1,3 +1,13 @@
 #pragma once
 #include "cocos2d.h"
-#include "GameManager.h"
+#include "Utils.h"
+
+
+class DataManager
+{
+public:
+	bool init();
+
+private:
+
+};
