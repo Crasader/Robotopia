@@ -1,4 +1,5 @@
 #include "LinearMissile.h"
+#include "GameManager.h"
 #include "Utils.h"
 #include <math.h>
 #define PIE 3.141592
@@ -15,7 +16,7 @@ bool LinearMissile::init()
 	m_Type = OT_LINEAR_MISSILE;
 	
 	m_MainSprite = Sprite::create();
-	auto animation = UtilFunctions::createAnimation("LinearMissile", 0, 10, 0.1f);
+	auto animation = GET_RESOURCE_MANAGER()->createAnimation("LinearMissile%d.png", 0, 10, 0.1f);
 	m_Animations[0] = animation;
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
 	

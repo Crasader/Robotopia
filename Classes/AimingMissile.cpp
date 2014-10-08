@@ -1,6 +1,7 @@
 
 
 #include "AimingMissile.h"
+#include "GameManager.h"
 #include <math.h>
 
 USING_NS_CC;
@@ -14,7 +15,7 @@ bool AimingMissile::init()
 	m_Type = OT_AIMING_MISSILE;
 
 	m_MainSprite = Sprite::create();
-	auto animation = UtilFunctions::createAnimation("AimingMissile", 1, 8, 0.1f);
+	auto animation = GET_RESOURCE_MANAGER()->createAnimation("AimingMissile%d.png", 1, 8, 0.1f);
 	m_Animations[0] = animation;
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
 
