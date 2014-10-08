@@ -7,12 +7,12 @@
 *.sln.docstates
 
 # Build results
-proj.android/
-proj.ios_mac/
-proj.linux/
-proj.wp8-xaml/
-proj.win32/
-cocos2d/
+[Pp]roj.android/
+[Pp]roj.ios_mac/
+[Pp]roj.linux/
+[Pp]roj.wp8-xaml/
+[Pp]roj.win32/
+[Cc]ocos2d/
 [Dd]ebug.win32/
 [Dd]ebug/
 [Dd]ebugPublic/

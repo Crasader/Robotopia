@@ -42,9 +42,6 @@
     <ClCompile Include="..\Classes\InteractiveObject.cpp">
       <Filter>Classes\InteractiveObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Utils.cpp">
-      <Filter>Classes\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\LandFloor.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\LandGateway.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Utils.cpp">
+      <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
