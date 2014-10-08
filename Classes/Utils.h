@@ -45,11 +45,3 @@ enum Direction
 	DIR_DOWN = 8,
 };
 typedef int Directions;
-
-//유틸 함수 모음. 
-
-class UtilFunctions
-{
-public:
-	static cocos2d::Animation* createAnimation(const char* animationName, int startIdx, size_t frameNum, float delay);
-};
