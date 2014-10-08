@@ -15,7 +15,6 @@ bool GameLayer::init()
 	{
 		return false;
 	}
-	KeyStateManager::receiveKeyboardData( this );
 	m_WinRect.size = Director::getInstance()->getVisibleSize();
 	m_WinRect.origin = Director::getInstance()->getVisibleOrigin();
 	m_Player = nullptr;
