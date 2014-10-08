@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "WorldScene.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
@@ -9,6 +10,7 @@ AppDelegate::AppDelegate() {
 
 AppDelegate::~AppDelegate() 
 {
+	GET_GAME_MANAGER()->releaseInstance();
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {

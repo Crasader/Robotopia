@@ -24,6 +24,11 @@ cocos2d::Animation* ResourceManager::createAnimation(const char* format, int sta
 
 }
 
+cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float delay /*= -1*/)
+{
+	return nullptr;
+}
+
 cocos2d::Sprite* ResourceManager::createSprite(const char* spriteName)
 {
 	auto sprite = Sprite::createWithSpriteFrameName(spriteName);
