@@ -13,6 +13,7 @@ proj.linux/
 proj.wp8-xaml/
 cocos2d/
 [Dd]ebug.win32/
+proj.win32/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
