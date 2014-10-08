@@ -64,6 +64,8 @@ InputManager* GameManager::getInputManagerInstance()
 	{
 		m_pInputManager = new InputManager();
 	}
+
+	m_pInputManager->init();
 	return m_pInputManager;
 }
 
@@ -73,6 +75,7 @@ EffectManager* GameManager::getEffectManagerInstance()
 	{
 		m_pEffectManager = new EffectManager();
 	}
+	m_pEffectManager->init();
 	return m_pEffectManager;
 }
 
@@ -82,7 +85,7 @@ ResourceManager* GameManager::getResourceManagerInstance()
 	{
 		m_pResourceManager = new ResourceManager();
 	}
-
+	m_pResourceManager->init();
 	return m_pResourceManager;
 }
 
@@ -92,6 +95,6 @@ StageManager* GameManager::getStageManagerInstance()
 	{
 		m_pStageManager = new StageManager();
 	}
-
+	m_pStageManager->init();
 	return m_pStageManager; 
 }
