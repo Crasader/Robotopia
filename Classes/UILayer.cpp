@@ -86,7 +86,7 @@ void UILayer::drawCurrentHP(int currentHP, int maxHP)
 
 	float scaleHP = (float)currentHP / maxHP;
 	foreHP->setScaleX(scaleHP);
-	if (currentHP < m_prevHP && backHP->numberOfRunningActions() == 0)
+	if (currentHP < m_prevHP && backHP->getNumberOfRunningActions() == 0)
 	{
 		auto backHPaction = ScaleTo::create(1, scaleHP, 1);
 		backHP->runAction(backHPaction);
