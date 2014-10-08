@@ -39,7 +39,11 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		myRect.origin.x >= enemyRect.origin.x + enemyRect.size.width ||
 		myRect.origin.y >= enemyRect.origin.y + enemyRect.size.height))
 	{
-		collisionDir = DIR_RIGHT | DIR_LEFT | DIR_UP | DIR_DOWN;
+		//collisionDir = DIR_RIGHT | DIR_LEFT | DIR_UP | DIR_DOWN;
+		myRect.origin.x -= this->getVelocity().x*dTime;
+		myRect.origin.y -= this->getVelocity().y*dTime;
+		enemyRect.origin.x -= enemy->getVelocity().x*dTime;
+		enemyRect.origin.y -= enemy->getVelocity().y*dTime;
 	}
 	else
 	{
