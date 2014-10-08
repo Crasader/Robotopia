@@ -18,29 +18,32 @@ bool GameLayer::init()
 	KeyStateManager::receiveKeyboardData( this );
 	m_WinRect.size = Director::getInstance()->getVisibleSize();
 	m_WinRect.origin = Director::getInstance()->getVisibleOrigin();
-	initWorldFromData( MAPDATA );
-	this->scheduleUpdate();
+	m_Player = nullptr;
 
+	this->scheduleUpdate();
+	initWorldFromData();
 	addMovingBackground();
+
+	UserDefault::getInstance()->setIntegerForKey( "mapWidth" , 48 );
+	UserDefault::getInstance()->setIntegerForKey( "mapHeight" , 20 );
+	UserDefault::getInstance()->setIntegerForKey( "boxWidth" , 32 );
+	UserDefault::getInstance()->setIntegerForKey( "boxHeight" , 32 );
+	UserDefault::getInstance()->setStringForKey( "mapData" , MAPDATA );
+
 
 	return true;
 }
 
-bool GameLayer::initWorldFromData( char* data )
+bool GameLayer::initWorldFromData()
 {
 	for( auto object : m_InteractiveObjects )
 	{
 		this->removeChild( object );
 	}
 	m_InteractiveObjects.clear();
-	m_Player = nullptr;
 	//월드 데이터를 본래는 리소스 메니저에게 키값을 넘겨서 받아와야 한다.
 	//받아야 하는 데이터들 BoxSize MapSize MapData(값)
-	UserDefault::getInstance()->setIntegerForKey( "mapWidth" , 48 );
-	UserDefault::getInstance()->setIntegerForKey( "mapHeight" , 20 );
-	UserDefault::getInstance()->setIntegerForKey( "boxWidth" , 32 );
-	UserDefault::getInstance()->setIntegerForKey( "boxHeight" , 32 );
-	UserDefault::getInstance()->setStringForKey( "mapData" , data );
+
 	m_BoxWidthNum = UserDefault::getInstance()->getIntegerForKey( "mapWidth" );
 	m_BoxHeightNum = UserDefault::getInstance()->getIntegerForKey( "mapHeight" );
 	m_BoxSize.width = UserDefault::getInstance()->getIntegerForKey( "boxWidth" );
@@ -86,9 +89,21 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_NONE:
 			return nullptr;
 		case OT_PLAYER:
-			object = Player::create();
-			zOrder = GameLayer::ZOrder::GAME_OBJECT;
-			m_Player = ( Player* )object;
+			if( m_Player == nullptr )
+			{
+				object = Player::create();
+				zOrder = GameLayer::ZOrder::GAME_OBJECT;
+				m_Player = ( Player* )object;
+				m_Player->retain();
+			}
+			else
+			{
+				m_Player->setAnchorPoint( Point( 0.5 , 0.5 ) );
+				m_Player->setPosition( position );
+				m_InteractiveObjects.push_back( m_Player );
+				this->addChild( m_Player , GameLayer::ZOrder::GAME_OBJECT );
+				return m_Player;
+			}
 			break;
 		case OT_FLOOR:
 			object = LandFloor::create();
@@ -254,7 +269,7 @@ std::vector<InteractiveObject*> GameLayer::getObjectsByPosition( cocos2d::Point 
 
 void GameLayer::gotoNextWorld()
 {
-	initWorldFromData( MAPDATA2 );
+	initWorldFromData();
 }
 
 std::vector<InteractiveObject*> GameLayer::getObjectsByRect( cocos2d::Rect checkRect )

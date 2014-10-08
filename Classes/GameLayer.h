@@ -56,7 +56,7 @@ public:
 	static cocos2d::Scene*			createScene();
 	OVERRIDE bool					init();  
 	OVERRIDE void					update(float dTime);
-	bool							initWorldFromData(char* data);
+	bool							initWorldFromData();
 	void							gotoNextWorld();
 
 	InteractiveObject*				addObject( ObjectType type , cocos2d::Point position );
