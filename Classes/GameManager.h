@@ -11,11 +11,13 @@
 #include "ResourceManager.h"
 #include "EffectManager.h"
 #include "StageManager.h"
+#include "DataManager.h"
 #define GET_GAME_MANAGER() GameManager::getInstance()
 #define GET_INPUT_MANAGER() GameManager::getInstance()->getInputManagerInstance()
 #define GET_EFFECT_MANAGER() GameManager::getInstance()->getEffectManagerInstance()
 #define GET_RESOURCE_MANAGER() GameManager::getInstance()->getResourceManagerInstance()
 #define GET_STAGE_MANAGER() GameManager::getInstance()->getStageManagerInstance()
+#define GET_DATA_MANAGER() GameManager::getInstance()->getDataManagerInstance()
 
 class GameManager
 {
@@ -26,12 +28,14 @@ public:
 	EffectManager* getEffectManagerInstance();
 	ResourceManager* getResourceManagerInstance();
 	StageManager* getStageManagerInstance();
+	DataManager* getDataManagerInstance();
 private:
 	static GameManager* m_pInstance;
 	InputManager* m_pInputManager;
 	EffectManager* m_pEffectManager;
 	ResourceManager* m_pResourceManager;
 	StageManager* m_pStageManager;
+	DataManager* m_pDataManager;
 	GameManager();
 	~GameManager();
 };

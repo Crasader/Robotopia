@@ -98,3 +98,13 @@ StageManager* GameManager::getStageManagerInstance()
 	m_pStageManager->init();
 	return m_pStageManager; 
 }
+
+DataManager* GameManager::getDataManagerInstance()
+{
+	if (m_pDataManager == nullptr)
+	{
+		m_pDataManager = new DataManager();
+	}
+	m_pDataManager->init();
+	return m_pDataManager;
+}
