@@ -46,13 +46,6 @@ enum Direction
 };
 typedef int Directions;
 
-enum KeyState
-{
-	KS_NONE, // 뗀 상태
-	KS_PRESS, //딱 누름
-	KS_HOLD, //꾹 누르는 중
-	KS_RELEASE, // 딱 뗌
-};
 //유틸 함수 모음. 
 
 class UtilFunctions

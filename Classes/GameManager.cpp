@@ -25,8 +25,10 @@ void GameManager::releaseInstance()
 
 GameManager::GameManager()
 {
-	m_pInputManager = new InputManager();
-
+	m_pInputManager = nullptr;
+	m_pEffectManager = nullptr;
+	m_pResourceManager = nullptr;
+	m_pStageManager = nullptr;
 }
 
 GameManager::~GameManager()
@@ -34,10 +36,62 @@ GameManager::~GameManager()
 	if (m_pInputManager != nullptr)
 	{
 		delete m_pInputManager;
+		m_pInputManager = nullptr;
+	}
+
+	if (m_pEffectManager != nullptr)
+	{
+		delete m_pEffectManager;
+		m_pEffectManager = nullptr;
+	}
+
+	if (m_pResourceManager != nullptr)
+	{
+		delete m_pResourceManager;
+		m_pResourceManager = nullptr;
+	}
+
+	if (m_pStageManager != nullptr)
+	{
+		delete m_pStageManager;
+		m_pStageManager = nullptr;
 	}
 }
 
 InputManager* GameManager::getInputManagerInstance()
 {
+	if (m_pInputManager == nullptr)
+	{
+		m_pInputManager = new InputManager();
+	}
 	return m_pInputManager;
+}
+
+EffectManager* GameManager::getEffectManagerInstance()
+{
+	if (m_pEffectManager == nullptr)
+	{
+		m_pEffectManager = new EffectManager();
+	}
+	return m_pEffectManager;
+}
+
+ResourceManager* GameManager::getResourceManagerInstance()
+{
+	if (m_pResourceManager == nullptr)
+	{
+		m_pResourceManager = new ResourceManager();
+	}
+
+	return m_pResourceManager;
+}
+
+StageManager* GameManager::getStageManagerInstance()
+{
+	if (m_pStageManager == nullptr)
+	{
+		m_pStageManager = new StageManager();
+	}
+
+	return m_pStageManager; 
 }

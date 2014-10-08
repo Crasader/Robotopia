@@ -2,6 +2,7 @@
 
 #include "cocos2d.h"
 #include "Utils.h"
+#include "WorldScene.h"
 
 enum KeyCode
 {
@@ -16,18 +17,26 @@ enum KeyCode
 	KC_MENU = cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE,
 };
 
+enum KeyState
+{
+	KS_NONE, // 뗀 상태
+	KS_PRESS, //딱 누름
+	KS_HOLD, //꾹 누르는 중
+	KS_RELEASE, // 딱 뗌
+};
+
 class InputManager
 {
 	friend class KeyStateSentinel;
 
 public:	
-
-	static KeyState													getKeyState(KeyCode keyCode);
-	static void														receiveKeyboardData(cocos2d::Layer* layer); //layer에서 호출하면 이제 그 레이어에서는 키보드 정보가 자동으로 업데이트됨.
+	bool													init();
+	KeyState												getKeyState(KeyCode keyCode);
+	void													receiveKeyboardData(WorldScene* scene); //layer에서 호출하면 이제 그 레이어에서는 키보드 정보가 자동으로 업데이트됨.
 private:
-	static std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_KeyStates;
-	static std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_PrevKeyStates;
-	static std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_FinalKeyStates;
+	std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_KeyStates;
+	std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_PrevKeyStates;
+	std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_FinalKeyStates;
 };
 
 class KeyStateSentinel : public cocos2d::Node

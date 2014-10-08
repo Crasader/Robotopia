@@ -81,14 +81,14 @@ void Player::update(float dTime)
 	pos.y += m_Velocity.y*dTime;
 	
 	//키, 상태 처리
-	KeyState leftState = InputManager::getKeyState(KC_LEFT);
-	KeyState rightState = InputManager::getKeyState(KC_RIGHT);
+	KeyState leftState = GET_INPUT_MANAGER()->getKeyState(KC_LEFT);
+	KeyState rightState = GET_INPUT_MANAGER()->getKeyState(KC_RIGHT);
 
-	if (InputManager::getKeyState(KC_TEST1) == KS_PRESS)
+	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST1) == KS_PRESS)
 	{
 		m_Hp += 20;
 	}
-	if (InputManager::getKeyState(KC_TEST2) == KS_PRESS)
+	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST2) == KS_PRESS)
 	{
 		m_Hp -= 20;
 	}
@@ -117,7 +117,7 @@ void Player::update(float dTime)
 	}
 	else
 	{
-		if (InputManager::getKeyState(KC_ATTACK) && (m_State == PS_STAND || m_State == PS_WALK))
+		if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) && (m_State == PS_STAND || m_State == PS_WALK))
 		{
 			changeState(PS_ATTACK);
 			m_Velocity.x = 0;
@@ -125,7 +125,7 @@ void Player::update(float dTime)
 
 		if (m_State != PS_ATTACK)
 		{
-			if (InputManager::getKeyState(KC_JUMP))
+			if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
 			{
 				m_Velocity.y = 400;
 			}
