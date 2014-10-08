@@ -1,18 +1,15 @@
 #include "UILayer.h"
 #include "Utils.h"
 #include "GameLayer.h"
+#include "Minimap.h"
+#include "WorldMenu.h"
+#include "BarContainer.h"
+#include "EquipmentWindow.h"
 
 USING_NS_CC;
 
 bool UILayer::init()
 {
-	//Minimap_Fake 진짜는 아직 없다!!!
-	auto sprMinimap = Sprite::create( "Minimap_Fake.png" );
-	sprMinimap->setAnchorPoint( Point( 0 , 1 ) );
-	sprMinimap->setOpacity( 120 );
-	sprMinimap->setPosition( Point( m_WinWidth - 200 , m_WinHeight - 15 ) );
-	this->addChild( sprMinimap );
-	
 	this->scheduleUpdate();
 	return true;
 }
@@ -34,7 +31,15 @@ void UILayer::initializeUILayer()
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
 
+	m_BarContainer = BarContainer::create();
+	m_EquipmentWindow = EquipmentWindow::create();
+	m_Minimap = Minimap::create();
+	m_WorldMenu = WorldMenu::create();
 
+	this->addChild(m_BarContainer);
+	this->addChild(m_EquipmentWindow);
+	this->addChild(m_Minimap);
+	this->addChild(m_WorldMenu);
 }
 
 

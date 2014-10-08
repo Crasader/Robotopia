@@ -3,6 +3,11 @@
 #include "WorldScene.h"
 #include "Player.h"
 
+class Minimap;
+class WorldMenu;
+class EquipmentWindow;
+class BarContainer;
+
 class UILayer : public WorldScene
 {
 public:
@@ -26,5 +31,8 @@ protected:
 	const Player*						m_Player;
 	int									m_WinWidth, m_WinHeight;
 
-
+	BarContainer*						m_BarContainer;
+	EquipmentWindow*					m_EquipmentWindow;
+	Minimap*							m_Minimap;
+	WorldMenu*							m_WorldMenu;
 };

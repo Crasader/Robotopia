@@ -7,8 +7,8 @@
 
 #pragma once
 #include "cocos2d.h"
-#include "UILayer.h"
 #include "WorldScene.h"
+#include "UILayer.h"
 
 class BarContainer : public UILayer
 {
