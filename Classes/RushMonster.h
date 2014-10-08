@@ -26,7 +26,6 @@ private:
 	bool		isSeePlayer();
 	
 	float		m_DelayTime;
-	float		m_AttackSpeed;//김연우 추가
 	State		m_State;
 	bool		m_IsRightDirection;
 };

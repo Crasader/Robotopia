@@ -31,7 +31,7 @@ bool RushMonster::init()
 	m_DelayTime = rand() % 3 + 4;
 	m_MoveSpeed = 30;
 	m_IsOnGravity = true;
-	m_AttackSpeed = 1.f; //김연우 추가
+
 	this->scheduleUpdate();
 
 	return true;
@@ -92,17 +92,6 @@ void RushMonster::endAnimation(cocos2d::Ref* sender)
 
 void RushMonster::update(float dTime)
 {
-	//김연우 미사일 발사 추가
-	static float accTime = 0.f;
-	accTime += dTime;
-	if( accTime > m_AttackSpeed )
-	{
-		accTime = 0.f;
-		auto gameLayer = ( ( GameLayer* )( this->getParent() ) );
-		auto newMissle = gameLayer->addObject( OT_AIMING_MISSILE , this->getPosition() );
-		auto player = gameLayer->getPlayer();
-		( ( AimingMissile* )newMissle )->setMoveAttribute( false , 100.f , this->getPosition() , player->getPosition() );
-	}
 
 	Point pos = this->getPosition();
 

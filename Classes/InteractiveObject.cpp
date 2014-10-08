@@ -33,120 +33,118 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 	Rect myRect = this->getRect();
 	Rect enemyRect = enemy->getRect();
 
-	//이미 충돌이 일어난 경우 한 프레임 전으로 돌려서 해결한다.
+	//이미 충돌이 일어난 경우 최대한 포지션이 덜 이동하는 방향으로 이동시킨 후 해당 방향으로 충돌이 일어난 것으로 처리.
 	if (!(myRect.origin.x + myRect.size.width <= enemyRect.origin.x ||
 		myRect.origin.y + myRect.size.height <= enemyRect.origin.y ||
 		myRect.origin.x >= enemyRect.origin.x + enemyRect.size.width ||
 		myRect.origin.y >= enemyRect.origin.y + enemyRect.size.height))
 	{
-		myRect.origin.x -= this->getVelocity().x*dTime;
-		enemyRect.origin.x -= enemy->getVelocity().x*dTime; 
-
-		myRect.origin.y -= this->getVelocity().y*dTime;
-		enemyRect.origin.y -= enemy->getVelocity().y*dTime;
+		collisionDir = DIR_RIGHT | DIR_LEFT | DIR_UP | DIR_DOWN;
 	}
-
-
-
-	Rect myAfterRect = myRect;
-	Rect enemyAfterRect = enemyRect;
-
-	myAfterRect.origin.x += this->getVelocity().x*dTime;
-	enemyAfterRect.origin.x += enemy->getVelocity().x*dTime;
-
-
-	myAfterRect.origin.y += this->getVelocity().y*dTime;
-	enemyAfterRect.origin.y += enemy->getVelocity().y*dTime;
-
-
-	//일단 충돌이 일어나는지 여부부터 확인
-	if (myAfterRect.intersectsRect(enemyAfterRect))
+	else
 	{
-		//아래쪽 면 검사
-		float gap = myRect.origin.y - (enemyRect.origin.y + enemyRect.size.height);
-		float afterGap = myAfterRect.origin.y - (enemyAfterRect.origin.y + enemyAfterRect.size.height);
 
-		if (gap*afterGap <= 0 )
+
+		Rect myAfterRect = myRect;
+		Rect enemyAfterRect = enemyRect;
+
+		myAfterRect.origin.x += this->getVelocity().x*dTime;
+		enemyAfterRect.origin.x += enemy->getVelocity().x*dTime;
+
+
+		myAfterRect.origin.y += this->getVelocity().y*dTime;
+		enemyAfterRect.origin.y += enemy->getVelocity().y*dTime;
+
+
+		//일단 충돌이 일어나는지 여부부터 확인
+		if (myAfterRect.intersectsRect(enemyAfterRect))
 		{
-			float length = abs(myRect.origin.y + myRect.size.height / 2
-				- (enemyRect.origin.y + enemyRect.size.height / 2))
-				- myRect.size.height / 2 - enemyRect.size.height / 2;
+			//아래쪽 면 검사
+			float gap = myRect.origin.y - (enemyRect.origin.y + enemyRect.size.height);
+			float afterGap = myAfterRect.origin.y - (enemyAfterRect.origin.y + enemyAfterRect.size.height);
 
-			float velocity = abs(this->getVelocity().y - enemy->getVelocity().y);
-
-			float time = length / velocity;
-
-			if (time < vertTime)
+			if (gap*afterGap <= 0)
 			{
-				vertTime = time;
+				float length = abs(myRect.origin.y + myRect.size.height / 2
+					- (enemyRect.origin.y + enemyRect.size.height / 2))
+					- myRect.size.height / 2 - enemyRect.size.height / 2;
+
+				float velocity = abs(this->getVelocity().y - enemy->getVelocity().y);
+
+				float time = length / velocity;
+
+				if (time < vertTime)
+				{
+					vertTime = time;
+				}
+				collisionDir |= DIR_DOWN;
 			}
-			collisionDir |= DIR_DOWN;
-		}
 
-		//위쪽 면 검사
-		gap = myRect.origin.y + myRect.size.height - enemyRect.origin.y;
-		afterGap = myAfterRect.origin.y + myAfterRect.size.height - enemyAfterRect.origin.y;
+			//위쪽 면 검사
+			gap = myRect.origin.y + myRect.size.height - enemyRect.origin.y;
+			afterGap = myAfterRect.origin.y + myAfterRect.size.height - enemyAfterRect.origin.y;
 
-		if (gap*afterGap <= 0)
-		{
-			float length = abs(myRect.origin.y + myRect.size.height / 2
-				- (enemyRect.origin.y + enemyRect.size.height / 2))
-				- myRect.size.height / 2 - enemyRect.size.height / 2;
-
-			float velocity = abs(this->getVelocity().y - enemy->getVelocity().y);
-
-			float time = length / velocity;
-
-			if (time < vertTime)
+			if (gap*afterGap <= 0)
 			{
-				vertTime = time;
+				float length = abs(myRect.origin.y + myRect.size.height / 2
+					- (enemyRect.origin.y + enemyRect.size.height / 2))
+					- myRect.size.height / 2 - enemyRect.size.height / 2;
+
+				float velocity = abs(this->getVelocity().y - enemy->getVelocity().y);
+
+				float time = length / velocity;
+
+				if (time < vertTime)
+				{
+					vertTime = time;
+				}
+				collisionDir |= DIR_UP;
 			}
-			collisionDir |= DIR_UP;
-		}
 
-		//왼쪽면
+			//왼쪽면
 
-		gap = myRect.origin.x - (enemyRect.origin.x + enemyRect.size.width);
-		afterGap = myAfterRect.origin.x - (enemyAfterRect.origin.x + enemyAfterRect.size.width);
+			gap = myRect.origin.x - (enemyRect.origin.x + enemyRect.size.width);
+			afterGap = myAfterRect.origin.x - (enemyAfterRect.origin.x + enemyAfterRect.size.width);
 
-		if (gap*afterGap <= 0)
-		{
-			float length = abs(myRect.origin.x + myRect.size.width / 2
-				- (enemyRect.origin.x + enemyRect.size.width / 2))
-				- myRect.size.width / 2 - enemyRect.size.width / 2;
-
-			float velocity = abs(this->getVelocity().x - enemy->getVelocity().x);
-
-			float time = length / velocity;
-
-			if (time < horzTime)
+			if (gap*afterGap <= 0)
 			{
-				horzTime = time;
+				float length = abs(myRect.origin.x + myRect.size.width / 2
+					- (enemyRect.origin.x + enemyRect.size.width / 2))
+					- myRect.size.width / 2 - enemyRect.size.width / 2;
+
+				float velocity = abs(this->getVelocity().x - enemy->getVelocity().x);
+
+				float time = length / velocity;
+
+				if (time < horzTime)
+				{
+					horzTime = time;
+				}
+				collisionDir |= DIR_LEFT;
 			}
-			collisionDir |= DIR_LEFT;
-		}
 
-		//오른쪽 면
+			//오른쪽 면
 
 
-		gap = myRect.origin.x + myRect.size.width - enemyRect.origin.x;
-		afterGap = myAfterRect.origin.x + myAfterRect.size.width - enemyAfterRect.origin.x;
+			gap = myRect.origin.x + myRect.size.width - enemyRect.origin.x;
+			afterGap = myAfterRect.origin.x + myAfterRect.size.width - enemyAfterRect.origin.x;
 
-		if (gap*afterGap <= 0)
-		{
-			float length = abs(myRect.origin.x + myRect.size.width / 2
-				- (enemyRect.origin.x + enemyRect.size.width / 2))
-				- myRect.size.width / 2 - enemyRect.size.width / 2;
-
-			float velocity = abs(this->getVelocity().x - enemy->getVelocity().x);
-
-			float time = length / velocity;
-
-			if (time < horzTime)
+			if (gap*afterGap <= 0)
 			{
-				horzTime = time;
+				float length = abs(myRect.origin.x + myRect.size.width / 2
+					- (enemyRect.origin.x + enemyRect.size.width / 2))
+					- myRect.size.width / 2 - enemyRect.size.width / 2;
+
+				float velocity = abs(this->getVelocity().x - enemy->getVelocity().x);
+
+				float time = length / velocity;
+
+				if (time < horzTime)
+				{
+					horzTime = time;
+				}
+				collisionDir |= DIR_RIGHT;
 			}
-			collisionDir |= DIR_RIGHT;
 		}
 	}
 

@@ -24,7 +24,7 @@ bool Player::init()
 	m_MaxHp = 100;
 	m_Hp = m_MaxHp;
 
-	m_MaxSteam = 20;
+	m_MaxSteam = 17;
 	m_Steam = m_MaxSteam;
 
 	for (int i = 0; i < PS_STATE_NUM; i++)
@@ -83,14 +83,14 @@ void Player::update(float dTime)
 	KeyState leftState = KeyStateManager::getKeyState(KC_LEFT);
 	KeyState rightState = KeyStateManager::getKeyState(KC_RIGHT);
 
-// 	if (KeyStateManager::getKeyState(KC_TEST1) == KS_PRESS)
-// 	{
-// 		m_Hp += 20;
-// 	}
-// 	if (KeyStateManager::getKeyState(KC_TEST2) == KS_PRESS)
-// 	{
-// 		m_Hp -= 20;
-// 	}
+	if (KeyStateManager::getKeyState(KC_TEST1) == KS_PRESS)
+	{
+		m_Hp += 20;
+	}
+	if (KeyStateManager::getKeyState(KC_TEST2) == KS_PRESS)
+	{
+		m_Hp -= 20;
+	}
 	
 	if (m_IsFlying)
 	{
@@ -101,6 +101,7 @@ void Player::update(float dTime)
 			m_Velocity.x = -m_MoveSpeed;
 			m_IsRightDirection = false;
 			m_MainSprite->setFlippedX(true);
+
 		}
 		else if (rightState == KS_HOLD)
 		{
