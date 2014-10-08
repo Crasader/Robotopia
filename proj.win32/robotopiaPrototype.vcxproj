@@ -138,6 +138,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AimingMissile.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BackgroundLayer.cpp" />
+    <ClCompile Include="..\Classes\BarContainer.cpp" />
+    <ClCompile Include="..\Classes\EquipmentWindow.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\InputManager.cpp" />
     <ClCompile Include="..\Classes\InteractiveObject.cpp" />
@@ -146,6 +148,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\LandGateway.cpp" />
     <ClCompile Include="..\Classes\LandObject.cpp" />
     <ClCompile Include="..\Classes\LinearMissile.cpp" />
+    <ClCompile Include="..\Classes\Minimap.cpp" />
     <ClCompile Include="..\Classes\Missile.cpp" />
     <ClCompile Include="..\Classes\Monster.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
@@ -156,6 +159,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\View.cpp" />
     <ClCompile Include="..\Classes\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Villager.cpp" />
+    <ClCompile Include="..\Classes\WorldMenu.cpp" />
     <ClCompile Include="..\Classes\WorldScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -163,6 +167,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\AimingMissile.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BackgroundLayer.h" />
+    <ClInclude Include="..\Classes\BarContainer.h" />
+    <ClInclude Include="..\Classes\EquipmentWindow.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\InputManager.h" />
     <ClInclude Include="..\Classes\InteractiveObject.h" />
@@ -171,6 +177,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\LandGateway.h" />
     <ClInclude Include="..\Classes\LandObject.h" />
     <ClInclude Include="..\Classes\LinearMissile.h" />
+    <ClInclude Include="..\Classes\Minimap.h" />
     <ClInclude Include="..\Classes\Missile.h" />
     <ClInclude Include="..\Classes\Monster.h" />
     <ClInclude Include="..\Classes\Player.h" />
@@ -181,6 +188,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\View.h" />
     <ClInclude Include="..\Classes\GameLayer.h" />
     <ClInclude Include="..\Classes\Villager.h" />
+    <ClInclude Include="..\Classes\WorldMenu.h" />
     <ClInclude Include="..\Classes\WorldScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

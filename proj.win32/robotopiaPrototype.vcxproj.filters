@@ -34,6 +34,9 @@
     <Filter Include="Classes\Core\Manager">
       <UniqueIdentifier>{bb7be262-280a-45f4-a9c4-8808a9fb9501}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scene\UILayer">
+      <UniqueIdentifier>{d724ff87-bd6c-4142-b61f-50d4f3d81d04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,9 +93,6 @@
     <ClCompile Include="..\Classes\AimingMissile.cpp">
       <Filter>Classes\InteractiveObject\Missile</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UILayer.cpp">
-      <Filter>Classes\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\LandGateway.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClCompile>
@@ -104,6 +104,21 @@
     </ClCompile>
     <ClCompile Include="..\Classes\InputManager.cpp">
       <Filter>Classes\Core\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UILayer.cpp">
+      <Filter>Classes\Scene\UILayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BarContainer.cpp">
+      <Filter>Classes\Scene\UILayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EquipmentWindow.cpp">
+      <Filter>Classes\Scene\UILayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Minimap.cpp">
+      <Filter>Classes\Scene\UILayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WorldMenu.cpp">
+      <Filter>Classes\Scene\UILayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +173,6 @@
     <ClInclude Include="..\Classes\AimingMissile.h">
       <Filter>Classes\InteractiveObject\Missile</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UILayer.h">
-      <Filter>Classes\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\LandGateway.h">
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClInclude>
@@ -175,6 +187,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\InputManager.h">
       <Filter>Classes\Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UILayer.h">
+      <Filter>Classes\Scene\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BarContainer.h">
+      <Filter>Classes\Scene\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EquipmentWindow.h">
+      <Filter>Classes\Scene\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Minimap.h">
+      <Filter>Classes\Scene\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WorldMenu.h">
+      <Filter>Classes\Scene\UILayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
