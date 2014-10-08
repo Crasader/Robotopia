@@ -18,8 +18,6 @@ bool WorldScene::init()
 		return false;
 	}
 
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile( "Robotopia.plist" );
-
 	m_GameLayer = GameLayer::create();
 	m_GameLayer->setAnchorPoint( Point::ZERO );
 	m_BackgroundLayer = BackgroundLayer::create();

@@ -1,5 +1,7 @@
 #include "LandGateway.h"
+#include "GameManager.h"
 #include "GameLayer.h"
+
 USING_NS_CC;
 
 bool LandGateway::init()
@@ -8,9 +10,9 @@ bool LandGateway::init()
 	{
 		return false;
 	}
-	m_MainSprite = Sprite::createWithSpriteFrameName( "Gateway0.png" );
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "Gateway0.png" );
 	this->addChild( m_MainSprite );
-	m_OpenAnimaion = UtilFunctions::createAnimation( "Gateway" , 0 , 11 , 0.2f );
+	m_OpenAnimaion = GET_RESOURCE_MANAGER()->createAnimation( "Gateway" , 0 , 11 , 0.2f );
 	m_OpenAnimaion->retain();
 	m_isOpen = false;
 

@@ -1,4 +1,5 @@
 #include "LandFloor.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
@@ -8,11 +9,10 @@ bool LandFloor::init()
 	{
 		return false;
 	}
-
-	m_MainSprite = Sprite::createWithSpriteFrameName( "floor.png" );
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "floor.png" );
 	this->setAnchorPoint( Point::ZERO );
 	this->addChild( m_MainSprite, 10 );
-	m_PieceSprite = Sprite::createWithSpriteFrameName( "floorPiece.png" );
+	m_PieceSprite = GET_RESOURCE_MANAGER()->createSprite("floorPiece.png" );
 	this->setAnchorPoint( Point::ZERO );
 	this->addChild( m_PieceSprite , 0);
 

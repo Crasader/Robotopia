@@ -1,3 +1,4 @@
+#include "GameManager.h"
 #include "GameLayer.h"
 #include "LandFloor.h"
 #include "LandBlock.h"
@@ -6,6 +7,9 @@
 #include "LinearMissile.h"
 #include "AimingMissile.h"
 #include "LandGateway.h"
+#include "View.h"
+#include "Player.h"
+#include "InteractiveObject.h"
 
 USING_NS_CC;
 
@@ -22,13 +26,6 @@ bool GameLayer::init()
 	this->scheduleUpdate();
 	initWorldFromData();
 	addMovingBackground();
-
-	UserDefault::getInstance()->setIntegerForKey( "mapWidth" , 48 );
-	UserDefault::getInstance()->setIntegerForKey( "mapHeight" , 20 );
-	UserDefault::getInstance()->setIntegerForKey( "boxWidth" , 32 );
-	UserDefault::getInstance()->setIntegerForKey( "boxHeight" , 32 );
-	UserDefault::getInstance()->setStringForKey( "mapData" , MAPDATA );
-
 
 	return true;
 }
@@ -213,7 +210,7 @@ void GameLayer::removeObject()
 
 void GameLayer::addMovingBackground()
 {
-	auto backgroundSprite = Sprite::createWithSpriteFrameName( "background.png" );
+	auto backgroundSprite = GET_RESOURCE_MANAGER()->createSprite( "background.png" );
 	Size spriteSize = backgroundSprite->getContentSize();
 	int xSpriteNum = ( m_MapRect.size.width / spriteSize.width );
 	int ySpriteNum = ( m_MapRect.size.height / spriteSize.height );
@@ -221,7 +218,7 @@ void GameLayer::addMovingBackground()
 	{
 		for( int xIdx = 0; xIdx <= xSpriteNum; ++xIdx )
 		{
-			backgroundSprite = Sprite::createWithSpriteFrameName( "background.png" );
+			backgroundSprite = GET_RESOURCE_MANAGER()->createSprite( "background.png" );
 			backgroundSprite->setAnchorPoint( Point::ZERO );
 			backgroundSprite->setPosition( xIdx*(spriteSize.width-10), yIdx*(spriteSize.height-10) );
 			this->addChild( backgroundSprite , GameLayer::ZOrder::BACKGROUND);
@@ -285,5 +282,6 @@ std::vector<InteractiveObject*> GameLayer::getObjectsByRect( cocos2d::Rect check
 	}
 	return collectObjects;
 }
+
 
 
