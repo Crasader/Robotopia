@@ -91,7 +91,7 @@
       <Filter>Classes\InteractiveObject\Land</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Utils.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
