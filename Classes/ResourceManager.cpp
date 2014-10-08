@@ -26,6 +26,11 @@ cocos2d::Animation* ResourceManager::createAnimation(const char* format, int sta
 
 cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float delay /*= -1*/)
 {
+	switch (type)
+	{
+	case AT_PLAYER_STAND: //animation
+		return createAnimation("player_stand%d.png", 1, 4, 0.1f);
+	}
 	return nullptr;
 }
 
