@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="win32">
@@ -30,6 +30,9 @@
     </Filter>
     <Filter Include="Classes\InteractiveObject\Missile">
       <UniqueIdentifier>{b757040d-808b-4ada-9bbb-34d9fccee41e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Core\Manager">
+      <UniqueIdentifier>{bb7be262-280a-45f4-a9c4-8808a9fb9501}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +75,6 @@
     <ClCompile Include="..\Classes\Player.cpp">
       <Filter>Classes\InteractiveObject\Character</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AimingMissile.cpp">
-      <Filter>Classes\InteractiveObject\Missile</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\LinearMissile.cpp">
       <Filter>Classes\InteractiveObject\Missile</Filter>
     </ClCompile>
@@ -84,14 +84,14 @@
     <ClCompile Include="..\Classes\RushMonster.cpp">
       <Filter>Classes\InteractiveObject\Character</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UILayer.cpp">
-      <Filter>Classes\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Villager.cpp">
       <Filter>Classes\InteractiveObject\Character</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EffectManager.cpp">
-      <Filter>Classes\Core</Filter>
+    <ClCompile Include="..\Classes\AimingMissile.cpp">
+      <Filter>Classes\InteractiveObject\Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UILayer.cpp">
+      <Filter>Classes\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LandGateway.cpp">
       <Filter>Classes\InteractiveObject\Land</Filter>
@@ -99,13 +99,16 @@
     <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>Classes\Core\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ResourceManager.cpp">
+      <Filter>Classes\Core\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\InputManager.cpp">
+      <Filter>Classes\Core\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes\App</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\InteractiveObject.h">
       <Filter>Classes\InteractiveObject</Filter>
@@ -140,9 +143,6 @@
     <ClInclude Include="..\Classes\Player.h">
       <Filter>Classes\InteractiveObject\Character</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AimingMissile.h">
-      <Filter>Classes\InteractiveObject\Missile</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\LinearMissile.h">
       <Filter>Classes\InteractiveObject\Missile</Filter>
     </ClInclude>
@@ -152,14 +152,14 @@
     <ClInclude Include="..\Classes\RushMonster.h">
       <Filter>Classes\InteractiveObject\Character</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UILayer.h">
-      <Filter>Classes\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Villager.h">
       <Filter>Classes\InteractiveObject\Character</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EffectManager.h">
-      <Filter>Classes\Core</Filter>
+    <ClInclude Include="..\Classes\AimingMissile.h">
+      <Filter>Classes\InteractiveObject\Missile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UILayer.h">
+      <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LandGateway.h">
       <Filter>Classes\InteractiveObject\Land</Filter>
@@ -168,6 +168,12 @@
       <Filter>Classes\App</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameManager.h">
+      <Filter>Classes\Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourceManager.h">
+      <Filter>Classes\Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\InputManager.h">
       <Filter>Classes\Core\Manager</Filter>
     </ClInclude>
   </ItemGroup>
