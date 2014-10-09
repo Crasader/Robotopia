@@ -199,16 +199,16 @@ cocos2d::Vec2 GameLayer::positionToIdxOfMapData( cocos2d::Point position )
 	return curPosIdx;
 }
 
-ObjectType GameLayer::getMapData( int xIdx , int yIdx )
+ObjectType GameLayer::getMapDataInPositionWithIdx( int xIdx , int yIdx )
 {
 	return m_MapData[yIdx*m_BoxHeightNum + xIdx];
 }
 
-ObjectType GameLayer::getMapData( cocos2d::Point position )
+ObjectType GameLayer::getMapDataInPosition( cocos2d::Point position )
 {
 	int xIdx = positionToIdxOfMapData( position ).x;
 	int yIdx = positionToIdxOfMapData( position ).y;
-	return getMapData( xIdx , yIdx );
+	return getMapDataInPositionWithIdx( xIdx , yIdx );
 }
 
 std::vector<InteractiveObject*> GameLayer::getObjectsByPosition( cocos2d::Point position )

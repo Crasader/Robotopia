@@ -22,8 +22,8 @@ public:
 	void							removeObject();
 
 	const Player*					getPlayer() {return m_Player; }
-	ObjectType						getMapData( cocos2d::Point position );
-	ObjectType						getMapData( int xIdx , int yIdx );
+	ObjectType						getMapDataInPosition( cocos2d::Point position );
+	ObjectType						getMapDataInPositionWithIdx( int xIdx , int yIdx );
 	std::vector<InteractiveObject*>	getObjectsByPosition( cocos2d::Point checkPosition ); //위치에 어떤 객체가 있는지를 리턴
 	std::vector<InteractiveObject*>	getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
 	cocos2d::Vec2					positionToIdxOfMapData( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴

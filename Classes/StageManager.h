@@ -56,11 +56,20 @@ public:
 		int MaxHp;
 		int MaxSteam;
 	};
-	bool			init();
-	void			changeStage();
-	const Player*	getPlayer();
+	bool							init();
+	void							changeStage();
 
+	InteractiveObject*				addObject( ObjectType type , cocos2d::Point position );
+	InteractiveObject*				addObjectByIdx( ObjectType type , int xIdx , int yIdx );
+	InteractiveObject*				addObjectByIdx( int xIdx , int yIdx );
+
+	ObjectType						getMapDataInPosition( cocos2d::Point position );
+	ObjectType						getMapDataInPositionWithIdx( int xIdx , int yIdx );
+	std::vector<InteractiveObject*>	getObjectsByPosition( cocos2d::Point checkPosition ); //위치에 어떤 객체가 있는지를 리턴
+	std::vector<InteractiveObject*>	getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
+	const Player*					getPlayer();
 private:
+
 	WorldScene*		m_WorldScene;
 	PlayerInfo		m_PlayerInfo;
 };
