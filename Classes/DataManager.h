@@ -23,6 +23,7 @@ struct StageData
 struct FloorData
 {
 	int width, height;
+	int stageNum;
 	std::vector<int> data;
 };
 
@@ -32,6 +33,7 @@ public:
 	bool init();
 	bool initModuleData();
 	bool initFloorData();
+	bool getFloorData(int currentFloor, FloorData* floorData, std::vector<StageData>* stageData);
 	DataManager();
 	~DataManager();
 

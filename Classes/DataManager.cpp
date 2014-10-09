@@ -113,6 +113,8 @@ bool DataManager::initFloorData()
 
 		stageNum = stageNum + (rand() % (stageRandNum * 2)) - stageRandNum;
 
+		m_FloorData[i].stageNum = stageNum;
+
 		for (int s = 0; s < stageNum; s++)
 		{
 			int x, y, width, height;
@@ -272,5 +274,22 @@ bool DataManager::initFloorData()
 			}
 		}
 	}
+	return true;
+}
+
+bool DataManager::getFloorData(int currentFloor, FloorData* floorData, std::vector<StageData>* stageData)
+{
+	if (m_FloorData.find(currentFloor) == m_FloorData.end())
+	{
+		return false;
+	}
+
+	*floorData = m_FloorData[currentFloor];
+
+	for (int s = 0; s < m_FloorData[currentFloor].stageNum; s++)
+	{
+		stageData->push_back(m_FloorStageData[currentFloor][s]);
+	}
+
 	return true;
 }
