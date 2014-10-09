@@ -47,7 +47,9 @@ void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Poi
 		m_Velocity.y = 0;
 	}
 
-	if (m_Velocity.x > 0)
+
+	//
+	/*if (m_Velocity.x > 0)
 	{
 		m_MainSprite->setFlippedX(true);
 	}
@@ -55,8 +57,8 @@ void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Poi
 	if (m_Velocity.y > 0)
 	{
 		m_MainSprite->setFlippedY(true);
-	}
-	m_MainSprite->setRotation(degree);
+	}*/
+	m_MainSprite->setRotation(-degree);
 
 	return;
 }

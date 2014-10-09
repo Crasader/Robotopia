@@ -34,8 +34,8 @@ void LinearMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, flo
 		m_MainSprite->setFlippedX(true);
 	}
 	m_Degree = degree;
-	m_Velocity.x = cos(PIE / 180 * degree)*velocity;
-	m_Velocity.y = sin(PIE / 180 * degree)*abs(velocity);
+	m_Velocity.x = cos(PIE / 180 * degree) * velocity;
+	m_Velocity.y = sin(PIE / 180 * degree) * abs(velocity);
 }
 
 void LinearMissile::update(float dTime)
