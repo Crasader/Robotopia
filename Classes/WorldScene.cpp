@@ -19,8 +19,6 @@ cocos2d::Scene* WorldScene::createSceneWithData(Vec2 boxNum, Size boxSize, std::
 	return scene;
 }
 
-
-
 bool WorldScene::init()
 {
 	if( !Scene::init() )
