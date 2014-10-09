@@ -280,13 +280,13 @@ bool DataManager::initFloorData()
 			}
 
 			m_FloorStageData[i][s].x++;
-			m_FloorStageData[i][s].y = m_FloorStageData[i][s].y + (m_FloorStageData[i][s].height/MODULE_BASE_HEIGHT);
+			//m_FloorStageData[i][s].y;
 			m_FloorStageData[i][s].width += 2;
 			m_FloorStageData[i][s].height += 2;
 		}
 
-
-		for (int y = 0; y <= endY + 1; y++)
+		
+		for (int y = endY + 1; y >= 0; y--)
 		{
 			for (int x = 0; x <= endX + 1; x++)
 			{
@@ -315,7 +315,7 @@ bool DataManager::getFloorData(int currentFloor, FloorData* floorData, std::vect
 
 	*floorData = m_FloorData[currentFloor - 1];
 
-	for (int s = 0; s < m_FloorData[currentFloor - 1].stageNum; s++)
+	for (int s = 0; s <= m_FloorData[currentFloor - 1].stageNum; s++)
 	{
 		stageData->push_back(m_FloorStageData[currentFloor - 1][s]);
 	}
