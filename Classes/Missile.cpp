@@ -17,9 +17,3 @@ bool Missile::init()
 
 	return true;
 }
-
-
-	
-
-
-
