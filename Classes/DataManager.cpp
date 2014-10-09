@@ -23,8 +23,9 @@ bool DataManager::initModuleData()
 	for (int i = 0; i < tokenNum; i++)
 	{
 		StageModuleData module;
+		Directions closedDirections;
 		rawData = strtok(nullptr, tokenList);
-		module.closedDirections = atoi(rawData);
+		closedDirections = atoi(rawData);
 		rawData = strtok(nullptr, tokenList);
 		module.width = atoi(rawData);
 		rawData =strtok(nullptr, tokenList);
@@ -39,6 +40,8 @@ bool DataManager::initModuleData()
 				module.data.push_back(atoi(rawData));
 			}
 		}
+
+		m_ModuleData[closedDirections].push_back(module);
 	}
 
 	return true;

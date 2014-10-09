@@ -5,7 +5,6 @@
 
 struct StageModuleData
 {
-	Directions closedDirections;
 	int width, height;
 	std::vector<int> data;
 };
@@ -31,6 +30,6 @@ public:
 	~DataManager();
 
 private:	
-
+	std::map < Directions, std::vector<StageModuleData>> m_ModuleData;
 
 };
