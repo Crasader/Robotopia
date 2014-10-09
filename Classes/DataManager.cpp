@@ -181,8 +181,8 @@ bool DataManager::initFloorData()
 
 			StageData stage;
 
-			stage.x = x;
-			stage.y = y;
+			stage.x = x + 1;
+			stage.y = y + 1;
 			stage.width = width;
 			stage.height = height;
 
