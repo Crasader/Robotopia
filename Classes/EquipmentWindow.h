@@ -24,5 +24,6 @@ public:
 private:
 	bool								m_CharWinOn;
 	int									m_WinWidth, m_WinHeight;
+	cocos2d::Sprite*					m_sprCharWinTrigger;
 	cocos2d::Sprite*					m_sprCharWinContainer;
 };

@@ -7,8 +7,6 @@
 
 #pragma once
 #include "cocos2d.h"
-#include "UILayer.h"
-#include "WorldScene.h"
 
 class WorldMenu : public cocos2d::Node
 {
@@ -25,6 +23,7 @@ public:
 private:
 	int								m_WinWidth, m_WinHeight;
 	bool							m_WorldMenuOn;
+	cocos2d::Sprite*				m_sprWorldMenuContainer;
 
 
 };

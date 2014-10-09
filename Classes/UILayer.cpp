@@ -63,6 +63,16 @@ void UILayer::update(float dTime)
 			m_WorldMenu->hideWorldMenu();
 		}
 	}
+
+	if (mouseLeft == MS_RELEASE)
+	{
+		Point leftClick = GET_INPUT_MANAGER()->getMousePosition();
+// 		Rect 
+// 		if (m_EquipmentWindow->getCharWinOn() == false)
+// 		{
+// 
+// 		}
+	}
 }
 
 void UILayer::initializeUILayer()
