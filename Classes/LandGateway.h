@@ -11,5 +11,6 @@ public:
 	CREATE_FUNC( LandGateway );
 private:
 	cocos2d::Animation*	m_OpenAnimaion;
+	cocos2d::Animation*	m_ActivateAnimation;
 	bool m_isOpen;
 };

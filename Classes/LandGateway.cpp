@@ -10,9 +10,10 @@ bool LandGateway::init()
 	{
 		return false;
 	}
-	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "Gateway0.png" );
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "gatewayUnactivate.png" );
 	this->addChild( m_MainSprite );
 	m_OpenAnimaion = GET_RESOURCE_MANAGER()->createAnimation( AT_GATEWAY_OPEN , 0.5f);
+	m_ActivateAnimation = GET_RESOURCE_MANAGER()->createAnimation();
 	m_OpenAnimaion->retain();
 	m_isOpen = false;
 
