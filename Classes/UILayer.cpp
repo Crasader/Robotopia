@@ -22,6 +22,9 @@ void UILayer::update(float dTime)
 	KeyState upKey = GET_INPUT_MANAGER()->getKeyState(KC_UP);
 	KeyState downKey = GET_INPUT_MANAGER()->getKeyState(KC_DOWN);
 	
+	MouseState mouseLeft = GET_INPUT_MANAGER()->getMouseState(MC_LEFT);
+	MouseState mouseRight = GET_INPUT_MANAGER()->getMouseState(MC_RIGHT);
+	
 	if (charWinKey == KS_PRESS)
 	{
 		if (m_WorldMenu->getWorldMenuOn() == false)

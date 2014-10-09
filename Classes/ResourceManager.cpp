@@ -6,6 +6,7 @@ bool ResourceManager::init()
 {
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Robotopia.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ET_AimingMissile_Collision.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ET_PLAYER_LANDING.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ozt.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ETLinearMissileCollision.plist");
 	return true;
@@ -50,7 +51,7 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 	case AT_PLAYER_ATTACK:
 		return createAnimation("player_attack%d.png", 1, 5, 0.05f);
 	case AT_PLAYER_LANDING:
-		return nullptr;
+		return createAnimation("ET_PLAYER_LANDING%d.png", 1, 4, 0.25f);
 	case AT_RUSHMONSTER_STAND:
 		return createAnimation("rushMonster_stand%d.png", 1, 4, 0.1f);
 	case AT_RUSHMONSTER_MOVE:
@@ -85,6 +86,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 		return createSprite("ETLinearMissileCollision1.png");
 	case ST_LOADING:
 		return createSprite("Loading.png");
+	case ST_PLAYER_LANDING:
+		return createSprite("ET_PLAYER_LANDING1.png");
 	}
 	return nullptr;
 }
