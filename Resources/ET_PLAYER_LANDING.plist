@@ -7,54 +7,54 @@
             <key>ET_PLAYER_LANDING1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,160},{22,41}}</string>
+                <string>{{160,2},{41,22}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{0,1}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{5,9},{22,41}}</string>
+                <string>{{9,4},{41,22}}</string>
                 <key>sourceSize</key>
-                <string>{32,59}</string>
+                <string>{59,32}</string>
             </dict>
             <key>ET_PLAYER_LANDING2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,56},{24,48}}</string>
+                <string>{{56,2},{48,24}}</string>
                 <key>offset</key>
-                <string>{-1,1}</string>
+                <string>{-1,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{5,8},{24,48}}</string>
+                <string>{{8,6},{48,24}}</string>
                 <key>sourceSize</key>
-                <string>{36,66}</string>
+                <string>{66,36}</string>
             </dict>
             <key>ET_PLAYER_LANDING3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{26,52}}</string>
+                <string>{{2,2},{52,26}}</string>
                 <key>offset</key>
-                <string>{-1,1}</string>
+                <string>{-1,-1}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{4,6},{26,52}}</string>
+                <string>{{6,6},{52,26}}</string>
                 <key>sourceSize</key>
-                <string>{36,66}</string>
+                <string>{66,36}</string>
             </dict>
             <key>ET_PLAYER_LANDING4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,106},{22,52}}</string>
+                <string>{{106,2},{52,22}}</string>
                 <key>offset</key>
-                <string>{2,3}</string>
+                <string>{-3,2}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{9,4},{22,52}}</string>
+                <string>{{4,5},{52,22}}</string>
                 <key>sourceSize</key>
-                <string>{36,66}</string>
+                <string>{66,36}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -64,9 +64,9 @@
             <key>realTextureFileName</key>
             <string>ET_PLAYER_LANDING.png</string>
             <key>size</key>
-            <string>{30,203}</string>
+            <string>{203,30}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:18d4902442d646366bd6cb549742cff2:7bd4bd431c9468ce26ef18f8317aea9b:f5b3ccddcb3d71026dff9cfc926a0406$</string>
+            <string>$TexturePacker:SmartUpdate:c5a985433a64269c0e6e6b09a57f6c7c:9afda1aebe23aa12a4e9c5652e28ebcb:f5b3ccddcb3d71026dff9cfc926a0406$</string>
             <key>textureFileName</key>
             <string>ET_PLAYER_LANDING.png</string>
         </dict>
