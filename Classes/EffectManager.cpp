@@ -19,15 +19,15 @@ void EffectManager::removeSprAfterAni(Ref* sender)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void EffectManager::createEffect(EffectType selectedEffect, cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
+void EffectManager::createEffect(EffectType selectedEffect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
 	switch (selectedEffect)
 	{
 	case ET_LINEAR_MISSILE_COLLISION:
-		createEffectLinearMissileCollision(enemyRect, ownRect, collisionDir, effectPlayNum);
+		createEffectLinearMissileCollision( ownRect, collisionDir, effectPlayNum);
 		break;
 	case ET_AIMING_MISSILE_COLLISION:
-		createEffectAimingMissileCollision(enemyRect, ownRect, collisionDir, effectPlayNum);
+		createEffectAimingMissileCollision( ownRect, collisionDir, effectPlayNum);
 		break;
 	case ET_PLAYER_FLOOR_COLLISION:
 		break;
@@ -36,12 +36,11 @@ void EffectManager::createEffect(EffectType selectedEffect, cocos2d::Rect enemyR
 }
 
 
-void EffectManager::createEffect(EffectType selectedEffect, Point enemyPoint, Size enemySize, Point ownPoint, Size ownSize,
-								 Directions collisionDir, int effectPlayNum)
+void EffectManager::createEffect(EffectType selectedEffect, Point ownPoint, Size ownSize, Directions collisionDir, int effectPlayNum)
 {
-	Rect enemyRect(enemyPoint.x, enemyPoint.y, enemySize.width, enemySize.height);
+	
 	Rect ownRect(ownPoint.x, ownPoint.y, ownSize.width, ownSize.width);
-	createEffect(selectedEffect, enemyRect, ownRect, collisionDir, effectPlayNum);
+	createEffect(selectedEffect, ownRect, collisionDir, effectPlayNum);
 	return;
 }
 
@@ -75,7 +74,7 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Po
 //EndLine///////////////////////////////////////////////
 
 
-void EffectManager::createEffectLinearMissileCollision(cocos2d::Rect enemyRect, Rect ownRect, Directions collisionDir, int effectPlayNum)
+void EffectManager::createEffectLinearMissileCollision(Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
 	float needEffectScale = 1.5f;
 	
@@ -155,7 +154,7 @@ void EffectManager::createEffectLinearMissileCollisionSelectedSizeByUser(cocos2d
 	return;
 }
 
-void EffectManager::createEffectAimingMissileCollision(cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
+void EffectManager::createEffectAimingMissileCollision(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
 	float needEffectScale = 1.5f;
 
@@ -210,6 +209,79 @@ void EffectManager::createEffectAimingMissileCollisionSelectedSizeByUser(cocos2d
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_AIMINGMISSILE_COLLISION);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_AIMINGMISSILE_COLLISION, 0.2f);
+
+	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
+	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
+
+	effectSpr->setScaleX(ratioX);
+	effectSpr->setScaleY(ratioY);
+
+	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
+	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
+	WorldScene->getGameLayer()->addEffect(effectSpr);
+
+	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
+	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
+	effectSpr->runAction(Sequence::create(action, callback, NULL));
+}
+
+void EffectManager::createEffectPlayerLanding(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
+{
+	float needEffectScale = 1.5f;
+
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_LANDING, 0.2f);
+
+	float ratioX = ownRect.size.width / effectSpr->getContentSize().width;
+	float ratioY = ownRect.size.height / effectSpr->getContentSize().height;
+
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
+
+
+	float setPosX = 0;
+	float setPosY = 0;
+
+	switch (collisionDir)
+	{
+	case DIR_NONE :
+		setPosX = ownRect.origin.x + (ownRect.size.width / 2);
+		setPosY = ownRect.origin.y;
+		break;
+	case DIR_UP:
+		setPosX = ownRect.origin.x + (ownRect.size.width / 2);
+		setPosY = ownRect.origin.y + (ownRect.size.height / 2);
+		break;
+	case DIR_DOWN:
+		setPosX = ownRect.origin.x + (ownRect.size.width / 2);
+		setPosY = ownRect.origin.y;
+		break;
+	case DIR_LEFT:
+		setPosX = ownRect.origin.x;
+		setPosY = ownRect.origin.y + (ownRect.size.height / 2);
+		break;
+	case DIR_RIGHT:
+		setPosX = ownRect.origin.x + ownRect.size.width;
+		setPosY = ownRect.origin.y + (ownRect.size.height / 2);
+		break;
+	}
+
+
+	effectSpr->setPosition(setPosX, setPosY);
+	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
+	WorldScene->getGameLayer()->addEffect(effectSpr);
+
+	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
+	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
+	effectSpr->runAction(Sequence::create(action, callback, NULL));
+
+	return;
+}
+
+void EffectManager::createEffectPlayerLandingSizeByUser(cocos2d::Rect effectRect, int effectPlayNum)
+{
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_LANDING, 0.2f);
 
 	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;

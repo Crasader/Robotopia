@@ -18,13 +18,12 @@ public:
 
 	//매개변수 설명, 
 	// 1. 사용하고 싶은 effect 이름,
-	// 2. 부딪힌 대상이 되는 오브젝트의 Rect(point와 size로 넣을수도 있음)
-	// 3. 부딪힌 방향
+	// 2. 자기 자신의 Rect(point와 size로 넣을수도 있음)
+	// 3. 부딪힌 방향(없으면 DIR_NONE)
 	// 4. effectPlayNum  
 	
-	void createEffect(EffectType selectedEffect, cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
-	void createEffect(EffectType selectedEffect, cocos2d::Point enemyPoint, cocos2d::Size enemySize, 
-					  cocos2d::Point ownPoint, cocos2d::Size ownSize, Directions collisionDir, int effectPlayNum);
+	void createEffect(EffectType selectedEffect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffect(EffectType selectedEffect, cocos2d::Point ownPoint, cocos2d::Size ownSize, Directions collisionDir, int effectPlayNum);
 
 	//매개변수 설명, 
 	// 1. 사용하고 싶은 effect 이름, 
@@ -34,11 +33,15 @@ public:
 	void createEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Point effectPoint, cocos2d::Size effectSize, int effectPlayNum);
 
 private:
-	void createEffectLinearMissileCollision(cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffectLinearMissileCollision(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
 	void createEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
-	void createEffectAimingMissileCollision(cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffectAimingMissileCollision( cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
 	void createEffectAimingMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
+
+	void createEffectPlayerLanding(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffectPlayerLandingSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
+
 
 
 
