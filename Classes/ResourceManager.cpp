@@ -69,8 +69,12 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 {
 	switch (type)
 	{
+	case ST_AIMINGMISSILE_FLYING:
+		return createSprite("AimingMissile1.png");
 	case ST_AIMINGMISSILE_COLLISION:
 		return createSprite("ET_AimingMissile_Collsion1.png");
+	case ST_LINEARMISSILE_FLYING:
+		return createSprite("LinearMissile1.png");
 	case ST_LINEARMISSILE_COLLISION:
 		return createSprite("ETLinearMissileCollision1.png");
 	case ST_LOADING:
