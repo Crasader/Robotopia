@@ -40,6 +40,11 @@ void EquipmentWindow::showCharacterWindow()
 		int currentSTE = GET_STAGE_MANAGER()->getPlayer()->getSteam();
 		int maxSTE = GET_STAGE_MANAGER()->getPlayer()->getMaxSteam();
 
+		drawWinHP(currentHP, maxHP);
+		drawWInSTE(currentSTE, maxSTE);
+
+		//여기다 아이템 리스트 받아와서 이미지 올리기!!!
+
 		auto action_0 = MoveTo::create(0.5, Point(m_WinWidth - 250, 25));
 		auto action_1 = EaseBackIn::create(action_0);
 		m_sprCharWinContainer->runAction(action_1);
@@ -56,4 +61,32 @@ void EquipmentWindow::hideCharacterWindow()
 		m_sprCharWinContainer->runAction(action_1);
 		m_CharWinOn = false;
 	}
+}
+
+void EquipmentWindow::drawWinHP(int currentHP, int maxHP)
+{
+	float scaleHP = (float)currentHP / (maxHP * 2);
+	auto sprHP = Sprite::create("HP_Block1.png");
+	sprHP->setScale(0.4);
+	sprHP->setScaleX(scaleHP);
+	sprHP->setPosition(Point(126, 347));
+	m_sprCharWinContainer->addChild(sprHP, 13);
+}
+
+void EquipmentWindow::drawWInSTE(int currentSTE, int maxSTE)
+{
+	float scaleSTE = (float)currentSTE / (maxSTE * 2);
+	auto sprSTE = Sprite::create("HP_Block2.png");
+	sprSTE->setScale(0.4);
+	sprSTE->setScaleX(scaleSTE);
+	sprSTE->setPosition(Point(126, 331));
+	m_sprCharWinContainer->addChild(sprSTE, 13);
+}
+
+Rect EquipmentWindow::getTriggerRect()
+{
+	Point containerPosition = m_sprCharWinContainer->getPosition();
+	Size triggerSize = m_sprCharWinTrigger->getContentSize();
+	auto triggerRect = Rect(containerPosition.x - 30, containerPosition.y + 250 - triggerSize.height, triggerSize.width, triggerSize.height);
+	return triggerRect;
 }

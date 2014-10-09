@@ -66,12 +66,14 @@ void UILayer::update(float dTime)
 
 	if (mouseLeft == MS_RELEASE)
 	{
-		Point leftClick = GET_INPUT_MANAGER()->getMousePosition();
-// 		Rect 
-// 		if (m_EquipmentWindow->getCharWinOn() == false)
-// 		{
-// 
-// 		}
+
+	}
+	if (mouseRight == MS_RELEASE)
+	{
+		if (m_EquipmentWindow->getCharWinOn() == true)
+		{
+			m_EquipmentWindow->hideCharacterWindow();
+		}
 	}
 }
 
@@ -81,6 +83,14 @@ void UILayer::initializeUILayer()
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
 
+	auto mouseListener = EventListenerMouse::create();
+	mouseListener->onMouseDown = CC_CALLBACK_1(UILayer::onMouseDown, this);
+	mouseListener->onMouseUp = CC_CALLBACK_1(UILayer::onMouseUp, this);
+	mouseListener->onMouseMove = CC_CALLBACK_1(UILayer::onMouseMove, this);
+	mouseListener->onMouseScroll = CC_CALLBACK_1(UILayer::onMouseScroll, this);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+
 	m_BarContainer = BarContainer::create();
 	m_EquipmentWindow = EquipmentWindow::create();
 	m_Minimap = Minimap::create();
@@ -89,4 +99,54 @@ void UILayer::initializeUILayer()
 	this->addChild( m_EquipmentWindow );
 	this->addChild( m_Minimap );
 	this->addChild( m_WorldMenu );
+}
+
+void UILayer::onMouseDown(Event *event)
+{
+	m_IsMouseDown = true;
+}
+
+void UILayer::onMouseUp(Event *event)
+{
+	auto ev = static_cast<EventMouse*>(event);
+
+	auto button = ev->getMouseButton();
+	Point clickPoint;
+	clickPoint.x = ev->getCursorX();
+	clickPoint.y = m_WinHeight + ev->getCursorY();
+
+	switch (button)
+	{
+		case MOUSE_BUTTON_LEFT:
+		{
+			if (m_EquipmentWindow->getCharWinOn() == false)
+			{
+				Rect triggerRect = m_EquipmentWindow->getTriggerRect();
+				if (triggerRect.containsPoint(clickPoint))
+				{
+					m_EquipmentWindow->showCharacterWindow();
+				}
+			}
+			break;
+		}
+		case MOUSE_BUTTON_RIGHT:
+		{
+			if (m_EquipmentWindow->getCharWinOn() == true)
+			{
+				m_EquipmentWindow->hideCharacterWindow();
+			}
+			break;
+		}
+	}
+	m_IsMouseDown = false;
+}
+
+void UILayer::onMouseMove(Event *event)
+{
+
+}
+
+void UILayer::onMouseScroll(Event *event)
+{
+
 }

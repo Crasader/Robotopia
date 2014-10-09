@@ -14,29 +14,29 @@ bool BarContainer::init()
 	//HP Container
 	auto sprBarContainer = Sprite::create("BarContainer.png");
 	sprBarContainer->setAnchorPoint(Point(0, 1));
-	sprBarContainer->setPosition(Point(20, m_WinHeight - 20));
+	sprBarContainer->setPosition(Point(0, m_WinHeight));
 	this->addChild(sprBarContainer, 10);
 
 	auto sprBarContainerBG = Sprite::create("BarContainerBG.png");
 	sprBarContainerBG->setAnchorPoint(Point(0, 1));
-	sprBarContainerBG->setPosition(Point(20, m_WinHeight - 20));
+	sprBarContainerBG->setPosition(Point(0, m_WinHeight));
 	this->addChild(sprBarContainerBG, 5);
 
 	auto sprHPBlock1 = Sprite::create("HP_Block1.png");
 	sprHPBlock1->setAnchorPoint(Point(0, 1));
-	sprHPBlock1->setPosition(Point(50, m_WinHeight - 24));
+	sprHPBlock1->setPosition(Point(30, m_WinHeight - 3));
 	this->addChild(sprHPBlock1, 8, SPRITE_FOREHP);
 
 	auto sprHPBlock2 = Sprite::create("HP_Block2.png");
 	sprHPBlock2->setAnchorPoint(Point(0, 1));
-	sprHPBlock2->setPosition(Point(50, m_WinHeight - 24));
+	sprHPBlock2->setPosition(Point(30, m_WinHeight - 3));
 	this->addChild(sprHPBlock2, 7, SPRITE_BACKHP);
 
 	//Label - 실제 개발에서는 문자를 이미지로 대체
-	auto hpLabel = Label::createWithSystemFont("", "Thonburi", 20);
-	hpLabel->setPosition(Point(175, m_WinHeight - 34));
-	auto steLabel = Label::createWithSystemFont("", "Thonburi", 20);
-	steLabel->setPosition(Point(175, m_WinHeight - 62));
+	auto hpLabel = Label::createWithSystemFont("", "Thonburi", 15);
+	hpLabel->setPosition(Point(155, m_WinHeight - 17));
+	auto steLabel = Label::createWithSystemFont("", "Thonburi", 15);
+	steLabel->setPosition(Point(155, m_WinHeight - 42));
 	this->addChild(hpLabel, 10, LABEL_HPSTATUS);
 	this->addChild(steLabel, 10, LABEL_STEAMSTATUS);
 
@@ -93,7 +93,7 @@ void BarContainer::setMaxSTE(int maxSTE)
 		{
 			auto sprSTE = Sprite::create("STE_Block.png");
 			sprSTE->setVisible(false);
-			sprSTE->setPosition(Point(70 + (10 * i), m_WinHeight - 62));
+			sprSTE->setPosition(Point(46 + (10 * i), m_WinHeight - 41));
 			m_STEs.pushBack(sprSTE);
 			this->addChild(sprSTE, 9);
 		}
