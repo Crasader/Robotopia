@@ -1,7 +1,6 @@
 #pragma once
 #include "cocos2d.h"
 #include "GameManager.h"
-#include "WorldScene.h"
 #include "Player.h"
 
 class Minimap;
@@ -9,10 +8,9 @@ class WorldMenu;
 class EquipmentWindow;
 class BarContainer;
 
-class UILayer : public WorldScene
+class UILayer : public cocos2d::Layer
 {
 public:
-	static cocos2d::Scene*	createScene();
 	virtual bool			init();
 	void					update( float dTime );
 
