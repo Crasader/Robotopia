@@ -12,7 +12,7 @@ public:
 	OVERRIDE void					update(float dTime);
 	bool							initWorldFromData( cocos2d::Vec2 boxNum , cocos2d::Size boxSize , 
 													   std::map<int , ObjectType> MapData , char* BGpath);
-
+	void							addEffect( cocos2d::Sprite* sprite );
 	InteractiveObject*				addObject( ObjectType type , cocos2d::Point position );
 	InteractiveObject*				addObjectByMapdata( ObjectType type , int xIdx , int yIdx );
 	InteractiveObject*				addObjectByMapdata( int xIdx , int yIdx );
@@ -38,6 +38,7 @@ private:
 		BACKGROUND,
 		LAND_OBJECT,
 		GAME_OBJECT,
+		EFFECT,
 	};
 
 	struct CollisionInformation

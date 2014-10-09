@@ -120,3 +120,9 @@ InteractiveObject* StageManager::addObjectByIdx( int xIdx , int yIdx )
 	}
 	return ( m_WorldScene->getGameLayer() )->addObjectByMapdata( xIdx , yIdx );
 }
+
+void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect )
+{
+	m_WorldScene->getGameLayer()->addEffect( effect );
+}
+

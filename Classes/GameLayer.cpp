@@ -239,5 +239,10 @@ std::vector<InteractiveObject*> GameLayer::getObjectsByRect( cocos2d::Rect check
 	return collectObjects;
 }
 
+void GameLayer::addEffect( Sprite* sprite )
+{
+	this->addChild( sprite , ZOrder::EFFECT );
+}
+
 
 

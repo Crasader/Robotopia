@@ -62,6 +62,8 @@ public:
 	InteractiveObject*				addObject( ObjectType type , cocos2d::Point position );
 	InteractiveObject*				addObjectByIdx( ObjectType type , int xIdx , int yIdx );
 	InteractiveObject*				addObjectByIdx( int xIdx , int yIdx );
+	
+	void							addEffectOnGameLayer(cocos2d::Sprite* effect);
 
 	ObjectType						getMapDataInPosition( cocos2d::Point position );
 	ObjectType						getMapDataInPositionWithIdx( int xIdx , int yIdx );
