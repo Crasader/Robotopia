@@ -181,8 +181,8 @@ bool DataManager::initFloorData()
 
 			StageData stage;
 
-			stage.x = x + 1;
-			stage.y = y + 1;
+			stage.x = x;
+			stage.y = y;
 			stage.width = width;
 			stage.height = height;
 
@@ -279,6 +279,8 @@ bool DataManager::initFloorData()
 				}
 			}
 
+			m_FloorStageData[i][s].x++;
+			m_FloorStageData[i][s].y = m_FloorStageData[i][s].y + (m_FloorStageData[i][s].height/MODULE_BASE_HEIGHT);
 			m_FloorStageData[i][s].width += 2;
 			m_FloorStageData[i][s].height += 2;
 		}
