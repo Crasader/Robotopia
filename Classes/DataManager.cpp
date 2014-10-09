@@ -32,7 +32,7 @@ bool DataManager::initModuleData()
 		rawData =strtok(nullptr, tokenList);
 		module.height = atoi(rawData);
 		
-		for (int y = 0; y < module.height; y++)
+		for (int y = module.height - 1; y >= 0; y--)
 		{
 			for (int x = 0; x < module.width; x++)
 			{
@@ -122,8 +122,8 @@ bool DataManager::initFloorData()
 			{
 				bool passFlag = true;
 
-				width = 2 + rand() % (maxStageWidth - 1);
-				height = 2 + rand() % (maxStageHeight - 1);
+				width = 1 + rand() % (maxStageWidth);
+				height = 1 + rand() % (maxStageHeight);
 
 				if (s == 1)
 				{
@@ -156,7 +156,6 @@ bool DataManager::initFloorData()
 						x += (rand() % width) - width + 1;
 						y += m_FloorStageData[i][nearRoom].height;
 						break;
-
 					}
 				}
 
@@ -220,7 +219,7 @@ bool DataManager::initFloorData()
 			int width = m_FloorStageData[i][s].width;
 			int height = m_FloorStageData[i][s].height;
 
-			for (int y = m_FloorStageData[i][s].y + 1; y <= m_FloorStageData[i][s].y + m_FloorStageData[i][s].height / MODULE_BASE_WIDTH; y++)
+			for (int y = m_FloorStageData[i][s].y + 1; y <= m_FloorStageData[i][s].y + m_FloorStageData[i][s].height / MODULE_BASE_HEIGHT; y++)
 			{
 				for (int x = m_FloorStageData[i][s].x + 1; x <= m_FloorStageData[i][s].x + m_FloorStageData[i][s].width / MODULE_BASE_WIDTH; x++)
 				{
@@ -257,7 +256,7 @@ bool DataManager::initFloorData()
 					{
 						for (int w = 0; w < moduleWidth; w++)
 						{
-							int idx = (idxY*moduleHeight + h + 1)*(width + 2) + idxX*moduleWidth + w + 1;
+							int idx = ((m_FloorStageData[i][s].height / MODULE_BASE_HEIGHT - idxY - 1)*moduleHeight + h + 1)*(width + 2) + idxX*moduleWidth + w + 1;
 							m_FloorStageData[i][s].data[idx] =
 								(ObjectType)m_ModuleData[closedDirection][moduleIdx].data[h*moduleWidth + w];
 						}
@@ -280,7 +279,7 @@ bool DataManager::initFloorData()
 			}
 
 			m_FloorStageData[i][s].x++;
-			//m_FloorStageData[i][s].y;
+			m_FloorStageData[i][s].y = endY + 1 - m_FloorStageData[i][s].y - m_FloorStageData[i][s].height/MODULE_BASE_HEIGHT;
 			m_FloorStageData[i][s].width += 2;
 			m_FloorStageData[i][s].height += 2;
 		}
