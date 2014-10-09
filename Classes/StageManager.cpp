@@ -24,7 +24,7 @@ void StageManager::changeStage(size_t stageNum)
 	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
 	m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
-	addObject( OT_PLAYER , Point(64 , 64 ));
+	addObject( OT_PLAYER , Point( 96 , 96 ) );
 }
 
 const Player* StageManager::getPlayer()
