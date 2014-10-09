@@ -9,8 +9,6 @@ USING_NS_CC;
 
 bool UILayer::init()
 {
-	m_Player = nullptr;
-
 	this->scheduleUpdate();
 	return true;
 }
@@ -40,11 +38,6 @@ void UILayer::update(float dTime)
 
 void UILayer::initializeUILayer()
 {
-	if (m_Player == nullptr)
-	{
-		//m_Player = GET_STAGE_MANAGER()->getPlayer();
-	}
-	
 	auto winSize = Director::getInstance()->getWinSize();
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;

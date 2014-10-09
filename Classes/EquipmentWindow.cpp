@@ -14,10 +14,7 @@ bool EquipmentWindow::init()
 
 void EquipmentWindow::update(float dTime)
 {
-	if (m_Player == nullptr)
-	{
-		return;
-	}
+
 }
 
 void EquipmentWindow::showCharacterWindow()
