@@ -16,6 +16,7 @@
 
 enum ObjectType
 {
+	OT_SENTINEL = -1,
 	OT_NONE,
 	OT_PLAYER,
 	OT_FLOOR,

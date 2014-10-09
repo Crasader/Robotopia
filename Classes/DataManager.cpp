@@ -257,24 +257,49 @@ bool DataManager::initFloorData()
 					{
 						for (int w = 0; w < moduleWidth; w++)
 						{
-							m_FloorStageData[i][s].data[(idxY*moduleHeight + h)*width + idxX*moduleWidth + w] =
+							int idx = (idxY*moduleHeight + h + 1)*(width + 2) + idxX*moduleWidth + w + 1;
+							m_FloorStageData[i][s].data[idx] =
 								(ObjectType)m_ModuleData[closedDirection][moduleIdx].data[h*moduleWidth + w];
 						}
 					}
 				}
 			}
+
+			for (int y = 0; y <= m_FloorStageData[i][s].height + 1; y++)
+			{
+				for (int x = 0; x <= m_FloorStageData[i][s].width + 1; x++)
+				{
+					if (y == 0 || x == 0 ||
+						y == m_FloorStageData[i][s].height + 1 ||
+						x == m_FloorStageData[i][s].width + 1)
+					{
+						int idx = y*(width + 2) + x;
+						m_FloorStageData[i][s].data[idx] = (ObjectType)-1;
+					}
+				}
+			}
+
+			m_FloorStageData[i][s].width += 2;
+			m_FloorStageData[i][s].height += 2;
 		}
 
 
-		for (int y = 1; y <= endY; y++)
+		for (int y = 0; y <= endY + 1; y++)
 		{
-			for (int x = 1; x <= endX; x++)
+			for (int x = 0; x <= endX + 1; x++)
 			{
-				m_FloorData[i].data.push_back(floorRawData[i][y][x]);
+				if (y == 0 || x == 0 || x == endX + 1 || y == endY + 1)
+				{
+					m_FloorData[i].data.push_back(0);
+				}
+				else
+				{
+					m_FloorData[i].data.push_back(floorRawData[i][y][x]);
+				}
 			}
 		}
-		m_FloorData[i].width = endX;
-		m_FloorData[i].height = endY;
+		m_FloorData[i].width = endX + 2;
+		m_FloorData[i].height = endY + 2;
 	}
 	return true;
 }
