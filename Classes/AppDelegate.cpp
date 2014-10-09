@@ -27,7 +27,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 	director->runWithScene( MenuScene::createScene() );
 	srand(time(NULL));
-	GET_DATA_MANAGER()->init();
 
     return true;
 }

@@ -39,7 +39,7 @@ public:
 
 private:	
 	std::map < int, std::vector<StageModuleData>> m_ModuleData;
-	std::map < int, std::vector<StageData>> m_FloorStageData;
+	std::map < int, std::map<int, StageData>> m_FloorStageData;
 	std::map <int, FloorData> m_FloorData;
 
 };

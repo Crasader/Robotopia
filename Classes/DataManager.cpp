@@ -85,9 +85,9 @@ bool DataManager::initFloorData()
 
 	floorNum = atoi(rawData);
 
-	for (int i = 0; i < floorNum; i++)
+	for (int i = 1; i <= floorNum; i++)
 	{
-		std::vector<StageData> dataVector;
+		std::map<int, StageData> dataVector;
 
 		dataVector.clear();
 
@@ -115,7 +115,7 @@ bool DataManager::initFloorData()
 
 		m_FloorData[i].stageNum = stageNum;
 
-		for (int s = 0; s < stageNum; s++)
+		for (int s = 1; s <= stageNum; s++)
 		{
 			int x, y, width, height;
 			while (true)
@@ -125,14 +125,14 @@ bool DataManager::initFloorData()
 				width = 1 + rand() % maxStageWidth;
 				height = 1 + rand() % maxStageHeight;
 
-				if (s == 0)
+				if (s == 1)
 				{
 					x = 0;
 					y = 0;
 				}
 				else
 				{
-					int nearRoom = rand() % s;
+					int nearRoom = 1 + rand() % (s-1);
 					int dir = rand() % 4;
 
 					x = m_FloorStageData[i][nearRoom].x;
@@ -160,7 +160,7 @@ bool DataManager::initFloorData()
 					}
 				}
 
-				for (int p = 0; p < s; p++)
+				for (int p = 1; p < s; p++)
 				{
 					int enemyX = m_FloorStageData[i][p].x;
 					int enemyY = m_FloorStageData[i][p].y;
@@ -191,13 +191,13 @@ bool DataManager::initFloorData()
 			if (x + width > endX) endX = x + width;
 			if (y + height > endY) endY = y + height;
 
-			m_FloorStageData[i].push_back(stage);
+			m_FloorStageData[i][s] = stage;
 		}
 
 		endX -= originX;
 		endY -= originY;
 
-		for (int s = 0; s < stageNum; s++)
+		for (int s = 1; s <= stageNum; s++)
 		{
 			std::map<int, ObjectType> objectsData;
 
@@ -209,11 +209,11 @@ bool DataManager::initFloorData()
 			{
 				for (int x = m_FloorStageData[i][s].x + 1; x <= m_FloorStageData[i][s].x + m_FloorStageData[i][s].width; x++)
 				{
-					floorRawData[i][y][x] = s + 1;
+					floorRawData[i][y][x] = s;
 				}
 			}
 		}
-		for (int s = 0; s < stageNum; s++)
+		for (int s = 1; s <= stageNum; s++)
 		{
 			m_FloorStageData[i][s].width *= MODULE_BASE_WIDTH;
 			m_FloorStageData[i][s].height *= MODULE_BASE_HEIGHT;
@@ -266,9 +266,9 @@ bool DataManager::initFloorData()
 		}
 
 
-		for (int y = 0; y < endY; y++)
+		for (int y = 1; y <= endY; y++)
 		{
-			for (int x = 0; x < endX; x++)
+			for (int x = 1; x <= endX; x++)
 			{
 				m_FloorData[i].data.push_back(floorRawData[i][y][x]);
 			}
