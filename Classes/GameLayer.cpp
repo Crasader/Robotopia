@@ -20,6 +20,7 @@ bool GameLayer::init()
 		return false;
 	}
 
+	m_Player = nullptr;
 	m_InteractiveObjects.clear();
 	this->scheduleUpdate();
 
@@ -34,7 +35,6 @@ bool GameLayer::initWorldFromData( Vec2 boxNum , Size boxSize , std::map<int , O
 	m_MapData = MapData;
 	m_MapRect.setRect( 0 , 0 , m_BoxSize.width * m_BoxWidthNum , m_BoxSize.height * m_BoxHeightNum );
 
-	//mapData에 입력된 객체들 트리에 추가
 	for( int yIdx = 0; yIdx < m_BoxHeightNum; yIdx++ )
 	{
 		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
@@ -42,6 +42,8 @@ bool GameLayer::initWorldFromData( Vec2 boxNum , Size boxSize , std::map<int , O
 			addObjectByMapdata( xIdx , yIdx );
 		}
 	}
+	addMovingBackground( BGpath );
+
 	return true;
 }
 
@@ -53,6 +55,11 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 	GameLayer::ZOrder zOrder;
 	switch( type )
 	{
+		case OT_PLAYER:
+			object = Player::create();
+			zOrder = GameLayer::ZOrder::LAND_OBJECT;
+			m_Player = (Player*)object;
+			break;
 		case OT_FLOOR:
 			object = LandFloor::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
@@ -106,9 +113,12 @@ InteractiveObject*	GameLayer::addObjectByMapdata( int xIdx , int yIdx )
 
 void GameLayer::update( float dTime )
 {
-	View::setViewPort( this , m_Player->getRect().origin , Point(0.5, 0.5) );
-	collisionCheck(dTime);
-	removeObject();
+	if( m_Player != nullptr )
+	{
+		View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
+		collisionCheck( dTime );
+		removeObject();
+	}
 }
 
 void GameLayer::collisionCheck(float dTime)

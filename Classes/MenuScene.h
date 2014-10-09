@@ -8,5 +8,4 @@ public:
 	virtual bool			init();
 	void					menuCallback( Ref* sender );
 	CREATE_FUNC( MenuScene );
-
 };
