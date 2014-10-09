@@ -19,14 +19,14 @@ void StageManager::changeStage( size_t stageNum )
 	m_CurrentStageNum = stageNum;
 	_ASSERT( stageNum <= m_FloorData.stageNum );
 	int boxNumWidth = m_CurrentFloorData[stageNum].width;
-	int boxNumHeight = m_CurrentFloorData[stageNum].width;
+	int boxNumHeight = m_CurrentFloorData[stageNum].height;
 	Size boxSize = Size( 32 , 32 );
 	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
 	m_WorldScene = WorldScene::createScene();
  	m_WorldScene->initCurrentSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
 	addObject( OT_PLAYER , Point(90, 90));
- }
+}
 
 const Player* StageManager::getPlayer()
 {
