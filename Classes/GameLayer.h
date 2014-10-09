@@ -56,13 +56,13 @@ private:
 		Directions			directions;
 	};
 
-	cocos2d::Rect							m_MapRect;
-	cocos2d::Size							m_BoxSize;
-	int										m_BoxWidthNum , m_BoxHeightNum;
-	Player*									m_Player;
-	std::vector<CollisionInformation>		m_CollisionInformations;
-	std::map<int , ObjectType>				m_MapData;
-	std::vector<InteractiveObject*>			m_InteractiveObjects; 
-	std::map<int , std::vector<InteractiveObject*>> m_ObjectsPositionHash;
+	cocos2d::Rect									m_MapRect;
+	cocos2d::Size									m_BoxSize;
+	int												m_BoxWidthNum , m_BoxHeightNum;
+	Player*											m_Player;
+	std::vector<CollisionInformation>				m_CollisionInformations;
+	std::map<int , ObjectType>						m_MapData;
+	std::vector<InteractiveObject*>					m_InteractiveObjects; 
+	std::map<int, std::vector<InteractiveObject*>>	m_ObjectPositionsHash;
 };
 

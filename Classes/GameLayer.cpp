@@ -13,6 +13,8 @@
 
 USING_NS_CC;
 
+#define MAX_BOX_OBJECTS 10
+
 bool GameLayer::init()
 {
 	if ( !Layer::init() )
@@ -23,9 +25,9 @@ bool GameLayer::init()
 	m_Player = nullptr;
 	m_InteractiveObjects.clear();
 	m_CollisionInformations.clear();
-	m_ObjectsPositionHash.clear();
-	this->scheduleUpdate();
+	m_ObjectPositionsHash.clear();
 
+	this->scheduleUpdate();
 	return true;
 }
 
@@ -135,8 +137,10 @@ void GameLayer::collisionCheck(float dTime)
 	{
 		collisionInfo.subject->collisionOccured( collisionInfo.object , collisionInfo.directions );
 	}
+
 	m_CollisionInformations.clear();
-	m_ObjectsPositionHash.clear();
+	m_ObjectPositionsHash.clear();
+
 }
 
 void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
@@ -150,12 +154,16 @@ void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
 	{
 		for( int yIdx = curY - 2; yIdx < curY + 3; ++yIdx )
 		{
-			for( auto object : m_ObjectsPositionHash[xIdx*yIdx + xIdx] )
+			int sum = xIdx*yIdx + xIdx;
+			if( sum < m_BoxWidthNum*m_BoxHeightNum && sum >= 0 )
 			{
-				collisionDirections = subject->collisionCheck( object , dTime );
-				if( collisionDirections )
+				for( auto object : m_ObjectPositionsHash[sum] )
 				{
-					m_CollisionInformations.push_back( CollisionInformation( subject , object , collisionDirections ) );
+					collisionDirections = subject->collisionCheck( object , dTime );
+					if( collisionDirections )
+					{
+						m_CollisionInformations.push_back(CollisionInformation( subject , object , collisionDirections ));
+					}
 				}
 			}
 		}
@@ -166,14 +174,18 @@ void GameLayer::makeHash()
 {
 	int x = 0;
 	int y = 0;
+	int sum = 0;
 	for( auto object : m_InteractiveObjects )
 	{
 		x = positionToIdxOfMapData( object->getPosition() ).x;
 		y = positionToIdxOfMapData( object->getPosition() ).y;
-		m_ObjectsPositionHash[x*y + x].push_back( object );
+		sum = x*y + x;
+		if( sum >= 0 && sum < m_BoxHeightNum*m_BoxWidthNum )
+		{
+			m_ObjectPositionsHash[sum].push_back(object);
+		}
 	}
 }
-
 
 
 void GameLayer::removeObject()
@@ -219,7 +231,7 @@ cocos2d::Vec2 GameLayer::positionToIdxOfMapData( cocos2d::Point position )
 		curPosIdx.x = position.x / m_BoxSize.width;
 		curPosIdx.y = position.y / m_BoxSize.height;
 	}
-	_ASSERT( curPosIdx != Vec2( -1 , -1 ) ); //맵안에 있지 않은 위치
+	//_ASSERT( curPosIdx != Vec2( -1 , -1 ) ); //맵안에 있지 않은 위치
 	return curPosIdx;
 }
 
