@@ -47,6 +47,11 @@ bool BarContainer::init()
 
 void BarContainer::update(float dTime)
 {
+	if (m_Player == nullptr)
+	{
+		return;
+	}
+
 	int currentHP = m_Player->getHp();
 	int maxHP = m_Player->getMaxHp();
 	int currentSTE = m_Player->getSteam();

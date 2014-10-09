@@ -1,5 +1,6 @@
 #pragma once
 #include "cocos2d.h"
+#include "GameManager.h"
 #include "WorldScene.h"
 #include "Player.h"
 
@@ -30,6 +31,7 @@ protected:
 
 	const Player*						m_Player;
 	int									m_WinWidth , m_WinHeight;
+	bool								m_CharWinOn;
 
 	BarContainer*						m_BarContainer;
 	EquipmentWindow*					m_EquipmentWindow;

@@ -14,22 +14,10 @@ bool EquipmentWindow::init()
 
 void EquipmentWindow::update(float dTime)
 {
-	KeyState charKey = GET_INPUT_MANAGER()->getKeyState(KC_CHARACTER_UI);
-
-	if (charKey == KS_PRESS)
+	if (m_Player == nullptr)
 	{
-		if (m_WindowOn == false)
-		{
-			showCharacterWindow();
-			m_WindowOn = true;
-		}
-		else if (m_WindowOn == true)
-		{
-			hideCharacterWindow();
-			m_WindowOn = false;
-		}
+		return;
 	}
-
 }
 
 void EquipmentWindow::showCharacterWindow()

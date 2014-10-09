@@ -18,5 +18,8 @@ bool Minimap::init()
 
 void Minimap::update(float dTime)
 {
-
+	if (m_Player == nullptr)
+	{
+		return;
+	}
 }
