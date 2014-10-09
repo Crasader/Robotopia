@@ -22,6 +22,8 @@ bool GameLayer::init()
 
 	m_Player = nullptr;
 	m_InteractiveObjects.clear();
+	m_CollisionInformations.clear();
+	m_ObjectsPositionHash.clear();
 	this->scheduleUpdate();
 
 	return true;
@@ -116,6 +118,7 @@ void GameLayer::update( float dTime )
 	if( m_Player != nullptr )
 	{
 		View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
+		makeHash();
 		collisionCheck( dTime );
 		removeObject();
 	}
@@ -123,34 +126,55 @@ void GameLayer::update( float dTime )
 
 void GameLayer::collisionCheck(float dTime)
 {
-	std::vector<CollisionInformation> collisionInformations;
-	Directions collisionDirections;
-
-	for( auto subjectIter = m_InteractiveObjects.begin(); subjectIter != m_InteractiveObjects.end(); ++subjectIter )
+	for( auto subject: m_InteractiveObjects )
 	{
-		for( auto objectIter = subjectIter + 1; objectIter != m_InteractiveObjects.end(); ++objectIter )
-		{
-			auto subject = *subjectIter; //충돌 주체
-			auto object = *objectIter;	//충돌당하는 애
-			collisionDirections = subject->collisionCheck( object , dTime );
-			if( collisionDirections )
-			{
-				collisionInformations.push_back( CollisionInformation(subject, object, collisionDirections));
-			}
-			
-			collisionDirections = object->collisionCheck( subject , dTime );
-			if( collisionDirections )
-			{
-				collisionInformations.push_back( CollisionInformation( object , subject , collisionDirections ) );
-			}
-		}
+		collisionCheckbyHash( subject , dTime );
 	}
 
-	for( auto collisionInfo : collisionInformations )
+	for( auto collisionInfo : m_CollisionInformations )
 	{
 		collisionInfo.subject->collisionOccured( collisionInfo.object , collisionInfo.directions );
 	}
+	m_CollisionInformations.clear();
+	m_ObjectsPositionHash.clear();
 }
+
+void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
+{
+	Directions collisionDirections;
+
+	int curX = positionToIdxOfMapData( subject->getPosition() ).x;
+	int curY = positionToIdxOfMapData( subject->getPosition() ).y;
+
+	for( int xIdx = curX - 2; xIdx < curX + 3; ++xIdx )
+	{
+		for( int yIdx = curY - 2; yIdx < curY + 3; ++yIdx )
+		{
+			for( auto object : m_ObjectsPositionHash[xIdx*yIdx + xIdx] )
+			{
+				collisionDirections = subject->collisionCheck( object , dTime );
+				if( collisionDirections )
+				{
+					m_CollisionInformations.push_back( CollisionInformation( subject , object , collisionDirections ) );
+				}
+			}
+		}
+	}
+}
+
+void GameLayer::makeHash()
+{
+	int x = 0;
+	int y = 0;
+	for( auto object : m_InteractiveObjects )
+	{
+		x = positionToIdxOfMapData( object->getPosition() ).x;
+		y = positionToIdxOfMapData( object->getPosition() ).y;
+		m_ObjectsPositionHash[x*y + x].push_back( object );
+	}
+}
+
+
 
 void GameLayer::removeObject()
 {
@@ -195,7 +219,7 @@ cocos2d::Vec2 GameLayer::positionToIdxOfMapData( cocos2d::Point position )
 		curPosIdx.x = position.x / m_BoxSize.width;
 		curPosIdx.y = position.y / m_BoxSize.height;
 	}
-	_ASSERT( curPosIdx == Vec2( -1 , -1 ) ); //맵안에 있지 않은 위치
+	_ASSERT( curPosIdx != Vec2( -1 , -1 ) ); //맵안에 있지 않은 위치
 	return curPosIdx;
 }
 
