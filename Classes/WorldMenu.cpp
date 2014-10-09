@@ -12,8 +12,5 @@ bool WorldMenu::init()
 
 void WorldMenu::update(float dTime)
 {
-	if (m_Player == nullptr)
-	{
-		return;
-	}
+
 }

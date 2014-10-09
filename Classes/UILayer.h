@@ -23,13 +23,12 @@ public:
 protected:
 	enum UILayerEnum
 	{
-		LABEL_HPSTATUS ,
-		LABEL_STEAMSTATUS ,
-		SPRITE_FOREHP ,
-		SPRITE_BACKHP ,
+		LABEL_HPSTATUS,
+		LABEL_STEAMSTATUS,
+		SPRITE_FOREHP,
+		SPRITE_BACKHP,
 	};
 
-	const Player*						m_Player;
 	int									m_WinWidth , m_WinHeight;
 	bool								m_CharWinOn;
 
