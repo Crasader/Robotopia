@@ -22,6 +22,6 @@ bool MenuScene::init()
 
 void MenuScene::menuCallback( Ref* sender )
 {
-	GET_STAGE_MANAGER()->changeStage();
+	GET_STAGE_MANAGER()->changeStage(0);
 }
 
