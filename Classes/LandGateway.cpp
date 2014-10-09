@@ -32,6 +32,12 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 	}
 }
 
+size_t LandGateway::findNextStageNum()
+{
+	Point curPos = this->getPosition();
+	return 1;
+}
+
 void LandGateway::gotoNextLevel(Ref* sender)
 {
 	//다음 월드 씬으로 변경해주는 함수호출

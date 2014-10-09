@@ -8,7 +8,7 @@ public:
 	OVERRIDE bool		init();
 	OVERRIDE void		collisionOccured( InteractiveObject* enemy , Directions dir );
 	void				gotoNextLevel( Ref* sender );
-
+	size_t				findNextStageNum();
 	CREATE_FUNC( LandGateway );
 
 private:

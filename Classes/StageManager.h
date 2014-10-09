@@ -20,7 +20,6 @@ public:
 	InteractiveObject*					addObject( ObjectType type , cocos2d::Point position );
 	InteractiveObject*					addObjectByIdx( ObjectType type , int xIdx , int yIdx );
 	InteractiveObject*					addObjectByIdx( int xIdx , int yIdx );
-	
 	void								addEffectOnGameLayer(cocos2d::Sprite* effect);
 
 	ObjectType							getMapDataInPosition( cocos2d::Point position );
@@ -31,6 +30,7 @@ public:
 	WorldScene*							getWorldScene(){return m_WorldScene;}
 	const Player*						getPlayer();
 
+	cocos2d::Vec2						positionToIdxOfMapData( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
 private:
 	int									m_CurrentFloor;
 	std::vector<StageData>				m_CurrentFloorData;

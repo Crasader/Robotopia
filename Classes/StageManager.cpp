@@ -22,6 +22,9 @@ void StageManager::changeStage(size_t stageNum)
 	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
 	m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
+
+	MODULE_BASE_WIDTH;
+	MODULE_BASE_HEIGHT;
 }
 
 const Player* StageManager::getPlayer()
@@ -109,5 +112,15 @@ InteractiveObject* StageManager::addObjectByIdx( int xIdx , int yIdx )
 void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect )
 {
 	m_WorldScene->getGameLayer()->addEffect( effect );
+}
+
+cocos2d::Vec2 StageManager::positionToIdxOfMapData( cocos2d::Point position )
+{
+	Vec2 resultIdx = Vec2(-1,-1);
+	if( m_WorldScene == nullptr )
+	{
+		return resultIdx;
+	}
+	return ( m_WorldScene->getGameLayer() )->positionToIdxOfMapData( position );
 }
 
