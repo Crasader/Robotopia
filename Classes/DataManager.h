@@ -3,6 +3,7 @@
 #include "Utils.h"
 #define MODULES_FILE_NAME "Data\\Stage\\moduleList.mld"
 
+
 struct StageModuleData
 {
 	int width, height;

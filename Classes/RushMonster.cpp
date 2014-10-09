@@ -15,8 +15,8 @@ bool RushMonster::init()
 	m_Type = OT_RUSH_MONSTER;
 
 	m_Animations[RM_STAND] = GET_RESOURCE_MANAGER()->createAnimation("rushMonster_stand%d.png", 1, 4, 0.1f);
-	m_Animations[RM_MOVE] = GET_RESOURCE_MANAGER()->createAnimation("rushMonster_move", 1, 4, 0.1f);
-	m_Animations[RM_RUSH] = GET_RESOURCE_MANAGER()->createAnimation("rushMonster_rush", 1, 4, 0.1f);
+	m_Animations[RM_MOVE] = GET_RESOURCE_MANAGER()->createAnimation("rushMonster_move%d.png", 1, 4, 0.1f);
+	m_Animations[RM_RUSH] = GET_RESOURCE_MANAGER()->createAnimation("rushMonster_rush%d.png", 1, 4, 0.1f);
 	
 	for (int i = 0; i < RM_STATE_NUM; i++)
 	{
