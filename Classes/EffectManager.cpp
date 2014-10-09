@@ -12,7 +12,8 @@ bool EffectManager::init()
 	return true;
 }
 
-void EffectManager::useEffect(EffectType selectedEffect, cocos2d::Rect obRect, int effectPlayNum, Point AnchorPoint)
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void EffectManager::useEffect(EffectType selectedEffect, Rect obRect, int effectPlayNum, Point AnchorPoint)
 {
 	switch (selectedEffect)
 	{
@@ -28,19 +29,21 @@ void EffectManager::useEffect(EffectType selectedEffect, cocos2d::Rect obRect, i
 }
 
 
-void EffectManager::useEffect(EffectType selectedEffect, cocos2d::Point obPoint, cocos2d::Size obSize, int effectPlayNum, Point AnchorPoint)
+void EffectManager::useEffect(EffectType selectedEffect, Point obPoint, Size obSize, int effectPlayNum, Point AnchorPoint)
 {
 	Rect obRect(obPoint.x, obPoint.y, obSize.width, obSize.height);
 	useEffect(selectedEffect, obRect, effectPlayNum, AnchorPoint);
 	return;
 }
 
-void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Rect effectRect, int effectPlayNum, cocos2d::Point AnchorPoint)
+//EndLine////////////////////////////////////////////////
+
+void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, Rect effectRect, int effectPlayNum)
 {
 	switch (selectedEffect)
 	{
 	case ET_LINEAR_MISSILE_COLLISION:
-		//useEffectLinearMissileCollision(obRect, effectPlayNum, AnchorPoint);
+		useEffectLinearMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
 		break;
 	case ET_AIMING_MISSILE_COLLISION:
 		break;
@@ -51,14 +54,15 @@ void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, cocos
 	return;
 }
 
-void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Point effectPoint, 
-												cocos2d::Size effectSize, int effectPlayNum, cocos2d::Point AnchorPoint)
+
+void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, Point effectPoint, Size effectSize, int effectPlayNum)
 {
 	Rect effectRect(effectPoint.x, effectPoint.y, effectSize.width, effectSize.height);
-	useEffectSelectedSizeByUser(selectedEffect, effectRect, effectPlayNum, AnchorPoint);
+	useEffectSelectedSizeByUser(selectedEffect, effectRect, effectPlayNum);
 	return;
 }
 
+//EndLine///////////////////////////////////////////////
 
 void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int effectPlayNum, Point AnchorPoint)
 {
@@ -90,6 +94,26 @@ void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int ef
 	
 	m_MainSprite->setPosition(addPosX, addPosY);
 	m_MainSprite->runAction(Repeat::create(Animate::create(m_MainAnimation), effectPlayNum));
+
+	return;
+}
+
+void EffectManager::useEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum)
+{
+	float needEffectScale = 0.5;
+
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite("ETLinearMissileCollision1.png");
+	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
+
+	float ratioX = effectRect.size.width / m_MainSprite->getContentSize().width;
+	float ratioY = effectRect.size.height / m_MainSprite->getContentSize().height;
+
+	m_MainSprite->setScaleX(ratioX);
+	m_MainSprite->setScaleY(ratioY);
+
+	m_MainSprite->setPosition(effectRect.origin.x, effectRect.origin.y);
+	m_MainSprite->runAction(Repeat::create(Animate::create(m_MainAnimation), effectPlayNum));
+
 
 	return;
 }
