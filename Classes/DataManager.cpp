@@ -273,7 +273,7 @@ bool DataManager::initFloorData()
 						y == m_FloorStageData[i][s].height + 1 ||
 						x == m_FloorStageData[i][s].width + 1)
 					{
-						int idx = y*(width + 2) + x;
+						int idx = y*(width + 2) + x; 
 						m_FloorStageData[i][s].data[idx] = (ObjectType)-1;
 					}
 				}
