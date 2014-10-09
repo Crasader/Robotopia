@@ -18,10 +18,6 @@ bool RushMonster::init()
 	m_Animations[RM_MOVE] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_MOVE);
 	m_Animations[RM_RUSH] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_RUSH);
 	
-	for (int i = 0; i < RM_STATE_NUM; i++)
-	{
-		m_Animations[i]->retain();
-	}
 
 	m_MainSprite = Sprite::create();
 

@@ -28,11 +28,6 @@ bool Player::init()
 	m_MaxSteam = 17;
 	m_Steam = m_MaxSteam;
 
-	for (int i = 0; i < PS_STATE_NUM; i++)
-	{
-		m_Animations[i]->retain();
-	}
-
 	m_MainSprite = Sprite::create();
 
 	changeState(PS_STAND);
