@@ -8,13 +8,13 @@ class UILayer;
 class WorldScene : public cocos2d::Scene
 {
 public:
-	static cocos2d::Scene*	createScene();
-	static cocos2d::Scene*		createSceneWithData( cocos2d::Vec2 boxNum , cocos2d::Size boxSize ,
+	static WorldScene*			createScene();
+	static WorldScene*			createSceneWithData( cocos2d::Vec2 boxNum , cocos2d::Size boxSize ,
 												 std::map<int , ObjectType> mapData , char* BGpath );
-	virtual bool			init();
+	virtual bool				init();
 
-	GameLayer*				getGameLayer() {return m_GameLayer; }
-	UILayer*				getUILayer() {return m_UILayer; }
+	GameLayer*					getGameLayer() {return m_GameLayer; }
+	UILayer*					getUILayer() {return m_UILayer; }
 	CREATE_FUNC( WorldScene );
 
 private:

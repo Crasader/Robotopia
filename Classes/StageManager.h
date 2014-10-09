@@ -58,6 +58,7 @@ public:
 	};
 	bool			init();
 	void			changeStage();
+	const Player*	getPlayer();
 
 private:
 	WorldScene*		m_WorldScene;

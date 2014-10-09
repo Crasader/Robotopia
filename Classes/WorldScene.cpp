@@ -6,14 +6,14 @@
 
 USING_NS_CC;
 
-Scene* WorldScene::createScene()
+WorldScene* WorldScene::createScene()
 {
 	WorldScene* scene = WorldScene::create();
 	return scene;
 }
 
 
-Scene* WorldScene::createSceneWithData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> mapData , char* BGpath )
+WorldScene* WorldScene::createSceneWithData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> mapData , char* BGpath )
 {
 	WorldScene* scene = WorldScene::create();
 	GET_INPUT_MANAGER()->receiveKeyboardData( scene );
@@ -30,15 +30,15 @@ bool WorldScene::init()
 
 	m_GameLayer = GameLayer::create();
 	m_GameLayer->setAnchorPoint( Point::ZERO );
-	//m_BackgroundLayer = BackgroundLayer::create();
-	//m_BackgroundLayer->setPosition( Point::ZERO );
-	//m_UILayer = UILayer::create();
-	//m_UILayer->setPosition( Point::ZERO );
+	m_BackgroundLayer = BackgroundLayer::create();
+	m_BackgroundLayer->setPosition( Point::ZERO );
+	m_UILayer = UILayer::create();
+	m_UILayer->setPosition( Point::ZERO );
 
 	this->addChild( m_GameLayer , WorldScene::ZOrder::GAMELAYER , TAG_GAME_LAYER );
-	//this->addChild( m_BackgroundLayer , WorldScene::ZOrder::BACKGROUND , "TAG_BACKGROUND_LAYER" );
-	//this->addChild( m_UILayer , WorldScene::ZOrder::UILAYER , "TAG_UI_LAYER" );
+	this->addChild( m_BackgroundLayer , WorldScene::ZOrder::BACKGROUND , "TAG_BACKGROUND_LAYER" );
+	this->addChild( m_UILayer , WorldScene::ZOrder::UILAYER , "TAG_UI_LAYER" );
 	
-	//m_UILayer->initializeUILayer();
+	m_UILayer->initializeUILayer();
 	return true;
 }

@@ -1,4 +1,5 @@
-#include "GameManager.h"
+#include "StageManager.h"
+#include "GameLayer.h"
 
 USING_NS_CC;
 
@@ -33,7 +34,16 @@ void StageManager::changeStage()
 			rawValue = strtok( nullptr , " \n" );
 		}
 	}
-	auto scene = WorldScene::createSceneWithData(Vec2(boxNumWidth, boxNumHeight), boxSize, data, "background.png");
-	Director::getInstance()->replaceScene( scene );
+	auto m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
+	Director::getInstance()->replaceScene( m_WorldScene );
+}
+
+const Player* StageManager::getPlayer()
+{
+	if( m_WorldScene == nullptr )
+	{
+		return nullptr;
+	}
+	return ( m_WorldScene->getGameLayer() )->getPlayer();
 }
 
