@@ -266,13 +266,15 @@ bool DataManager::initFloorData()
 		}
 
 
-		for (int y = 1; y <= endY; y++)
+		for (int y = 0; y < endY; y++)
 		{
-			for (int x = 1; x <= endX; x++)
+			for (int x = 0; x < endX; x++)
 			{
 				m_FloorData[i].data.push_back(floorRawData[i][y][x]);
 			}
 		}
+		m_FloorData[i].width = endX;
+		m_FloorData[i].height = endY;
 	}
 	return true;
 }
