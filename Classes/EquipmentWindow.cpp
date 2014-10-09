@@ -26,16 +26,20 @@ void EquipmentWindow::update(float dTime)
 
 void EquipmentWindow::showCharacterWindow()
 {
-	auto action_0 = MoveTo::create(1, Point(m_WinWidth - 270, m_WinHeight - 160));
-	auto action_1 = EaseBackIn::create(action_0);
-
-	m_sprCharWinContainer->runAction(action_1);
+	if (m_sprCharWinContainer->getNumberOfRunningActions() == 0)
+	{
+		auto action_0 = MoveTo::create(1, Point(m_WinWidth - 270, m_WinHeight - 160));
+		auto action_1 = EaseBackIn::create(action_0);
+		m_sprCharWinContainer->runAction(action_1);
+	}
 }
 
 void EquipmentWindow::hideCharacterWindow()
 {
-	auto action_0 = MoveTo::create(1, Point(m_WinWidth - 30, m_WinHeight - 160));
-	auto action_1 = EaseBounceOut::create(action_0);
-
-	m_sprCharWinContainer->runAction(action_1);
+	if (m_sprCharWinContainer->getNumberOfRunningActions() == 0)
+	{
+		auto action_0 = MoveTo::create(1, Point(m_WinWidth - 30, m_WinHeight - 160));
+		auto action_1 = EaseBounceOut::create(action_0);
+		m_sprCharWinContainer->runAction(action_1);
+	}
 }

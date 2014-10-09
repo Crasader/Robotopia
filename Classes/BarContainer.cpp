@@ -12,34 +12,31 @@ bool BarContainer::init()
 	m_WinHeight = winSize.height;
 
 	//HP Container
-	auto sprHPContainer = Sprite::create("Container_HP.png");
-	sprHPContainer->setScale(0.75);
-	sprHPContainer->setAnchorPoint(Point(0, 1));
-	sprHPContainer->setPosition(Point(20, m_WinHeight - 20));
-	this->addChild(sprHPContainer, 10);
+	auto sprBarContainer = Sprite::create("BarContainer.png");
+	sprBarContainer->setAnchorPoint(Point(0, 1));
+	sprBarContainer->setPosition(Point(20, m_WinHeight - 20));
+	this->addChild(sprBarContainer, 10);
+
+	auto sprBarContainerBG = Sprite::create("BarContainerBG.png");
+	sprBarContainerBG->setAnchorPoint(Point(0, 1));
+	sprBarContainerBG->setPosition(Point(20, m_WinHeight - 20));
+	this->addChild(sprBarContainerBG, 5);
 
 	auto sprHPBlock1 = Sprite::create("HP_Block1.png");
 	sprHPBlock1->setAnchorPoint(Point(0, 1));
-	sprHPBlock1->setPosition(Point(21, m_WinHeight - 27));
+	sprHPBlock1->setPosition(Point(50, m_WinHeight - 24));
 	this->addChild(sprHPBlock1, 8, SPRITE_FOREHP);
 
 	auto sprHPBlock2 = Sprite::create("HP_Block2.png");
 	sprHPBlock2->setAnchorPoint(Point(0, 1));
-	sprHPBlock2->setPosition(Point(21, m_WinHeight - 27));
+	sprHPBlock2->setPosition(Point(50, m_WinHeight - 24));
 	this->addChild(sprHPBlock2, 7, SPRITE_BACKHP);
-
-	//STE Container
-	auto sprSTEContainer = Sprite::create("Container_STE.png");
-	sprSTEContainer->setScale(0.75);
-	sprSTEContainer->setAnchorPoint(Point(0, 1));
-	sprSTEContainer->setPosition(Point(20, m_WinHeight - 80));
-	this->addChild(sprSTEContainer, 10);
 
 	//Label - 실제 개발에서는 문자를 이미지로 대체
 	auto hpLabel = Label::createWithSystemFont("", "Thonburi", 20);
-	hpLabel->setPosition(Point(175, m_WinHeight - 45));
+	hpLabel->setPosition(Point(175, m_WinHeight - 34));
 	auto steLabel = Label::createWithSystemFont("", "Thonburi", 20);
-	steLabel->setPosition(Point(175, m_WinHeight - 100));
+	steLabel->setPosition(Point(175, m_WinHeight - 62));
 	this->addChild(hpLabel, 10, LABEL_HPSTATUS);
 	this->addChild(steLabel, 10, LABEL_STEAMSTATUS);
 
@@ -95,11 +92,10 @@ void BarContainer::setMaxSTE(int maxSTE)
 		for (int i = 0; i < maxSTE - sizeOfSTEs; ++i)
 		{
 			auto sprSTE = Sprite::create("STE_Block.png");
-			sprSTE->setScale(0.8);
 			sprSTE->setVisible(false);
-			sprSTE->setPosition(Point(37 + (17 * i), m_WinHeight - 103));
+			sprSTE->setPosition(Point(70 + (10 * i), m_WinHeight - 62));
 			m_STEs.pushBack(sprSTE);
-			this->addChild(sprSTE);
+			this->addChild(sprSTE, 9);
 		}
 	}
 }
