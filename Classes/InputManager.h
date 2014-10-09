@@ -15,6 +15,8 @@ enum KeyCode
 	KC_TEST1 = cocos2d::EventKeyboard::KeyCode::KEY_F1,
 	KC_TEST2 = cocos2d::EventKeyboard::KeyCode::KEY_F2,
 	KC_MENU = cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE,
+	KC_CHARACTER_UI = cocos2d::EventKeyboard::KeyCode::KEY_C,
+	KC_RETURN = cocos2d::EventKeyboard::KeyCode::KEY_ENTER,
 };
 
 enum KeyState
