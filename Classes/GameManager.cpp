@@ -29,6 +29,7 @@ GameManager::GameManager()
 	m_pEffectManager = nullptr;
 	m_pResourceManager = nullptr;
 	m_pStageManager = nullptr;
+	m_pDataManager = nullptr;
 }
 
 GameManager::~GameManager()
@@ -55,6 +56,12 @@ GameManager::~GameManager()
 	{
 		delete m_pStageManager;
 		m_pStageManager = nullptr;
+	}
+
+	if (m_pDataManager != nullptr)
+	{
+		delete m_pDataManager;
+		m_pDataManager = nullptr;
 	}
 }
 

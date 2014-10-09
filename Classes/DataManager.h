@@ -35,6 +35,7 @@ public:
 
 private:	
 	std::map < Directions, std::vector<StageModuleData>> m_ModuleData;
-	std::map < int, std::vector<StageData>> m_FloorData;
+	std::map < int, std::vector<StageData>> m_FloorStageData;
+	std::map <int, FloorData> m_FloorData;
 
 };

@@ -50,7 +50,16 @@ bool DataManager::initModuleData()
 
 DataManager::DataManager()
 {
+	m_ModuleData.clear();
+	for (int i = 0; i < 15; i++)
+	{
+		std::vector<StageModuleData> moduleDataVector;
 
+		moduleDataVector.clear();
+
+		m_ModuleData[i] = moduleDataVector;
+	}
+	m_FloorStageData.clear();
 }
 
 DataManager::~DataManager()
@@ -65,10 +74,25 @@ bool DataManager::initFloorData()
 	char* rawData = (char*)data.getBytes();
 	const char* tokenList = " \r\n\0";
 	int floorNum;
+	int floorRawData[4][100][100] = {0,};
+	int originX = 0, originY = 0;
+	int endX = 0, endY = 0;
+
+	CCLOG("%s", rawData);
+
 
 	rawData = strtok(rawData, tokenList);
 
 	floorNum = atoi(rawData);
+
+	for (int i = 0; i < floorNum; i++)
+	{
+		std::vector<StageData> dataVector;
+
+		dataVector.clear();
+
+		m_FloorStageData[i] = dataVector;
+	}
 
 	for (int i = 0; i < floorNum; i++)
 	{
@@ -109,8 +133,8 @@ bool DataManager::initFloorData()
 					int nearRoom = rand() % s;
 					int dir = rand() % 4;
 
-					x = m_FloorData[i][s].x;
-					y = m_FloorData[i][s].y;
+					x = m_FloorStageData[i][nearRoom].x;
+					y = m_FloorStageData[i][nearRoom].y;
 
 					switch (dir)
 					{
@@ -123,12 +147,12 @@ bool DataManager::initFloorData()
 						y -= height;
 						break;
 					case 2: //오른쪽
-						x += m_FloorData[i][s].width;
+						x += m_FloorStageData[i][nearRoom].width;
 						y += (rand() % height) - height + 1;
 						break;
 					case 3: //아래
 						x += (rand() % width) - width + 1;
-						y += m_FloorData[i][s].height;
+						y += m_FloorStageData[i][nearRoom].height;
 						break;
 
 					}
@@ -136,10 +160,10 @@ bool DataManager::initFloorData()
 
 				for (int p = 0; p < s; p++)
 				{
-					int enemyX = m_FloorData[i][p].x;
-					int enemyY = m_FloorData[i][p].y;
-					int enemyWidth = m_FloorData[i][p].width;
-					int enemyHeight = m_FloorData[i][p].height;
+					int enemyX = m_FloorStageData[i][p].x;
+					int enemyY = m_FloorStageData[i][p].y;
+					int enemyWidth = m_FloorStageData[i][p].width;
+					int enemyHeight = m_FloorStageData[i][p].height;
 
 					if (!(x + width<=enemyX || x>=enemyX + enemyWidth ||
 						y + height<=enemyY || y>=enemyY + enemyHeight))
@@ -160,7 +184,36 @@ bool DataManager::initFloorData()
 			stage.width = width;
 			stage.height = height;
 
+			if (x < originX) originX = x;
+			if (y < originY) originY = y;
+			if (x + width > endX) endX = x + width;
+			if (y + height > endY) endY = y + height;
 
+			m_FloorStageData[i].push_back(stage);
+		}
+
+		endX -= originX;
+		endY -= originY;
+
+		for (int s = 0; s < stageNum; s++)
+		{
+			m_FloorStageData[i][s].y -= originY;
+			m_FloorStageData[i][s].x -= originX;
+			for (int j = m_FloorStageData[i][s].y; j < m_FloorStageData[i][s].y + m_FloorStageData[i][s].height; j++)
+			{
+				for (int k = m_FloorStageData[i][s].x; k < m_FloorStageData[i][s].x + m_FloorStageData[i][s].width; k++)
+				{
+					floorRawData[i][j][k] = s + 1;
+				}
+			}
+		}
+
+		for (int y = 0; y < endY; y++)
+		{
+			for (int x = 0; x < endX; x++)
+			{
+				m_FloorData[i].data.push_back(floorRawData[i][y][x]);
+			}
 		}
 	}
 	return true;
