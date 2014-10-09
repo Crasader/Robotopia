@@ -14,7 +14,7 @@ bool StageManager::init()
 	return true;
 }
 
-void StageManager::changeStage(size_t stageNum)
+void StageManager::changeStage( size_t stageNum , Point playerPosition )
 {
 	m_CurrentStageNum = stageNum;
 	_ASSERT( stageNum < m_CurrentFloorData.size() );
@@ -24,7 +24,7 @@ void StageManager::changeStage(size_t stageNum)
 	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
 	m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
-	addObject( OT_PLAYER , Point( 96 , 96 ) );
+	addObject( OT_PLAYER , Point(90, 90));
 }
 
 const Player* StageManager::getPlayer()
@@ -58,7 +58,7 @@ std::vector<InteractiveObject*> StageManager::getObjectsByPosition( cocos2d::Poi
 	return ( m_WorldScene->getGameLayer() )->getObjectsByPosition( checkPosition );
 }
 
-ObjectType StageManager::getMapDataInPosition( cocos2d::Point position )
+ObjectType StageManager::getStageDataInPosition( cocos2d::Point position )
 {
 	ObjectType resultType = OT_NONE;
 	if( m_WorldScene == nullptr )
@@ -69,7 +69,7 @@ ObjectType StageManager::getMapDataInPosition( cocos2d::Point position )
 }
 
 
-ObjectType StageManager::getMapDataInPositionWithIdx( int xIdx , int yIdx )
+ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx )
 {
 	ObjectType resultType = OT_NONE;
 	if( m_WorldScene == nullptr )
@@ -128,9 +128,14 @@ cocos2d::Vec2 StageManager::positionToIdxOfFloor( cocos2d::Point position )
 {
 	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( position ).x;
 	int stageYIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( position ).y;
-	int floorXIdx = stageXIdx / MODULE_BASE_WIDTH + m_CurrentFloorData[m_CurrentStageNum].x;
-	int floorYIdx = stageYIdx / MODULE_BASE_HEIGHT + m_CurrentFloorData[m_CurrentStageNum].y;
+	int floorXIdx = m_CurrentFloorData[m_CurrentStageNum].x + stageXIdx / MODULE_BASE_WIDTH;
+	int floorYIdx = m_CurrentFloorData[m_CurrentStageNum].y + stageYIdx / MODULE_BASE_HEIGHT;
 
 	return Vec2( floorXIdx , floorYIdx );
+}
+
+int StageManager::getFloorDataByIdx( int xIdx , int yIdx )
+{
+	return m_FloorData.data[xIdx*yIdx + xIdx];
 }
 

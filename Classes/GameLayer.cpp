@@ -43,7 +43,7 @@ bool GameLayer::initWorldFromData( Vec2 boxNum , Size boxSize , std::map<int , O
 	{
 		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
 		{
-			addObjectByMapdata( xIdx , m_BoxHeightNum - yIdx );
+			addObjectByMapdata( xIdx , yIdx );
 		}
 	}
 	addMovingBackground( BGpath );

@@ -22,8 +22,9 @@ public:
 	InteractiveObject*					addObjectByIdx( int xIdx , int yIdx );
 	void								addEffectOnGameLayer(cocos2d::Sprite* effect);
 
-	ObjectType							getMapDataInPosition( cocos2d::Point position );
-	ObjectType							getMapDataInPositionWithIdx( int xIdx , int yIdx );
+	ObjectType							getStageDataInPosition( cocos2d::Point position );
+	ObjectType							getStageDataInPositionWithIdx( int xIdx , int yIdx );
+	int									getFloorDataByIdx( int xIdx , int yIdx );
 	std::vector<InteractiveObject*>		getObjectsByPosition( cocos2d::Point checkPosition ); //위치에 어떤 객체가 있는지를 리턴
 	std::vector<InteractiveObject*>		getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
 	
