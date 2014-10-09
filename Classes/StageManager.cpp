@@ -9,17 +9,17 @@ bool StageManager::init()
 {
 	m_WorldScene = nullptr;
 	m_CurrentFloor = 1;
-
-	GET_DATA_MANAGER()->getFloorData( m_CurrentFloor , m_FloorData , &m_CurrentStageData );
+	GET_DATA_MANAGER()->getFloorData( m_CurrentFloor , &m_FloorData , &m_CurrentFloorData );
 	return true;
 }
 
-void StageManager::changeStage(int stageNum)
+void StageManager::changeStage(size_t stageNum)
 {
-	int boxNumWidth = m_CurrentStageData[stageNum].width;
-	int boxNumHeight = m_CurrentStageData[stageNum].width;
+	_ASSERT( stageNum < m_CurrentFloorData.size() );
+	int boxNumWidth = m_CurrentFloorData[stageNum].width;
+	int boxNumHeight = m_CurrentFloorData[stageNum].width;
 	Size boxSize = Size( 32 , 32 );
-	std::map<int , ObjectType> data = m_CurrentStageData[stageNum].data;
+	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
 	m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
 }
