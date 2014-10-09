@@ -69,6 +69,9 @@ void UILayer::update(float dTime)
 
 void UILayer::initializeUILayer()
 {
+	m_CharWinOn = false;
+	m_WorldMenuOn = false;
+
 	auto winSize = Director::getInstance()->getWinSize();
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
