@@ -5,6 +5,7 @@ USING_NS_CC;
 bool ResourceManager::init()
 {
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Robotopia.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ozt.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ETLinearMissileCollision.plist");
 	return true;
 }
@@ -27,6 +28,16 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 {
 	switch (type)
 	{
+	case AT_AIMINGMISSILE_FLYING:
+		return createAnimation("AimingMissile%d.png", 1, 8, 0.1f);
+	case AT_AIMINGMISSILE_COLLISION:
+		return nullptr;
+	case AT_GATEWAY_OPEN:
+		return createAnimation("Gateway%d.png", 0, 11, 0.2f);
+	case AT_LINEARMISSILE_FLYING:
+		return createAnimation("LinearMissile%d.png", 0, 10, 0.1f);
+	case AT_LINEARMISSILE_COLLISION:
+		return createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
 	case AT_PLAYER_STAND:
 		return createAnimation("player_stand%d.png", 1, 4, 0.1f);
 	case AT_PLAYER_WALK:
@@ -43,16 +54,7 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		return createAnimation("rushMonster_move%d.png", 1, 4, 0.1f);
 	case AT_RUSHMONSTER_RUSH:
 		return createAnimation("rushMonster_rush%d.png", 1, 4, 0.1f);
-	case AT_LINEARMISSILE_FLYING:
-		return createAnimation("LinearMissile%d.png", 0, 10, 0.1f);
-	case AT_LINEARMISSILE_COLLISION:
-		return createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
-	case AT_AIMINGMISSILE_FLYING:
-		return createAnimation("AimingMissile%d.png", 1, 8, 0.1f);
-	case AT_AIMINGMISSILE_COLLISION:
-		return nullptr;
-	case AT_GATEWAY_OPEN:
-		return createAnimation("Gateway%d.png", 0, 11, 0.2f);
+	
 	
 	}
 	return nullptr;
@@ -70,6 +72,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 	{
 	case ST_LINEARMISSILE_COLLISION:
 		return createSprite("ETLinearMissileCollision1.png");
+	case ST_LOADING:
+		return createSprite("Loading.png");
 	}
 	return nullptr;
 }
