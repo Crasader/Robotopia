@@ -19,51 +19,20 @@ bool GameLayer::init()
 	{
 		return false;
 	}
-	m_WinRect.size = Director::getInstance()->getVisibleSize();
-	m_WinRect.origin = Director::getInstance()->getVisibleOrigin();
-	m_Player = nullptr;
 
+	m_InteractiveObjects.clear();
 	this->scheduleUpdate();
-	initWorldFromData();
-	addMovingBackground();
 
 	return true;
 }
 
-bool GameLayer::initWorldFromData()
+bool GameLayer::initWorldFromData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> MapData , char* BGpath )
 {
-	for( auto object : m_InteractiveObjects )
-	{
-		this->removeChild( object );
-	}
-	m_InteractiveObjects.clear();
-
-	//월드 데이터를 본래는 리소스 메니저에게 키값을 넘겨서 받아와야 한다.
-	//받아야 하는 데이터들 BoxSize MapSize MapData(값)
-
-	m_BoxWidthNum = UserDefault::getInstance()->getIntegerForKey( "mapWidth" );
-	m_BoxHeightNum = UserDefault::getInstance()->getIntegerForKey( "mapHeight" );
-	m_BoxSize.width = UserDefault::getInstance()->getIntegerForKey( "boxWidth" );
-	m_BoxSize.height = UserDefault::getInstance()->getIntegerForKey( "boxHeight" );
-	m_MapRawData = UserDefault::getInstance()->getStringForKey( "mapData" );
+	m_BoxWidthNum = boxNum.x;
+	m_BoxHeightNum = boxNum.y;
+	m_BoxSize = boxSize;
+	m_MapData = MapData;
 	m_MapRect.setRect( 0 , 0 , m_BoxSize.width * m_BoxWidthNum , m_BoxSize.height * m_BoxHeightNum );
-
-	char* rawValue;
-	char rawData[MAX_DATA_SIZE];
-
-	//rawData를 mapData로 파싱
-	strcpy( rawData , m_MapRawData.c_str() );
-	rawValue = strtok( rawData , " \n" );
-	int value;
-	for( int yIdx = m_BoxHeightNum - 1; yIdx >= 0; yIdx-- )
-	{
-		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
-		{
-			value = atoi( rawValue );
-			m_MapData[m_BoxWidthNum*yIdx + xIdx] = (ObjectType)value;
-			rawValue = strtok( nullptr , " \n" );
-		}
-	}
 
 	//mapData에 입력된 객체들 트리에 추가
 	for( int yIdx = 0; yIdx < m_BoxHeightNum; yIdx++ )
@@ -76,6 +45,7 @@ bool GameLayer::initWorldFromData()
 	return true;
 }
 
+
 //타입별 객체를 월드 위치좌표에 추가해준다.
 InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 {
@@ -83,25 +53,6 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 	GameLayer::ZOrder zOrder;
 	switch( type )
 	{
-		case OT_NONE:
-			return nullptr;
-		case OT_PLAYER:
-			if( m_Player == nullptr )
-			{
-				object = Player::create();
-				zOrder = GameLayer::ZOrder::GAME_OBJECT;
-				m_Player = ( Player* )object;
-				m_Player->retain();
-			}
-			else
-			{
-				m_Player->setAnchorPoint( Point( 0.5 , 0.5 ) );
-				m_Player->setPosition( position );
-				m_InteractiveObjects.push_back( m_Player );
-				this->addChild( m_Player , GameLayer::ZOrder::GAME_OBJECT );
-				return m_Player;
-			}
-			break;
 		case OT_FLOOR:
 			object = LandFloor::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
@@ -208,9 +159,9 @@ void GameLayer::removeObject()
 	}
 }
 
-void GameLayer::addMovingBackground()
+void GameLayer::addMovingBackground( char* BGpath )
 {
-	auto backgroundSprite = GET_RESOURCE_MANAGER()->createSprite( "background.png" );
+	auto backgroundSprite = GET_RESOURCE_MANAGER()->createSprite( BGpath );
 	Size spriteSize = backgroundSprite->getContentSize();
 	int xSpriteNum = ( m_MapRect.size.width / spriteSize.width );
 	int ySpriteNum = ( m_MapRect.size.height / spriteSize.height );
@@ -218,7 +169,7 @@ void GameLayer::addMovingBackground()
 	{
 		for( int xIdx = 0; xIdx <= xSpriteNum; ++xIdx )
 		{
-			backgroundSprite = GET_RESOURCE_MANAGER()->createSprite( "background.png" );
+			backgroundSprite = GET_RESOURCE_MANAGER()->createSprite( BGpath );
 			backgroundSprite->setAnchorPoint( Point::ZERO );
 			backgroundSprite->setPosition( xIdx*(spriteSize.width-10), yIdx*(spriteSize.height-10) );
 			this->addChild( backgroundSprite , GameLayer::ZOrder::BACKGROUND);
@@ -262,11 +213,6 @@ std::vector<InteractiveObject*> GameLayer::getObjectsByPosition( cocos2d::Point 
 		}
 	}
 	return collectObjects;
-}
-
-void GameLayer::gotoNextWorld()
-{
-	initWorldFromData();
 }
 
 std::vector<InteractiveObject*> GameLayer::getObjectsByRect( cocos2d::Rect checkRect )

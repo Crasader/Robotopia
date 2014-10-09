@@ -23,7 +23,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     director->setDisplayStats(false);
-
     director->setAnimationInterval(1.0 / 60);
 
     return true;

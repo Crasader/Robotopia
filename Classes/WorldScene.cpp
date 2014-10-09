@@ -11,6 +11,16 @@ Scene* WorldScene::createScene()
 	return scene;
 }
 
+
+cocos2d::Scene* WorldScene::createSceneWithData(Vec2 boxNum, Size boxSize, std::map<int, ObjectType> mapData, char* BGpath)
+{
+	WorldScene* scene = WorldScene::create();
+	scene->getGameLayer()->initWorldFromData(boxNum, boxSize, mapData, BGpath);
+	return scene;
+}
+
+
+
 bool WorldScene::init()
 {
 	if( !Scene::init() )
@@ -32,4 +42,3 @@ bool WorldScene::init()
 	m_UILayer->initializeUILayer();
 	return true;
 }
-

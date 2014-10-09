@@ -33,6 +33,6 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 
 void LandGateway::gotoNextLevel(Ref* sender)
 {
-	( ( GameLayer* )this->getParent() )->gotoNextWorld();
+	//다음 월드 씬으로 변경해주는 함수호출
 }
 
