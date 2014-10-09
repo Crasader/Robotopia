@@ -313,11 +313,11 @@ bool DataManager::getFloorData(int currentFloor, FloorData* floorData, std::vect
 		return false;
 	}
 
-	*floorData = m_FloorData[currentFloor];
+	*floorData = m_FloorData[currentFloor - 1];
 
-	for (int s = 0; s < m_FloorData[currentFloor].stageNum; s++)
+	for (int s = 0; s < m_FloorData[currentFloor - 1].stageNum; s++)
 	{
-		stageData->push_back(m_FloorStageData[currentFloor][s]);
+		stageData->push_back(m_FloorStageData[currentFloor - 1][s]);
 	}
 
 	return true;
