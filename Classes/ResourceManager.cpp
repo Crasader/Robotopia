@@ -54,8 +54,6 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		return createAnimation("rushMonster_move%d.png", 1, 4, 0.1f);
 	case AT_RUSHMONSTER_RUSH:
 		return createAnimation("rushMonster_rush%d.png", 1, 4, 0.1f);
-	
-	
 	}
 	return nullptr;
 }

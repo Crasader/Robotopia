@@ -16,12 +16,12 @@ public:
 	static cocos2d::Scene*			createScene();
 	virtual bool					init();
 	void							update(float dTime);
+	void							showCharacterWindow();
+	void							hideCharacterWindow();
 
 	CREATE_FUNC(EquipmentWindow);
 
 private:
-
 	bool							m_WindowOn;
-	void							showEquipWindow();
 
 };
