@@ -19,13 +19,6 @@ public:
 	void					initializeUILayer();
 
 protected:
-	enum UILayerEnum
-	{
-		LABEL_HPSTATUS,
-		LABEL_STEAMSTATUS,
-		SPRITE_FOREHP,
-		SPRITE_BACKHP,
-	};
 
 	int									m_WinWidth , m_WinHeight;
 	bool								m_WorldMenuOn;

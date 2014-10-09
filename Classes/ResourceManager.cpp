@@ -22,6 +22,7 @@ cocos2d::Animation* ResourceManager::createAnimation(const char* format, int sta
 			getSpriteFrameByName(StringUtils::format(format, i + startIdx));
 		animation->addSpriteFrame(frame);
 	}
+	animation->retain();
 	return animation;
 }
 

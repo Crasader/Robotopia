@@ -10,7 +10,7 @@
 #include "UILayer.h"
 #include "WorldScene.h"
 
-class EquipmentWindow : public UILayer
+class EquipmentWindow : public cocos2d::Node
 {
 public:
 	virtual bool					init();
@@ -21,6 +21,6 @@ public:
 	CREATE_FUNC(EquipmentWindow);
 
 private:
-	bool							m_WindowOn;
+	int									m_WinWidth, m_WinHeight;
 
 };

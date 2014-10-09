@@ -10,7 +10,7 @@
 #include "UILayer.h"
 #include "WorldScene.h"
 
-class WorldMenu : public UILayer
+class WorldMenu : public cocos2d::Node
 {
 public:
 	virtual bool					init();
@@ -22,6 +22,7 @@ public:
 	void							hideWorldMenu();
 
 private:
+	int								m_WinWidth, m_WinHeight;
 
 
 };

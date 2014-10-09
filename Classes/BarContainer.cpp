@@ -7,6 +7,9 @@ bool BarContainer::init()
 {
 	m_prevHP = 0;
 	m_STEs.clear();
+	auto winSize = Director::getInstance()->getWinSize();
+	m_WinWidth = winSize.width;
+	m_WinHeight = winSize.height;
 
 	//HP Container
 	auto sprHPContainer = Sprite::create("Container_HP.png");
@@ -42,7 +45,6 @@ bool BarContainer::init()
 
 	this->scheduleUpdate();
 	return true;
-
 }
 
 void BarContainer::update(float dTime)

@@ -10,7 +10,7 @@
 #include "WorldScene.h"
 #include "UILayer.h"
 
-class Minimap : public UILayer
+class Minimap : public cocos2d::Node
 {
 public:
 	virtual bool					init();
@@ -19,6 +19,7 @@ public:
 	CREATE_FUNC(Minimap);
 
 private:
+	int									m_WinWidth, m_WinHeight;
 
 
 };

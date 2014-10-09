@@ -10,7 +10,7 @@
 #include "WorldScene.h"
 #include "UILayer.h"
 
-class BarContainer : public UILayer
+class BarContainer : public cocos2d::Node
 {
 
 public:
@@ -21,6 +21,16 @@ public:
 
 
 private:
+	enum BarContainerEnum
+	{
+		LABEL_HPSTATUS,
+		LABEL_STEAMSTATUS,
+		SPRITE_FOREHP,
+		SPRITE_BACKHP,
+	};
+
+
+	int									m_WinWidth, m_WinHeight;
 	int									m_prevHP;
 	cocos2d::Vector<cocos2d::Sprite*>	m_STEs;
 

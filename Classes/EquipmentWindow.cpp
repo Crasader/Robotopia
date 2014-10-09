@@ -6,7 +6,9 @@ USING_NS_CC;
 
 bool EquipmentWindow::init()
 {
-	m_WindowOn = false;
+	auto winSize = Director::getInstance()->getWinSize();
+	m_WinWidth = winSize.width;
+	m_WinHeight = winSize.height;
 
 	this->scheduleUpdate();
 	return true;
