@@ -3,6 +3,8 @@
 #include "Utils.h"
 #define MODULES_FILE_NAME "Data\\Stage\\moduleList.mld"
 #define FLOOR_FILE_NAME "Data\\Stage\\floorData.fdd"
+#define MODULE_BASE_WIDTH 10
+#define MODULE_BASE_HEIGHT 10
 
 
 struct StageModuleData
@@ -15,7 +17,7 @@ struct StageData
 {
 	int x, y;
 	int width, height;
-	std::vector<int> data;
+	std::map<int, ObjectType> data;
 };
 
 struct FloorData
@@ -34,7 +36,7 @@ public:
 	~DataManager();
 
 private:	
-	std::map < Directions, std::vector<StageModuleData>> m_ModuleData;
+	std::map < int, std::vector<StageModuleData>> m_ModuleData;
 	std::map < int, std::vector<StageData>> m_FloorStageData;
 	std::map <int, FloorData> m_FloorData;
 

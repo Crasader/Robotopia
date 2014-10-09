@@ -197,20 +197,76 @@ bool DataManager::initFloorData()
 
 		for (int s = 0; s < stageNum; s++)
 		{
+			std::map<int, ObjectType> objectsData;
+
 			m_FloorStageData[i][s].y -= originY;
 			m_FloorStageData[i][s].x -= originX;
-			for (int j = m_FloorStageData[i][s].y; j < m_FloorStageData[i][s].y + m_FloorStageData[i][s].height; j++)
+			m_FloorStageData[i][s].data = objectsData;
+
+			for (int y = m_FloorStageData[i][s].y + 1; y <= m_FloorStageData[i][s].y + m_FloorStageData[i][s].height; y++)
 			{
-				for (int k = m_FloorStageData[i][s].x; k < m_FloorStageData[i][s].x + m_FloorStageData[i][s].width; k++)
+				for (int x = m_FloorStageData[i][s].x + 1; x <= m_FloorStageData[i][s].x + m_FloorStageData[i][s].width; x++)
 				{
-					floorRawData[i][j][k] = s + 1;
+					floorRawData[i][y][x] = s + 1;
+				}
+			}
+		}
+		for (int s = 0; s < stageNum; s++)
+		{
+			m_FloorStageData[i][s].width *= MODULE_BASE_WIDTH;
+			m_FloorStageData[i][s].height *= MODULE_BASE_HEIGHT;
+			int width = m_FloorStageData[i][s].width;
+			int height = m_FloorStageData[i][s].height;
+
+			for (int y = m_FloorStageData[i][s].y + 1; y <= m_FloorStageData[i][s].y + m_FloorStageData[i][s].height / MODULE_BASE_WIDTH; y++)
+			{
+				for (int x = m_FloorStageData[i][s].x + 1; x <= m_FloorStageData[i][s].x + m_FloorStageData[i][s].width / MODULE_BASE_WIDTH; x++)
+				{
+					int closedDirection = DIR_NONE;
+
+					if (floorRawData[i][y - 1][x] != floorRawData[i][y][x])
+					{
+						closedDirection |= DIR_UP;
+					}
+
+					if (floorRawData[i][y + 1][x] != floorRawData[i][y][x])
+					{
+						closedDirection |= DIR_DOWN;
+					}
+
+					if (floorRawData[i][y][x - 1] != floorRawData[i][y][x])
+					{
+						closedDirection |= DIR_LEFT;
+					}
+
+					if (floorRawData[i][y][x + 1] != floorRawData[i][y][x])
+					{
+						closedDirection |= DIR_RIGHT;
+					}
+
+					int moduleIdx = rand() % m_ModuleData[closedDirection].size();
+					int moduleWidth = m_ModuleData[closedDirection][moduleIdx].width;
+					int moduleHeight = m_ModuleData[closedDirection][moduleIdx].height;
+
+					int idxX = x - m_FloorStageData[i][s].x - 1;
+					int idxY = y - m_FloorStageData[i][s].y - 1;
+
+					for (int h = 0; h < moduleHeight; h++)
+					{
+						for (int w = 0; w < moduleWidth; w++)
+						{
+							m_FloorStageData[i][s].data[(idxY*moduleHeight + h)*width + idxX*moduleWidth + w] =
+								(ObjectType)m_ModuleData[closedDirection][moduleIdx].data[h*moduleWidth + w];
+						}
+					}
 				}
 			}
 		}
 
-		for (int y = 0; y < endY; y++)
+
+		for (int y = 1; y <= endY; y++)
 		{
-			for (int x = 0; x < endX; x++)
+			for (int x = 1; x <= endX; x++)
 			{
 				m_FloorData[i].data.push_back(floorRawData[i][y][x]);
 			}
