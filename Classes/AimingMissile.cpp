@@ -58,7 +58,7 @@ void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Poi
 	{
 		m_MainSprite->setFlippedY(true);
 	}*/
-	m_MainSprite->setRotation(-degree);
+	m_MainSprite->setRotation(degree);
 
 	return;
 }
