@@ -20,9 +20,11 @@ public:
 
 	void							showWorldMenu();
 	void							hideWorldMenu();
+	bool							getWorldMenuOn() { return m_WorldMenuOn; }
 
 private:
 	int								m_WinWidth, m_WinHeight;
+	bool							m_WorldMenuOn;
 
 
 };

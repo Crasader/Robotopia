@@ -24,7 +24,7 @@ void UILayer::update(float dTime)
 	
 	if (charWinKey == KS_PRESS)
 	{
-		if (m_WorldMenuOn == false)
+		if (m_WorldMenu->getWorldMenuOn() == false)
 		{
 			if (m_EquipmentWindow->getCharWinOn() == false)
 			{
@@ -44,7 +44,7 @@ void UILayer::update(float dTime)
 	
 	if (escKey == KS_PRESS)
 	{
-		if (m_WorldMenuOn == false)
+		if (m_WorldMenu->getWorldMenuOn() == false)
 		{
 			if (m_EquipmentWindow->getCharWinOn() == true)
 			{
@@ -53,21 +53,17 @@ void UILayer::update(float dTime)
 			else
 			{
 				m_WorldMenu->showWorldMenu();
-				m_WorldMenuOn = true;
 			}
 		}
 		else
 		{
 			m_WorldMenu->hideWorldMenu();
-			m_WorldMenuOn = false;
 		}
 	}
 }
 
 void UILayer::initializeUILayer()
 {
-	m_WorldMenuOn = false;
-
 	auto winSize = Director::getInstance()->getWinSize();
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
