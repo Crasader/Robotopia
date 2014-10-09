@@ -3,9 +3,6 @@
 USING_NS_CC;
 
 
-
-
-
 bool EffectManager::init()
 {
 	m_MainSprite = Sprite::create();
@@ -68,8 +65,8 @@ void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int ef
 {
 	float needEffectScale = 0.5;
 	
-	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite("ETLinearMissileCollision1.png");
-	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_LINEARMISSILE_COLLISION);
+	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation(AT_LINEARMISSILE_COLLISION, 0.1f);
 
 	float ratioX = obRect.size.width / m_MainSprite->getContentSize().width;
 	float ratioY = obRect.size.height / m_MainSprite->getContentSize().height;
@@ -102,8 +99,8 @@ void EffectManager::useEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::R
 {
 	float needEffectScale = 0.5;
 
-	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite("ETLinearMissileCollision1.png");
-	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_LINEARMISSILE_COLLISION);
+	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation(AT_LINEARMISSILE_COLLISION, 0.1f);
 
 	float ratioX = effectRect.size.width / m_MainSprite->getContentSize().width;
 	float ratioY = effectRect.size.height / m_MainSprite->getContentSize().height;

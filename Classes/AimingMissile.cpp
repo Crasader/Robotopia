@@ -15,7 +15,7 @@ bool AimingMissile::init()
 	m_Type = OT_AIMING_MISSILE;
 
 	m_MainSprite = Sprite::create();
-	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_AIMING_MISSILE, 0.2f);
+	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_AIMINGMISSILE_FLYING, 0.2f);
 	m_Animations[0] = animation;
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
 
