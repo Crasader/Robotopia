@@ -16,10 +16,10 @@ bool Player::init()
 	m_Type = OT_PLAYER;
 	m_MoveSpeed = 100;
 	m_AnimationNum = PS_STATE_NUM;
-	m_Animations[PS_STAND] = GET_RESOURCE_MANAGER()->createAnimation("player_stand%d.png", 1, 4, 0.05f);
-	m_Animations[PS_WALK] = GET_RESOURCE_MANAGER()->createAnimation("player_walk%d.png", 1, 8, 0.05f);
-	m_Animations[PS_JUMP] = GET_RESOURCE_MANAGER()->createAnimation("player_jump%d.png", 1, 1, 0.1f);
-	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation("player_attack%d.png", 1, 5, 0.05f);
+	m_Animations[PS_STAND] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_STAND);
+	m_Animations[PS_WALK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_WALK);
+	m_Animations[PS_JUMP] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_JUMP);
+	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK);
 	m_IsRightDirection = true;
 
 	m_MaxHp = 100;

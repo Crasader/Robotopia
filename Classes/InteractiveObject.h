@@ -9,6 +9,7 @@
 
 #include "cocos2d.h"
 #include "Utils.h"
+#include "DataManager.h"
 
 class InteractiveObject : public cocos2d::Node
 {
