@@ -15,28 +15,28 @@ AppDelegate::~AppDelegate()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-    auto director = Director::getInstance();
-    auto glview = director->getOpenGLView();
-    if(!glview) {
+	auto director = Director::getInstance();
+	auto glview = director->getOpenGLView();
+	if(!glview) {
 		glview = GLView::createWithRect( "robotopiaPrototype" ,
 										 Rect( 0 , 0 , 800 , 600 ));
-        director->setOpenGLView(glview);
-    }
+		director->setOpenGLView(glview);
+	}
 
-    director->setDisplayStats(true);
-    director->setAnimationInterval(1.0 / 60);
+	director->setDisplayStats(true);
+	director->setAnimationInterval(1.0 / 60);
 	director->runWithScene( MenuScene::createScene() );
 	srand(time(NULL));
 
-    return true;
+	return true;
 }
 
 void AppDelegate::applicationDidEnterBackground() {
-    Director::getInstance()->stopAnimation();
+	Director::getInstance()->stopAnimation();
 
 }
 
 void AppDelegate::applicationWillEnterForeground() {
-    Director::getInstance()->startAnimation();
+	Director::getInstance()->startAnimation();
 
 }
