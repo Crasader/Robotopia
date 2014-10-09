@@ -13,12 +13,10 @@ WorldScene* WorldScene::createScene()
 }
 
 
-WorldScene* WorldScene::createSceneWithData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> mapData , char* BGpath )
+void WorldScene::initCurrentSceneWithData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> mapData , char* BGpath )
 {
-	WorldScene* scene = WorldScene::create();
-	GET_INPUT_MANAGER()->receiveInputData( scene );
-	scene->getGameLayer()->initWorldFromData(boxNum, boxSize, mapData, BGpath);
-	return scene;
+	GET_INPUT_MANAGER()->receiveInputData( this );
+	this->getGameLayer()->initWorldFromData(boxNum, boxSize, mapData, BGpath);
 }
 
 bool WorldScene::init()

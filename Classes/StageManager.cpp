@@ -17,12 +17,13 @@ bool StageManager::init()
 void StageManager::changeStage( size_t stageNum )
 {
 	m_CurrentStageNum = stageNum;
-	_ASSERT( stageNum < m_CurrentFloorData.size() );
+	_ASSERT( stageNum <= m_CurrentFloorData.size() );
 	int boxNumWidth = m_CurrentFloorData[stageNum].width;
 	int boxNumHeight = m_CurrentFloorData[stageNum].width;
 	Size boxSize = Size( 32 , 32 );
 	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
-	m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
+	m_WorldScene = WorldScene::createScene();
+	m_WorldScene->initCurrentSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
 	addObject( OT_PLAYER , Point(90, 90));
 }
@@ -136,6 +137,6 @@ cocos2d::Vec2 StageManager::positionToIdxOfFloor( cocos2d::Point position )
 
 int StageManager::getFloorDataByIdx( int xIdx , int yIdx )
 {
-	return m_FloorData.data[xIdx*yIdx + xIdx];
+	return m_FloorData.data[m_FloorData.width*yIdx + xIdx];
 }
 

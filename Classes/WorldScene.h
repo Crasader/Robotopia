@@ -9,7 +9,7 @@ class WorldScene : public cocos2d::Scene
 {
 public:
 	static WorldScene*			createScene();
-	static WorldScene*			createSceneWithData( cocos2d::Vec2 boxNum , cocos2d::Size boxSize ,
+	void						initCurrentSceneWithData( cocos2d::Vec2 boxNum , cocos2d::Size boxSize ,
 												 std::map<int , ObjectType> mapData , char* BGpath );
 	virtual bool				init();
 

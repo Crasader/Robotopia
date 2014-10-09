@@ -142,7 +142,7 @@ void Player::update(float dTime)
 		{
 			if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
 			{
-				m_Velocity.y = 500;
+				m_Velocity.y = 1000;
 			}
 			else if (leftState == KS_HOLD)
 			{

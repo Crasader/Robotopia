@@ -10,12 +10,12 @@ bool LandGateway::init()
 	{
 		return false;
 	}
-	findNextStage();
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "GatewayUnactive.png" );
 	this->addChild( m_MainSprite );
+	m_Type = OT_GATEWAY;
 	m_OpenAnimaion = GET_RESOURCE_MANAGER()->createAnimation( AT_GATEWAY_ACT , 0.5f );
 	m_OpenAnimaion->retain();
 	m_isOpen = false;
-	m_IsActive = false;
 
 	return true;
 }
@@ -34,7 +34,6 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 
 void LandGateway::findNextStage()
 {
-	int result = 0;
 	Point curPos = this->getPosition();
 	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).x;
 	int stageYIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).y;
@@ -43,21 +42,22 @@ void LandGateway::findNextStage()
 	int floorXIdx = GET_STAGE_MANAGER()->positionToIdxOfFloor( curPos ).x;
 	int floorYIdx = GET_STAGE_MANAGER()->positionToIdxOfFloor( curPos ).y;
 	m_NextFloorIdx = findNeighbor( Vec2( floorXIdx , floorYIdx ) , sentinelDir );
-	result = GET_STAGE_MANAGER()->getFloorDataByIdx( m_NextFloorIdx.x , m_NextFloorIdx.y );
+	m_NextFloorNum = GET_STAGE_MANAGER()->getFloorDataByIdx( m_NextFloorIdx.x , m_NextFloorIdx.y );
 
-	if( result != 0 )
+	if( m_NextFloorNum != 0 )
 	{
+		this->removeChild( m_MainSprite );
 		m_IsActive = true;
 		m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "GatewayActive.png" );
+		this->addChild( m_MainSprite );
 	}
 	else
 	{
+		this->removeChild( m_MainSprite );
 		m_IsActive = false;
 		m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "GatewayUnactive.png" );
+		this->addChild( m_MainSprite );
 	}
-
-	m_NextFloorNum = result;
-	
 }
 
 void LandGateway::gotoNextLevel(Ref* sender)

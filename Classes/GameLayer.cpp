@@ -99,7 +99,10 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 	object->setPosition( position );
 	m_InteractiveObjects.push_back( object );
 	this->addChild( object , zOrder );
-	
+	if( type == OT_GATEWAY)
+	{
+		(( LandGateway* )object)->findNextStage();
+	}
 	return object;
 }
 
