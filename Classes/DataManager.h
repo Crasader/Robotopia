@@ -5,6 +5,7 @@
 
 struct StageModuleData
 {
+	Directions closedDirections;
 	int width, height;
 	std::vector<int> data;
 };
