@@ -5,6 +5,7 @@ USING_NS_CC;
 bool ResourceManager::init()
 {
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Robotopia.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ET_AimingMissile_Collision.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ozt.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ETLinearMissileCollision.plist");
 	return true;
@@ -31,7 +32,7 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 	case AT_AIMINGMISSILE_FLYING:
 		return createAnimation("AimingMissile%d.png", 1, 8, 0.1f);
 	case AT_AIMINGMISSILE_COLLISION:
-		return nullptr;
+		return createAnimation("ET_AimingMissile_Collsion%d.png", 1, 4, 0.1f);
 	case AT_GATEWAY_OPEN:
 		return createAnimation("Gateway%d.png", 0, 11, 0.2f);
 	case AT_LINEARMISSILE_FLYING:
@@ -68,6 +69,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 {
 	switch (type)
 	{
+	case ST_AIMINGMISSILE_COLLISION:
+		return createSprite("ET_AimingMissile_Collsion1.png");
 	case ST_LINEARMISSILE_COLLISION:
 		return createSprite("ETLinearMissileCollision1.png");
 	case ST_LOADING:

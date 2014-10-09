@@ -18,9 +18,11 @@ bool UILayer::init()
 
 void UILayer::update(float dTime)
 {
-	KeyState charKey = GET_INPUT_MANAGER()->getKeyState(KC_CHARACTER_UI);
+	KeyState charWinKey = GET_INPUT_MANAGER()->getKeyState(KC_CHARACTER_UI);
+	KeyState enterKey = GET_INPUT_MANAGER()->getKeyState(KC_RETURN);
+	KeyState escKey = GET_INPUT_MANAGER()->getKeyState(KC_MENU);
 
-	if (charKey == KS_PRESS)
+	if (charWinKey == KS_PRESS)
 	{
 		if (m_CharWinOn == false)
 		{

@@ -22,6 +22,7 @@ enum AnimationType
 
 enum SpriteType
 {
+	ST_AIMINGMISSILE_COLLISION,
 	ST_LINEARMISSILE_COLLISION,
 	ST_LOADING,
 };
