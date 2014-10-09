@@ -26,15 +26,13 @@ void UILayer::update(float dTime)
 	{
 		if (m_WorldMenuOn == false)
 		{
-			if (m_CharWinOn == false)
+			if (m_EquipmentWindow->getCharWinOn() == false)
 			{
 				m_EquipmentWindow->showCharacterWindow();
-				m_CharWinOn = true;
 			}
-			else if (m_CharWinOn == true)
+			else if (m_EquipmentWindow->getCharWinOn() == true)
 			{
 				m_EquipmentWindow->hideCharacterWindow();
-				m_CharWinOn = false;
 			}
 		}
 	}
@@ -48,10 +46,9 @@ void UILayer::update(float dTime)
 	{
 		if (m_WorldMenuOn == false)
 		{
-			if (m_CharWinOn == true)
+			if (m_EquipmentWindow->getCharWinOn() == true)
 			{
 				m_EquipmentWindow->hideCharacterWindow();
-				m_CharWinOn = false;
 			}
 			else
 			{
@@ -69,7 +66,6 @@ void UILayer::update(float dTime)
 
 void UILayer::initializeUILayer()
 {
-	m_CharWinOn = false;
 	m_WorldMenuOn = false;
 
 	auto winSize = Director::getInstance()->getWinSize();
