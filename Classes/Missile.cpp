@@ -1,4 +1,5 @@
 #include "Missile.h"
+#include "GameManager.h"
 
 
 bool Missile::init()
@@ -61,6 +62,11 @@ void Missile::collisionOccured(InteractiveObject* enemy, Directions dir)
 
 		m_IsDestroyed = true;
 		break;
+	}
+
+	if (m_IsDestroyed)
+	{
+		GET_EFFECT_MANAGER()->createEffect(ET_AIMING_MISSILE_COLLISION, enemy->getRect(), this->getRect(), dir, 1);
 	}
 
 }

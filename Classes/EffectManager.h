@@ -28,7 +28,7 @@ public:
 
 	//매개변수 설명, 
 	// 1. 사용하고 싶은 effect 이름, 
-	// 2. 이펙트가 나타나길 원하는 위치와 원하는 크기를 담은 Rect(크기의 경우 -1,-1값을 넣으면 디폴트로 생성)
+	// 2. 이펙트가 나타나길 원하는 위치와 원하는 크기를 담은 Rect
 	// 3. effectPlayNum
 	void createEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Rect effectRect, int effectPlayNum);
 	void createEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Point effectPoint, cocos2d::Size effectSize, int effectPlayNum);
@@ -37,7 +37,10 @@ private:
 	void createEffectLinearMissileCollision(cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
 	void createEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
-	cocos2d::Sprite*	effectSpr;
-	cocos2d::Animation* m_MainAnimation;
+	void createEffectAimingMissileCollision(cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffectAimingMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
+
+
+
 };
 
