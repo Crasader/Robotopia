@@ -1,4 +1,4 @@
-#include "StageManager.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 

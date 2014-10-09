@@ -2,6 +2,7 @@
 #include "GameLayer.h"
 #include "BackgroundLayer.h"
 #include "UILayer.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
@@ -15,6 +16,7 @@ Scene* WorldScene::createScene()
 Scene* WorldScene::createSceneWithData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> mapData , char* BGpath )
 {
 	WorldScene* scene = WorldScene::create();
+	GET_INPUT_MANAGER()->receiveKeyboardData( scene );
 	scene->getGameLayer()->initWorldFromData(boxNum, boxSize, mapData, BGpath);
 	return scene;
 }
