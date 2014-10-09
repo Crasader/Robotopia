@@ -14,7 +14,7 @@ bool StageManager::init()
 	return true;
 }
 
-void StageManager::changeStage( size_t stageNum , Point playerPosition )
+void StageManager::changeStage( size_t stageNum )
 {
 	m_CurrentStageNum = stageNum;
 	_ASSERT( stageNum < m_CurrentFloorData.size() );
