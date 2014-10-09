@@ -142,19 +142,19 @@ bool DataManager::initFloorData()
 					{
 					case 0: //왼쪽
 						x -= width;
-						y -= (rand() % height) - height + 1;
+						y += (rand() % height) - height + 1;
 						break;
 					case 1: //위
 						x += (rand() %width ) - width + 1;
-						y += height;
+						y -= height;
 						break;
 					case 2: //오른쪽
 						x += m_FloorStageData[i][nearRoom].width;
-						y -= (rand() % height) - height + 1;
+						y += (rand() % height) - height + 1;
 						break;
 					case 3: //아래
 						x += (rand() % width) - width + 1;
-						y -= m_FloorStageData[i][nearRoom].height;
+						y += m_FloorStageData[i][nearRoom].height;
 						break;
 
 					}
@@ -226,12 +226,12 @@ bool DataManager::initFloorData()
 				{
 					int closedDirection = DIR_NONE;
 
-					if (floorRawData[i][y + 1][x] != floorRawData[i][y][x])
+					if (floorRawData[i][y - 1][x] != floorRawData[i][y][x])
 					{
 						closedDirection |= DIR_UP;
 					}
 
-					if (floorRawData[i][y - 1][x] != floorRawData[i][y][x])
+					if (floorRawData[i][y + 1][x] != floorRawData[i][y][x])
 					{
 						closedDirection |= DIR_DOWN;
 					}
