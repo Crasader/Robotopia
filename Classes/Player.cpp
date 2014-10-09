@@ -3,6 +3,7 @@
 #include "AimingMissile.h"
 #include "LinearMissile.h"
 #include "GameManager.h"
+#include "LandGateway.h"
 
 USING_NS_CC;
 
@@ -66,18 +67,21 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		break;
 	case OT_GATEWAY:
-		if (dir & DIR_DOWN)
+		if (!((LandGateway*)enemy)->IsOpen())
 		{
-			m_IsFlying = false;
-			m_Velocity.y = 0;
-		}
-		if (dir&DIR_LEFT || dir&DIR_RIGHT)
-		{
-			m_Velocity.x = 0;
-		}
-		if (dir&DIR_UP)
-		{
-			m_Velocity.y = 0;
+			if (dir & DIR_DOWN)
+			{
+				m_IsFlying = false;
+				m_Velocity.y = 0;
+			}
+			if (dir&DIR_LEFT || dir&DIR_RIGHT)
+			{
+				m_Velocity.x = 0;
+			}
+			if (dir&DIR_UP)
+			{
+				m_Velocity.y = 0;
+			}
 		}
 		break;
 	}
