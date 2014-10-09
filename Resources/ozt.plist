@@ -4,6 +4,97 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>GatewayAct0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{742,326},{26,32}}</string>
+                <key>offset</key>
+                <string>{-3,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{26,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
+            </dict>
+            <key>GatewayAct1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{644,360},{30,32}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{30,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
+            </dict>
+            <key>GatewayAct2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{676,360},{30,32}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{30,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
+            </dict>
+            <key>GatewayAct3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{644,394},{32,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{32,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
+            </dict>
+            <key>GatewayAct4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{678,394},{32,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{32,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
+            </dict>
+            <key>GatewayActive.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{766,124},{1,1}}</string>
+                <key>offset</key>
+                <string>{-15.5,15.5}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{1,1}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
+            </dict>
+            <key>GatewayUnactive.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{712,394},{32,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{32,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
+            </dict>
             <key>Loading.png</key>
             <dict>
                 <key>frame</key>
@@ -20,7 +111,7 @@
             <key>gatewayActivate0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,2},{32,64}}</string>
+                <string>{{644,90},{32,64}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +124,7 @@
             <key>gatewayActivate1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,36},{32,64}}</string>
+                <string>{{644,124},{32,64}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +137,7 @@
             <key>gatewayActivate2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,104},{32,62}}</string>
+                <string>{{644,226},{32,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +150,7 @@
             <key>gatewayActivate3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,138},{32,62}}</string>
+                <string>{{644,260},{32,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +163,7 @@
             <key>gatewayActivate4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,172},{32,62}}</string>
+                <string>{{644,294},{32,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +176,7 @@
             <key>gatewayOpen0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,70},{32,64}}</string>
+                <string>{{644,158},{32,64}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,11 +189,11 @@
             <key>gatewayOpen1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,206},{32,62}}</string>
+                <string>{{708,326},{32,62}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{32,62}}</string>
                 <key>sourceSize</key>
@@ -111,7 +202,7 @@
             <key>gatewayOpen10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{722,363},{32,26}}</string>
+                <string>{{742,360},{32,26}}</string>
                 <key>offset</key>
                 <string>{0,19}</string>
                 <key>rotated</key>
@@ -124,11 +215,11 @@
             <key>gatewayOpen11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{688,395},{32,22}}</string>
+                <string>{{744,292},{32,22}}</string>
                 <key>offset</key>
                 <string>{0,21}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{32,22}}</string>
                 <key>sourceSize</key>
@@ -137,7 +228,7 @@
             <key>gatewayOpen12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{732,329},{32,18}}</string>
+                <string>{{748,258},{32,18}}</string>
                 <key>offset</key>
                 <string>{0,23}</string>
                 <key>rotated</key>
@@ -150,11 +241,11 @@
             <key>gatewayOpen13.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,435},{32,14}}</string>
+                <string>{{754,224},{32,14}}</string>
                 <key>offset</key>
                 <string>{0,25}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{32,14}}</string>
                 <key>sourceSize</key>
@@ -163,7 +254,7 @@
             <key>gatewayOpen2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,240},{32,58}}</string>
+                <string>{{710,90},{32,58}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -176,7 +267,7 @@
             <key>gatewayOpen3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,274},{32,54}}</string>
+                <string>{{710,124},{32,54}}</string>
                 <key>offset</key>
                 <string>{0,5}</string>
                 <key>rotated</key>
@@ -189,7 +280,7 @@
             <key>gatewayOpen4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{700,297},{30,50}}</string>
+                <string>{{710,158},{30,50}}</string>
                 <key>offset</key>
                 <string>{-1,7}</string>
                 <key>rotated</key>
@@ -202,7 +293,7 @@
             <key>gatewayOpen5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{704,263},{32,46}}</string>
+                <string>{{710,190},{32,46}}</string>
                 <key>offset</key>
                 <string>{0,9}</string>
                 <key>rotated</key>
@@ -215,7 +306,7 @@
             <key>gatewayOpen6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{688,329},{32,42}}</string>
+                <string>{{710,224},{32,42}}</string>
                 <key>offset</key>
                 <string>{0,11}</string>
                 <key>rotated</key>
@@ -228,7 +319,7 @@
             <key>gatewayOpen7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{710,2},{32,38}}</string>
+                <string>{{708,258},{32,38}}</string>
                 <key>offset</key>
                 <string>{0,13}</string>
                 <key>rotated</key>
@@ -241,7 +332,7 @@
             <key>gatewayOpen8.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{710,36},{32,34}}</string>
+                <string>{{708,292},{32,34}}</string>
                 <key>offset</key>
                 <string>{0,15}</string>
                 <key>rotated</key>
@@ -254,7 +345,7 @@
             <key>gatewayOpen9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{688,363},{32,30}}</string>
+                <string>{{644,328},{32,30}}</string>
                 <key>offset</key>
                 <string>{0,17}</string>
                 <key>rotated</key>
@@ -267,11 +358,11 @@
             <key>gatewayUnactivate.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{710,70},{32,64}}</string>
+                <string>{{644,192},{32,64}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{32,64}}</string>
                 <key>sourceSize</key>
@@ -280,11 +371,11 @@
             <key>menu_play0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{708,136},{125,42}}</string>
+                <string>{{644,2},{125,42}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{125,42}}</string>
                 <key>sourceSize</key>
@@ -293,11 +384,11 @@
             <key>menu_play1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,308},{125,42}}</string>
+                <string>{{644,46},{125,42}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{125,42}}</string>
                 <key>sourceSize</key>
@@ -311,9 +402,9 @@
             <key>realTextureFileName</key>
             <string>ozt.png</string>
             <key>size</key>
-            <string>{752,452}</string>
+            <string>{771,452}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9b574142ad48f131f935c6d7eaf440a5:271c8ea60e5589e7dd831d94f640502d:d3a240d8472909aae37610582f1d0455$</string>
+            <string>$TexturePacker:SmartUpdate:d9c164800c01b190949aac12afc9daff:675c3205bc496c94b13cc8b94462ea64:d3a240d8472909aae37610582f1d0455$</string>
             <key>textureFileName</key>
             <string>ozt.png</string>
         </dict>
