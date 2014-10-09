@@ -26,7 +26,7 @@ void StageManager::changeStage( size_t stageNum )
  	m_WorldScene->initCurrentSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
 	addObject( OT_PLAYER , Point(90, 90));
-}
+ }
 
 const Player* StageManager::getPlayer()
 {
