@@ -21,15 +21,32 @@ cocos2d::Animation* ResourceManager::createAnimation(const char* format, int sta
 		animation->addSpriteFrame(frame);
 	}
 	return animation;
-
 }
 
 cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float delay /*= -1*/)
 {
 	switch (type)
 	{
-	case AT_PLAYER_STAND: //animation
+	case AT_PLAYER_STAND:
 		return createAnimation("player_stand%d.png", 1, 4, 0.1f);
+	case AT_PLAYER_WALK:
+		return createAnimation("player_walk%d.png", 1, 8, 0.05f);
+	case AT_PLAYER_JUMP:
+		return createAnimation("player_jump%d.png", 1, 1, 0.1f);
+	case AT_PLAYER_ATTACK:
+		return createAnimation("player_attack%d.png", 1, 5, 0.05f);
+	case AT_RUSHMONSTER_STAND:
+		return createAnimation("rushMonster_stand%d.png", 1, 4, 0.1f);
+	case AT_RUSHMONSTER_MOVE:
+		return createAnimation("rushMonster_move%d.png", 1, 4, 0.1f);
+	case AT_RUSHMONSTER_RUSH:
+		return createAnimation("rushMonster_rush%d.png", 1, 4, 0.1f);
+	case AT_LINEAR_MISSILE:
+		return createAnimation("LinearMissile%d.png", 0, 10, 0.1f);
+	case AT_AIMING_MISSILE:
+		return createAnimation("AimingMissile%d.png", 1, 8, 0.1f);
+	case AT_GATEWAY_OPEN:
+		return createAnimation("Gateway%d.png", 0, 11, 0.2f);
 	}
 	return nullptr;
 }
@@ -37,6 +54,5 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 cocos2d::Sprite* ResourceManager::createSprite(const char* spriteName)
 {
 	auto sprite = Sprite::createWithSpriteFrameName(spriteName);
-
 	return sprite;
 }
