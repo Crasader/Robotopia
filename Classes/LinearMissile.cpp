@@ -16,7 +16,7 @@ bool LinearMissile::init()
 	m_Type = OT_LINEAR_MISSILE;
 	
 	m_MainSprite = Sprite::create();
-	auto animation = GET_RESOURCE_MANAGER()->createAnimation("LinearMissile%d.png", 0, 10, 0.1f);
+	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_LINEAR_MISSILE, 0.05f);
 	m_Animations[0] = animation;
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
 	
