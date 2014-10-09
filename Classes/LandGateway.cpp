@@ -34,12 +34,28 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 
 size_t LandGateway::findNextStageNum()
 {
+	size_t result = 0;
 	Point curPos = this->getPosition();
-	return 1;
+	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).x;
+	int stageYIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).y;
+	
+
+	int floorXIdx = GET_STAGE_MANAGER()->positionToIdxOfFloor( curPos ).x;
+	int floorYIdx = GET_STAGE_MANAGER()->positionToIdxOfFloor( curPos ).y;
+	
+
+	return result;
 }
 
 void LandGateway::gotoNextLevel(Ref* sender)
 {
 	//다음 월드 씬으로 변경해주는 함수호출
+}
+
+Direction LandGateway::findNeighborDir( Vec2 stageIdx )
+{
+	Direction result = DIR_NONE;
+
+	return result;
 }
 

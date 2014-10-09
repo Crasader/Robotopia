@@ -9,6 +9,7 @@ public:
 	OVERRIDE void		collisionOccured( InteractiveObject* enemy , Directions dir );
 	void				gotoNextLevel( Ref* sender );
 	size_t				findNextStageNum();
+	Direction			findNeighborDir(cocos2d::Vec2 stageIdx);
 	CREATE_FUNC( LandGateway );
 
 private:

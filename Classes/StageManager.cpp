@@ -9,12 +9,14 @@ bool StageManager::init()
 {
 	m_WorldScene = nullptr;
 	m_CurrentFloor = 1;
+	m_CurrentStageNum = 0;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloor , &m_FloorData , &m_CurrentFloorData );
 	return true;
 }
 
 void StageManager::changeStage(size_t stageNum)
 {
+	m_CurrentStageNum = stageNum;
 	_ASSERT( stageNum < m_CurrentFloorData.size() );
 	int boxNumWidth = m_CurrentFloorData[stageNum].width;
 	int boxNumHeight = m_CurrentFloorData[stageNum].width;
@@ -22,9 +24,7 @@ void StageManager::changeStage(size_t stageNum)
 	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
 	m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
-
-	MODULE_BASE_WIDTH;
-	MODULE_BASE_HEIGHT;
+	addObject( OT_PLAYER , Point(64 , 64 ));
 }
 
 const Player* StageManager::getPlayer()
@@ -114,7 +114,7 @@ void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect )
 	m_WorldScene->getGameLayer()->addEffect( effect );
 }
 
-cocos2d::Vec2 StageManager::positionToIdxOfMapData( cocos2d::Point position )
+cocos2d::Vec2 StageManager::positionToIdxOfStage( cocos2d::Point position )
 {
 	Vec2 resultIdx = Vec2(-1,-1);
 	if( m_WorldScene == nullptr )
@@ -122,5 +122,15 @@ cocos2d::Vec2 StageManager::positionToIdxOfMapData( cocos2d::Point position )
 		return resultIdx;
 	}
 	return ( m_WorldScene->getGameLayer() )->positionToIdxOfMapData( position );
+}
+
+cocos2d::Vec2 StageManager::positionToIdxOfFloor( cocos2d::Point position )
+{
+	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( position ).x;
+	int stageYIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( position ).y;
+	int floorXIdx = stageXIdx / MODULE_BASE_WIDTH + m_CurrentFloorData[m_CurrentStageNum].x;
+	int floorYIdx = stageYIdx / MODULE_BASE_HEIGHT + m_CurrentFloorData[m_CurrentStageNum].y;
+
+	return Vec2( floorXIdx , floorYIdx );
 }
 
