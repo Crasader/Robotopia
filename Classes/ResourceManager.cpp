@@ -66,5 +66,10 @@ cocos2d::Sprite* ResourceManager::createSprite(const char* spriteName)
 
 cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 {
-
+	switch (type)
+	{
+	case ST_LINEARMISSILE_COLLISION:
+		return createSprite("ETLinearMissileCollision1.png");
+	}
+	return nullptr;
 }

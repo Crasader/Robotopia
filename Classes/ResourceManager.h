@@ -18,12 +18,11 @@ enum AnimationType
 	AT_RUSHMONSTER_RUSH,
 
 	AT_GATEWAY_OPEN,
-
 };
 
 enum SpriteType
 {
-
+	ST_LINEARMISSILE_COLLISION,
 };
 
 
