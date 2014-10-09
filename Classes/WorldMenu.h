@@ -19,6 +19,9 @@ public:
 
 	CREATE_FUNC(WorldMenu);
 
+	void							showWorldMenu();
+	void							hideWorldMenu();
+
 private:
 
 

@@ -47,17 +47,21 @@ bool BarContainer::init()
 
 void BarContainer::update(float dTime)
 {
-	int currentHP = GET_STAGE_MANAGER()->getPlayer()->getHp();
-	int maxHP = GET_STAGE_MANAGER()->getPlayer()->getMaxHp();
-	int currentSTE = GET_STAGE_MANAGER()->getPlayer()->getSteam();
-	int maxSTE = GET_STAGE_MANAGER()->getPlayer()->getMaxSteam();
+	auto player = GET_STAGE_MANAGER()->getPlayer();
+	if (player != nullptr)
+	{
+		int currentHP = GET_STAGE_MANAGER()->getPlayer()->getHp();
+		int maxHP = GET_STAGE_MANAGER()->getPlayer()->getMaxHp();
+		int currentSTE = GET_STAGE_MANAGER()->getPlayer()->getSteam();
+		int maxSTE = GET_STAGE_MANAGER()->getPlayer()->getMaxSteam();
 
-	drawCurrentHP(currentHP, maxHP);
+		drawCurrentHP(currentHP, maxHP);
 
-	setMaxSTE(maxSTE);
-	drawCurrentSTE(currentSTE);
+		setMaxSTE(maxSTE);
+		drawCurrentSTE(currentSTE);
 
-	setLabels(currentHP, maxHP, currentSTE, maxSTE);
+		setLabels(currentHP, maxHP, currentSTE, maxSTE);
+	}
 }
 
 

@@ -14,3 +14,13 @@ void WorldMenu::update(float dTime)
 {
 
 }
+
+void WorldMenu::showWorldMenu()
+{
+
+}
+
+void WorldMenu::hideWorldMenu()
+{
+
+}

@@ -30,6 +30,7 @@ protected:
 	};
 
 	int									m_WinWidth , m_WinHeight;
+	bool								m_WorldMenuOn;
 	bool								m_CharWinOn;
 
 	BarContainer*						m_BarContainer;

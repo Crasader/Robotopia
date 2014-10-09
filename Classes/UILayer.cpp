@@ -19,21 +19,52 @@ void UILayer::update(float dTime)
 	KeyState charWinKey = GET_INPUT_MANAGER()->getKeyState(KC_CHARACTER_UI);
 	KeyState enterKey = GET_INPUT_MANAGER()->getKeyState(KC_RETURN);
 	KeyState escKey = GET_INPUT_MANAGER()->getKeyState(KC_MENU);
-
+	KeyState upKey = GET_INPUT_MANAGER()->getKeyState(KC_UP);
+	KeyState downKey = GET_INPUT_MANAGER()->getKeyState(KC_DOWN);
+	
 	if (charWinKey == KS_PRESS)
 	{
-		if (m_CharWinOn == false)
+		if (m_WorldMenuOn == false)
 		{
-			m_EquipmentWindow->showCharacterWindow();
-			m_CharWinOn = true;
-		}
-		else if (m_CharWinOn == true)
-		{
-			m_EquipmentWindow->hideCharacterWindow();
-			m_CharWinOn = false;
+			if (m_CharWinOn == false)
+			{
+				m_EquipmentWindow->showCharacterWindow();
+				m_CharWinOn = true;
+			}
+			else if (m_CharWinOn == true)
+			{
+				m_EquipmentWindow->hideCharacterWindow();
+				m_CharWinOn = false;
+			}
 		}
 	}
+	
+	if (enterKey == KS_PRESS)
+	{
 
+	}
+	
+	if (escKey == KS_PRESS)
+	{
+		if (m_WorldMenuOn == false)
+		{
+			if (m_CharWinOn == true)
+			{
+				m_EquipmentWindow->hideCharacterWindow();
+				m_CharWinOn = false;
+			}
+			else
+			{
+				m_WorldMenu->showWorldMenu();
+				m_WorldMenuOn = true;
+			}
+		}
+		else
+		{
+			m_WorldMenu->hideWorldMenu();
+			m_WorldMenuOn = false;
+		}
+	}
 }
 
 void UILayer::initializeUILayer()
