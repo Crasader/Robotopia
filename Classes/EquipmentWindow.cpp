@@ -10,10 +10,10 @@ bool EquipmentWindow::init()
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
 
-	auto sprCharWinContainer = Sprite::create("Char_Window.png");
-	sprCharWinContainer->setAnchorPoint(Point(0, 1));
-	sprCharWinContainer->setPosition(Point(m_WinWidth - 30, m_WinHeight - 100));
-	this->addChild(sprCharWinContainer, 12);
+	m_sprCharWinContainer = Sprite::create("Char_Window.png");
+	m_sprCharWinContainer->setAnchorPoint(Point(0, 1));
+	m_sprCharWinContainer->setPosition(Point(m_WinWidth - 30, m_WinHeight - 160));
+	this->addChild(m_sprCharWinContainer, 12);
 
 	this->scheduleUpdate();
 	return true;
@@ -26,10 +26,16 @@ void EquipmentWindow::update(float dTime)
 
 void EquipmentWindow::showCharacterWindow()
 {
+	auto action_0 = MoveTo::create(1, Point(m_WinWidth - 270, m_WinHeight - 160));
+	auto action_1 = EaseBackIn::create(action_0);
 
+	m_sprCharWinContainer->runAction(action_1);
 }
 
 void EquipmentWindow::hideCharacterWindow()
 {
+	auto action_0 = MoveTo::create(1, Point(m_WinWidth - 30, m_WinHeight - 160));
+	auto action_1 = EaseBounceOut::create(action_0);
 
+	m_sprCharWinContainer->runAction(action_1);
 }

@@ -35,8 +35,10 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		return createAnimation("AimingMissile%d.png", 1, 8, 0.1f);
 	case AT_AIMINGMISSILE_COLLISION:
 		return createAnimation("ET_AimingMissile_Collision%d.png", 1, 4, 0.1f);
+	case AT_GATEWAY_ACTIVATE:
+		return createAnimation("gatewayActivate%d.png", 0, 4, 0.1f);
 	case AT_GATEWAY_OPEN:
-		return createAnimation("Gateway%d.png", 0, 11, 0.2f);
+		return createAnimation("gatewayOpen%d.png", 0, 13, 0.1f);
 	case AT_LINEARMISSILE_FLYING:
 		return createAnimation("LinearMissile%d.png", 0, 10, 0.1f);
 	case AT_LINEARMISSILE_COLLISION:
@@ -75,6 +77,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 		return createSprite("AimingMissile1.png");
 	case ST_AIMINGMISSILE_COLLISION:
 		return createSprite("ET_AimingMissile_Collision1.png");
+	case ST_GATEWAY_UNACTIVATED:
+		return createSprite("gatewayUnactivate.png");
 	case ST_LINEARMISSILE_FLYING:
 		return createSprite("LinearMissile1.png");
 	case ST_LINEARMISSILE_COLLISION:

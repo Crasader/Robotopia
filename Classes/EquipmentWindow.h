@@ -22,5 +22,5 @@ public:
 
 private:
 	int									m_WinWidth, m_WinHeight;
-
+	cocos2d::Sprite*					m_sprCharWinContainer;
 };
