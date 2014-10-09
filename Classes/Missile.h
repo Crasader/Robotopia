@@ -10,6 +10,7 @@
 
 #include "cocos2d.h"
 #include "InteractiveObject.h"
+#define PIE 3.141592
 
 class Missile : public InteractiveObject
 {

@@ -2,7 +2,7 @@
 #include "GameManager.h"
 #include "Utils.h"
 #include <math.h>
-#define PIE 3.141592
+
 
 USING_NS_CC;
 

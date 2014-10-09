@@ -10,12 +10,12 @@ bool EffectManager::init()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void EffectManager::useEffect(EffectType selectedEffect, Rect obRect, int effectPlayNum, Point AnchorPoint)
+void EffectManager::useEffect(EffectType selectedEffect, Rect obRect, int effectPlayNum, Point AnchorPoint, Vec2 velocity)
 {
 	switch (selectedEffect)
 	{
 	case ET_LINEAR_MISSILE_COLLISION:
-		useEffectLinearMissileCollision(obRect, effectPlayNum, AnchorPoint);
+		useEffectLinearMissileCollision(obRect, effectPlayNum, AnchorPoint, velocity);
 		break;
 	case ET_AIMING_MISSILE_COLLISION:
 		break;
@@ -26,10 +26,10 @@ void EffectManager::useEffect(EffectType selectedEffect, Rect obRect, int effect
 }
 
 
-void EffectManager::useEffect(EffectType selectedEffect, Point obPoint, Size obSize, int effectPlayNum, Point AnchorPoint)
+void EffectManager::useEffect(EffectType selectedEffect, Point obPoint, Size obSize, int effectPlayNum, Point AnchorPoint, Vec2 velocity)
 {
 	Rect obRect(obPoint.x, obPoint.y, obSize.width, obSize.height);
-	useEffect(selectedEffect, obRect, effectPlayNum, AnchorPoint);
+	useEffect(selectedEffect, obRect, effectPlayNum, AnchorPoint, velocity);
 	return;
 }
 
@@ -61,7 +61,7 @@ void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, Point
 
 //EndLine///////////////////////////////////////////////
 
-void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int effectPlayNum, Point AnchorPoint)
+void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int effectPlayNum, Point AnchorPoint, Vec2 velocity)
 {
 	float needEffectScale = 0.5;
 	
@@ -80,8 +80,21 @@ void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int ef
 	if (AnchorPoint.x < 0 || AnchorPoint.y < 0)
 	{
 		//LinearMissileCollision같은 경우는 미사일 앞에서 중간에 그려지게 하고 시푸다
-		addPosX = obRect.origin.x + 0.25f * obRect.size.width;
-		addPosY = obRect.origin.y + 0.25f * obRect.size.height;
+		if (velocity.x >0)
+		{
+			addPosX = obRect.origin.x + 0.25f * obRect.size.width;
+			addPosY = obRect.origin.y + 0.25f * obRect.size.height;
+		}
+		else if (velocity.x == 0)
+		{
+			addPosX = 0;
+			addPosY = 0;
+		}
+		else
+		{
+			addPosX = obRect.origin.x - 0.25f * obRect.size.width;
+			addPosY = obRect.origin.y - 0.25f * obRect.size.height;
+		}
 	}
 	else
 	{

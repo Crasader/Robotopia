@@ -32,11 +32,13 @@ bool AimingMissile::init()
 void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Point myPos, Point targetPos)
 {
 	float distance = sqrt((myPos.x - targetPos.x)*(myPos.x - targetPos.x) + (myPos.y - targetPos.y) * (myPos.y - targetPos.y));
+	float degree = 0;
 
 	if (distance != 0)
 	{
 		m_Velocity.x = ((targetPos.x - myPos.x) / distance) * velocity;
 		m_Velocity.y = ((targetPos.y - myPos.y) / distance) * velocity;
+		degree = acos((myPos.x - targetPos.x) / distance) * 180/PIE;
 	
 	}
 	else
@@ -49,6 +51,12 @@ void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Poi
 	{
 		m_MainSprite->setFlippedX(true);
 	}
+
+	if (m_Velocity.y > 0)
+	{
+		m_MainSprite->setFlippedY(true);
+	}
+	m_MainSprite->setRotation(degree);
 
 	return;
 }
