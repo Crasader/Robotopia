@@ -17,7 +17,7 @@ bool StageManager::init()
 void StageManager::changeStage( size_t stageNum )
 {
 	m_CurrentStageNum = stageNum;
-	_ASSERT( stageNum <= m_CurrentFloorData.size() );
+	_ASSERT( stageNum <= m_FloorData.stageNum );
 	int boxNumWidth = m_CurrentFloorData[stageNum].width;
 	int boxNumHeight = m_CurrentFloorData[stageNum].width;
 	Size boxSize = Size( 32 , 32 );
