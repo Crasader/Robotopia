@@ -122,8 +122,8 @@ bool DataManager::initFloorData()
 			{
 				bool passFlag = true;
 
-				width = 1 + rand() % maxStageWidth;
-				height = 1 + rand() % maxStageHeight;
+				width = 2 + rand() % (maxStageWidth - 1);
+				height = 2 + rand() % (maxStageHeight - 1);
 
 				if (s == 1)
 				{

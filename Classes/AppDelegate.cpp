@@ -23,7 +23,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-    director->setDisplayStats(false);
+    director->setDisplayStats(true);
     director->setAnimationInterval(1.0 / 60);
 	director->runWithScene( MenuScene::createScene() );
 	srand(time(NULL));
