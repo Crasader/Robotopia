@@ -63,9 +63,9 @@ InputManager* GameManager::getInputManagerInstance()
 	if (m_pInputManager == nullptr)
 	{
 		m_pInputManager = new InputManager();
+		m_pInputManager->init();
 	}
-
-	m_pInputManager->init();
+	
 	return m_pInputManager;
 }
 
@@ -74,8 +74,9 @@ EffectManager* GameManager::getEffectManagerInstance()
 	if (m_pEffectManager == nullptr)
 	{
 		m_pEffectManager = new EffectManager();
+		m_pEffectManager->init();
 	}
-	m_pEffectManager->init();
+	
 	return m_pEffectManager;
 }
 
@@ -84,8 +85,9 @@ ResourceManager* GameManager::getResourceManagerInstance()
 	if (m_pResourceManager == nullptr)
 	{
 		m_pResourceManager = new ResourceManager();
+		m_pResourceManager->init();
 	}
-	m_pResourceManager->init();
+	
 	return m_pResourceManager;
 }
 
@@ -94,8 +96,9 @@ StageManager* GameManager::getStageManagerInstance()
 	if (m_pStageManager == nullptr)
 	{
 		m_pStageManager = new StageManager();
+		m_pStageManager->init();
 	}
-	m_pStageManager->init();
+	
 	return m_pStageManager; 
 }
 
@@ -104,7 +107,8 @@ DataManager* GameManager::getDataManagerInstance()
 	if (m_pDataManager == nullptr)
 	{
 		m_pDataManager = new DataManager();
+		m_pDataManager->init();
 	}
-	m_pDataManager->init();
+	
 	return m_pDataManager;
 }
