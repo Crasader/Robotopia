@@ -14,24 +14,30 @@ class EffectManager
 {
 public:
 	bool init();
+	void removeSprAfterAni(cocos2d::Ref* sender);
 
-	//매개변수 설명, 1. 사용하고 싶은 effect 이름, 2. 대상이 되는 오브젝트의 Rect(point와 size로 넣을수도 있음), 
-	//			   3. effectPlayNum  
-	//			   4.대상이 되는 오브젝트에 어느쪽에 효과가 나타날것인지에 대한 앵커포인트 (0~1) (-1,-1)을 넣으면 디폴트 위치에 효과가 생성됨
-	//			   5. 대상이 되는 오브젝트의 속도
-	void useEffect(EffectType selectedEffect, cocos2d::Rect obRect, int effectPlayNum, cocos2d::Point AnchorPoint, cocos2d::Vec2 velocity);
-	void useEffect(EffectType selectedEffect, cocos2d::Point obPoint, cocos2d::Size obSize, int effectPlayNum, cocos2d::Point AnchorPoint, cocos2d::Vec2 velocity);
+	//매개변수 설명, 
+	// 1. 사용하고 싶은 effect 이름,
+	// 2. 부딪힌 대상이 되는 오브젝트의 Rect(point와 size로 넣을수도 있음)
+	// 3. 부딪힌 방향
+	// 4. effectPlayNum  
+	
+	void createEffect(EffectType selectedEffect, cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffect(EffectType selectedEffect, cocos2d::Point enemyPoint, cocos2d::Size enemySize, 
+					  cocos2d::Point ownPoint, cocos2d::Size ownSize, Directions collisionDir, int effectPlayNum);
 
-	//매개변수 설명, 1. 사용하고 싶은 effect 이름, 2. 이펙트가 나타나길 원하는 위치와 원하는 크기를 담은 Rect(크기의 경우 -1,-1값을 넣으면 디폴트로 생성)
-	//			   3. effectPlayNum
-	void useEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Rect effectRect, int effectPlayNum);
-	void useEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Point effectPoint, cocos2d::Size effectSize, int effectPlayNum);
+	//매개변수 설명, 
+	// 1. 사용하고 싶은 effect 이름, 
+	// 2. 이펙트가 나타나길 원하는 위치와 원하는 크기를 담은 Rect(크기의 경우 -1,-1값을 넣으면 디폴트로 생성)
+	// 3. effectPlayNum
+	void createEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Rect effectRect, int effectPlayNum);
+	void createEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Point effectPoint, cocos2d::Size effectSize, int effectPlayNum);
 
 private:
-	void useEffectLinearMissileCollision(cocos2d::Rect obRect, int effectPlayNum, cocos2d::Point AnchorPoint, cocos2d::Vec2 velocity);
-	void useEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
+	void createEffectLinearMissileCollision(cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
-	cocos2d::Sprite*	m_MainSprite;
+	cocos2d::Sprite*	effectSpr;
 	cocos2d::Animation* m_MainAnimation;
 };
 

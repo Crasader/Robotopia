@@ -1,21 +1,30 @@
 #include "EffectManager.h"
 #include "GameManager.h"
+#include "GameLayer.h"
 USING_NS_CC;
 
 
 bool EffectManager::init()
 {
-	m_MainSprite = Sprite::create();
+	effectSpr = Sprite::create();
 	return true;
 }
 
+void EffectManager::removeSprAfterAni(Ref* sender)
+{
+	auto spr = (Sprite*)sender;
+	spr->removeFromParent();
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void EffectManager::useEffect(EffectType selectedEffect, Rect obRect, int effectPlayNum, Point AnchorPoint, Vec2 velocity)
+
+void EffectManager::createEffect(EffectType selectedEffect, cocos2d::Rect enemyRect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
 	switch (selectedEffect)
 	{
 	case ET_LINEAR_MISSILE_COLLISION:
-		useEffectLinearMissileCollision(obRect, effectPlayNum, AnchorPoint, velocity);
+		createEffectLinearMissileCollision(enemyRect, ownRect, collisionDir, effectPlayNum);
 		break;
 	case ET_AIMING_MISSILE_COLLISION:
 		break;
@@ -26,21 +35,23 @@ void EffectManager::useEffect(EffectType selectedEffect, Rect obRect, int effect
 }
 
 
-void EffectManager::useEffect(EffectType selectedEffect, Point obPoint, Size obSize, int effectPlayNum, Point AnchorPoint, Vec2 velocity)
+void EffectManager::createEffect(EffectType selectedEffect, Point enemyPoint, Size enemySize, Point ownPoint, Size ownSize,
+								 Directions collisionDir, int effectPlayNum)
 {
-	Rect obRect(obPoint.x, obPoint.y, obSize.width, obSize.height);
-	useEffect(selectedEffect, obRect, effectPlayNum, AnchorPoint, velocity);
+	Rect enemyRect(enemyPoint.x, enemyPoint.y, enemySize.width, enemySize.height);
+	Rect ownRect(ownPoint.x, ownPoint.y, ownSize.width, ownSize.width);
+	createEffect(selectedEffect, enemyRect, ownRect, collisionDir, effectPlayNum);
 	return;
 }
 
 //EndLine////////////////////////////////////////////////
 
-void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, Rect effectRect, int effectPlayNum)
+void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Rect effectRect, int effectPlayNum)
 {
 	switch (selectedEffect)
 	{
 	case ET_LINEAR_MISSILE_COLLISION:
-		useEffectLinearMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
+		createEffectLinearMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
 		break;
 	case ET_AIMING_MISSILE_COLLISION:
 		break;
@@ -52,80 +63,88 @@ void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, Rect 
 }
 
 
-void EffectManager::useEffectSelectedSizeByUser(EffectType selectedEffect, Point effectPoint, Size effectSize, int effectPlayNum)
+void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Point effectPoint, Size effectSize, int effectPlayNum)
 {
 	Rect effectRect(effectPoint.x, effectPoint.y, effectSize.width, effectSize.height);
-	useEffectSelectedSizeByUser(selectedEffect, effectRect, effectPlayNum);
+	createEffectSelectedSizeByUser(selectedEffect, effectRect, effectPlayNum);
 	return;
 }
 
 //EndLine///////////////////////////////////////////////
 
-void EffectManager::useEffectLinearMissileCollision(cocos2d::Rect obRect, int effectPlayNum, Point AnchorPoint, Vec2 velocity)
+
+void EffectManager::createEffectLinearMissileCollision(cocos2d::Rect enemyRect, Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
-	float needEffectScale = 0.5;
+	float needEffectScale = 1.5f;
 	
-	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_LINEARMISSILE_COLLISION);
-	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation(AT_LINEARMISSILE_COLLISION, 0.1f);
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_LINEARMISSILE_COLLISION);
+	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation(AT_LINEARMISSILE_COLLISION, 0.2f);
 
-	float ratioX = obRect.size.width / m_MainSprite->getContentSize().width;
-	float ratioY = obRect.size.height / m_MainSprite->getContentSize().height;
-	
-	m_MainSprite->setScaleX(ratioX * needEffectScale);
-	m_MainSprite->setScaleY(ratioY * needEffectScale);
+	float ratioX = ownRect.size.width / effectSpr->getContentSize().width;
+	float ratioY = ownRect.size.height / effectSpr->getContentSize().height;
 
-	float addPosX, addPosY;
-	//이게 이펙트마다 anchorPoint가 들어오지 않았을 때 기본으로 어느위치에 존재할 것인가가 다르다. 
-	//앵커포인트 default 값을 -1로 받을 것이기 때문에 0보다 작으면 내가 지정한 위치에 그려진다. 
-	if (AnchorPoint.x < 0 || AnchorPoint.y < 0)
-	{
-		//LinearMissileCollision같은 경우는 미사일 앞에서 중간에 그려지게 하고 시푸다
-		if (velocity.x >0)
-		{
-			addPosX = obRect.origin.x + 0.25f * obRect.size.width;
-			addPosY = obRect.origin.y + 0.25f * obRect.size.height;
-		}
-		else if (velocity.x == 0)
-		{
-			addPosX = 0;
-			addPosY = 0;
-		}
-		else
-		{
-			addPosX = obRect.origin.x - 0.25f * obRect.size.width;
-			addPosY = obRect.origin.y - 0.25f * obRect.size.height;
-		}
-	}
-	else
-	{
-		addPosX = obRect.origin.x + (AnchorPoint.x - 0.5) * obRect.size.width;
-		addPosY = obRect.origin.y + (AnchorPoint.y - 0.5) * obRect.size.height;
-	}
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
 	
-	m_MainSprite->setPosition(addPosX, addPosY);
-	m_MainSprite->runAction(Repeat::create(Animate::create(m_MainAnimation), effectPlayNum));
+
+	float setPosX = 0;
+	float setPosY = 0;
+
+	//발사된 녀석의 면을 중심으로 하기 때문에
+	//만나는 애들이 포지션에 대한 앵커포인터가 0,0으로 되어 있다. 
+	switch (collisionDir)
+	{
+	case DIR_UP:
+		setPosX = ownRect.origin.x + (ownRect.size.width/2);
+		setPosY = ownRect.origin.y + (ownRect.size.height / 2);
+		break;
+	case DIR_DOWN:
+		setPosX = ownRect.origin.x + (ownRect.size.width/2);
+		setPosY = ownRect.origin.y;
+		break;
+	case DIR_LEFT:
+		setPosX = ownRect.origin.x;
+		setPosY = ownRect.origin.y + (ownRect.size.height / 2);
+		break;
+	case DIR_RIGHT:
+		setPosX = ownRect.origin.x + ownRect.size.width;
+		setPosY = ownRect.origin.y + (ownRect.size.height/2);
+		break;
+	}
+
+	
+	effectSpr->setPosition(setPosX, setPosY);
+	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
+	WorldScene->getGameLayer()->addEffect(effectSpr);
+
+	auto action = Repeat::create(Animate::create(m_MainAnimation), effectPlayNum);
+	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
+	effectSpr->runAction(Sequence::create(action, callback, NULL));
 
 	return;
 }
 
-void EffectManager::useEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum)
-{
-	float needEffectScale = 0.5;
 
-	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_LINEARMISSILE_COLLISION);
+
+void EffectManager::createEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum)
+{
+	float needEffectScale = 2.0f;
+
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_LINEARMISSILE_COLLISION);
 	m_MainAnimation = GET_RESOURCE_MANAGER()->createAnimation(AT_LINEARMISSILE_COLLISION, 0.1f);
 
-	float ratioX = effectRect.size.width / m_MainSprite->getContentSize().width;
-	float ratioY = effectRect.size.height / m_MainSprite->getContentSize().height;
+	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
+	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
 
-	m_MainSprite->setScaleX(ratioX);
-	m_MainSprite->setScaleY(ratioY);
+	effectSpr->setScaleX(ratioX);
+	effectSpr->setScaleY(ratioY);
 
-	m_MainSprite->setPosition(effectRect.origin.x, effectRect.origin.y);
-	m_MainSprite->runAction(Repeat::create(Animate::create(m_MainAnimation), effectPlayNum));
+	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
+	effectSpr->runAction(Repeat::create(Animate::create(m_MainAnimation), effectPlayNum));
 
 
 	return;
 }
+
 
 

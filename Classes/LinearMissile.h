@@ -14,10 +14,10 @@
 class LinearMissile : public Missile
 {
 public:
-	OVERRIDE bool init();
-	void		  update(float dTime);
-	void		  setMoveAttribute(bool m_IsPlayerMissile, float velocity, float degree);
-
+	OVERRIDE bool   init();
+	void		    update(float dTime);
+	void		    setMoveAttribute(bool m_IsPlayerMissile, float velocity, float degree);
+	OVERRIDE void	collisionOccured(InteractiveObject* enemy, Directions dir);
 	CREATE_FUNC(LinearMissile);
 
 private:

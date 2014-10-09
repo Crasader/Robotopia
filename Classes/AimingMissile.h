@@ -13,9 +13,10 @@
 class AimingMissile : public Missile
 {
 public:
-	OVERRIDE bool init();
-	void		  setMoveAttribute(bool m_IsPlayerMissile, float velocity, cocos2d::Point myPos, cocos2d::Point targetPos);
-	void		  update(float dTime);
+	OVERRIDE bool	 init();
+	void			 setMoveAttribute(bool m_IsPlayerMissile, float velocity, cocos2d::Point myPos, cocos2d::Point targetPos);
+	OVERRIDE void	 collisionOccured(InteractiveObject* enemy, Directions dir);
+	void			 update(float dTime);
 	CREATE_FUNC(AimingMissile);
 private:
 	
