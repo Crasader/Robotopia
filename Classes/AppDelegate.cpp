@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "WorldScene.h"
 #include "GameManager.h"
+#include "MenuScene.h"
 
 USING_NS_CC;
 
@@ -24,8 +25,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     director->setDisplayStats(false);
     director->setAnimationInterval(1.0 / 60);
-
-	GET_DATA_MANAGER()->init();
+	director->runWithScene( MenuScene::createScene() );
+	//GET_DATA_MANAGER()->init();
 
     return true;
 }
