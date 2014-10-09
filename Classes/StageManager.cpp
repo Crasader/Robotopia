@@ -35,7 +35,7 @@ void StageManager::changeStage()
 			rawValue = strtok( nullptr , " \n" );
 		}
 	}
-	auto m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
+	m_WorldScene = WorldScene::createSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
 }
 
