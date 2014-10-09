@@ -189,6 +189,8 @@
         <key>fileList</key>
         <array>
             <filename>Loading.png</filename>
+            <filename>menu_play0.png</filename>
+            <filename>menu_play1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

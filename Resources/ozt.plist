@@ -11,11 +11,37 @@
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{640,448}}</string>
                 <key>sourceSize</key>
                 <string>{640,448}</string>
+            </dict>
+            <key>menu_play0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,644},{125,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{125,42}}</string>
+                <key>sourceSize</key>
+                <string>{125,42}</string>
+            </dict>
+            <key>menu_play1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{129,644},{125,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{125,42}}</string>
+                <key>sourceSize</key>
+                <string>{125,42}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -25,9 +51,9 @@
             <key>realTextureFileName</key>
             <string>ozt.png</string>
             <key>size</key>
-            <string>{644,452}</string>
+            <string>{452,688}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:46e6a2ceae877468c665a3605dc4aef5:d552381decbffd8149cc6cec7caff038:d3a240d8472909aae37610582f1d0455$</string>
+            <string>$TexturePacker:SmartUpdate:2eeb6b1ec8c70390f7dcbf504f806c40:4975b9cfd5b069f8829d507cbb995617:d3a240d8472909aae37610582f1d0455$</string>
             <key>textureFileName</key>
             <string>ozt.png</string>
         </dict>
