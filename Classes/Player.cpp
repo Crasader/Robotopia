@@ -21,6 +21,7 @@ bool Player::init()
 	m_Animations[PS_JUMP] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_JUMP);
 	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK);
 	m_IsRightDirection = true;
+	m_AttackEnd = false;
 
 	m_MaxHp = 100;
 	m_Hp = m_MaxHp;
@@ -149,7 +150,7 @@ void Player::update(float dTime)
 		{
 			Rect nowRect = m_MainSprite->getTextureRect();
 			Rect targetRect = SpriteFrameCache::getInstance()->getSpriteFrameByName("player_attack2.png")->getRect();
-			if (nowRect.origin.x == targetRect.origin.x &&nowRect.origin.y == targetRect.origin.y)
+			if (nowRect.origin.x == targetRect.origin.x &&nowRect.origin.y == targetRect.origin.y&& !m_AttackEnd)
 			{
 				auto gameLayer = (GameLayer*)this->getParent();
 
@@ -176,6 +177,8 @@ void Player::update(float dTime)
 				{
 					object->setMoveAttribute(true, -200, 0);
 				}
+
+				m_AttackEnd = true;
 			}
 		}
 	}
@@ -195,6 +198,11 @@ void Player::changeState(State state)
 	}
 	m_State = state;
 	m_MainSprite->stopAllActions();
+
+	if (state == PS_ATTACK)
+	{
+		m_AttackEnd = false;
+	}
 
 	auto animate = Animate::create(m_Animations[state]);
 	auto callfunc = CallFuncN::create(CC_CALLBACK_1(Player::endAnimation, this));

@@ -156,6 +156,15 @@ void RushMonster::update(float dTime)
 		}
 	}
 
+	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST1) == KS_PRESS)
+	{
+
+		auto object = (AimingMissile*)GET_STAGE_MANAGER()->addObject(OT_AIMING_MISSILE, pos);
+
+
+		object->setMoveAttribute(true, 200, pos, GET_STAGE_MANAGER()->getPlayer()->getPosition());
+	}
+
 	m_Velocity.y -= GRAVITY*dTime;
 	m_IsFlying = true;
 }

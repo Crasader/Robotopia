@@ -40,6 +40,7 @@ private:
 	int			m_Steam;
 	int			m_MaxHp;
 	int			m_MaxSteam;
+	bool		m_AttackEnd;
 
 	void		changeState(State state);
 	void		endAnimation(cocos2d::Ref* sender);
