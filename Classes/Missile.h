@@ -17,7 +17,7 @@ class Missile : public InteractiveObject
 public:
 	OVERRIDE bool	init();
 	bool			IsPlayerMissile(){ return m_IsPlayerMissile; }
-	OVERRIDE void	collisionOccured(InteractiveObject* enemy, Directions dir);
+	
 	
 protected:
 	bool    m_IsPlayerMissile;
