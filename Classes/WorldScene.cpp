@@ -16,7 +16,7 @@ WorldScene* WorldScene::createScene()
 WorldScene* WorldScene::createSceneWithData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> mapData , char* BGpath )
 {
 	WorldScene* scene = WorldScene::create();
-	GET_INPUT_MANAGER()->receiveKeyboardData( scene );
+	GET_INPUT_MANAGER()->receiveInputData( scene );
 	scene->getGameLayer()->initWorldFromData(boxNum, boxSize, mapData, BGpath);
 	return scene;
 }
