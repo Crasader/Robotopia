@@ -25,7 +25,7 @@ bool Player::init()
 	m_MaxHp = 100;
 	m_Hp = m_MaxHp;
 
-	m_MaxSteam = 17;
+	m_MaxSteam = 20;
 	m_Steam = m_MaxSteam;
 
 	m_MainSprite = Sprite::create();
