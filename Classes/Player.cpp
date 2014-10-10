@@ -204,7 +204,7 @@ void Player::update(float dTime)
 			pos.x -= 70;
 		}
 
-		auto object = (MeleeMissile*)gameLayer->addObject(OT_LINEAR_MISSILE, pos);
+		auto object = (MeleeMissile*)gameLayer->addObject(OT_MELEE_MISSILE, pos);
 
 
 		if (m_IsRightDirection)
