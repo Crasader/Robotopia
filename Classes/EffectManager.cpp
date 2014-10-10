@@ -270,7 +270,7 @@ void EffectManager::createEffectPlayerLanding(cocos2d::Rect ownRect, Directions 
 	float needEffectScale = 1.2f;
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING);
-	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_LANDING, 0.1f);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_LANDING, 0.05f);
 
 	float ratioX = ownRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = ownRect.size.height / effectSpr->getContentSize().height;
@@ -294,7 +294,7 @@ void EffectManager::createEffectPlayerLanding(cocos2d::Rect ownRect, Directions 
 		break;
 	case DIR_DOWN:
 		setPosX = ownRect.origin.x + (ownRect.size.width / 2);
-		setPosY = ownRect.origin.y;
+		setPosY = ownRect.origin.y + (ownRect.size.height/ 5);
 		break;
 	case DIR_LEFT:
 		setPosX = ownRect.origin.x;

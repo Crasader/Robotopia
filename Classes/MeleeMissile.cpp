@@ -89,8 +89,8 @@ void MeleeMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 	}
 	if (m_IsDestroyed)
 	{
-		//전기 충격 이펙트로  바꿔 놓기
-		GET_EFFECT_MANAGER()->createEffect(ET_MELEE_MISIILE_COLLSION, this->getRect(), dir, 2);
+		
+		GET_EFFECT_MANAGER()->createEffect(ET_MELEE_MISIILE_COLLSION, this->getRect(), dir, 1);
 	}
 	return;
 }
