@@ -27,7 +27,8 @@ bool Minimap::init()
 	};
 	minimapBg->drawPolygon(points, 4, Color4F(0.5f, 0.5f, 0.5f, 1), 0, Color4F(1.0f, 0.3f, 0.3f, 1));
 	minimapBg->setAnchorPoint(Point(0, 0));
-	minimapBg->setPosition(Point(-500, -200));
+	minimapBg->setOpacity(0);
+	minimapBg->setPosition(Point(-200, -200));
 	sprMinimap->addChild(minimapBg);
 
 	for (int j = 0; j < fd.height; ++j)
