@@ -16,6 +16,7 @@ bool LandGateway::init()
 	m_OpenAnimaion = GET_RESOURCE_MANAGER()->createAnimation( AT_GATEWAY_ACT , 0.5f );
 	m_OpenAnimaion->retain();
 	m_isOpen = false;
+	m_LinkingPoint = Point( 90 , 90 );
 
 	return true;
 }
@@ -74,7 +75,7 @@ void LandGateway::findNextStage()
 void LandGateway::gotoNextLevel(Ref* sender)
 {
 	//다음 월드 씬으로 변경해주는 함수호출
-	GET_STAGE_MANAGER()->changeStage( m_NextFloorNum );
+	GET_STAGE_MANAGER()->changeStage( m_NextFloorNum, m_LinkingPoint );
 }
 
 //현재 위치에서 센티넬이 있는 방향을 리턴해줍니다.

@@ -15,8 +15,9 @@ public:
 		int MaxSteam;
 	};
 	bool								init();
-	void								changeStage(size_t stageNum);
+	void								changeStage(size_t stageNum, cocos2d::Point nextPlayerPosition);
 
+	void								addVisitedStage(int stage);
 	InteractiveObject*					addObject( ObjectType type , cocos2d::Point position );
 	InteractiveObject*					addObjectByIdx( ObjectType type , int xIdx , int yIdx );
 	InteractiveObject*					addObjectByIdx( int xIdx , int yIdx );
@@ -32,11 +33,13 @@ public:
 	FloorData							getFloorData(){return m_FloorData;};
 	StageData							getStageDatas(){return m_CurrentFloorData[m_CurrentStageNum];};
 	int									getCurStageNum() {return m_CurrentStageNum; }
+	std::vector<int>					getVisitedStageNums(){return m_VisitedStageNums;}
 
 	cocos2d::Vec2						positionToIdxOfStage( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 
 private:
+	std::vector<int>					m_VisitedStageNums;
 	int									m_CurrentStageNum;
 	int									m_CurrentFloor;
 	std::vector<StageData>				m_CurrentFloorData;
