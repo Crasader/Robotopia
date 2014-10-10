@@ -17,8 +17,8 @@ bool MeleeMissile::init()
 	m_MainSprite = Sprite::create();
 	//이부분에 대한 생각 필요
 	//m_MainSprite->setZOrder(-100);
-	m_Animations[0] = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_FLYING, 0.05f);
-	int aniPlayNum = 2;
+	m_Animations[0] = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_FLYING, 0.02f);
+	int aniPlayNum = 1;
 
 
 	auto action = Repeat::create(Animate::create(m_Animations[0]), aniPlayNum);

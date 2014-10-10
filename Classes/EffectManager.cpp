@@ -159,8 +159,7 @@ void EffectManager::createEffectLinearMissileCollision(Rect ownRect, Directions 
 
 	
 	effectSpr->setPosition(setPosX, setPosY);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
@@ -236,8 +235,7 @@ void EffectManager::createEffectAimingMissileCollision(cocos2d::Rect ownRect, Di
 
 
 	effectSpr->setPosition(setPosX, setPosY);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
@@ -260,8 +258,7 @@ void EffectManager::createEffectAimingMissileCollisionSelectedSizeByUser(cocos2d
 	effectSpr->setScaleY(ratioY);
 
 	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
@@ -311,8 +308,7 @@ void EffectManager::createEffectPlayerLanding(cocos2d::Rect ownRect, Directions 
 
 
 	effectSpr->setPosition(setPosX, setPosY);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
@@ -333,8 +329,7 @@ void EffectManager::createEffectPlayerLandingSizeByUser(cocos2d::Rect effectRect
 	effectSpr->setScaleY(ratioY);
 
 	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
@@ -385,8 +380,7 @@ void EffectManager::createEffectMeleeMissileCollision(cocos2d::Rect ownRect, Dir
 
 
 	effectSpr->setPosition(setPosX, setPosY);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
@@ -407,8 +401,7 @@ void EffectManager::createEffectMeleeMissileCollisionByUser(cocos2d::Rect effect
 	effectSpr->setScaleY(ratioY);
 
 	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
@@ -459,8 +452,7 @@ void EffectManager::createEffectNewLinearMissileCollsion(cocos2d::Rect ownRect, 
 
 
 	effectSpr->setPosition(setPosX, setPosY);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
@@ -481,8 +473,7 @@ void EffectManager::createEffectNewLinearMissileCollsionByUser(cocos2d::Rect eff
 	effectSpr->setScaleY(ratioY);
 
 	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
-	auto WorldScene = GET_STAGE_MANAGER()->getWorldScene();
-	WorldScene->getGameLayer()->addEffect(effectSpr);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
