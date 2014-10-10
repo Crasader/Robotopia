@@ -61,7 +61,10 @@ void LandGateway::findNextStage()
 	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).x;
 	int stageYIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).y;
 	Direction sentinelDir = findCentinelNeighborDir( Vec2( stageXIdx , stageYIdx ) );
-
+	if( sentinelDir == DIR_UP )
+	{
+		int x = 0;
+	}
 	//인덱스값으로 어느쪽 방향이 센티넬인지를 체크하여 다음 이동할 방의 방향을 찾습니다.
 	int floorXIdx = GET_STAGE_MANAGER()->positionToIdxOfFloor( curPos ).x;
 	int floorYIdx = GET_STAGE_MANAGER()->positionToIdxOfFloor( curPos ).y;

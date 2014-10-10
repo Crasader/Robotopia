@@ -36,7 +36,6 @@ public:
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 	
 
-
 private:
 	int									m_CurrentStageNum;
 	int									m_CurrentFloor;

@@ -130,8 +130,10 @@ cocos2d::Vec2 StageManager::positionToIdxOfFloor( cocos2d::Point position )
 {
 	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( position ).x;
 	int stageYIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( position ).y;
-	int floorXIdx = m_CurrentFloorData[m_CurrentStageNum].x + stageXIdx / MODULE_BASE_WIDTH;
-	int floorYIdx = m_CurrentFloorData[m_CurrentStageNum].y + stageYIdx / MODULE_BASE_HEIGHT;
+	int floorXIdx = m_CurrentFloorData[m_CurrentStageNum].x + (stageXIdx - 1) / MODULE_BASE_WIDTH;
+	int curFloorY = m_CurrentFloorData[m_CurrentStageNum].y;
+	int curPositionAddY = (stageYIdx-1) / MODULE_BASE_HEIGHT;
+	int floorYIdx = curFloorY + curPositionAddY;
 
 	return Vec2( floorXIdx , floorYIdx );
 }
