@@ -39,16 +39,41 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		myRect.origin.x >= enemyRect.origin.x + enemyRect.size.width ||
 		myRect.origin.y >= enemyRect.origin.y + enemyRect.size.height))
 	{
-		//collisionDir = DIR_RIGHT | DIR_LEFT | DIR_UP | DIR_DOWN;
-		myRect.origin.x -= this->getVelocity().x*dTime;
-		myRect.origin.y -= this->getVelocity().y*dTime;
-		enemyRect.origin.x -= enemy->getVelocity().x*dTime;
-		enemyRect.origin.y -= enemy->getVelocity().y*dTime;
+		float dis = enemyRect.origin.x + enemyRect.size.width - myRect.origin.x;
+		float minDis;
+
+		if (dis > 0)
+		{
+			collisionDir = DIR_LEFT;
+			minDis = dis;
+		}
+
+		dis = myRect.origin.x + myRect.size.width - enemyRect.origin.x;
+
+		if (dis > 0 && dis < minDis)
+		{
+			collisionDir = DIR_RIGHT;
+			minDis = dis;
+		}
+
+		dis = enemyRect.origin.y + enemyRect.size.height - myRect.origin.y;
+
+		if (dis > 0 && dis < minDis)
+		{
+			collisionDir = DIR_UP;
+			minDis = dis;
+		}
+
+		dis = myRect.origin.y + myRect.size.height - enemyRect.origin.y;
+
+		if (dis > 0 && dis < minDis)
+		{
+			collisionDir = DIR_DOWN;
+			minDis = dis;
+		}
 	}
 	else
 	{
-
-
 		Rect myAfterRect = myRect;
 		Rect enemyAfterRect = enemyRect;
 
@@ -150,37 +175,39 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 				collisionDir |= DIR_RIGHT;
 			}
 		}
+
+		if (collisionDir != DIR_NONE && this->isOnGravity())
+		{
+			Point changePos = this->getPosition();
+			Point pos = this->getPosition();
+
+
+			if (collisionDir&DIR_LEFT || collisionDir&DIR_RIGHT)
+			{
+				changePos.x = pos.x + horzTime*this->getVelocity().x;
+			}
+			if (collisionDir&DIR_UP || collisionDir&DIR_DOWN)
+			{
+				changePos.y = pos.y + vertTime*this->getVelocity().y;
+			}
+
+			if (vertTime == 0)
+			{
+				collisionDir &= ~DIR_LEFT;
+				collisionDir &= ~DIR_RIGHT;
+			}
+
+			if (horzTime == 0)
+			{
+				collisionDir &= ~DIR_UP;
+				collisionDir &= ~DIR_DOWN;
+			}
+
+			this->setPosition(changePos);
+		}
 	}
 
-	if (collisionDir != DIR_NONE && !enemy->isOnGravity())
-	{
-		Point changePos = this->getPosition();
-		Point pos = this->getPosition();
-
-		
-		if (collisionDir&DIR_LEFT || collisionDir&DIR_RIGHT)
-		{
-			changePos.x = pos.x + horzTime*this->getVelocity().x;
-		}
-		if (collisionDir&DIR_UP || collisionDir&DIR_DOWN)
-		{
-			changePos.y = pos.y + vertTime*this->getVelocity().y;
-		}
-
-		if (vertTime == 0)
-		{
-			collisionDir &= ~DIR_LEFT;
-			collisionDir &= ~DIR_RIGHT;
-		}
-
-		if (horzTime == 0)
-		{
-			collisionDir &= ~DIR_UP;
-			collisionDir &= ~DIR_DOWN;
-		}
-
-		this->setPosition(changePos);
-	}
+	
 	
 	return collisionDir;
 }

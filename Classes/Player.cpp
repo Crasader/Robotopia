@@ -221,6 +221,12 @@ void Player::update(float dTime)
 
 	m_IsActiveFly = false;
 	m_Velocity.y -= GRAVITY*dTime;
+	
+	if (m_Velocity.y < -500)
+	{
+		m_Velocity.y = -500;
+	}
+	
 	m_IsFlying = true;
 
 	this->setPosition(pos);
