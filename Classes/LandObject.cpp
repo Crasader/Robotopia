@@ -10,6 +10,7 @@ bool LandObject::init()
 	}
 	m_IsOnGravity = false;
 	m_IsOverlapable = false;
+	m_IsMovable = false;
 	m_PieceSprite = nullptr;
 	return true;
 }

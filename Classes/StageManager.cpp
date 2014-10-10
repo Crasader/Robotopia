@@ -11,6 +11,7 @@ bool StageManager::init()
 	m_WorldScene = nullptr;
 	m_CurrentFloor = 1;
 	m_CurrentStageNum = 0;
+	m_PlayerInfo.Hp = 0 , m_PlayerInfo.MaxHp = 0 , m_PlayerInfo.Steam = 0 , m_PlayerInfo.MaxSteam = 0;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloor , &m_FloorData , &m_CurrentFloorData );
 	return true;
 }
@@ -18,6 +19,7 @@ bool StageManager::init()
 void StageManager::changeStage( size_t stageNum , Point nextPlayerPosition)
 {
 	addVisitedStage( stageNum );
+	savePlayerInfo();
 	m_CurrentStageNum = stageNum;
 	int boxNumWidth = m_CurrentFloorData[stageNum].width;
 	int boxNumHeight = m_CurrentFloorData[stageNum].height;
@@ -27,10 +29,10 @@ void StageManager::changeStage( size_t stageNum , Point nextPlayerPosition)
 	m_WorldScene = WorldScene::createScene();
 	m_WorldScene->initCurrentSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , m_BoxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
-	addObject( OT_PLAYER , nextPlayerPosition );
+	loadPlayer(nextPlayerPosition);
 }
 
-const Player* StageManager::getPlayer()
+Player* StageManager::getPlayer()
 {
 	if( m_WorldScene == nullptr )
 	{
@@ -149,4 +151,28 @@ void StageManager::addVisitedStage( int stage )
 cocos2d::Point StageManager::idxOfStageDataToPosiion( cocos2d::Vec2 idx )
 {
 	return Point( idx.x*m_BoxSize.width , idx.y*m_BoxSize.height );
+}
+
+void StageManager::savePlayerInfo()
+{
+	auto player = getPlayer();
+	if( player == nullptr )
+	{
+		return;
+	}
+	m_PlayerInfo.Hp = player->getHp();
+	m_PlayerInfo.MaxHp = player->getMaxHp();
+	m_PlayerInfo.Steam = player->getSteam();
+	m_PlayerInfo.MaxSteam = player->getMaxSteam();
+
+}
+
+void StageManager::loadPlayer( Point setPosition )
+{
+	addObject( OT_PLAYER , setPosition );
+	auto player = getPlayer();
+	player->setHp( m_PlayerInfo.Hp );
+	player->setMaxHp( m_PlayerInfo.MaxHp );
+	player->setSteam( m_PlayerInfo.Steam );
+	player->setMaxSteam( m_PlayerInfo.MaxSteam );
 }

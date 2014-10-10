@@ -23,7 +23,7 @@ public:
 	void							removeObject();
 	void							makeHash();
 
-	const Player*					getPlayer() {return m_Player; }
+	Player*							getPlayer() {return m_Player; }
 	std::vector<InteractiveObject*>	getObjectsByPosition( cocos2d::Point checkPosition ); //위치에 어떤 객체가 있는지를 리턴
 	std::vector<InteractiveObject*>	getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
 	cocos2d::Rect					getMapRect(){return m_MapRect; }

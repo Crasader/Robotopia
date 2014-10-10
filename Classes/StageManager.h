@@ -7,13 +7,7 @@
 class StageManager
 {
 public:
-	struct PlayerInfo
-	{
-		int Hp;
-		int Steam;
-		int MaxHp;
-		int MaxSteam;
-	};
+
 	bool								init();
 	//stage를 변경합니다.
 	void								changeStage(size_t stageNum, cocos2d::Point nextPlayerPosition);
@@ -36,7 +30,7 @@ public:
 	
 	//멤버변수들 정보조회
 	WorldScene*							getWorldScene(){return m_WorldScene;}
-	const Player*						getPlayer();
+	Player*								getPlayer();
 	const FloorData&					getFloorData(){return m_FloorData;};
 	const StageData&					getStageDataByStageNum(int stageNum) { return m_CurrentFloorData[stageNum]; }
 	const StageData&					getStageDatas(){return m_CurrentFloorData[m_CurrentStageNum];};
@@ -49,10 +43,19 @@ public:
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 	cocos2d::Point						idxOfStageDataToPosiion( cocos2d::Vec2 idx ); //인덱스값을 받아서 위치값으로 리턴
 
-
+	void								savePlayerInfo();
+	void								loadPlayer(cocos2d::Point setPosition);
 
 
 private:
+	struct PlayerInfo
+	{
+		int Hp;
+		int Steam;
+		int MaxHp;
+		int MaxSteam;
+	};
+
 	cocos2d::Rect						m_StageRect;
 	cocos2d::Size						m_BoxSize;
 	std::vector<int>					m_VisitedStageNums;
