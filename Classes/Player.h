@@ -24,6 +24,10 @@ public:
 	int						getSteam() const { return m_Steam; }
 	int						getMaxHp() const { return m_MaxHp; }
 	int						getMaxSteam() const { return m_MaxSteam; }
+	void					setHp(int hp) { m_Hp = hp; }
+	void					setMaxHp(int maxHp) { m_MaxHp = maxHp; }
+	void					setSteam(int steam) { m_Steam = steam; }
+	void					setMaxSteam(int maxSteam){ m_MaxSteam = maxSteam; }
 private:
 	enum State
 	{

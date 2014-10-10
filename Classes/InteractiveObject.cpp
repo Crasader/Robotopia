@@ -73,7 +73,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			minDis = dis;
 		}
 
-		if (this->isOnGravity() && enemy->isOnGravity())
+		if (!this->isOverlapable() && !enemy->isOverlapable())
 		{
 			if (collisionDir == DIR_RIGHT || collisionDir == DIR_UP)
 			{
@@ -82,8 +82,14 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 			if (collisionDir == DIR_LEFT || collisionDir == DIR_RIGHT)
 			{
-
+				myRect.origin.x += minDis;
 			}
+			else
+			{
+				myRect.origin.y += minDis;
+			}
+
+			this->setPosition(myRect.origin);
 		}
 	}
 	else
@@ -190,7 +196,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			}
 		}
 
-		if (collisionDir != DIR_NONE && this->isOnGravity() && enemy->isOnGravity())
+		if (collisionDir != DIR_NONE && !this->isOverlapable() && !enemy->isOverlapable())
 		{
 			Point changePos = this->getPosition();
 			Point pos = this->getPosition();
