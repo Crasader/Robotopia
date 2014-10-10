@@ -42,6 +42,7 @@ private:
 	int			m_MaxSteam;
 	bool		m_AttackEnd;
 	bool		m_IsActiveFly;
+	float		m_ActiveFlyingTime;
 
 	void		changeState(State state);
 	void		endAnimation(cocos2d::Ref* sender);

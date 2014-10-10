@@ -31,6 +31,7 @@ bool Player::init()
 
 	m_MaxSteam = 20;
 	m_Steam = m_MaxSteam;
+	m_ActiveFlyingTime = 0;
 
 	m_MainSprite = Sprite::create();
 
@@ -224,6 +225,14 @@ void Player::update(float dTime)
 	}
 	
 	m_IsFlying = true;
+
+	m_ActiveFlyingTime += dTime;
+
+	if (m_ActiveFlyingTime >= 10)
+	{
+		m_ActiveFlyingTime = 0;
+		m_Steam--;
+	}
 
 	this->setPosition(pos);
 }
