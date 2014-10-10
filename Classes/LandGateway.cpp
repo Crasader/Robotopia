@@ -122,3 +122,34 @@ Vec2 LandGateway::findNeighbor( cocos2d::Vec2 Idx , Direction dir )
 	return Vec2( x , y );
 }
 
+void LandGateway::findNextStage()
+{
+	StageData nextStageData = GET_STAGE_MANAGER()->getStageDataByStageNum( m_NextFloorNum );
+	m_NextFloorIdx;
+	Direction nextDirection;
+	nextStageData.data;
+
+}
+
+Direction LandGateway::findReverseDirection( Direction dir )
+{
+	Direction resultDir = DIR_NONE;
+	switch( dir )
+	{
+		case DIR_LEFT:
+			resultDir = DIR_RIGHT;
+			break;
+		case DIR_UP:
+			resultDir = DIR_DOWN;
+			break;
+		case DIR_RIGHT:
+			resultDir = DIR_LEFT;
+			break;
+		case DIR_DOWN:
+			resultDir = DIR_UP;
+			break;
+		default:
+			break;
+	}
+	return resultDir;
+}

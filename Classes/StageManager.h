@@ -15,9 +15,11 @@ public:
 		int MaxSteam;
 	};
 	bool								init();
+	//stage를 변경합니다.
 	void								changeStage(size_t stageNum, cocos2d::Point nextPlayerPosition);
-
+	//방문한 장소를 추가합니다.
 	void								addVisitedStage(int stage);
+	//오브젝트의 타입과 위치 값을 받아 오브젝트를 GameLayer에 추가합니다.
 	InteractiveObject*					addObject( ObjectType type , cocos2d::Point position );
 	InteractiveObject*					addObjectByIdx( ObjectType type , int xIdx , int yIdx );
 	InteractiveObject*					addObjectByIdx( int xIdx , int yIdx );
