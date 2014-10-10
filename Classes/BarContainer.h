@@ -7,8 +7,7 @@
 
 #pragma once
 #include "cocos2d.h"
-#include "WorldScene.h"
-#include "UILayer.h"
+#include "GameManager.h"
 
 class BarContainer : public cocos2d::Node
 {

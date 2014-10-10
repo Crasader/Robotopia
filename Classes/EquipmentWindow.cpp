@@ -1,6 +1,4 @@
 #include "EquipmentWindow.h"
-#include "GameManager.h"
-#include "Utils.h"
 
 USING_NS_CC;
 
@@ -45,7 +43,7 @@ void EquipmentWindow::showCharacterWindow()
 
 		//여기다 아이템 리스트 받아와서 이미지 올리기!!!
 
-		auto action_0 = MoveTo::create(0.5, Point(m_WinWidth - 250, 25));
+		auto action_0 = MoveTo::create(0.5f, Point(m_WinWidth - 250, 25));
 		auto action_1 = EaseBackIn::create(action_0);
 		m_sprCharWinContainer->runAction(action_1);
 		m_CharWinOn = true;
@@ -56,7 +54,7 @@ void EquipmentWindow::hideCharacterWindow()
 {
 	if (m_sprCharWinContainer->getNumberOfRunningActions() == 0)
 	{
-		auto action_0 = MoveTo::create(0.7, Point(m_WinWidth, 25));
+		auto action_0 = MoveTo::create(0.7f, Point(m_WinWidth, 25));
 		auto action_1 = EaseBounceOut::create(action_0);
 		m_sprCharWinContainer->runAction(action_1);
 		m_CharWinOn = false;
@@ -67,7 +65,7 @@ void EquipmentWindow::drawWinHP(int currentHP, int maxHP)
 {
 	float scaleHP = (float)currentHP / (maxHP * 2);
 	auto sprHP = Sprite::create("HP_Block1.png");
-	sprHP->setScale(0.4);
+	sprHP->setScale(0.4f);
 	sprHP->setScaleX(scaleHP);
 	sprHP->setPosition(Point(126, 347));
 	m_sprCharWinContainer->addChild(sprHP, 13);
@@ -77,7 +75,7 @@ void EquipmentWindow::drawWInSTE(int currentSTE, int maxSTE)
 {
 	float scaleSTE = (float)currentSTE / (maxSTE * 2);
 	auto sprSTE = Sprite::create("HP_Block2.png");
-	sprSTE->setScale(0.4);
+	sprSTE->setScale(0.4f);
 	sprSTE->setScaleX(scaleSTE);
 	sprSTE->setPosition(Point(126, 331));
 	m_sprCharWinContainer->addChild(sprSTE, 13);

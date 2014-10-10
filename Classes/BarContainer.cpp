@@ -1,5 +1,4 @@
 #include "BarContainer.h"
-#include "Utils.h"
 
 USING_NS_CC;
 

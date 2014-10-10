@@ -7,6 +7,7 @@
 
 #pragma once
 #include "cocos2d.h"
+#include "GameManager.h"
 
 class WorldMenu : public cocos2d::Node
 {

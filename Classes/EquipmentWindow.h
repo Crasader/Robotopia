@@ -7,8 +7,7 @@
 
 #pragma once
 #include "cocos2d.h"
-#include "UILayer.h"
-#include "WorldScene.h"
+#include "GameManager.h"
 
 class EquipmentWindow : public cocos2d::Node
 {

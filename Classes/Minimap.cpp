@@ -1,9 +1,8 @@
 #include "Minimap.h"
-#include "Utils.h"
 
 USING_NS_CC;
 
-#define MINIMAPSCALE 20
+#define MINIMAPSCALE 30
 
 bool Minimap::init()
 {
@@ -28,13 +27,29 @@ bool Minimap::init()
 	};
 	minimapBg->drawPolygon(points, 4, Color4F(0.5f, 0.5f, 0.5f, 1), 0, Color4F(1.0f, 0.3f, 0.3f, 1));
 	minimapBg->setAnchorPoint(Point(0, 0));
-	minimapBg->setPosition(Point());
+	minimapBg->setPosition(Point(-500, -200));
 	sprMinimap->addChild(minimapBg);
 
 	for (int j = 0; j < fd.height; ++j)
 	{
 		for (int i = 0; i < fd.width; ++i)
 		{
+			int room = GET_STAGE_MANAGER()->getFloorDataByIdx(i, j);
+			if (room != 0)
+			{
+				auto roomRect = DrawNode::create();
+				Vec2 points[] =
+				{
+					Vec2(0, MINIMAPSCALE),
+					Vec2(MINIMAPSCALE, MINIMAPSCALE),
+					Vec2(MINIMAPSCALE, 0),
+					Vec2(0, 0),
+				};
+				roomRect->drawPolygon(points, 4, Color4F(0.2f, 0.7f, 0.8f, 1), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
+				roomRect->setAnchorPoint(Point(0, 0));
+				roomRect->setPosition(Point(i * MINIMAPSCALE, j * MINIMAPSCALE));
+				minimapBg->addChild(roomRect);
+			}
 		}
 	}
 	this->scheduleUpdate();
