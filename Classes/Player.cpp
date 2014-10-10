@@ -25,6 +25,7 @@ bool Player::init()
 	m_IsRightDirection = true;
 	m_AttackEnd = false;
 	m_IsActiveFly = false;
+	m_IsOverlapable = false;
 
 	m_MaxHp = 100;
 	m_Hp = m_MaxHp;

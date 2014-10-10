@@ -8,6 +8,7 @@ bool Monster::init()
 	}
 
 	m_Type = OT_MONSTER;
+	m_IsOverlapable = false;
 
 	return true;
 }

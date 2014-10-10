@@ -24,6 +24,7 @@ public:
 	cocos2d::Vec2			getVelocity() const;
 	bool					isOnGravity() { return m_IsOnGravity; }
 	bool					isDestroyed() { return m_IsDestroyed; }
+	bool					isOverlapable(){ return m_IsOverlapable; }
 
 protected:
 	cocos2d::Sprite*						m_MainSprite;
@@ -36,4 +37,5 @@ protected:
 	bool									m_IsFlying;
 	float									m_MoveSpeed;
 	bool									m_IsDestroyed;
+	bool									m_IsOverlapable;
 };

@@ -19,6 +19,7 @@ bool InteractiveObject::init()
 	m_MoveSpeed = 0;
 	m_IsDestroyed = false;
 	m_IsFlying = false;
+	m_IsOverlapable = true;
 
 	return true;
 }
@@ -70,6 +71,19 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		{
 			collisionDir = DIR_DOWN;
 			minDis = dis;
+		}
+
+		if (this->isOnGravity() && enemy->isOnGravity())
+		{
+			if (collisionDir == DIR_RIGHT || collisionDir == DIR_UP)
+			{
+				minDis = -minDis;
+			}
+
+			if (collisionDir == DIR_LEFT || collisionDir == DIR_RIGHT)
+			{
+
+			}
 		}
 	}
 	else
@@ -176,7 +190,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			}
 		}
 
-		if (collisionDir != DIR_NONE && this->isOnGravity())
+		if (collisionDir != DIR_NONE && this->isOnGravity() && enemy->isOnGravity())
 		{
 			Point changePos = this->getPosition();
 			Point pos = this->getPosition();
