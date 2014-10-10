@@ -15,7 +15,7 @@ bool NewLinearMissile::init()
 		return false;
 	}
 
-	m_Type = OT_LINEAR_MISSILE;
+	m_Type = OT_NEW_LINEAR_MISSILE;
 
 	m_MainSprite = Sprite::create();
 	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_NEW_LINEAR_MISSILE_FLYING, 0.05f);

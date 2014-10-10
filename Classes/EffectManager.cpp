@@ -81,19 +81,23 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 		switch (selectedEffect)
 		{
 		case ET_LINEAR_MISSILE_COLLISION:
-			//여기에 기본 크기 넣어주기 
+			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_LINEARMISSILE_COLLISION)->getContentSize();
 			createEffectLinearMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
 			break;
 		case ET_AIMING_MISSILE_COLLISION:
+			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_AIMINGMISSILE_COLLISION)->getContentSize();
 			createEffectAimingMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
 			break;
 		case ET_MELEE_MISIILE_COLLSION:
+			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_MELEE_MISSILE_COLLISION)->getContentSize();
 			createEffectMeleeMissileCollisionByUser(effectRect, effectPlayNum);
 			break;
 		case ET_NEW_LINEAR_MISSILE_COLLISION:
+			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_NEW_LINEAR_MISSILE_COLLISION)->getContentSize();
 			createEffectNewLinearMissileCollsionByUser(effectRect, effectPlayNum);
 			break;
 		case ET_PLAYER_LANDING:
+			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING)->getContentSize();
 			createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
 
 		}
