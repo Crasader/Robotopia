@@ -8,6 +8,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "GameManager.h"
+#include "DataManager.h"
 
 class Minimap : public cocos2d::Node
 {
@@ -18,7 +19,8 @@ public:
 	CREATE_FUNC(Minimap);
 
 private:
-	int									m_WinWidth, m_WinHeight;
-
-
+	int								m_WinWidth, m_WinHeight;
+ 	cocos2d::DrawNode*				drawRoomRect(int xidx, int yidx);
+// 	FloorData&						m_fd;
 };
+
