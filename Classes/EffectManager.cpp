@@ -102,7 +102,7 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING)->getContentSize();
 			createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
 		case ET_ROUND_SMOKE:
-			//effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_ROUNDSMOKE)->getComtentSize();
+			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_ROUND_SMOKE)->getContentSize();
 			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
 		}
 	}
@@ -346,7 +346,7 @@ void EffectManager::createEffectMeleeMissileCollision(cocos2d::Rect ownRect, Dir
 	float needEffectScale = 1.0f;
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_MELEE_MISSILE_COLLISION);
-	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_COLLISION, 0.2f);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_COLLISION, 0.05f);
 
 	float ratioX = ownRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = ownRect.size.height / effectSpr->getContentSize().height;
@@ -491,8 +491,8 @@ void EffectManager::createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int e
 {
 	float needEffectScale = 1.0f;
 
-	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_NEW_LINEAR_MISSILE_COLLISION);
-	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_NEW_LINEAR_MISSILE_COLLISION, 0.2f);
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_ROUND_SMOKE);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_ROUND_SMOKE, 0.05f);
 
 	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
@@ -504,7 +504,7 @@ void EffectManager::createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int e
 	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
-	auto fadeTo = FadeTo::create(1.0f, 128);
+	auto fadeTo = FadeTo::create(0.2f, 128);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
 	effectSpr->runAction(Sequence::create(action,fadeTo, callback, NULL));
 }
