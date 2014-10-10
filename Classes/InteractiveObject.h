@@ -38,4 +38,5 @@ protected:
 	float									m_MoveSpeed;
 	bool									m_IsDestroyed;
 	bool									m_IsOverlapable;
+	bool									m_IsMovable;
 };

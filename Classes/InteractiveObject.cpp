@@ -20,6 +20,7 @@ bool InteractiveObject::init()
 	m_IsDestroyed = false;
 	m_IsFlying = false;
 	m_IsOverlapable = true;
+	m_IsMovable = true;
 
 	return true;
 }
@@ -73,7 +74,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			minDis = dis;
 		}
 
-		if (!this->isOverlapable() && !enemy->isOverlapable())
+		if (!this->isOverlapable() && !enemy->isOverlapable() && m_IsMovable)
 		{
 			if (collisionDir == DIR_RIGHT || collisionDir == DIR_UP)
 			{
