@@ -3,6 +3,7 @@
 
 USING_NS_CC;
 
+#define MINIMAPSCALE 20
 
 bool Minimap::init()
 {
@@ -16,6 +17,24 @@ bool Minimap::init()
 	sprMinimap->setPosition(Point(m_WinWidth - 200, m_WinHeight - 15));
 	this->addChild(sprMinimap);
 
+	FloorData fd = GET_STAGE_MANAGER()->getFloorData();
+	auto minimapBg = DrawNode::create();
+	Vec2 points[] =
+	{
+		Vec2(0, fd.height * MINIMAPSCALE),
+		Vec2(fd.width * MINIMAPSCALE, fd.height * MINIMAPSCALE),
+		Vec2(fd.width * MINIMAPSCALE, 0),
+		Vec2(0, 0),
+	};
+	minimapBg->drawPolygon(points, 4, Color4F(0.5f, 0.5f, 0.5f, 1), 0, Color4F(1.0f, 0.3f, 0.3f, 1));
+	minimapBg->setAnchorPoint(Point(0, 0));
+	minimapBg->setPosition(Point());
+	sprMinimap->addChild(minimapBg);
+// 
+// 	int a = fd.data[0, 0];
+// 	for (int i = 0; i < )
+// 	fd.width;
+// 	fd.height;
 	this->scheduleUpdate();
 	return true;
 }

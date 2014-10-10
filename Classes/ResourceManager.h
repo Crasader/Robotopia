@@ -1,4 +1,11 @@
-﻿#pragma once
+﻿//ResourceManager.h
+//
+//Resource Sprite 및 Animation을 추가할 때 언제든지 얘기해주세요!
+//
+//작성자 : 우재우
+//
+
+#pragma once
 
 #include "cocos2d.h"
 

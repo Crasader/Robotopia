@@ -35,15 +35,15 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 	switch (type)
 	{
 	case AT_AIMINGMISSILE_FLYING:
-		return createAnimation("AimingMissile%d.png", 1, 8, 0.1f);
+		return createAnimation("AimingMissile%d.png", 1, 8, delay);
 	case AT_AIMINGMISSILE_COLLISION:
-		return createAnimation("ET_AimingMissile_Collision%d.png", 1, 4, 0.1f);
+		return createAnimation("ET_AimingMissile_Collision%d.png", 1, 4, delay);
 	case AT_GATEWAY_ACT:
-		return createAnimation("GatewayAct%d.png", 0, 5, 0.1f);
+		return createAnimation("GatewayAct%d.png", 0, 5, delay);
 	case AT_LINEARMISSILE_FLYING:
-		return createAnimation("LinearMissile%d.png", 0, 10, 0.1f);
+		return createAnimation("LinearMissile%d.png", 0, 10, delay);
 	case AT_LINEARMISSILE_COLLISION:
-		return createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
+		return createAnimation("ETLinearMissileCollision%d.png", 1, 9, delay);
 	case AT_MELEE_MISSILE_FLYING:
 		return createAnimation("Melee_Missile%d.png", 1, 6, delay);
 	case AT_MELEE_MISSILE_COLLISION:
@@ -53,21 +53,21 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 	case AT_NEW_LINEAR_MISSILE_COLLISION:
 		return createAnimation("New_Linear_Missile_Collision%d.png", 1, 6, delay);
 	case AT_PLAYER_STAND:
-		return createAnimation("player_stand%d.png", 1, 4, 0.1f);
+		return createAnimation("player_stand%d.png", 1, 4, delay);
 	case AT_PLAYER_WALK:
-		return createAnimation("player_walk%d.png", 1, 8, 0.05f);
+		return createAnimation("player_walk%d.png", 1, 8, delay);
 	case AT_PLAYER_JUMP:
-		return createAnimation("player_jump%d.png", 1, 1, 0.1f);
+		return createAnimation("player_jump%d.png", 1, 1, delay);
 	case AT_PLAYER_ATTACK:
-		return createAnimation("player_attack%d.png", 1, 5, 0.05f);
+		return createAnimation("player_attack%d.png", 1, 5, delay);
 	case AT_PLAYER_LANDING:
-		return createAnimation("ET_PLAYER_LANDING%d.png", 1, 4, 0.25f);
+		return createAnimation("ET_PLAYER_LANDING%d.png", 1, 4, delay);
 	case AT_RUSHMONSTER_STAND:
-		return createAnimation("rushMonster_stand%d.png", 1, 4, 0.1f);
+		return createAnimation("rushMonster_stand%d.png", 1, 4, delay);
 	case AT_RUSHMONSTER_MOVE:
-		return createAnimation("rushMonster_move%d.png", 1, 4, 0.1f);
+		return createAnimation("rushMonster_move%d.png", 1, 4, delay);
 	case AT_RUSHMONSTER_RUSH:
-		return createAnimation("rushMonster_rush%d.png", 1, 4, 0.1f);
+		return createAnimation("rushMonster_rush%d.png", 1, 4, delay);
 	}
 	return nullptr;
 }
