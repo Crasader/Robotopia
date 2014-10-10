@@ -15,7 +15,8 @@ bool MeleeMissile::init()
 	m_Type = OT_MELEE_MISSILE;
 
 	m_MainSprite = Sprite::create();
-	m_MainSprite->setZOrder(-100);
+	//이부분에 대한 생각 필요
+	//m_MainSprite->setZOrder(-100);
 	m_Animations[0] = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_FLYING, 0.05f);
 	int aniPlayNum = 2;
 
@@ -26,6 +27,7 @@ bool MeleeMissile::init()
 	
 
 	this->addChild(m_MainSprite);
+	this->scheduleUpdate();
 	return true;
 }
 
@@ -88,8 +90,17 @@ void MeleeMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 	if (m_IsDestroyed)
 	{
 		//전기 충격 이펙트로  바꿔 놓기
-		GET_EFFECT_MANAGER()->createEffect(ET_LINEAR_MISSILE_COLLISION, this->getRect(), dir, 1);
+		GET_EFFECT_MANAGER()->createEffect(ET_MELEE_MISIILE_COLLSION, this->getRect(), dir, 2);
 	}
 	return;
+}
+
+//속도가 실제로는 0이지만 오른쪽 보고 있으면 velocity에 + 값 넣어주세요
+void MeleeMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, float degree)
+{
+	if (velocity < 0)
+	{
+		m_MainSprite->setFlippedX(true);
+	}
 }
 

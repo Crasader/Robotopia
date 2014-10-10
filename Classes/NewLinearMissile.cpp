@@ -101,7 +101,7 @@ void NewLinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir
 	if (m_IsDestroyed)
 	{
 		// New
-		GET_EFFECT_MANAGER()->createEffect(ET_LINEAR_MISSILE_COLLISION, this->getRect(), dir, 1);
+		GET_EFFECT_MANAGER()->createEffect(ET_NEW_LINEAR_MISSILE_COLLISION, this->getRect(), dir, 1);
 	}
 	return;
 }

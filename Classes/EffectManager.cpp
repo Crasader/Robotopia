@@ -55,24 +55,50 @@ void EffectManager::createEffect(EffectType selectedEffect, Point ownPoint, Size
 
 void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Rect effectRect, int effectPlayNum)
 {
-	switch (selectedEffect)
+	if (effectRect.size.width >= 0)
 	{
-	case ET_LINEAR_MISSILE_COLLISION:
-		createEffectLinearMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
-		break;
-	case ET_AIMING_MISSILE_COLLISION:
-		createEffectAimingMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
-		break;
-	case ET_MELEE_MISIILE_COLLSION:
-		createEffectMeleeMissileCollisionByUser(effectRect, effectPlayNum);
-		break;
-	case ET_NEW_LINEAR_MISSILE_COLLISION:
-		createEffectNewLinearMissileCollsionByUser(effectRect, effectPlayNum);
-		break;
-	case ET_PLAYER_LANDING:
-		createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
+		switch (selectedEffect)
+		{
+		case ET_LINEAR_MISSILE_COLLISION:
+			createEffectLinearMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
+			break;
+		case ET_AIMING_MISSILE_COLLISION:
+			createEffectAimingMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
+			break;
+		case ET_MELEE_MISIILE_COLLSION:
+			createEffectMeleeMissileCollisionByUser(effectRect, effectPlayNum);
+			break;
+		case ET_NEW_LINEAR_MISSILE_COLLISION:
+			createEffectNewLinearMissileCollsionByUser(effectRect, effectPlayNum);
+			break;
+		case ET_PLAYER_LANDING:
+			createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
 
+		}
 	}
+	else
+	{
+		switch (selectedEffect)
+		{
+		case ET_LINEAR_MISSILE_COLLISION:
+			//여기에 기본 크기 넣어주기 
+			createEffectLinearMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
+			break;
+		case ET_AIMING_MISSILE_COLLISION:
+			createEffectAimingMissileCollisionSelectedSizeByUser(effectRect, effectPlayNum);
+			break;
+		case ET_MELEE_MISIILE_COLLSION:
+			createEffectMeleeMissileCollisionByUser(effectRect, effectPlayNum);
+			break;
+		case ET_NEW_LINEAR_MISSILE_COLLISION:
+			createEffectNewLinearMissileCollsionByUser(effectRect, effectPlayNum);
+			break;
+		case ET_PLAYER_LANDING:
+			createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
+
+		}
+	}
+	
 	return;
 }
 
@@ -240,10 +266,10 @@ void EffectManager::createEffectAimingMissileCollisionSelectedSizeByUser(cocos2d
 
 void EffectManager::createEffectPlayerLanding(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
-	float needEffectScale = 1.5f;
+	float needEffectScale = 1.2f;
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING);
-	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_LANDING, 0.2f);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_LANDING, 0.1f);
 
 	float ratioX = ownRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = ownRect.size.height / effectSpr->getContentSize().height;
