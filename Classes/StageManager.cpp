@@ -11,7 +11,7 @@ bool StageManager::init()
 	m_WorldScene = nullptr;
 	m_CurrentFloor = 1;
 	m_CurrentStageNum = 0;
-	m_PlayerInfo.Hp = 0 , m_PlayerInfo.MaxHp = 0 , m_PlayerInfo.Steam = 0 , m_PlayerInfo.MaxSteam = 0;
+	m_PlayerInfo.Hp = 100 , m_PlayerInfo.MaxHp = 100 , m_PlayerInfo.Steam = 20 , m_PlayerInfo.MaxSteam = 20;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloor , &m_FloorData , &m_CurrentFloorData );
 	return true;
 }
