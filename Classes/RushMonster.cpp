@@ -20,6 +20,7 @@ bool RushMonster::init()
 	
 
 	m_MainSprite = Sprite::create();
+	m_MainSprite->setScale(2);
 
 	this->addChild(m_MainSprite);
 
@@ -93,13 +94,12 @@ void RushMonster::update(float dTime)
 	Point pos = this->getPosition();
 	Rect rect = this->getRect();
 
-	rect.origin.x += m_Velocity.x*dTime;
 	if (m_Velocity.x > 0)
 		rect.origin.x += rect.size.width / 2;
 	else
-		rect.origin.x -= rect.size.width / 2;
+		rect.origin.x -= rect.size.width / 3;
 
-	rect.origin.y += m_Velocity.y*dTime - rect.size.height;
+	rect.origin.y -= rect.size.height/2;
 	
 
 	for (auto& obj : GET_STAGE_MANAGER()->getObjectsByPosition(rect.origin))
@@ -189,10 +189,13 @@ void RushMonster::update(float dTime)
 
 cocos2d::Rect RushMonster::getRect()
 {
-	m_Width = m_MainSprite->getContentSize().width;
-	m_Height = m_MainSprite->getContentSize().height;
+	m_Width = m_MainSprite->getContentSize().width * 2;
+	m_Height = m_MainSprite->getContentSize().height * 2;
 
-	return InteractiveObject::getRect();
+	Point pos = this->getPosition();
+	Point Anchor = this->getAnchorPoint();
+
+	return Rect(pos.x - Anchor.x*m_Width, pos.y - Anchor.y*m_Height, m_Width, m_Height);
 }
 
 bool RushMonster::isSeePlayer()
@@ -201,7 +204,7 @@ bool RushMonster::isSeePlayer()
 
 	vision.origin.x -= 100;
 	vision.origin.y += 20;
-	vision.size.width += 200;
+	vision.size.width += 300;
 	vision.size.height += 50;
 
 	auto objList = ((GameLayer*)this->getParent())->getObjectsByRect(vision);

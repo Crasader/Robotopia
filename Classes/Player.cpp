@@ -73,21 +73,18 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		break;
 	case OT_GATEWAY:
-		if (!((LandGateway*)enemy)->IsOpen())
+		if (dir & DIR_DOWN)
 		{
-			if (dir & DIR_DOWN)
-			{
-				m_IsFlying = false;
-				m_Velocity.y = 0;
-			}
-			if (dir&DIR_LEFT || dir&DIR_RIGHT)
-			{
-				m_Velocity.x = 0;
-			}
-			if (dir&DIR_UP)
-			{
-				m_Velocity.y = 0;
-			}
+			m_IsFlying = false;
+			m_Velocity.y = 0;
+		}
+		if (dir&DIR_LEFT || dir&DIR_RIGHT)
+		{
+			m_Velocity.x = 0;
+		}
+		if (dir&DIR_UP)
+		{
+			m_Velocity.y = 0;
 		}
 		break;
 	}
@@ -144,20 +141,14 @@ void Player::update(float dTime)
 		GET_EFFECT_MANAGER()->createEffectSelectedSizeByUser(ET_ROUND_SMOKE, Rect(pos.x, pos.y, -1, -1), 1);
 	}
 
-	if (m_IsFlying)
+	if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) == KS_HOLD)
 	{
-		if (m_IsActiveFly)
-		{
-			if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) == KS_HOLD)
-			{
-				changeState(PS_ATTACK);
-			}
-			else if (m_State != PS_ATTACK)
-			{
-				changeState(PS_JUMP);
-			}
-		}
-		else if (m_State != PS_ATTACK)
+		changeState(PS_ATTACK);
+	}
+
+	if (m_IsFlying)
+	{ 
+		if (m_State != PS_ATTACK)
 		{
 			changeState(PS_JUMP);
 		}
