@@ -6,6 +6,7 @@
 #include "Villager.h"
 #include "LinearMissile.h"
 #include "AimingMissile.h"
+#include "MeleeMissile.h"
 #include "LandGateway.h"
 #include "View.h"
 #include "Player.h"
@@ -92,6 +93,9 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			object = LandGateway::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
 			break;
+		case OT_MELEE_MISSILE:
+			object = MeleeMissile::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 		default:
 			return nullptr;
 	}

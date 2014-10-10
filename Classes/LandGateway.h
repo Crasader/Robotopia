@@ -9,7 +9,9 @@ public:
 	OVERRIDE void		collisionOccured( InteractiveObject* enemy , Directions dir );
 	void				gotoNextLevel( Ref* sender );
 	void				findNextStage();
+	Point				findNextPosition();
 	Direction			findCentinelNeighborDir(cocos2d::Vec2 stageIdx);
+	Direction			findReverseDirection(Direction dir);
 	cocos2d::Vec2		findNeighbor( cocos2d::Vec2 Idx , Direction dir );
 	bool				IsOpen() {return m_isOpen; }
 	CREATE_FUNC( LandGateway );

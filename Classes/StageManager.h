@@ -21,9 +21,11 @@ public:
 	void								addVisitedStage(int stage);
 	//오브젝트의 타입과 위치 값을 받아 오브젝트를 GameLayer에 추가합니다.
 	InteractiveObject*					addObject( ObjectType type , cocos2d::Point position );
-	InteractiveObject*					addObjectByIdx( ObjectType type , int xIdx , int yIdx );
-	InteractiveObject*					addObjectByIdx( int xIdx , int yIdx );
+	InteractiveObject*					addObjectFromStageData( ObjectType type , int xIdx , int yIdx );
+	InteractiveObject*					addObjectFromStageData( int xIdx , int yIdx );
+
 	void								addEffectOnGameLayer(cocos2d::Sprite* effect);
+	void								addEffectOnGameLayer( cocos2d::Sprite* effect, Point position, Point anchorPoint );
 
 	ObjectType							getStageDataInPosition( cocos2d::Point position );
 	ObjectType							getStageDataInPositionWithIdx( int xIdx , int yIdx );
@@ -32,10 +34,10 @@ public:
 	std::vector<InteractiveObject*>		getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
 	WorldScene*							getWorldScene(){return m_WorldScene;}
 	const Player*						getPlayer();
-	FloorData							getFloorData(){return m_FloorData;};
-	StageData							getStageDatas(){return m_CurrentFloorData[m_CurrentStageNum];};
+	const FloorData&					getFloorData(){return m_FloorData;};
+	const StageData&					getStageDatas(){return m_CurrentFloorData[m_CurrentStageNum];};
 	int									getCurStageNum() {return m_CurrentStageNum; }
-	std::vector<int>					getVisitedStageNums(){return m_VisitedStageNums;}
+	const std::vector<int>&				getVisitedStageNums(){return m_VisitedStageNums;}
 
 	cocos2d::Vec2						positionToIdxOfStage( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );

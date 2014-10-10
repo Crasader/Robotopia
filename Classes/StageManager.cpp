@@ -91,7 +91,7 @@ InteractiveObject* StageManager::addObject( ObjectType type , cocos2d::Point pos
 	return ( m_WorldScene->getGameLayer() )->addObject( type , position );
 }
 
-InteractiveObject* StageManager::addObjectByIdx( ObjectType type , int xIdx , int yIdx )
+InteractiveObject* StageManager::addObjectFromStageData( ObjectType type , int xIdx , int yIdx )
 {
 	InteractiveObject* resultType = nullptr;
 	if( m_WorldScene == nullptr )
@@ -101,7 +101,7 @@ InteractiveObject* StageManager::addObjectByIdx( ObjectType type , int xIdx , in
 	return ( m_WorldScene->getGameLayer() )->addObjectByMapdata( type , xIdx , yIdx );
 }
 
-InteractiveObject* StageManager::addObjectByIdx( int xIdx , int yIdx )
+InteractiveObject* StageManager::addObjectFromStageData( int xIdx , int yIdx )
 {
 	InteractiveObject* resultType = nullptr;
 	if( m_WorldScene == nullptr )
@@ -113,6 +113,13 @@ InteractiveObject* StageManager::addObjectByIdx( int xIdx , int yIdx )
 
 void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect )
 {
+	m_WorldScene->getGameLayer()->addEffect( effect );
+}
+
+void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect , Point position , Point AnchorPoint )
+{
+	effect->setAnchorPoint( AnchorPoint );
+	effect->setPosition( position );
 	m_WorldScene->getGameLayer()->addEffect( effect );
 }
 
