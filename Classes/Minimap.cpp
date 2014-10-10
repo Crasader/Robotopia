@@ -30,11 +30,13 @@ bool Minimap::init()
 	minimapBg->setAnchorPoint(Point(0, 0));
 	minimapBg->setPosition(Point());
 	sprMinimap->addChild(minimapBg);
-// 
-// 	int a = fd.data[0, 0];
-// 	for (int i = 0; i < )
-// 	fd.width;
-// 	fd.height;
+
+	for (int j = 0; j < fd.height; ++j)
+	{
+		for (int i = 0; i < fd.width; ++i)
+		{
+		}
+	}
 	this->scheduleUpdate();
 	return true;
 }
