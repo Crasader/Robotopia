@@ -120,14 +120,6 @@ InteractiveObject*	GameLayer::addObjectByMapdata( ObjectType type , int xIdx , i
 //맵데이터를 보고 객체를 추가한다. 인덱스만 받아도 충분
 InteractiveObject*	GameLayer::addObjectByMapdata( int xIdx , int yIdx )
 {
-	int dataSheet[50][50] = { 0 , };
-	for( int x = 0; x < m_BoxWidthNum; ++x )
-	{
-		for( int y = 0; y < m_BoxHeightNum; ++y )
-		{
-			dataSheet[m_BoxHeightNum - y - 1][x] = m_MapData[y*m_BoxWidthNum + x];
-		}
-	}
 	ObjectType ot = m_MapData[yIdx*m_BoxWidthNum + xIdx];
 	return addObjectByMapdata( ot , xIdx , yIdx );
 }
@@ -157,15 +149,14 @@ void GameLayer::collisionCheck(float dTime)
 
 	m_CollisionInformations.clear();
 	m_ObjectPositionsHash.clear();
-
 }
 
 void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
 {
 	Directions collisionDirections;
 
-	int curX = positionToIdxOfMapData( subject->getPosition() ).x;
-	int curY = positionToIdxOfMapData( subject->getPosition() ).y;
+	int curX = positionToIdxOfStageData( subject->getPosition() ).x;
+	int curY = positionToIdxOfStageData( subject->getPosition() ).y;
 
 	for( int xIdx = curX - 2; xIdx < curX + 3; ++xIdx )
 	{
@@ -197,8 +188,8 @@ void GameLayer::makeHash()
 	int sum = 0;
 	for( auto object : m_InteractiveObjects )
 	{
-		x = positionToIdxOfMapData( object->getPosition() ).x;
-		y = positionToIdxOfMapData( object->getPosition() ).y;
+		x = positionToIdxOfStageData( object->getPosition() ).x;
+		y = positionToIdxOfStageData( object->getPosition() ).y;
 		sum = x*y + x;
 		if( sum >= 0 && sum < m_BoxHeightNum*m_BoxWidthNum )
 		{
@@ -213,7 +204,7 @@ void GameLayer::removeObject()
 	for( auto objectIter = m_InteractiveObjects.begin(); objectIter != m_InteractiveObjects.end(); )
 	{
 		auto object = *objectIter;
-		if( object->isDestroyed() )
+		if( object->isDestroyed() || isOutOfStageMap(object->getPosition()))
 		{
 			objectIter = m_InteractiveObjects.erase( objectIter );
 			removeChild( object );
@@ -243,7 +234,7 @@ void GameLayer::addMovingBackground( char* BGpath )
 	}
 }
 
-cocos2d::Vec2 GameLayer::positionToIdxOfMapData( cocos2d::Point position )
+cocos2d::Vec2 GameLayer::positionToIdxOfStageData( cocos2d::Point position )
 {
 	Vec2 curPosIdx = Vec2(-1 , -1); 
 	if( m_MapRect.containsPoint( position ) )
@@ -251,20 +242,7 @@ cocos2d::Vec2 GameLayer::positionToIdxOfMapData( cocos2d::Point position )
 		curPosIdx.x = position.x / m_BoxSize.width;
 		curPosIdx.y = position.y / m_BoxSize.height;
 	}
-	//_ASSERT( curPosIdx != Vec2( -1 , -1 ) ); //맵안에 있지 않은 위치
 	return curPosIdx;
-}
-
-ObjectType GameLayer::getMapDataInPositionWithIdx( int xIdx , int yIdx )
-{
-	return m_MapData[yIdx*m_BoxWidthNum + xIdx];
-}
-
-ObjectType GameLayer::getMapDataInPosition( cocos2d::Point position )
-{
-	int xIdx = positionToIdxOfMapData( position ).x;
-	int yIdx = positionToIdxOfMapData( position ).y;
-	return getMapDataInPositionWithIdx( xIdx , yIdx );
 }
 
 std::vector<InteractiveObject*> GameLayer::getObjectsByPosition( cocos2d::Point position )
@@ -300,5 +278,8 @@ void GameLayer::addEffect( Sprite* sprite )
 	this->addChild( sprite , ZOrder::EFFECT );
 }
 
-
+bool GameLayer::isOutOfStageMap( cocos2d::Point checkPosition )
+{
+	return !m_MapRect.containsPoint( checkPosition );
+}
 

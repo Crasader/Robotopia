@@ -21,10 +21,11 @@ void StageManager::changeStage( size_t stageNum , Point nextPlayerPosition)
 	m_CurrentStageNum = stageNum;
 	int boxNumWidth = m_CurrentFloorData[stageNum].width;
 	int boxNumHeight = m_CurrentFloorData[stageNum].height;
-	Size boxSize = Size( 32 , 32 );
+	m_BoxSize = Size( 32 , 32 );
+	m_StageRect = Rect( 0 , 0 , m_BoxSize.width * boxNumWidth , m_BoxSize.height * boxNumHeight );
 	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
 	m_WorldScene = WorldScene::createScene();
- 	m_WorldScene->initCurrentSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , boxSize , data , "background.png" );
+	m_WorldScene->initCurrentSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , m_BoxSize , data , "background.png" );
 	Director::getInstance()->replaceScene( m_WorldScene );
 	addObject( OT_PLAYER , nextPlayerPosition );
 }
@@ -62,23 +63,20 @@ std::vector<InteractiveObject*> StageManager::getObjectsByPosition( cocos2d::Poi
 
 ObjectType StageManager::getStageDataInPosition( cocos2d::Point position )
 {
-	ObjectType resultType = OT_NONE;
-	if( m_WorldScene == nullptr )
-	{
-		return resultType;
-	}
-	return ( m_WorldScene->getGameLayer() )->getMapDataInPosition( position );
+	Vec2 idx = positionToIdxOfStage( position );
+	return getStageDataInPositionWithIdx( idx.x , idx.y );
 }
 
 
 ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx )
 {
-	ObjectType resultType = OT_NONE;
-	if( m_WorldScene == nullptr )
-	{
-		return resultType;
-	}
-	return ( m_WorldScene->getGameLayer() )->getMapDataInPositionWithIdx( xIdx , yIdx );
+	return getStageDataInPositionWithIdx( xIdx , yIdx , m_CurrentStageNum );
+}
+
+ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx , int stageNum )
+{
+	StageData stageData = m_CurrentFloorData[stageNum];
+	return stageData.data[yIdx*stageData.width + xIdx];
 }
 
 InteractiveObject* StageManager::addObject( ObjectType type , cocos2d::Point position )
@@ -89,26 +87,6 @@ InteractiveObject* StageManager::addObject( ObjectType type , cocos2d::Point pos
 		return resultType;
 	}
 	return ( m_WorldScene->getGameLayer() )->addObject( type , position );
-}
-
-InteractiveObject* StageManager::addObjectFromStageData( ObjectType type , int xIdx , int yIdx )
-{
-	InteractiveObject* resultType = nullptr;
-	if( m_WorldScene == nullptr )
-	{
-		return resultType;
-	}
-	return ( m_WorldScene->getGameLayer() )->addObjectByMapdata( type , xIdx , yIdx );
-}
-
-InteractiveObject* StageManager::addObjectFromStageData( int xIdx , int yIdx )
-{
-	InteractiveObject* resultType = nullptr;
-	if( m_WorldScene == nullptr )
-	{
-		return resultType;
-	}
-	return ( m_WorldScene->getGameLayer() )->addObjectByMapdata( xIdx , yIdx );
 }
 
 void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect )
@@ -125,12 +103,13 @@ void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect , Point positio
 
 cocos2d::Vec2 StageManager::positionToIdxOfStage( cocos2d::Point position )
 {
-	Vec2 resultIdx = Vec2(-1,-1);
-	if( m_WorldScene == nullptr )
+	Vec2 curPosIdx = Vec2( -1 , -1 );
+	if( m_StageRect.containsPoint( position ) )
 	{
-		return resultIdx;
+		curPosIdx.x = position.x / m_BoxSize.width;
+		curPosIdx.y = position.y / m_BoxSize.height;
 	}
-	return ( m_WorldScene->getGameLayer() )->positionToIdxOfMapData( position );
+	return curPosIdx;
 }
 
 cocos2d::Vec2 StageManager::positionToIdxOfFloor( cocos2d::Point position )
@@ -165,4 +144,9 @@ void StageManager::addVisitedStage( int stage )
 	{
 		m_VisitedStageNums.push_back( stage );
 	}
+}
+
+cocos2d::Point StageManager::idxOfStageDataToPosiion( cocos2d::Vec2 idx )
+{
+	return Point( idx.x*m_BoxSize.width , idx.y*m_BoxSize.height );
 }

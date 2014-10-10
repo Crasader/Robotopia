@@ -24,16 +24,13 @@ public:
 	void							makeHash();
 
 	const Player*					getPlayer() {return m_Player; }
-	ObjectType						getMapDataInPosition( cocos2d::Point position );
-	ObjectType						getMapDataInPositionWithIdx( int xIdx , int yIdx );
 	std::vector<InteractiveObject*>	getObjectsByPosition( cocos2d::Point checkPosition ); //위치에 어떤 객체가 있는지를 리턴
 	std::vector<InteractiveObject*>	getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
-	cocos2d::Vec2					positionToIdxOfMapData( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
-
 	cocos2d::Rect					getMapRect(){return m_MapRect; }
+	bool							isOutOfStageMap(cocos2d::Point checkPosition);
+	cocos2d::Vec2					positionToIdxOfStageData( cocos2d::Point position );
 
 	CREATE_FUNC( GameLayer );
-
 private:
 	enum ZOrder
 	{
