@@ -9,6 +9,8 @@ bool ResourceManager::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ET_PLAYER_LANDING.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ozt.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ETLinearMissileCollision.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("New_Linear_Missile.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Melee_Missile.plist");
 	return true;
 }
 
@@ -42,6 +44,14 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		return createAnimation("LinearMissile%d.png", 0, 10, 0.1f);
 	case AT_LINEARMISSILE_COLLISION:
 		return createAnimation("ETLinearMissileCollision%d.png", 1, 9, 0.1f);
+	case AT_MELEE_MISSILE_FLYING:
+		return createAnimation("Melee_Missile%d.png", 1, 6, delay);
+	case AT_MELEE_MISSILE_COLLISION:
+		return createAnimation("Melee_Missile_Collision%d.png", 1, 6, delay);
+	case AT_NEW_LINEAR_MISSILE_FLYING:
+		return createAnimation("New_Linear_Missile%d.png", 1, 6, delay);
+	case AT_NEW_LINEAR_MISSILE_COLLISION:
+		return createAnimation("New_Linear_Missile_Collision%d.png", 1, 6, delay);
 	case AT_PLAYER_STAND:
 		return createAnimation("player_stand%d.png", 1, 4, 0.1f);
 	case AT_PLAYER_WALK:
@@ -86,6 +96,14 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 		return createSprite("ETLinearMissileCollision1.png");
 	case ST_LOADING:
 		return createSprite("Loading.png");
+	case ST_MELEE_MISSILE_FLYING:
+		return createSprite("Melee_Missile3.png");
+	case ST_MELEE_MISSILE_COLLISION:
+		return createSprite("Melee_Missile_Collision1.png");
+	case ST_NEW_LENEAR_MISSILE_FLYING:
+		return createSprite("New_Linear_Missile1.png");
+	case ST_NEW_LENEAR_MISSILE_COLLISION:
+		return createSprite("New_Linear_Missile_Collision1.png");
 	case ST_PLAYER_LANDING:
 		return createSprite("ET_PLAYER_LANDING1.png");
 	}
