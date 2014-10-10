@@ -137,6 +137,11 @@ void Player::update(float dTime)
 		{
 			m_Velocity.y += 1500 * dTime;
 		}
+
+		int x = rand() % (int)(m_Width / 1.5);
+		Point pos = Point(this->getPosition().x + x - m_Width/3, this->getPosition().y - m_Height / 2);
+
+		GET_EFFECT_MANAGER()->createEffectSelectedSizeByUser(ET_ROUND_SMOKE, Rect(pos.x, pos.y, -1, -1), 1);
 	}
 
 	if (m_IsFlying)
