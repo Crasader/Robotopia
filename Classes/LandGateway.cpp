@@ -25,7 +25,6 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 {
 	if( !m_isOpen && enemy->getType() == OT_PLAYER && m_IsActive &&GET_INPUT_MANAGER()->getKeyState(KC_UP))
 	{
-		CCLOG( "%d\n" , m_NextFloorNum );
 		m_isOpen = true;
 		auto animate = Animate::create( m_OpenAnimaion );
 		auto callfunc = CallFuncN::create( CC_CALLBACK_1( LandGateway::gotoNextLevel , this ) );
@@ -156,27 +155,11 @@ Direction LandGateway::findReverseDirection( Direction dir )
 Point LandGateway::findNextPosition()
 {
 	StageData nextStageData = GET_STAGE_MANAGER()->getStageDataByStageNum( m_NextFloorNum );
-	
-	int transedStageXIdx = (m_NextFloorIdx.x - nextStageData.x)*MODULE_BASE_WIDTH; //FloorIdx단위로 잘린 위치값을 스테이지 Idx로 가져온다.
-	int transedStageYIdx = ( m_NextFloorIdx.y - nextStageData.y )*MODULE_BASE_HEIGHT;
-	Vec2 nextGatewayIdx = Vec2::ZERO;
+	Vec2 transedStageIdx;
+	transedStageIdx.x = (m_NextFloorIdx.x - nextStageData.x)*MODULE_BASE_WIDTH; //FloorIdx단위로 잘린 위치값을 스테이지 Idx로 가져온다.
+	transedStageIdx.y = ( m_NextFloorIdx.y - nextStageData.y )*MODULE_BASE_HEIGHT;
 
-	Direction setDirection = findReverseDirection( m_NextDirection );
-
-	for( int xIdx = transedStageXIdx; xIdx < nextStageData.width; ++xIdx )
-	{
-		for( int yIdx = transedStageYIdx; yIdx < nextStageData.height; ++yIdx )
-		{
-			if( nextStageData.data[yIdx*nextStageData.width + xIdx] == OT_GATEWAY &&
-				findCentinelNeighborDir( Vec2( xIdx , yIdx ) , m_NextFloorNum ) == setDirection )
-			{
-				nextGatewayIdx.x = xIdx;
-				nextGatewayIdx.y = yIdx;
-				break;
-			}
-		}
-	}
-	Point nextSettingPosition = adjustSettingPosition( nextGatewayIdx , m_NextDirection );
+	Point nextSettingPosition = adjustSettingPosition( transedStageIdx, m_NextDirection );
 	return nextSettingPosition;
 }
 
