@@ -12,10 +12,16 @@ bool Minimap::init()
 	m_WinHeight = winSize.height;
 
 	auto sprMinimap = Sprite::create("Minimap_Frame.png");
-	sprMinimap->setAnchorPoint(Point(0, 1));
-	sprMinimap->setOpacity(120);
-	sprMinimap->setPosition(Point(m_WinWidth - 200, m_WinHeight - 15));
+	sprMinimap->setAnchorPoint(Point(1, 1));
+	sprMinimap->setOpacity(150);
+	sprMinimap->setPosition(Point(m_WinWidth, m_WinHeight));
 	this->addChild(sprMinimap);
+
+	auto sprPlayerPosition = Sprite::create("Minimap_Player.png");
+	sprPlayerPosition->setAnchorPoint(Point(0.5, 0.5));
+	sprPlayerPosition->setPosition(Point(sprMinimap->getContentSize().width / 2, sprMinimap->getContentSize().height / 2));
+	sprPlayerPosition->setOpacity(200);
+	sprMinimap->addChild(sprPlayerPosition, 15, MINIMAP_PLAYER);
 
 	m_fd = GET_STAGE_MANAGER()->getFloorData();
 	m_VisitedRoom = GET_STAGE_MANAGER()->getVisitedStageNums();
@@ -29,9 +35,8 @@ bool Minimap::init()
 		Vec2(0, 0),
 	};
 	m_MinimapBgRect->drawPolygon(points, 4, Color4F(Color4B(51, 51, 51, 0)), 0, Color4F(1.0f, 0.3f, 0.3f, 1)); //Color4F(Rf, Gf, Bf, Opacityf) or Color4F(Color4B(Rb, Gb, Bb, Opacityb))
-	m_MinimapBgRect->setAnchorPoint(Point(0, 0));
-	m_MinimapBgRect->setPosition(Point(-200, -200));
-	sprMinimap->addChild(m_MinimapBgRect);
+	sprPlayerPosition->setAnchorPoint(Point(0, 0));
+	sprPlayerPosition->addChild(m_MinimapBgRect, -10);
 
 	for (int j = 0; j < m_fd.height; ++j)
 	{
@@ -48,11 +53,6 @@ bool Minimap::init()
 		}
 	}
 
-	auto sprPlayerPosition = Sprite::create("Minimap_Player.png");
-	sprPlayerPosition->setPosition(Point(0, 0));
-	sprPlayerPosition->setOpacity(200);
-	m_MinimapBgRect->addChild(sprPlayerPosition, 11, MINIMAP_PLAYER);
-
 	this->scheduleUpdate();
 	return true;
 }
@@ -62,9 +62,7 @@ void Minimap::update(float dTime)
 	int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
 	Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
 	Vec2 playerRoomOrigin = GET_STAGE_MANAGER()->positionToIdxOfFloor(playerPosition);
-	Sprite* sprPlayerPosition = (Sprite*)m_MinimapBgRect->getChildByTag(MINIMAP_PLAYER);
-	sprPlayerPosition->setPosition(playerRoomOrigin.x * MINIMAP_SCALE + 15, playerRoomOrigin.y * MINIMAP_SCALE + 15);
-	
+	m_MinimapBgRect->setPosition(Point(-1 * (playerRoomOrigin.x * MINIMAP_SCALE + 6), -1 * (playerRoomOrigin.y * MINIMAP_SCALE + 6)));
 }
 
 void Minimap::drawRoomRect(int xidx, int yidx)
