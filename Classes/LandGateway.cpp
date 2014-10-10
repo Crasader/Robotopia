@@ -35,8 +35,27 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 void LandGateway::findNextStage()
 {
 	auto floorData = GET_STAGE_MANAGER()->getFloorData();
-	auto stageDatas = GET_STAGE_MANAGER()->getStageDatas();
+	auto stageData = GET_STAGE_MANAGER()->getStageDatas();
 
+	int floorDataSheet[50][50] = { 0 , };
+	int stageDataSheet[50][50] = { 0 , };
+
+	for( int x = 0; x < floorData.width; ++x )
+	{
+		for( int y = 0; y < floorData.height; ++y )
+		{
+			floorDataSheet[floorData.height - y - 1][x] = floorData.data[y*floorData.width + x];
+		}
+	}
+
+	for( int x = 0; x < stageData.width; ++x )
+	{
+		for( int y = 0; y < stageData.height; ++y )
+		{
+			stageDataSheet[stageData.height - y - 1][x] = stageData.data[y*stageData.width + x];
+		}
+	}
+	
 	Point curPos = this->getPosition();
 	//현재 위치로 부터 스테이지의 인덱스값을 찾습니다.
 	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).x;

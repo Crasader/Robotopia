@@ -115,7 +115,16 @@ InteractiveObject*	GameLayer::addObjectByMapdata( ObjectType type , int xIdx , i
 //맵데이터를 보고 객체를 추가한다. 인덱스만 받아도 충분
 InteractiveObject*	GameLayer::addObjectByMapdata( int xIdx , int yIdx )
 {
-	return addObjectByMapdata( m_MapData[yIdx*m_BoxWidthNum + xIdx] , xIdx , yIdx );
+	int dataSheet[50][50] = { 0 , };
+	for( int x = 0; x < m_BoxWidthNum; ++x )
+	{
+		for( int y = 0; y < m_BoxHeightNum; ++y )
+		{
+			dataSheet[m_BoxHeightNum - y - 1][x] = m_MapData[y*m_BoxWidthNum + x];
+		}
+	}
+	ObjectType ot = m_MapData[yIdx*m_BoxWidthNum + xIdx];
+	return addObjectByMapdata( ot , xIdx , yIdx );
 }
 
 void GameLayer::update( float dTime )

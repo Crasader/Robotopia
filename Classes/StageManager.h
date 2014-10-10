@@ -27,15 +27,16 @@ public:
 	int									getFloorDataByIdx( int xIdx , int yIdx );
 	std::vector<InteractiveObject*>		getObjectsByPosition( cocos2d::Point checkPosition ); //위치에 어떤 객체가 있는지를 리턴
 	std::vector<InteractiveObject*>		getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
-	
 	WorldScene*							getWorldScene(){return m_WorldScene;}
 	const Player*						getPlayer();
+	FloorData							getFloorData(){return m_FloorData;};
+	StageData							getStageDatas(){return m_CurrentFloorData[m_CurrentStageNum];};
 
 	cocos2d::Vec2						positionToIdxOfStage( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 	
-	std::string							getFloorData();
-	std::vector<std::string>			getStageDatas();
+
+
 private:
 	int									m_CurrentStageNum;
 	int									m_CurrentFloor;
