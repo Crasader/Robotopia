@@ -13,6 +13,7 @@ bool ResourceManager::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Melee_Missile.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Melee_Missile_Collision.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Round_Smoke.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("monsterBat.plist");
 	return true;
 }
 
@@ -54,6 +55,8 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		return createAnimation("New_Linear_Missile%d.png", 1, 6, delay);
 	case AT_NEW_LINEAR_MISSILE_COLLISION:
 		return createAnimation("New_Linear_Missile_Collision%d.png", 1, 6, delay);
+	case AT_MONSTER_BAT:
+		return createAnimation("monster_bat%d.png", 1, 8, delay);
 	case AT_PLAYER_STAND:
 		return createAnimation("player_stand%d.png", 1, 4, 0.1f);
 	case AT_PLAYER_WALK:
@@ -104,6 +107,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 		return createSprite("Melee_Missile3.png");
 	case ST_MELEE_MISSILE_COLLISION:
 		return createSprite("Melee_Missile_Collision1.png");
+	case ST_MONSTER_BAT:
+		return createSprite("monster_bat1.png");
 	case ST_NEW_LINEAR_MISSILE_FLYING:
 		return createSprite("New_Linear_Missile1.png");
 	case ST_NEW_LINEAR_MISSILE_COLLISION:

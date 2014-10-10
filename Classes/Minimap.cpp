@@ -45,7 +45,9 @@ bool Minimap::init()
 
 void Minimap::update(float dTime)
 {
-
+	int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
+	Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
+	
 }
 
 void Minimap::drawRoomRect(int xidx, int yidx)
@@ -95,7 +97,7 @@ void Minimap::drawRoomRect(int xidx, int yidx)
 		int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
 		if (currentRoom == roomNum)
 		{
-			roomRect->drawPolygon(points, 4, Color4F(Color4B(212, 24, 26, 120)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
+			roomRect->drawPolygon(points, 4, Color4F(Color4B(212, 24, 26, 100)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
 		}
 		else if (roomNum != 0)
 		{
