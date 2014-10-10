@@ -33,7 +33,9 @@ public:
 
 	cocos2d::Vec2						positionToIdxOfStage( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
-
+	
+	std::string							getFloorData();
+	std::vector<std::string>			getStageDatas();
 private:
 	int									m_CurrentStageNum;
 	int									m_CurrentFloor;

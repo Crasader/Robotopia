@@ -34,6 +34,9 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 //현재 게이트웨이가 어디와 연결되어있는지를 체크하고 정보를 저장하는 함수
 void LandGateway::findNextStage()
 {
+	auto floorData = GET_STAGE_MANAGER()->getFloorData();
+	auto stageDatas = GET_STAGE_MANAGER()->getStageDatas();
+
 	Point curPos = this->getPosition();
 	//현재 위치로 부터 스테이지의 인덱스값을 찾습니다.
 	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).x;

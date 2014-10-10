@@ -162,10 +162,13 @@ void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
 			{
 				for( auto object : m_ObjectPositionsHash[sum] )
 				{
-					collisionDirections = subject->collisionCheck( object , dTime );
-					if( collisionDirections )
+					if( object != subject )
 					{
-						m_CollisionInformations.push_back(CollisionInformation( subject , object , collisionDirections ));
+						collisionDirections = subject->collisionCheck( object , dTime );
+						if( collisionDirections )
+						{
+							m_CollisionInformations.push_back(CollisionInformation( subject , object , collisionDirections ));
+						}
 					}
 				}
 			}

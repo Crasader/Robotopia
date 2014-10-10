@@ -30,7 +30,7 @@ public:
 	std::vector<InteractiveObject*>	getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
 	cocos2d::Vec2					positionToIdxOfMapData( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
 
-	cocos2d::Rect					getMapRect() {return m_MapRect; }
+	cocos2d::Rect					getMapRect(){return m_MapRect; }
 
 	CREATE_FUNC( GameLayer );
 

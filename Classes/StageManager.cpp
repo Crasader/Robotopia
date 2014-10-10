@@ -1,4 +1,5 @@
 
+#include <string>
 #include "GameManager.h"
 #include "GameLayer.h"
 #include "InteractiveObject.h"
@@ -138,5 +139,39 @@ cocos2d::Vec2 StageManager::positionToIdxOfFloor( cocos2d::Point position )
 int StageManager::getFloorDataByIdx( int xIdx , int yIdx )
 {
 	return m_FloorData.data[m_FloorData.width*yIdx + xIdx];
+}
+
+std::string StageManager::getFloorData()
+{
+	std::string result;
+	for( auto x = 0; x < m_FloorData.width; ++x )
+	{
+		for( auto y = 0; y < m_FloorData.height; ++y )
+		{
+			result += std::to_string( m_FloorData.data[(m_FloorData.height - y - 1)*m_FloorData.width + x] );
+		}
+		result += "\n";
+	}
+	return result;
+}
+
+std::vector<std::string> StageManager::getStageDatas()
+{
+	std::vector<std::string> result;
+	for( auto stageData : m_CurrentFloorData )
+	{
+		std::string data;
+
+		for( int x = 0; x < stageData.width; ++x )
+		{
+			for( int y = 0; y < stageData.height; ++y )
+			{
+				data += std::to_string( stageData.data[( m_FloorData.height - y - 1 )* stageData.width + x] );
+			}
+			data += "\n";
+		}
+		result.push_back( data );
+	}
+	return result;
 }
 
