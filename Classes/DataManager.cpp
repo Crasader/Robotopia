@@ -316,6 +316,7 @@ bool DataManager::getFloorData(int currentFloor, FloorData* floorData, std::vect
 	{
 		stageData->push_back(m_FloorStageData[currentFloor - 1][s]);
 	}
+	
 
 	return true;
 }
