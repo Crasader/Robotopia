@@ -100,9 +100,9 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 		return createSprite("Melee_Missile3.png");
 	case ST_MELEE_MISSILE_COLLISION:
 		return createSprite("Melee_Missile_Collision1.png");
-	case ST_NEW_LENEAR_MISSILE_FLYING:
+	case ST_NEW_LINEAR_MISSILE_FLYING:
 		return createSprite("New_Linear_Missile1.png");
-	case ST_NEW_LENEAR_MISSILE_COLLISION:
+	case ST_NEW_LINEAR_MISSILE_COLLISION:
 		return createSprite("New_Linear_Missile_Collision1.png");
 	case ST_PLAYER_LANDING:
 		return createSprite("ET_PLAYER_LANDING1.png");
