@@ -21,6 +21,6 @@ public:
 private:
 	int								m_WinWidth, m_WinHeight;
  	cocos2d::DrawNode*				drawRoomRect(int xidx, int yidx);
-// 	FloorData&						m_fd;
+ 	FloorData						m_fd;
 };
 
