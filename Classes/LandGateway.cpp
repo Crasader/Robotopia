@@ -152,4 +152,6 @@ Point LandGateway::findNextPosition()
 	m_NextFloorIdx;
 	Direction nextDirection;
 	nextStageData.data;
+
+	return Point( 0 , 0 );
 }
