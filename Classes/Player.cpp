@@ -54,6 +54,10 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 	case OT_BLOCK:
 		if (dir & DIR_DOWN)
 		{
+			if (m_State == PS_JUMP)
+			{
+				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+			}
 			m_IsFlying = false;
 			m_Velocity.y = 0;
 		}
@@ -99,36 +103,41 @@ void Player::update(float dTime)
 	KeyState leftState = GET_INPUT_MANAGER()->getKeyState(KC_LEFT);
 	KeyState rightState = GET_INPUT_MANAGER()->getKeyState(KC_RIGHT);
 
-	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST1) == KS_PRESS)
+
+	if (leftState == KS_HOLD)
 	{
-		m_Hp += 20;
+		m_Velocity.x = -m_MoveSpeed;
+		m_IsRightDirection = false;
+		m_MainSprite->setFlippedX(true);
+
 	}
-	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST2) == KS_PRESS)
+	else if (rightState == KS_HOLD)
 	{
-		m_Hp -= 20;
+		m_Velocity.x = m_MoveSpeed;
+		m_IsRightDirection = true;
+		m_MainSprite->setFlippedX(false);
 	}
-	
+	else
+	{
+		m_Velocity.x = 0;
+	}
+
+	if (GET_INPUT_MANAGER()->getKeyState(KC_FLY) == KS_HOLD)
+	{
+		if (m_Velocity.y <= -300)
+		{
+			m_Velocity.y = -300;
+		}
+
+		if (m_Velocity.y <= 300)
+		{
+			m_Velocity.y += 1500 * dTime;
+		}
+	}
+
 	if (m_IsFlying)
 	{
 		changeState(PS_JUMP);
-
-		if (leftState == KS_HOLD)
-		{
-			m_Velocity.x = -m_MoveSpeed;
-			m_IsRightDirection = false;
-			m_MainSprite->setFlippedX(true);
-
-		}
-		else if (rightState == KS_HOLD)
-		{
-			m_Velocity.x = m_MoveSpeed;
-			m_IsRightDirection = true;
-			m_MainSprite->setFlippedX(false);
-		}
-		else
-		{
-			m_Velocity.x = 0;
-		}
 	}
 	else
 	{
@@ -142,27 +151,20 @@ void Player::update(float dTime)
 		{
 			if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
 			{
-				m_Velocity.y = 700;
+				m_Velocity.y = 500;
 			}
 			else if (leftState == KS_HOLD)
 			{
 				changeState(PS_WALK);
-				m_Velocity.x = -m_MoveSpeed;
-				m_IsRightDirection = false;
-				m_MainSprite->setFlippedX(true);
 
 			}
 			else if (rightState == KS_HOLD)
 			{
 				changeState(PS_WALK);
-				m_Velocity.x = m_MoveSpeed;
-				m_IsRightDirection = true;
-				m_MainSprite->setFlippedX(false);
 			}
 			else
 			{
 				changeState(PS_STAND);
-				m_Velocity.x = 0;
 			}
 		}
 		else

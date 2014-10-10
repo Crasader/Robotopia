@@ -10,6 +10,7 @@ enum KeyCode
 	KC_RIGHT = cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
 	KC_DOWN = cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW,
 	KC_LEFT = cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW,
+	KC_FLY = cocos2d::EventKeyboard::KeyCode::KEY_SHIFT,
 	KC_ATTACK = cocos2d::EventKeyboard::KeyCode::KEY_A,
 	KC_JUMP = cocos2d::EventKeyboard::KeyCode::KEY_SPACE,
 	KC_TEST1 = cocos2d::EventKeyboard::KeyCode::KEY_F1,
