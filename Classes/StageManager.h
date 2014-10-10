@@ -31,10 +31,10 @@ public:
 	const Player*						getPlayer();
 	FloorData							getFloorData(){return m_FloorData;};
 	StageData							getStageDatas(){return m_CurrentFloorData[m_CurrentStageNum];};
+	int									getCurStageNum() {return m_CurrentStageNum; }
 
 	cocos2d::Vec2						positionToIdxOfStage( cocos2d::Point position ); //위치값을 받아서 인덱스 값으로 리턴
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
-	
 
 private:
 	int									m_CurrentStageNum;

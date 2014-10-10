@@ -24,6 +24,7 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 {
 	if( !m_isOpen && enemy->getType() == OT_PLAYER && m_IsActive )
 	{
+		CCLOG( "%d\n" , m_NextFloorNum );
 		m_isOpen = true;
 		auto animate = Animate::create( m_OpenAnimaion );
 		auto callfunc = CallFuncN::create( CC_CALLBACK_1( LandGateway::gotoNextLevel , this ) );
@@ -34,28 +35,6 @@ void LandGateway::collisionOccured( InteractiveObject* enemy , Directions dir )
 //현재 게이트웨이가 어디와 연결되어있는지를 체크하고 정보를 저장하는 함수
 void LandGateway::findNextStage()
 {
-	auto floorData = GET_STAGE_MANAGER()->getFloorData();
-	auto stageData = GET_STAGE_MANAGER()->getStageDatas();
-
-	int floorDataSheet[50][50] = { 0 , };
-	int stageDataSheet[50][50] = { 0 , };
-
-	for( int x = 0; x < floorData.width; ++x )
-	{
-		for( int y = 0; y < floorData.height; ++y )
-		{
-			floorDataSheet[floorData.height - y - 1][x] = floorData.data[y*floorData.width + x];
-		}
-	}
-
-	for( int x = 0; x < stageData.width; ++x )
-	{
-		for( int y = 0; y < stageData.height; ++y )
-		{
-			stageDataSheet[stageData.height - y - 1][x] = stageData.data[y*stageData.width + x];
-		}
-	}
-	
 	Point curPos = this->getPosition();
 	//현재 위치로 부터 스테이지의 인덱스값을 찾습니다.
 	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( curPos ).x;
@@ -96,7 +75,6 @@ void LandGateway::gotoNextLevel(Ref* sender)
 {
 	//다음 월드 씬으로 변경해주는 함수호출
 	GET_STAGE_MANAGER()->changeStage( m_NextFloorNum );
-
 }
 
 //현재 위치에서 센티넬이 있는 방향을 리턴해줍니다.

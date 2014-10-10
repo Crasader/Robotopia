@@ -15,6 +15,7 @@ public:
 	CREATE_FUNC( LandGateway );
 
 private:
+	int					m_CurFloorNum;
 	int					m_NextFloorNum;
 	cocos2d::Vec2		m_NextFloorIdx;
 	cocos2d::Animation*	m_OpenAnimaion;
