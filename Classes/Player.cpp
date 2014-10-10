@@ -33,6 +33,7 @@ bool Player::init()
 	m_MaxSteam = 20;
 	m_Steam = m_MaxSteam;
 	m_ActiveFlyingTime = 0;
+	m_AttackNum = 0;
 
 	m_MainSprite = Sprite::create();
 
@@ -188,6 +189,7 @@ void Player::update(float dTime)
 	Rect targetRect = SpriteFrameCache::getInstance()->getSpriteFrameByName("player_attack2.png")->getRect();
 	if (nowRect.origin.x == targetRect.origin.x &&nowRect.origin.y == targetRect.origin.y&& !m_AttackEnd)
 	{
+		m_AttackNum++;
 		auto gameLayer = (GameLayer*)this->getParent();
 
 		Point pos = this->getPosition();
@@ -227,11 +229,20 @@ void Player::update(float dTime)
 	
 	m_IsFlying = true;
 
-	m_ActiveFlyingTime += dTime;
+	if (m_IsActiveFly)
+	{
+		m_ActiveFlyingTime += dTime;
+	}
 
 	if (m_ActiveFlyingTime >= 10)
 	{
 		m_ActiveFlyingTime = 0;
+		m_Steam--;
+	}
+
+	if (m_AttackNum >= 50)
+	{
+		m_AttackNum = 0;
 		m_Steam--;
 	}
 

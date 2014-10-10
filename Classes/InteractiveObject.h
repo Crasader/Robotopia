@@ -25,6 +25,7 @@ public:
 	bool					isOnGravity() { return m_IsOnGravity; }
 	bool					isDestroyed() { return m_IsDestroyed; }
 	bool					isOverlapable(){ return m_IsOverlapable; }
+	bool					isMovable() { return m_IsMovable; }
 
 protected:
 	cocos2d::Sprite*						m_MainSprite;

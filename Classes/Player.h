@@ -44,6 +44,7 @@ private:
 	int			m_Steam;
 	int			m_MaxHp;
 	int			m_MaxSteam;
+	int			m_AttackNum;
 	bool		m_AttackEnd;
 	bool		m_IsActiveFly;
 	float		m_ActiveFlyingTime;

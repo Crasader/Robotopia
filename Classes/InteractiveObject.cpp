@@ -35,6 +35,11 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 	Rect myRect = this->getRect();
 	Rect enemyRect = enemy->getRect();
 
+	if (this->getType() == OT_PLAYER)
+	{
+		myRect = this->getRect();
+	}
+
 	//이미 충돌이 일어난 경우 최대한 포지션이 덜 이동하는 방향으로 이동시킨 후 해당 방향으로 충돌이 일어난 것으로 처리.
 	if (!(myRect.origin.x + myRect.size.width <= enemyRect.origin.x ||
 		myRect.origin.y + myRect.size.height <= enemyRect.origin.y ||
@@ -74,7 +79,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			minDis = dis;
 		}
 
-		if (!this->isOverlapable() && !enemy->isOverlapable() && m_IsMovable)
+		if (!this->isOverlapable() && !enemy->isOverlapable() && !enemy->isMovable() && m_IsMovable)
 		{
 			if (collisionDir == DIR_RIGHT || collisionDir == DIR_UP)
 			{
@@ -124,7 +129,16 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 				float velocity = abs(this->getVelocity().y - enemy->getVelocity().y);
 
-				float time = length / velocity;
+				float time;
+
+				if (velocity == 0)
+				{
+					time = 0;
+				}
+				else
+				{
+					time = length / velocity;
+				}
 
 				if (time < vertTime)
 				{
@@ -145,7 +159,16 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 				float velocity = abs(this->getVelocity().y - enemy->getVelocity().y);
 
-				float time = length / velocity;
+				float time;
+
+				if (velocity == 0)
+				{
+					time = 0;
+				}
+				else
+				{
+					time = length / velocity;
+				}
 
 				if (time < vertTime)
 				{
@@ -167,7 +190,16 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 				float velocity = abs(this->getVelocity().x - enemy->getVelocity().x);
 
-				float time = length / velocity;
+				float time;
+
+				if (velocity == 0)
+				{
+					time = 0;
+				}
+				else
+				{
+					time = length / velocity;
+				}
 
 				if (time < horzTime)
 				{
@@ -190,7 +222,16 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 				float velocity = abs(this->getVelocity().x - enemy->getVelocity().x);
 
-				float time = length / velocity;
+				float time;
+
+				if (velocity == 0)
+				{
+					time = 0;
+				}
+				else
+				{
+					time = length / velocity;
+				}
 
 				if (time < horzTime)
 				{
@@ -200,7 +241,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			}
 		}
 
-		if (collisionDir != DIR_NONE && !this->isOverlapable() && !enemy->isOverlapable())
+		if (collisionDir != DIR_NONE && !this->isOverlapable() && !enemy->isOverlapable() && !enemy->isMovable() && m_IsMovable)
 		{
 			Point changePos = this->getPosition();
 			Point pos = this->getPosition();
