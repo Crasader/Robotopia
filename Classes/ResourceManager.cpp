@@ -12,6 +12,7 @@ bool ResourceManager::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("New_Linear_Missile.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Melee_Missile.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Melee_Missile_Collision.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Round_Smoke.plist");
 	return true;
 }
 
@@ -63,6 +64,8 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		return createAnimation("player_attack%d.png", 1, 5, 0.05f);
 	case AT_PLAYER_LANDING:
 		return createAnimation("ET_PLAYER_LANDING%d.png", 1, 4, delay);
+	case AT_ROUND_SMOKE:
+		return createAnimation("Round_Smoke%d.png", 1, 4, delay);
 	case AT_RUSHMONSTER_STAND:
 		return createAnimation("rushMonster_stand%d.png", 1, 4, 0.1f);
 	case AT_RUSHMONSTER_MOVE:
@@ -107,6 +110,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 		return createSprite("New_Linear_Missile_Collision1.png");
 	case ST_PLAYER_LANDING:
 		return createSprite("ET_PLAYER_LANDING1.png");
+	case ST_ROUND_SMOKE:
+		return createSprite("Round_Smoke1.png");
 	}
 	return nullptr;
 }

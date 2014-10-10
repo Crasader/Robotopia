@@ -2,7 +2,8 @@
 
 USING_NS_CC;
 
-#define MINIMAPSCALE 30
+#define MINIMAP_SCALE 30
+#define ROOM_RECT_MARGIN 3
 
 bool Minimap::init()
 {
@@ -21,9 +22,9 @@ bool Minimap::init()
 	auto minimapBg = DrawNode::create();
 	Vec2 points[] =
 	{
-		Vec2(0, m_fd.height * MINIMAPSCALE),
-		Vec2(m_fd.width * MINIMAPSCALE, m_fd.height * MINIMAPSCALE),
-		Vec2(m_fd.width * MINIMAPSCALE, 0),
+		Vec2(0, m_fd.height * MINIMAP_SCALE),
+		Vec2(m_fd.width * MINIMAP_SCALE, m_fd.height * MINIMAP_SCALE),
+		Vec2(m_fd.width * MINIMAP_SCALE, 0),
 		Vec2(0, 0),
 	};
 	minimapBg->drawPolygon(points, 4, Color4F(Color4B(51, 51, 51, 0)), 0, Color4F(1.0f, 0.3f, 0.3f, 1)); //Color4F(Rf, Gf, Bf, Opacityf) or Color4F(Color4B(Rb, Gb, Bb, Opacityb))
@@ -52,56 +53,37 @@ void Minimap::update(float dTime)
 DrawNode* Minimap::drawRoomRect(int xidx, int yidx)
 {
 	auto roomRect = DrawNode::create();
-	int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
 	int roomNum = GET_STAGE_MANAGER()->getFloorDataByIdx(xidx, yidx);
-	
-	for (int i = 0; i < 4; ++i)
-	{
+	Vec2 vertices1 = Vec2(0, MINIMAP_SCALE);
+	Vec2 vertices2 = Vec2(MINIMAP_SCALE, MINIMAP_SCALE);
+	Vec2 vertices3 = Vec2(MINIMAP_SCALE, 0);
+	Vec2 vertices4 = Vec2(0, 0);
 
+// 	for (int i = 0; i < 4; ++i)
+// 	{
+// 		if (room)
+// 	}
+
+	Vec2 points[] =
+	{
+		vertices1,
+		vertices2,
+		vertices3,
+		vertices4
+	};
+
+	//플레이어 현재 방 색깔 구분
+	int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
+	if (currentRoom == roomNum)
+	{
+		roomRect->drawPolygon(points, 4, Color4F(Color4B(212, 24, 26, 120)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
+	}
+	else if (roomNum != 0)
+	{
+		roomRect->drawPolygon(points, 4, Color4F(Color4B(117, 198, 185, 120)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
 	}
 
-// 	Vec2 points[] =
-// 	{
-// 		Vec2(0, MINIMAPSCALE),
-// 		Vec2(MINIMAPSCALE, MINIMAPSCALE),
-// 		Vec2(MINIMAPSCALE, 0),
-// 		Vec2(0, 0),
-// 	};
-// 	roomRect->drawPolygon(points, 4, Color4F(0.2f, 0.7f, 0.8f, 1), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
-// 	roomRect->setAnchorPoint(Point(0, 0));
-// 	roomRect->setPosition(Point(i * MINIMAPSCALE, j * MINIMAPSCALE));
-
-	// 			int roomNum = GET_STAGE_MANAGER()->getFloorDataByIdx(i, j);
-	// 			int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
-	// 			if (currentRoom == roomNum)
-	// 			{
-	// 				auto currentRoomRect = DrawNode::create();
-	// 				Vec2 points[] =
-	// 				{
-	// 					Vec2(0, MINIMAPSCALE),
-	// 					Vec2(MINIMAPSCALE, MINIMAPSCALE),
-	// 					Vec2(MINIMAPSCALE, 0),
-	// 					Vec2(0, 0),
-	// 				};
-	// 				currentRoomRect->drawPolygon(points, 4, Color4F(0.9f, 0.4f, 0.1f, 1), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
-	// 				currentRoomRect->setAnchorPoint(Point(0, 0));
-	// 				currentRoomRect->setPosition(Point(i * MINIMAPSCALE, j * MINIMAPSCALE));
-	// 				minimapBg->addChild(currentRoomRect);
-	// 			}
-	// 			else if (roomNum != 0)
-	// 			{
-	// 				auto roomRect = DrawNode::create();
-	// 				Vec2 points[] =
-	// 				{
-	// 					Vec2(0, MINIMAPSCALE),
-	// 					Vec2(MINIMAPSCALE, MINIMAPSCALE),
-	// 					Vec2(MINIMAPSCALE, 0),
-	// 					Vec2(0, 0),
-	// 				};
-	// 				roomRect->drawPolygon(points, 4, Color4F(0.2f, 0.7f, 0.8f, 1), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
-	// 				roomRect->setAnchorPoint(Point(0, 0));
-	// 				roomRect->setPosition(Point(i * MINIMAPSCALE, j * MINIMAPSCALE));
-	// 				minimapBg->addChild(roomRect);
-	// 			}
+	roomRect->setAnchorPoint(Point(0, 0));
+	roomRect->setPosition(Point(xidx * MINIMAP_SCALE, yidx * MINIMAP_SCALE));
 	return roomRect;
 }
