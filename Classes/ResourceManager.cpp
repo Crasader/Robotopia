@@ -11,6 +11,7 @@ bool ResourceManager::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ETLinearMissileCollision.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("New_Linear_Missile.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Melee_Missile.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Melee_Missile_Collision.plist");
 	return true;
 }
 
