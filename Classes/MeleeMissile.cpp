@@ -44,9 +44,23 @@ void MeleeMissile::isDestroyedToTureAfterAni()
 void MeleeMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
 	
-		
-	GET_EFFECT_MANAGER()->createEffect(ET_MELEE_MISIILE_COLLSION, this->getRect(), dir, 1);
-	
+	bool meleeEffectAdd = false;
+	switch (enemy->getType())
+	{
+	case OT_MONSTER:
+		meleeEffectAdd = true;
+		break;
+	case OT_RUSH_MONSTER:
+		meleeEffectAdd = true;
+		break;;
+	default:
+		break;
+	}
+
+	if (meleeEffectAdd)
+	{
+		GET_EFFECT_MANAGER()->createEffect(ET_MELEE_MISIILE_COLLSION, this->getRect(), dir, 1);
+	}
 	return;
 }
 
