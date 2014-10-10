@@ -13,7 +13,7 @@ bool EquipmentWindow::init()
 	m_sprCharWinContainer = Sprite::create("CharWindow.png");
 	m_sprCharWinContainer->setAnchorPoint(Point(0, 0));
 	m_sprCharWinContainer->setPosition(Point(m_WinWidth, 25));
-	this->addChild(m_sprCharWinContainer, 12);
+	this->addChild(m_sprCharWinContainer, 15);
 
 	m_sprCharWinTrigger = Sprite::create("CharWindowTrigger.png");
 	m_sprCharWinTrigger->setAnchorPoint(Point(0, 1));
