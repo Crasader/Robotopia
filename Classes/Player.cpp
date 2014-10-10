@@ -4,6 +4,7 @@
 #include "LinearMissile.h"
 #include "GameManager.h"
 #include "LandGateway.h"
+#include "MeleeMissile.h"
 
 USING_NS_CC;
 
@@ -23,6 +24,7 @@ bool Player::init()
 	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK);
 	m_IsRightDirection = true;
 	m_AttackEnd = false;
+	m_IsActiveFly = false;
 
 	m_MaxHp = 100;
 	m_Hp = m_MaxHp;
@@ -124,6 +126,8 @@ void Player::update(float dTime)
 
 	if (GET_INPUT_MANAGER()->getKeyState(KC_FLY) == KS_HOLD)
 	{
+		m_IsActiveFly = true;
+
 		if (m_Velocity.y <= -300)
 		{
 			m_Velocity.y = -300;
@@ -137,14 +141,27 @@ void Player::update(float dTime)
 
 	if (m_IsFlying)
 	{
-		changeState(PS_JUMP);
+		if (m_IsActiveFly)
+		{
+			if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) == KS_HOLD)
+			{
+				changeState(PS_ATTACK);
+			}
+			else if (m_State != PS_ATTACK)
+			{
+				changeState(PS_JUMP);
+			}
+		}
+		else if (m_State != PS_ATTACK)
+		{
+			changeState(PS_JUMP);
+		}
 	}
 	else
 	{
 		if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) && (m_State == PS_STAND || m_State == PS_WALK))
 		{
 			changeState(PS_ATTACK);
-			m_Velocity.x = 0;
 		}
 
 		if (m_State != PS_ATTACK)
@@ -167,43 +184,42 @@ void Player::update(float dTime)
 				changeState(PS_STAND);
 			}
 		}
-		else
-		{
-			Rect nowRect = m_MainSprite->getTextureRect();
-			Rect targetRect = SpriteFrameCache::getInstance()->getSpriteFrameByName("player_attack2.png")->getRect();
-			if (nowRect.origin.x == targetRect.origin.x &&nowRect.origin.y == targetRect.origin.y&& !m_AttackEnd)
-			{
-				auto gameLayer = (GameLayer*)this->getParent();
-
-				Point pos = this->getPosition();
-
-				pos.y += 3;
-				if (m_IsRightDirection)
-				{
-					pos.x += 30;
-				}
-				else
-				{
-					pos.x -= 30;
-				}
-
-				auto object = (LinearMissile*)gameLayer->addObject(OT_LINEAR_MISSILE, pos);
-				
-
-				if (m_IsRightDirection)
-				{
-					object->setMoveAttribute(true, 200, 0);
-				}
-				else
-				{
-					object->setMoveAttribute(true, -200, 0);
-				}
-
-				m_AttackEnd = true;
-			}
-		}
 	}
 
+	Rect nowRect = m_MainSprite->getTextureRect();
+	Rect targetRect = SpriteFrameCache::getInstance()->getSpriteFrameByName("player_attack2.png")->getRect();
+	if (nowRect.origin.x == targetRect.origin.x &&nowRect.origin.y == targetRect.origin.y&& !m_AttackEnd)
+	{
+		auto gameLayer = (GameLayer*)this->getParent();
+
+		Point pos = this->getPosition();
+
+		pos.y += 3;
+		if (m_IsRightDirection)
+		{
+			pos.x += 70;
+		}
+		else
+		{
+			pos.x -= 70;
+		}
+
+		auto object = (MeleeMissile*)gameLayer->addObject(OT_LINEAR_MISSILE, pos);
+
+
+		if (m_IsRightDirection)
+		{
+			object->setMoveAttribute(true, 1, 0);
+		}
+		else
+		{
+			object->setMoveAttribute(true, -1, 0);
+		}
+
+		m_AttackEnd = true;
+	}
+
+	m_IsActiveFly = false;
 	m_Velocity.y -= GRAVITY*dTime;
 	m_IsFlying = true;
 

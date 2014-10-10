@@ -41,6 +41,7 @@ private:
 	int			m_MaxHp;
 	int			m_MaxSteam;
 	bool		m_AttackEnd;
+	bool		m_IsActiveFly;
 
 	void		changeState(State state);
 	void		endAnimation(cocos2d::Ref* sender);
