@@ -11,7 +11,6 @@ bool DataManager::init()
 
 bool DataManager::initModuleData()
 {
-	unsigned long fileSize;
 	Data data = FileUtils::getInstance()->getDataFromFile(MODULES_FILE_NAME);
 	char* rawData = (char*)data.getBytes();
 	const char* tokenList = " \r\n\0";
@@ -69,7 +68,6 @@ DataManager::~DataManager()
 
 bool DataManager::initFloorData()
 {
-	unsigned long fileSize;
 	Data data = FileUtils::getInstance()->getDataFromFile(FLOOR_FILE_NAME);
 	char* rawData = (char*)data.getBytes();
 	const char* tokenList = " \r\n\0";
