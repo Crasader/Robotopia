@@ -343,7 +343,7 @@ void EffectManager::createEffectPlayerLandingSizeByUser(cocos2d::Rect effectRect
 
 void EffectManager::createEffectMeleeMissileCollision(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
-	float needEffectScale = 1.0f;
+	float needEffectScale = 0.85f;
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_MELEE_MISSILE_COLLISION);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_COLLISION, 0.02f);
@@ -504,7 +504,7 @@ void EffectManager::createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int e
 	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
 
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
-	auto fadeTo = FadeTo::create(0.2f, 128);
+	auto fadeTo = FadeTo::create(0.3f, 80);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
 	effectSpr->runAction(Sequence::create(action,fadeTo, callback, NULL));
 }

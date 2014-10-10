@@ -52,7 +52,7 @@ void NewLinearMissile::update(float dTime)
 
 void NewLinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
-	m_IsPlayerMissile = IsPlayerMissile();
+	bool effectAdd = false;
 
 
 	//플레이어 미사일과 몬스터 미사일을 구분지어서 사라지는 부분
@@ -62,10 +62,10 @@ void NewLinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir
 		{
 		case OT_MONSTER:
 
-			m_IsDestroyed = true;
+			effectAdd = true;
 			break;
 		case OT_RUSH_MONSTER:
-			m_IsDestroyed = true;
+			effectAdd = true;
 
 			break;
 		}
@@ -75,34 +75,18 @@ void NewLinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir
 		switch (enemy->getType())
 		{
 		case OT_PLAYER:
-			m_IsDestroyed = true;
+			effectAdd = true;
 			break;
 		}
 	}
 
 
-	//플레이어 미사일이든 몬스터 미사일이든 공통으로 충돌했을 때 사라지는 부분
-	switch (enemy->getType())
+	
+	if (effectAdd)
 	{
-	case OT_FLOOR:
-		m_IsDestroyed = true;
-		break;
-	case OT_BLOCK:
-		m_IsDestroyed = true;
-		break;
-
-	case OT_VILLAGER:
-
-		m_IsDestroyed = true;
-		break;
-	}
-
-
-	if (m_IsDestroyed)
-	{
-		// New
 		GET_EFFECT_MANAGER()->createEffect(ET_NEW_LINEAR_MISSILE_COLLISION, this->getRect(), dir, 1);
 	}
+
 	return;
 }
 
