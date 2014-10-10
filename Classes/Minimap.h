@@ -20,7 +20,8 @@ public:
 
 private:
 	int								m_WinWidth, m_WinHeight;
- 	cocos2d::DrawNode*				drawRoomRect(int xidx, int yidx);
+	cocos2d::DrawNode*				m_MinimapBgRect;
+ 	void							drawRoomRect(int xidx, int yidx);
  	FloorData						m_fd;
 };
 
