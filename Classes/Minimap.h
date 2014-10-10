@@ -21,7 +21,14 @@ public:
 private:
 	int								m_WinWidth, m_WinHeight;
 	cocos2d::DrawNode*				m_MinimapBgRect;
+	FloorData						m_fd;
+	std::vector<int>				m_VisitedRoom;
+
  	void							drawRoomRect(int xidx, int yidx);
- 	FloorData						m_fd;
+
+	enum MiniMapEnum
+	{
+		MINIMAP_PLAYER,
+	};
 };
 

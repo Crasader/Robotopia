@@ -18,7 +18,8 @@ bool Minimap::init()
 	this->addChild(sprMinimap);
 
 	m_fd = GET_STAGE_MANAGER()->getFloorData();
-	
+	m_VisitedRoom = GET_STAGE_MANAGER()->getVisitedStageNums();
+
 	m_MinimapBgRect = DrawNode::create();
 	Vec2 points[] =
 	{
@@ -36,9 +37,22 @@ bool Minimap::init()
 	{
 		for (int i = 0; i < m_fd.width; ++i)
 		{
-			drawRoomRect(i, j);
+			int roomNum = GET_STAGE_MANAGER()->getFloorDataByIdx(i, j);
+			for (auto room : m_VisitedRoom)
+			{
+				if (room == roomNum)
+				{
+					drawRoomRect(i, j);
+				}
+			}
 		}
 	}
+
+	auto sprPlayerPosition = Sprite::create("Minimap_Player.png");
+	sprPlayerPosition->setPosition(Point(0, 0));
+	sprPlayerPosition->setOpacity(200);
+	m_MinimapBgRect->addChild(sprPlayerPosition, 11, MINIMAP_PLAYER);
+
 	this->scheduleUpdate();
 	return true;
 }
@@ -47,6 +61,9 @@ void Minimap::update(float dTime)
 {
 	int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
 	Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
+	Vec2 playerRoomOrigin = GET_STAGE_MANAGER()->positionToIdxOfFloor(playerPosition);
+	Sprite* sprPlayerPosition = (Sprite*)m_MinimapBgRect->getChildByTag(MINIMAP_PLAYER);
+	sprPlayerPosition->setPosition(playerRoomOrigin.x * MINIMAP_SCALE + 15, playerRoomOrigin.y * MINIMAP_SCALE + 15);
 	
 }
 
