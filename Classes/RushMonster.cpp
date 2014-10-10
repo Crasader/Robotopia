@@ -97,7 +97,7 @@ void RushMonster::update(float dTime)
 	if (m_Velocity.x > 0)
 		rect.origin.x += rect.size.width / 2;
 	else
-		rect.origin.x -= rect.size.width / 3;
+		rect.origin.x -= rect.size.width / 2;
 
 	rect.origin.y -= rect.size.height/2;
 	
