@@ -96,6 +96,7 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_MELEE_MISSILE:
 			object = MeleeMissile::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
 		default:
 			return nullptr;
 	}
