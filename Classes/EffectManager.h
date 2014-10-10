@@ -18,6 +18,7 @@ enum EffectType
 	ET_NEW_LINEAR_MISSILE_COLLISION,
 	ET_MELEE_MISIILE_COLLSION,
 	ET_PLAYER_LANDING,
+	ET_ROUND_SMOKE,
 };
 
 class EffectManager
@@ -59,5 +60,7 @@ private:
 	void createEffectNewLinearMissileCollsionByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
 
+	//////////////////충돌 없는 애들
+	void createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int effectPlayNum);
 };
 

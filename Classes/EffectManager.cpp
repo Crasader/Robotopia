@@ -73,6 +73,8 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 			break;
 		case ET_PLAYER_LANDING:
 			createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
+		case ET_ROUND_SMOKE:
+			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
 
 		}
 	}
@@ -99,7 +101,9 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 		case ET_PLAYER_LANDING:
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING)->getContentSize();
 			createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
-
+		case ET_ROUND_SMOKE:
+			//effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_ROUNDSMOKE)->getComtentSize();
+			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
 		}
 	}
 	
@@ -172,7 +176,7 @@ void EffectManager::createEffectLinearMissileCollision(Rect ownRect, Directions 
 
 void EffectManager::createEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum)
 {
-	
+	float needEffectScale = 1.0f;
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_LINEARMISSILE_COLLISION);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_LINEARMISSILE_COLLISION, 0.1f);
@@ -180,8 +184,8 @@ void EffectManager::createEffectLinearMissileCollisionSelectedSizeByUser(cocos2d
 	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
 
-	effectSpr->setScaleX(ratioX);
-	effectSpr->setScaleY(ratioY);
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
 
 	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
 
@@ -247,15 +251,15 @@ void EffectManager::createEffectAimingMissileCollision(cocos2d::Rect ownRect, Di
 void EffectManager::createEffectAimingMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum)
 {
 
-
+	float needEffectScale = 1.0f;
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_AIMINGMISSILE_COLLISION);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_AIMINGMISSILE_COLLISION, 0.2f);
 
 	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
 
-	effectSpr->setScaleX(ratioX);
-	effectSpr->setScaleY(ratioY);
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
 
 	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
 	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
@@ -319,6 +323,7 @@ void EffectManager::createEffectPlayerLanding(cocos2d::Rect ownRect, Directions 
 
 void EffectManager::createEffectPlayerLandingSizeByUser(cocos2d::Rect effectRect, int effectPlayNum)
 {
+	float needEffectScale = 1.0f;
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_LANDING, 0.2f);
 
@@ -391,14 +396,15 @@ void EffectManager::createEffectMeleeMissileCollision(cocos2d::Rect ownRect, Dir
 
 void EffectManager::createEffectMeleeMissileCollisionByUser(cocos2d::Rect effectRect, int effectPlayNum)
 {
+	float needEffectScale = 1.0f;
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_MELEE_MISSILE_COLLISION);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_COLLISION, 0.2f);
 
 	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
 
-	effectSpr->setScaleX(ratioX);
-	effectSpr->setScaleY(ratioY);
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
 
 	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
 	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
@@ -463,14 +469,15 @@ void EffectManager::createEffectNewLinearMissileCollsion(cocos2d::Rect ownRect, 
 
 void EffectManager::createEffectNewLinearMissileCollsionByUser(cocos2d::Rect effectRect, int effectPlayNum)
 {
+	float needEffectScale = 1.0f;
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_NEW_LINEAR_MISSILE_COLLISION);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_NEW_LINEAR_MISSILE_COLLISION, 0.2f);
 
 	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
 
-	effectSpr->setScaleX(ratioX);
-	effectSpr->setScaleY(ratioY);
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
 
 	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
 	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
@@ -478,6 +485,28 @@ void EffectManager::createEffectNewLinearMissileCollsionByUser(cocos2d::Rect eff
 	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
 	effectSpr->runAction(Sequence::create(action, callback, NULL));
+}
+
+void EffectManager::createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int effectPlayNum)
+{
+	float needEffectScale = 1.0f;
+
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_NEW_LINEAR_MISSILE_COLLISION);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_NEW_LINEAR_MISSILE_COLLISION, 0.2f);
+
+	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
+	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
+
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
+
+	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
+
+	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
+	auto fadeTo = FadeTo::create(1.0f, 128);
+	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
+	effectSpr->runAction(Sequence::create(action,fadeTo, callback, NULL));
 }
 
 
