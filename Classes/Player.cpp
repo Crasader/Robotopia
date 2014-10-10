@@ -15,7 +15,7 @@ bool Player::init()
 	}
 
 	m_Type = OT_PLAYER;
-	m_MoveSpeed = 100;
+	m_MoveSpeed = 200;
 	m_AnimationNum = PS_STATE_NUM;
 	m_Animations[PS_STAND] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_STAND);
 	m_Animations[PS_WALK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_WALK);
@@ -142,7 +142,7 @@ void Player::update(float dTime)
 		{
 			if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
 			{
-				m_Velocity.y = 1000;
+				m_Velocity.y = 700;
 			}
 			else if (leftState == KS_HOLD)
 			{

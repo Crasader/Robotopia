@@ -91,11 +91,29 @@ void RushMonster::update(float dTime)
 {
 
 	Point pos = this->getPosition();
+	Rect rect = this->getRect();
 
-	pos.x += m_Velocity.x*dTime;
+	rect.origin.x += m_Velocity.x*dTime;
+	if (m_Velocity.x > 0)
+		rect.origin.x += rect.size.width / 2;
+	else
+		rect.origin.x -= rect.size.width / 2;
+
+	rect.origin.y += m_Velocity.y*dTime - rect.size.height;
+	
+
+	for (auto& obj : GET_STAGE_MANAGER()->getObjectsByPosition(rect.origin))
+	{
+		if (obj->getType() == OT_BLOCK)
+		{
+			pos.x += m_Velocity.x*dTime;
+			break;
+		}
+	}
+	
 	pos.y += m_Velocity.y*dTime;
-
 	this->setPosition(pos);
+
 
 	if (isSeePlayer())
 	{
