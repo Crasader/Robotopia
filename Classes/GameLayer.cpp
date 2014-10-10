@@ -240,7 +240,7 @@ cocos2d::Vec2 GameLayer::positionToIdxOfMapData( cocos2d::Point position )
 
 ObjectType GameLayer::getMapDataInPositionWithIdx( int xIdx , int yIdx )
 {
-	return m_MapData[yIdx*m_BoxHeightNum + xIdx];
+	return m_MapData[yIdx*m_BoxWidthNum + xIdx];
 }
 
 ObjectType GameLayer::getMapDataInPosition( cocos2d::Point position )
