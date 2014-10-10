@@ -11,6 +11,15 @@
 #include "cocos2d.h"
 #include "Utils.h"
 
+enum EffectType
+{
+	ET_LINEAR_MISSILE_COLLISION,
+	ET_AIMING_MISSILE_COLLISION,
+	ET_NEW_LINEAR_MISSILE_COLLISION,
+	ET_MELEE_MISIILE_COLLSION,
+	ET_PLAYER_LANDING,
+};
+
 class EffectManager
 {
 public:
@@ -43,8 +52,11 @@ private:
 	void createEffectPlayerLanding(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
 	void createEffectPlayerLandingSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
-	//void createEffectM
+	void createEffectMeleeMissileCollision(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffectMeleeMissileCollisionByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
+	void createEffectNewLinearMissileCollsion(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffectNewLinearMissileCollsionByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
 
 };
