@@ -2,7 +2,8 @@
 // 
 //
 //사용 시기는 불러오는 쪽에서 알아서 맞춰야 됨
-//구조에 대해서 생각해볼 여지가 많은듯
+//createEffect를 통해서 원하는 이펙트 사용가능 
+//
 //작성자 : 김성연
 
 #pragma once
@@ -42,6 +43,7 @@ private:
 	void createEffectPlayerLanding(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
 	void createEffectPlayerLandingSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
+	//void createEffectM
 
 
 
