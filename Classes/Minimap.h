@@ -30,14 +30,15 @@ private:
 	std::vector<int>				m_VisitedRoom;
 
 	bool							m_MinimapWinOn;
-	cocos2d::Sprite*				m_sprMinimapWinTrigger;
-	cocos2d::Sprite*				m_sprMinimapWinContainer;
 
  	void							drawRoomRect(int xidx, int yidx);
 
 	enum MiniMapEnum
 	{
 		MINIMAP_PLAYER,
+		MINIMAP_WIN,
+		MINIMAP_WIN_OPEN,
+		MINIMAP_WIN_CLOSE,
 	};
 };
 

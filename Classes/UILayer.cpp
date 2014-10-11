@@ -22,13 +22,14 @@ void UILayer::update(float dTime)
 
 	KeyState charWinKey = GET_INPUT_MANAGER()->getKeyState(KC_CHARACTER_UI);
 	KeyState enterKey = GET_INPUT_MANAGER()->getKeyState(KC_RETURN);
+	KeyState mapWinKey = GET_INPUT_MANAGER()->getKeyState(KC_MAP);
 	KeyState escKey = GET_INPUT_MANAGER()->getKeyState(KC_MENU);
-	KeyState upKey = GET_INPUT_MANAGER()->getKeyState(KC_UP);
 	KeyState downKey = GET_INPUT_MANAGER()->getKeyState(KC_DOWN);
-	
+	KeyState upKey = GET_INPUT_MANAGER()->getKeyState(KC_UP);
+
 	if (charWinKey == KS_PRESS)
 	{
-		if (m_WorldMenu->getWorldMenuOn() == false)
+		if (m_WorldMenu->getWorldMenuOn() == false && m_Minimap->getMinimapWinOn() == false)
 		{
 			if (m_EquipmentWindow->getCharWinOn() == false)
 			{
@@ -46,11 +47,30 @@ void UILayer::update(float dTime)
 
 	}
 	
+	if (mapWinKey == KS_PRESS)
+	{
+		if (m_WorldMenu->getWorldMenuOn() == false)
+		{
+			if (m_Minimap->getMinimapWinOn() == false)
+			{
+				m_Minimap->showMinimapWin();
+			}
+			else if (m_Minimap->getMinimapWinOn() == true)
+			{
+				m_Minimap->hideMinimapWin();
+			}
+		}
+	}
+
 	if (escKey == KS_PRESS)
 	{
 		if (m_WorldMenu->getWorldMenuOn() == false)
 		{
-			if (m_EquipmentWindow->getCharWinOn() == true)
+			if (m_Minimap->getMinimapWinOn() == true)
+			{
+				m_Minimap->hideMinimapWin();
+			}
+			else if (m_EquipmentWindow->getCharWinOn() == true)
 			{
 				m_EquipmentWindow->hideCharacterWindow();
 			}
@@ -89,6 +109,8 @@ void UILayer::initializeUILayer()
 	this->addChild( m_Minimap );
 	this->addChild( m_WorldMenu );
 }
+
+
 
 void UILayer::onMouseDown(Event *event)
 {
