@@ -1,11 +1,13 @@
+
 #include "GameManager.h"
 #include "GameLayer.h"
 #include "LandFloor.h"
 #include "LandBlock.h"
 #include "RushMonster.h"
 #include "Villager.h"
-#include "LinearMissile.h"
+#include "NewLinearMissile.h"
 #include "AimingMissile.h"
+#include "LinearMissile.h"
 #include "MeleeMissile.h"
 #include "SteamPack.h"
 #include "LandGateway.h"
@@ -103,6 +105,11 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			break;
 		case OT_STEAM_PACK:
 			object = SteamPack::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
+
+		case OT_NEW_LINEAR_MISSILE:
+			object = NewLinearMissile::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
 		default:
