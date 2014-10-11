@@ -65,7 +65,6 @@ void RushMonster::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		break;
 	case OT_LINEAR_MISSILE:
-		//m_IsDestroyed = true;
 		break;
 	case OT_MELEE_MISSILE:
 		m_Info.hp--;
@@ -168,6 +167,7 @@ void RushMonster::update(float dTime)
 				m_MainSprite->setFlippedX(m_IsRightDirection);
 				m_DelayTime = 2;
 				m_Velocity.x = m_MoveSpeed;
+
 				if (!m_IsRightDirection)
 				{
 					m_Velocity.x = -m_Velocity.x;
