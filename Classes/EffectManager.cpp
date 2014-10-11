@@ -555,6 +555,9 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 	case SO_NEW_LINEAR_MISSILE_CREATING:
 		SimpleAudioEngine::getInstance()->playEffect("NewLinearMissile.wav", isRepeated);
 		break;
+	case SO_PLAYER_AND_MONSTER_COLLISION:
+		SimpleAudioEngine::getInstance()->playEffect("CollisionPlayerAndMonster.wav", isRepeated);
+		break;
 		
 	}
 }

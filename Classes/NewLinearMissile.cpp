@@ -70,6 +70,8 @@ void NewLinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir
 			effectAdd = true;
 
 			break;
+		case OT_BAT_MONSTER:
+			effectAdd = true;
 		}
 	}
 	else
