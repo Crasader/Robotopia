@@ -12,6 +12,6 @@ public:
 	
 
 protected:
-	float m_RemainGroundTime; 
+	float  m_RemainGroundTime; 
 	long   m_CreateTimeInMilli;
 };
