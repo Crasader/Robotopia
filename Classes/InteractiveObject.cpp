@@ -97,8 +97,8 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 				myRect.origin.y += minDis;
 			}
 
-			//myRect.origin.x += m_Width / 2;
-			//myRect.origin.y += m_Height / 2;
+			myRect.origin.x += m_Width / 2;
+			myRect.origin.y += m_Height / 2;
 
 			this->setPosition(myRect.origin);
 		}

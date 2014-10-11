@@ -33,6 +33,8 @@ bool BatMonster::init()
 	m_Info.maxHp = 40;
 	m_Info.hp = m_Info.maxHp;
 
+	changeState(BM_FIND);
+
 	return true;
 }
 
