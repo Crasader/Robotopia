@@ -44,7 +44,6 @@ bool WorldScene::init()
 void WorldScene::onEnter()
 {
 	Node::onEnter();
-	this->scheduleUpdate();
 }
 
 void WorldScene::update(float dTime)

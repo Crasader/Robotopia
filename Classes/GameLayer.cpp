@@ -105,7 +105,7 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 	}
 	object->setAnchorPoint( Point(0.5,0.5) );
 	object->setPosition( position );
-	m_InteractiveObjects.push_back( object );
+	m_AddObjects.push_back( object );
 	this->addChild( object , zOrder );
 	if( type == OT_GATEWAY)
 	{
@@ -139,6 +139,8 @@ void GameLayer::update( float dTime )
 		makeHash();
 		collisionCheck( dTime );
 		removeObjects();
+		m_InteractiveObjects.insert( m_InteractiveObjects.end() , m_AddObjects.begin() , m_AddObjects.end() );
+		m_AddObjects.clear();
 	}
 }
 
@@ -225,9 +227,16 @@ void GameLayer::removeObjects()
 
 void GameLayer::removeObject( InteractiveObject* deleteObject )
 {
-	m_InteractiveObjects.erase(std::find( 
-		m_InteractiveObjects.begin() , m_InteractiveObjects.end() , deleteObject ));
-	removeChild( deleteObject );
+	if( deleteObject == m_Player )
+	{
+		m_Player = nullptr;
+	}
+	auto deleteIter = std::find(m_InteractiveObjects.begin() , m_InteractiveObjects.end() , deleteObject );
+	if( deleteIter != m_InteractiveObjects.end() )
+	{
+		m_InteractiveObjects.erase(deleteIter);
+		removeChild( deleteObject );
+	}
 }
 
 void GameLayer::addMovingBackground( char* BGpath )

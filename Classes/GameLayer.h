@@ -17,6 +17,7 @@ public:
 	InteractiveObject*				addObjectByMapdata( ObjectType type , int xIdx , int yIdx );
 	InteractiveObject*				addObjectByMapdata( int xIdx , int yIdx );
 	void							addMovingBackground(char* BGpath);
+
 	void							collisionCheck(float dTime);
 	void							collisionCheckbyHash(InteractiveObject* subject, float dTime);
 	void							removeObjects();
@@ -60,6 +61,7 @@ private:
 	std::vector<CollisionInformation>				m_CollisionInformations;
 	std::map<int , ObjectType>						m_MapData;
 	std::vector<InteractiveObject*>					m_InteractiveObjects; 
+	std::vector<InteractiveObject*>					m_AddObjects;
 	std::map<int, std::vector<InteractiveObject*>>	m_ObjectPositionsHash;
 };
 
