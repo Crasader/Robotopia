@@ -11,17 +11,26 @@ bool Minimap::init()
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
 
-	auto sprMinimap = Sprite::create("Minimap_Frame.png");
+	auto sprMinimap = Sprite::create("Minimap_Container.png");
 	sprMinimap->setAnchorPoint(Point(1, 1));
 	sprMinimap->setOpacity(150);
 	sprMinimap->setPosition(Point(m_WinWidth, m_WinHeight));
 	this->addChild(sprMinimap);
 
+	auto sprMinimapFrame = Sprite::create();
+	Rect testRect = Rect(0, 0, 200, 150);
+	m_MinimapFrame = SpriteFrame::create("Minimap_Frame.png", testRect);
+	sprMinimapFrame->setAnchorPoint(Point(0, 0));
+	sprMinimapFrame->setPosition(Point(10, 10));
+	sprMinimapFrame->setOpacity(50);
+	sprMinimapFrame->setDisplayFrame(m_MinimapFrame);
+	sprMinimap->addChild(sprMinimapFrame);
+
 	auto sprPlayerPosition = Sprite::create("Minimap_Player.png");
 	sprPlayerPosition->setAnchorPoint(Point(0.5, 0.5));
 	sprPlayerPosition->setPosition(Point(sprMinimap->getContentSize().width / 2, sprMinimap->getContentSize().height / 2));
 	sprPlayerPosition->setOpacity(200);
-	sprMinimap->addChild(sprPlayerPosition, 15, MINIMAP_PLAYER);
+	sprMinimapFrame->addChild(sprPlayerPosition, 15, MINIMAP_PLAYER);
 
 	m_fd = GET_STAGE_MANAGER()->getFloorData();
 	m_VisitedRoom = GET_STAGE_MANAGER()->getVisitedStageNums();
@@ -37,7 +46,21 @@ bool Minimap::init()
 	m_MinimapBgRect->drawPolygon(points, 4, Color4F(Color4B(51, 51, 51, 0)), 0, Color4F(1.0f, 0.3f, 0.3f, 1)); //Color4F(Rf, Gf, Bf, Opacityf) or Color4F(Color4B(Rb, Gb, Bb, Opacityb))
 	sprPlayerPosition->setAnchorPoint(Point(0, 0));
 	sprPlayerPosition->addChild(m_MinimapBgRect, -10);
+	
 
+// 	auto minimapFrame = SpriteFrame::create("CharWindow.png", testRect);
+// 	this->addChild(minimapFrame);
+// 
+// 	Sprite* pSprite = Sprite::create();
+// 	SpriteFrame* frame = SpriteFrame::create("CharWindow.png", testRect);
+// 	pSprite->setPosition(Point(500, 200));
+// 	pSprite->setDisplayFrame(frame);
+// 	this->addChild(pSprite);
+
+// 	Texture2D *pTexture = SourceSpriteObj->getTexture();
+// 	
+// 	Sprite*DestSpriteObj = Sprite::s(pTexture, CGRect);
+	
 	for (int j = 0; j < m_fd.height; ++j)
 	{
 		for (int i = 0; i < m_fd.width; ++i)
@@ -121,6 +144,7 @@ void Minimap::drawRoomRect(int xidx, int yidx)
 
 		roomRect->setAnchorPoint(Point(0, 0));
 		roomRect->setPosition(Point(xidx * MINIMAP_SCALE, yidx * MINIMAP_SCALE));
+		
 		m_MinimapBgRect->addChild(roomRect);
 	}
 }

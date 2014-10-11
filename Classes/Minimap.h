@@ -21,6 +21,7 @@ public:
 private:
 	int								m_WinWidth, m_WinHeight;
 	cocos2d::DrawNode*				m_MinimapBgRect;
+	cocos2d::SpriteFrame*					m_MinimapFrame;
 	FloorData						m_fd;
 	std::vector<int>				m_VisitedRoom;
 
