@@ -11,8 +11,8 @@ bool InteractiveObject::init()
 
 	m_MainSprite = nullptr;
 	m_AnimationNum = 0;
-	m_Width = 0;
-	m_Height = 0;
+	m_Width = 1;
+	m_Height = 1;
 	m_Type = OT_NONE;
 	m_Velocity = Vec2(0, 0);
 	m_IsOnGravity = true;

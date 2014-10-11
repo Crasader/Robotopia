@@ -69,6 +69,7 @@ void RushMonster::collisionOccured(InteractiveObject* enemy, Directions dir)
 		break;
 	case OT_MELEE_MISSILE:
 		auto bullet = (MeleeMissile*)enemy;
+
 		m_Info.hp -= bullet->getDamage();
 
 		if (m_Info.hp <= 0)

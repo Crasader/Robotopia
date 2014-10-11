@@ -3,8 +3,8 @@
 #include "Utils.h"
 #define MODULES_FILE_NAME "Data\\Stage\\moduleList.mld"
 #define FLOOR_FILE_NAME "Data\\Stage\\floorData.fdd"
-#define MODULE_BASE_WIDTH 10
-#define MODULE_BASE_HEIGHT 10
+#define MODULE_BASE_WIDTH 20
+#define MODULE_BASE_HEIGHT 20
 
 
 struct StageModuleData
