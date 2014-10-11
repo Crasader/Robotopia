@@ -241,3 +241,9 @@ const StaticStageData& StageManager::getStageDatas()
 	_ASSERT( m_CurrentStageNum < _countof( m_StaticStageDatas ) );
 	return m_StaticStageDatas[m_CurrentStageNum]; 
 }
+
+WorldScene* StageManager::getWorldScene()
+{
+	_ASSERT( m_CurrentStageNum < _countof( m_WorldScenes ) );
+	return m_WorldScenes[m_CurrentStageNum]; 
+}

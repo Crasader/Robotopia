@@ -38,7 +38,7 @@ public:
 	std::vector<InteractiveObject*>		getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
 	
 	//멤버변수들 정보조회
-	WorldScene*							getWorldScene(){return m_WorldScenes[m_CurrentStageNum];}
+	WorldScene*							getWorldScene();
 	Player*								getPlayer();
 	const FloorData&					getFloorData(){return m_FloorData;};
 	const StaticStageData&				getStageDataByStageNum( int stageNum );
@@ -67,7 +67,6 @@ private:
 	//성능이슈로 정적 배열로 데이터 관리합니다.
 	StaticStageData						m_StaticStageDatas[MAX_STAGE_NUM];
 	WorldScene*							m_WorldScenes[MAX_STAGE_NUM];
-
 	WorldScene*							m_CurrentWorldScene;
 	PlayerInfo							m_PlayerInfo;
 };
