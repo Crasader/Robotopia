@@ -23,11 +23,6 @@ bool InputManager::init()
 		m_KeyStates[i] = KS_NONE;
 	}
 
-	m_PrevMouseStates[MC_LEFT] = MS_NONE;
-	m_MouseStates[MC_RIGHT] = MS_NONE;
-	m_MouseWheel = 0.0f;
-	m_MousePos = Point::ZERO;
-
 	return true;
 }
 
