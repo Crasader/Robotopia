@@ -13,8 +13,9 @@ bool StageManager::init()
 	m_CurrentStageNum = 1;
 	m_PlayerInfo.hp = 100 , m_PlayerInfo.maxHp = 100 , m_PlayerInfo.steam = 20 , m_PlayerInfo.maxSteam = 20;
 	m_BoxSize = Size( 32 , 32 );
-
+	
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
+	makeStaticData();
 
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
@@ -214,12 +215,15 @@ void StageManager::shakeFloor()
 
 void StageManager::makeStaticData()
 {
-	for( int i = 1; i <= m_FloorData.stageNum; ++i )
-	{
-		auto data = m_CurrentFloorStagesData[i];
-		for( int i = 0; i < data.width* data.height; ++i )
-		{
+	memset( m_StaticStageDatas , 0 , sizeof(int) * MAX_STAGE_NUM * MAX_STAGE_SIZE );
 
+	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
+	{
+		auto datas = m_CurrentFloorStagesData[stageNum];
+		auto stageData = datas.data;
+		for( int idx = 0; idx < datas.width* datas.height; ++idx )
+		{
+			m_StaticStageDatas[stageNum][idx] = ( int )stageData[idx];
 		}
 	}
 }
