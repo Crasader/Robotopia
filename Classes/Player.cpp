@@ -111,11 +111,13 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 			changeState(PS_HIT);
 			if (m_Velocity.x > 0)
 			{
+				m_IsRightDirection = true;
 				m_MainSprite->setFlippedX(false);
 				m_Velocity.x = -300;
 			}
 			else
 			{
+				m_IsRightDirection = false;
 				m_MainSprite->setFlippedX(true);
 				m_Velocity.x = 300;
 			}
