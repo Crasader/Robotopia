@@ -65,8 +65,9 @@ void MeleeMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 }
 
 //속도가 실제로는 0이지만 오른쪽 보고 있으면 velocity에 + 값 넣어주세요
-void MeleeMissile::setAttribute(bool m_IsPlayerMissile, float velocity, float degree, float setDamage)
+void MeleeMissile::setAttribute(bool isPlayerMissile, float velocity, float degree, float setDamage)
 {
+	m_IsPlayerMissile = isPlayerMissile;
 	if (velocity < 0)
 	{
 		m_MainSprite->setFlippedX(true);

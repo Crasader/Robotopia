@@ -28,8 +28,9 @@ bool NewLinearMissile::init()
 }
 
 
-void NewLinearMissile::setAttribute(bool m_IsPlayerMissile, float velocity, float degree, float setDamage)
+void NewLinearMissile::setAttribute(bool isPlayerMissile, float velocity, float degree, float setDamage)
 {
+	m_IsPlayerMissile = isPlayerMissile;
 	if (velocity < 0)
 	{
 		m_MainSprite->setFlippedX(true);

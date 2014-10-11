@@ -16,7 +16,7 @@ class NewLinearMissile : public Missile
 public:
 	OVERRIDE bool   init();
 	void		    update(float dTime);
-	void		    setAttribute(bool m_IsPlayerMissile, float velocity, float degree, float setDamage);
+	void		    setAttribute(bool isPlayerMissile, float velocity, float degree, float setDamage);
 	OVERRIDE void	collisionOccured(InteractiveObject* enemy, Directions dir);
 	CREATE_FUNC(NewLinearMissile);
 
