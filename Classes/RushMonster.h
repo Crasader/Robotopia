@@ -17,6 +17,7 @@ private:
 		RM_STAND,
 		RM_MOVE,
 		RM_RUSH,
+		RM_RUSH_WAIT,
 		RM_STATE_NUM,
 	};
 
@@ -28,4 +29,5 @@ private:
 	float		m_DelayTime;
 	State		m_State;
 	bool		m_IsRightDirection;
+	float		m_WaitTime;
 };

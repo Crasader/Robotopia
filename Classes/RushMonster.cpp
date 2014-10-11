@@ -18,6 +18,7 @@ bool RushMonster::init()
 	m_Animations[RM_STAND] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_STAND);
 	m_Animations[RM_MOVE] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_MOVE);
 	m_Animations[RM_RUSH] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_RUSH);
+	m_Animations[RM_RUSH_WAIT] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_STAND);
 	
 
 	m_MainSprite = Sprite::create();
@@ -33,6 +34,7 @@ bool RushMonster::init()
 
 	m_Info.maxHp = 100;
 	m_Info.hp = m_Info.maxHp;
+	m_WaitTime = 0;
 
 	return true;
 }
@@ -64,7 +66,6 @@ void RushMonster::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		break;
 	case OT_LINEAR_MISSILE:
-		break;
 	case OT_MELEE_MISSILE:
 	case OT_NEW_LINEAR_MISSILE:
 		auto bullet = (MeleeMissile*)enemy;
@@ -86,6 +87,28 @@ void RushMonster::changeState(State state)
 	if (m_State == state)
 	{
 		return;
+	}
+
+	if (m_State == RM_RUSH)
+	{
+		m_WaitTime = 0;
+		auto playerX = GET_STAGE_MANAGER()->getPlayer()->getPosition().x;
+
+		if (playerX < this->getPosition().x)
+		{
+			m_IsRightDirection = false;
+		}
+		else
+		{
+			m_IsRightDirection = true;
+		}
+
+		m_MainSprite->setFlippedX(m_IsRightDirection);
+		m_Velocity.x = m_MoveSpeed * 4;
+		if (!m_IsRightDirection)
+		{
+			m_Velocity.x = -m_Velocity.x;
+		}
 	}
 	m_State = state;
 	m_MainSprite->stopAllActions();
@@ -132,31 +155,47 @@ void RushMonster::update(float dTime)
 	{
 		changeState(RM_RUSH);
 	}
-	else if(m_State == RM_RUSH)
+	else if(m_State == RM_RUSH_WAIT)
 	{
 		m_Velocity.x = 0;
 		changeState(RM_STAND);
 	}
 	
-	if (m_State == RM_RUSH)
+	if (m_State == RM_RUSH || m_State == RM_RUSH_WAIT)
 	{
-		auto gameLayer = (GameLayer*)this->getParent();
-		auto playerX = gameLayer->getPlayer()->getPosition().x;
+		m_WaitTime += dTime;
 
-		if (playerX < this->getPosition().x)
+		if (m_State==RM_RUSH)
 		{
-			m_IsRightDirection = false;
+			if (m_WaitTime > 2)
+			{
+				m_WaitTime = 0;
+
+				changeState(RM_RUSH_WAIT);
+			}
 		}
 		else
 		{
-			m_IsRightDirection = true;
-		}
+			auto playerX = GET_STAGE_MANAGER()->getPlayer()->getPosition().x;
 
-		m_MainSprite->setFlippedX(m_IsRightDirection);
-		m_Velocity.x = m_MoveSpeed * 4 ;
-		if (!m_IsRightDirection)
-		{
-			m_Velocity.x = -m_Velocity.x;
+			if (playerX < this->getPosition().x)
+			{
+				m_IsRightDirection = false;
+			}
+			else
+			{
+				m_IsRightDirection = true;
+			}
+
+			if (m_WaitTime > 2)
+			{
+				m_WaitTime = 0;
+				changeState(RM_RUSH);
+			}
+			else
+			{
+				m_Velocity.x = 0;
+			}
 		}
 	}
 	else 
