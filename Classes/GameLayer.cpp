@@ -11,6 +11,7 @@
 #include "MeleeMissile.h"
 #include "SteamPack.h"
 #include "LandGateway.h"
+#include "LandTurret.h"
 #include "View.h"
 #include "Player.h"
 #include "InteractiveObject.h"
@@ -30,6 +31,7 @@ bool GameLayer::init()
 	}
 
 	m_Player = nullptr;
+	m_isVisited = false;
 	m_InteractiveObjects.clear();
 	m_CollisionInformations.clear();
 	m_ObjectPositionsHash.clear();
@@ -116,6 +118,10 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			object = NewLinearMissile::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
+		case OT_TURRET:
+			object = LandTurret::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
 		default:
 			return nullptr;
 	}
@@ -123,10 +129,6 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 	object->setPosition( position );
 	m_AddObjects.push_back( object );
 	this->addChild( object , zOrder );
-	if( type == OT_GATEWAY)
-	{
-		(( LandGateway* )object)->findNextStage();
-	}
 	return object;
 }
 
@@ -145,6 +147,12 @@ InteractiveObject*	GameLayer::addObjectByMapdata( int xIdx , int yIdx )
 
 void GameLayer::update( float dTime )
 {
+	if( !m_isVisited )
+	{
+		m_isVisited = true;
+		initGateways();
+	}
+
 	if( m_Player != nullptr )
 	{
 		View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
@@ -325,7 +333,7 @@ bool GameLayer::isOutOfStageMap( cocos2d::Point checkPosition )
 	return !m_MapRect.containsPoint( checkPosition );
 }
 
-void GameLayer::shakeStage()
+void GameLayer::initGateways()
 {
 	for( auto gateway : m_Gateways )
 	{

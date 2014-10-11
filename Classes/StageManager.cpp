@@ -208,6 +208,6 @@ void StageManager::shakeFloor()
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
 	for( int i = 1; i <= m_FloorData.stageNum; ++i )
 	{
-		m_WorldScenes[i]->getGameLayer()->shakeStage();
+		m_WorldScenes[i]->getGameLayer()->initGateways();
 	}
 }
