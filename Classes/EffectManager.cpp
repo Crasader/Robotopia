@@ -12,6 +12,7 @@ bool EffectManager::init()
 	SimpleAudioEngine::getInstance()->preloadEffect("MeleeMissile1.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("SteamGet.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("jump.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("NewLinearMissile.wav");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM1.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM2.mp3");
 	
@@ -20,7 +21,6 @@ bool EffectManager::init()
 
 void EffectManager::removeSprAfterAni(Ref* sender)
 {
-	
 	auto spr = (Sprite*)sender;
 	spr->removeFromParent();
 }
@@ -551,6 +551,10 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		break;
 	case SO_PLAYER_FLYING:
 		SimpleAudioEngine::getInstance()->playEffect("Flying.mp3", isRepeated);
+		break;
+	case SO_NEW_LINEAR_MISSILE_CREATING:
+		SimpleAudioEngine::getInstance()->playEffect("NewLinearMissile.wav", isRepeated);
+		break;
 		
 	}
 }
