@@ -5,6 +5,7 @@
 #include "GameManager.h"
 #include "LandGateway.h"
 #include "MeleeMissile.h"
+#include "NewLinearMissile.h"
 
 USING_NS_CC;
 
@@ -23,6 +24,7 @@ bool Player::init()
 	m_Animations[PS_JUMP] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_JUMP);
 	m_Animations[PS_HIT] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_JUMP);
 	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK,0.3f);
+	m_Animations[PS_ATTACK2] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK, 1.0f);
 	m_IsRightDirection = true;
 	m_AttackEnd = false;
 	m_IsActiveFly = false;
@@ -143,7 +145,7 @@ void Player::update(float dTime)
 	}
 	
 	//키 입력이 따른 상태 처리
-	if (m_State != PS_HIT)
+	if (m_State != PS_HIT || m_State != PS_ATTACK2)
 	{
 		act(dTime);
 	}
@@ -162,7 +164,7 @@ void Player::changeState(State state)
 	m_State = state;
 	m_MainSprite->stopAllActions();
 
-	if (state == PS_ATTACK)
+	if (state == PS_ATTACK || state==PS_ATTACK2)
 	{
 		m_AttackEnd = false;
 	}
@@ -183,7 +185,7 @@ void Player::changeState(State state)
 
 void Player::endAnimation(cocos2d::Ref* sender)
 {
-	if (m_State == PS_ATTACK)
+	if (m_State == PS_ATTACK || m_State == PS_ATTACK2)
 	{
 		changeState(PS_STAND);
 	}
@@ -241,9 +243,20 @@ void Player::act(float dTime)
 		GET_EFFECT_MANAGER()->createEffectSelectedSizeByUser(ET_ROUND_SMOKE, Rect(pos.x, pos.y, -1, -1), 1);
 	}
 
-	if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) == KS_HOLD)
+	if (m_State != KC_ATTACK2)
 	{
-		changeState(PS_ATTACK);
+		if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) == KS_HOLD)
+		{
+			changeState(PS_ATTACK);
+		}
+	}
+
+	if (m_State == PS_WALK || m_State == PS_STAND)
+	{
+		if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK2) == KS_HOLD)
+		{
+			changeState(PS_ATTACK2);
+		}
 	}
 
 	if (m_IsFlying)
@@ -255,12 +268,7 @@ void Player::act(float dTime)
 	}
 	else
 	{
-		if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) && (m_State == PS_STAND || m_State == PS_WALK))
-		{
-			changeState(PS_ATTACK);
-		}
-
-		if (m_State != PS_ATTACK)
+		if (m_State != PS_ATTACK && m_State != PS_ATTACK2)
 		{
 			if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
 			{
@@ -300,16 +308,33 @@ void Player::act(float dTime)
 			pos.x -= 70;
 		}
 
-		auto object = (MeleeMissile*)gameLayer->addObject(OT_MELEE_MISSILE, pos);
-
-
-		if (m_IsRightDirection)
+		if (m_State == PS_ATTACK)
 		{
-			object->setAttribute(true, 1, 0, 2);
+			auto object = (MeleeMissile*)gameLayer->addObject(OT_MELEE_MISSILE, pos);
+
+
+			if (m_IsRightDirection)
+			{
+				object->setAttribute(true, 1, 0, 2);
+			}
+			else
+			{
+				object->setAttribute(true, -1, 0, 2);
+			}
 		}
 		else
 		{
-			object->setAttribute(true, -1, 0, 2);
+			auto object = (NewLinearMissile*)gameLayer->addObject(OT_NEW_LINEAR_MISSILE, pos);
+
+
+			if (m_IsRightDirection)
+			{
+				object->setAttribute(true, 200, 0, 5);
+			}
+			else
+			{
+				object->setAttribute(true, -200, 0, 5);
+			}
 		}
 
 		m_AttackEnd = true;

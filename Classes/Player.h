@@ -45,6 +45,7 @@ private:
 		PS_WALK,
 		PS_JUMP,
 		PS_ATTACK,
+		PS_ATTACK2,
 		PS_HIT,
 		PS_STATE_NUM,
 	};
