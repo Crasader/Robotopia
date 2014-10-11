@@ -67,7 +67,7 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		case AT_NEW_LINEAR_MISSILE_FLYING:
 			return createAnimation("New_Linear_Missile%d.png", 1, 6, delay);
 		case AT_NEW_LINEAR_MISSILE_COLLISION:
-			return createAnimation("New_Linear_Missile_Collision%d.png", 1, 6, delay);
+			return createAnimation("New_Linear_Missile_Collsion%d.png", 1, 6, delay);
 		case AT_MONSTER_BAT:
 			return createAnimation("monster_bat%d.png", 1, 8, delay);
 		case AT_PLAYER_STAND:
@@ -129,7 +129,7 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 		case ST_NEW_LINEAR_MISSILE_FLYING:
 			return createSprite("New_Linear_Missile1.png");
 		case ST_NEW_LINEAR_MISSILE_COLLISION:
-			return createSprite("New_Linear_Missile_Collision1.png");
+			return createSprite("New_Linear_Missile_Collsion1.png");
 		case ST_PLAYER_LANDING:
 			return createSprite("ET_PLAYER_LANDING1.png");
 		case ST_ROUND_SMOKE:
