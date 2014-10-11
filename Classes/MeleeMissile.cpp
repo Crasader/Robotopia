@@ -25,7 +25,7 @@ bool MeleeMissile::init()
 	auto action = Repeat::create(Animate::create(m_Animations[0]), aniPlayNum);
 	auto callback = CallFunc::create(CC_CALLBACK_0(MeleeMissile::isDestroyedToTureAfterAni, this));
 	m_MainSprite->runAction(Sequence::create(action, callback, NULL));
-	
+	GET_EFFECT_MANAGER()->createSound(SO_MELEE_MISSILE, false);
 
 	this->addChild(m_MainSprite);
 	return true;
