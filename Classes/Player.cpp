@@ -163,7 +163,7 @@ void Player::update(float dTime)
 
 	this->setPosition(pos);
 
-	if (m_Info.hp == 0 || m_Info.steam == 0)
+	if (m_Info.hp <= 0 || m_Info.steam <= 0)
 	{
 		Director::getInstance()->end();
 	}
