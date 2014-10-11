@@ -9,13 +9,6 @@ USING_NS_CC;
 bool Minimap::init()
 {
 	m_MMWinOn = false;
-
-	Player* player = GET_STAGE_MANAGER()->getPlayer();
-	if (player == nullptr)
-	{
-		return false;
-	}
-
 	auto winSize = Director::getInstance()->getWinSize();
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
@@ -63,6 +56,11 @@ bool Minimap::init()
 
 void Minimap::update(float dTime)
 {
+	Player* player = GET_STAGE_MANAGER()->getPlayer();
+	if (player == nullptr)
+	{
+		return;
+	}
 	int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
 	Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
 	Vec2 playerRoomOrigin = GET_STAGE_MANAGER()->positionToIdxOfFloor(playerPosition);

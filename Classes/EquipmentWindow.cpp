@@ -4,12 +4,6 @@ USING_NS_CC;
 
 bool EquipmentWindow::init()
 {
-	Player* player = GET_STAGE_MANAGER()->getPlayer();
-	if (player == nullptr)
-	{
-		return false;
-	}
-
 	m_CharWinOn = false;
 
 	auto winSize = Director::getInstance()->getWinSize();
