@@ -160,7 +160,7 @@ Direction LandGateway::findReverseDirection( Direction dir )
 
 Point LandGateway::findNextPosition()
 {
-	StageData nextStageData = GET_STAGE_MANAGER()->getStageDataByStageNum( m_NextFloorNum );
+	StaticStageData nextStageData = GET_STAGE_MANAGER()->getStageDataByStageNum( m_NextFloorNum );
 	Vec2 transedStageIdx;
 	transedStageIdx.x = (m_NextFloorIdx.x - nextStageData.x)*MODULE_BASE_WIDTH; //FloorIdx단위로 잘린 위치값을 스테이지 Idx로 가져온다.
 	transedStageIdx.y = ( m_NextFloorIdx.y - nextStageData.y )*MODULE_BASE_HEIGHT;

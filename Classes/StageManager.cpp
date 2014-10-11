@@ -97,9 +97,9 @@ ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx )
 ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx , int stageNum )
 {
 	_ASSERT( stageNum <= m_FloorData.stageNum && 
-			 yIdx*m_StaticStageWidths[stageNum] + xIdx < 
-			 m_StaticStageWidths[stageNum] * m_StaticStageHeights[stageNum] );
-	return ( ObjectType )m_StaticStageDatas[stageNum][yIdx*m_StaticStageWidths[stageNum] + xIdx];
+			 yIdx*m_StaticStageDatas[stageNum].width + xIdx < 
+			 m_StaticStageDatas[stageNum].width * m_StaticStageDatas[stageNum].height );
+	return ( ObjectType )m_StaticStageDatas[stageNum].data[yIdx*m_StaticStageDatas[stageNum].width + xIdx];
 }
 
 InteractiveObject* StageManager::addObject( ObjectType type , cocos2d::Point position )
