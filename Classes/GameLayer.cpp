@@ -100,6 +100,7 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_STEAM_PACK:
 			object = SteamPack::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
 		default:
 			return nullptr;
 	}
