@@ -247,5 +247,6 @@ const StaticStageData& StageManager::getStageDatas()
 
 WorldScene* StageManager::getWorldScene()
 {
+	_ASSERT( m_CurrentStageNum > 0 && m_CurrentStageNum <= m_FloorData.stageNum );
 	return m_WorldScenes[m_CurrentStageNum]; 
 }

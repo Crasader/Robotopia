@@ -20,7 +20,7 @@ bool LoadingScene::init()
 	spr->setPosition( Point::ZERO );
 	layer->addChild( spr );
 	m_Mutex = true;
-	//GET_EFFECT_MANAGER()->createSound( SoundType::SO_SAGA_BGM , false );
+	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SAGA_BGM , true );
 	this->scheduleUpdate();
 	return true;
 }
