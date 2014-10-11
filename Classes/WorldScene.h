@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "Utils.h"
 
+class KeyStateSentinel;
 class GameLayer;
 class BackgroundLayer;
 class UILayer;
@@ -28,4 +29,5 @@ private:
 	GameLayer*			m_GameLayer;
 	BackgroundLayer*	m_BackgroundLayer;
 	UILayer*			m_UILayer;
+	KeyStateSentinel*	m_KeySentinel;
 };

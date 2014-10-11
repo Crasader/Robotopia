@@ -15,7 +15,7 @@ WorldScene* WorldScene::createScene()
 
 void WorldScene::initCurrentSceneWithData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> mapData , char* BGpath )
 {
-	GET_INPUT_MANAGER()->receiveInputData( this );
+	m_KeySentinel = GET_INPUT_MANAGER()->receiveInputData( this );
 	this->getGameLayer()->initWorldFromData(boxNum, boxSize, mapData, BGpath);
 }
 
@@ -25,7 +25,7 @@ bool WorldScene::init()
 	{
 		return false;
 	}
-
+	
 	m_GameLayer = GameLayer::create();
 	m_GameLayer->setAnchorPoint( Point::ZERO );
 	m_BackgroundLayer = BackgroundLayer::create();
@@ -49,6 +49,7 @@ void WorldScene::onEnter()
 
 void WorldScene::update(float dTime)
 {
+	m_KeySentinel->update( dTime );
 	m_GameLayer->update( dTime );
 	m_UILayer->update( dTime );
 	m_BackgroundLayer->update( dTime );
