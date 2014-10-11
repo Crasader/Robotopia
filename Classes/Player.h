@@ -56,6 +56,7 @@ private:
 	bool		m_AttackEnd;
 	bool		m_IsActiveFly;
 	bool		m_IsInvincible;
+	bool		m_IsCrashed;
 	float		m_ActiveFlyingTime;
 	float		m_HitTime;
 

@@ -28,6 +28,7 @@ bool Player::init()
 	m_IsActiveFly = false;
 	m_IsOverlapable = false;
 	m_IsInvincible = false;
+	m_IsCrashed = false;
 
 	m_Info.maxHp = 100;
 	m_Info.hp = m_Info.maxHp;
@@ -60,11 +61,21 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		break;
 	case OT_BLOCK:
+		if (m_IsCrashed == true)
+		{
+			break;
+		}
 		if (dir & DIR_DOWN)
 		{
 			if (m_State == PS_JUMP)
 			{
 				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+			}
+			if (m_State == PS_HIT)
+			{
+				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+				changeState(PS_STAND);
+				startInvincible();
 			}
 			m_IsFlying = false;
 			m_Velocity.y = 0;
@@ -96,50 +107,20 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 	case OT_RUSH_MONSTER:
 		if (m_State != PS_HIT && !m_IsInvincible)
 		{
+			m_IsCrashed = true;
 			this->setHp(this->getHp() - 5);
 			changeState(PS_HIT);
-			if (dir&DIR_LEFT)
-			{
-				m_MainSprite->setFlippedX(true);
-				m_Velocity.x = 300;
-				m_Velocity.y = 200;
-			}
-			if (dir&DIR_RIGHT)
+			if (m_Velocity.x > 0)
 			{
 				m_MainSprite->setFlippedX(false);
 				m_Velocity.x = -300;
-				m_Velocity.y = 200;
 			}
-			if (dir&DIR_UP)
+			else
 			{
-				if (m_Velocity.x > 0)
-				{
-					m_MainSprite->setFlippedX(false);
-					m_Velocity.x = -300;
-				}
-				else
-				{
-					m_MainSprite->setFlippedX(true);
-					m_Velocity.x = 300;
-				}
-
-				m_Velocity.y = -200;
+				m_MainSprite->setFlippedX(true);
+				m_Velocity.x = 300;
 			}
-			if (dir&DIR_DOWN)
-			{
-				if (m_Velocity.x > 0)
-				{
-					m_MainSprite->setFlippedX(false);
-					m_Velocity.x = -300;
-				}
-				else
-				{
-					m_MainSprite->setFlippedX(true);
-					m_Velocity.x = 300;
-				}
-
-				m_Velocity.y = 200;
-			}
+			m_Velocity.y = 200;
 		}
 		break;
 	}
@@ -356,13 +337,9 @@ void Player::reset(float dTime)
 		m_Info.steam--;
 	}
 
-	if (m_Velocity.y == 0 && m_State == PS_HIT)
-	{
-		changeState(PS_STAND);
-		startInvincible();
-	}
 
 	m_IsActiveFly = false;
+	m_IsCrashed = false;
 	m_Velocity.y -= GRAVITY*dTime;
 }
 
