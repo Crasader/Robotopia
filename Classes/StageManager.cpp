@@ -214,5 +214,9 @@ void StageManager::shakeFloor()
 
 void StageManager::makeStaticData()
 {
-
+	for( int i = 1; i <= m_FloorData.stageNum; ++i )
+	{
+		auto data = m_CurrentFloorStagesData[i];
+		for( int i = 0; i <  data.)
+	}
 }

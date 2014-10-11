@@ -18,7 +18,7 @@ bool LandTurret::init()
 	this->setAnchorPoint( Point::ZERO );
 	this->addChild( m_MainSprite );
 
-	m_Type = OT_FLOOR;
+	m_Type = OT_TURRET;
 	m_Width = m_MainSprite->getContentSize().width;
 	m_Height = m_MainSprite->getContentSize().height;
 
