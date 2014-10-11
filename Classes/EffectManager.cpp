@@ -10,9 +10,9 @@ bool EffectManager::init()
 {
 	m_IsOnBGM = false;
 	SimpleAudioEngine::getInstance()->preloadEffect("MeleeMissile1.wav");
-	SimpleAudioEngine::getInstance()->setEffectsVolume(1.0);
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM1.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM2.mp3");
+	
 	return true;
 }
 
