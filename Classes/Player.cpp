@@ -300,6 +300,7 @@ void Player::act(float dTime)
 			{
 				if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
 				{
+					GET_EFFECT_MANAGER()->createSound(SO_JUMP, false);
 					m_Velocity.y = 600;
 				}
 				else if (leftState == KS_HOLD)
