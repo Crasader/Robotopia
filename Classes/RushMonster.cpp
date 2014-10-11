@@ -30,6 +30,9 @@ bool RushMonster::init()
 	m_MoveSpeed = 30;
 	m_IsOnGravity = true;
 
+	m_Info.maxHp = 100;
+	m_Info.hp = m_Info.maxHp;
+
 	this->scheduleUpdate();
 
 	return true;
@@ -63,6 +66,13 @@ void RushMonster::collisionOccured(InteractiveObject* enemy, Directions dir)
 		break;
 	case OT_LINEAR_MISSILE:
 		//m_IsDestroyed = true;
+		break;
+	case OT_MELEE_MISSILE:
+		m_Info.hp--;
+		if (m_Info.hp <= 0)
+		{
+			m_IsDestroyed = true;
+		}
 		break;
 	}
 }
@@ -140,7 +150,7 @@ void RushMonster::update(float dTime)
 		}
 
 		m_MainSprite->setFlippedX(m_IsRightDirection);
-		m_Velocity.x = m_MoveSpeed * 2;
+		m_Velocity.x = m_MoveSpeed * 4 ;
 		if (!m_IsRightDirection)
 		{
 			m_Velocity.x = -m_Velocity.x;
