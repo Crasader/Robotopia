@@ -13,6 +13,8 @@ KeyStateSentinel* InputManager::receiveKeyboardData(WorldScene* scene)
 	auto sentinel = KeyStateSentinel::create();
 
 	scene->addChild(sentinel);
+
+	return sentinel;
 }
 
 bool InputManager::init()
@@ -26,7 +28,7 @@ bool InputManager::init()
 	return true;
 }
 
-KeyStateSentinel InputManager::receiveInputData(WorldScene* scene)
+KeyStateSentinel* InputManager::receiveInputData(WorldScene* scene)
 {
 	return receiveKeyboardData(scene);
 }
