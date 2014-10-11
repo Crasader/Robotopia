@@ -12,7 +12,6 @@ public:
 	void						initCurrentSceneWithData( cocos2d::Vec2 boxNum , cocos2d::Size boxSize ,
 												 std::map<int , ObjectType> mapData , char* BGpath );
 	virtual bool				init();
-
 	GameLayer*					getGameLayer() {return m_GameLayer; }
 	UILayer*					getUILayer() {return m_UILayer; }
 	CREATE_FUNC( WorldScene );

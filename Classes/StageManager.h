@@ -10,7 +10,7 @@ public:
 
 	bool								init();
 	//stage를 변경합니다.
-	void								changeStage(size_t stageNum, cocos2d::Point nextPlayerPosition);
+	void								changeStage(int stageNum, cocos2d::Point nextPlayerPosition);
 	//방문한 장소를 추가합니다.
 	void								addVisitedStage(int stage);
 	//오브젝트의 타입과 위치 값을 받아 오브젝트를 GameLayer에 추가합니다.
@@ -29,12 +29,12 @@ public:
 	std::vector<InteractiveObject*>		getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
 	
 	//멤버변수들 정보조회
-	WorldScene*							getWorldScene(){return m_WorldScene;}
+	WorldScene*							getWorldScene(){return m_WorldScenes[m_CurrentStageNum];}
 	Player*								getPlayer();
 	const FloorData&					getFloorData(){return m_FloorData;};
-	const StageData&					getStageDataByStageNum(int stageNum) { return m_CurrentFloorData[stageNum]; }
-	const StageData&					getStageDatas(){return m_CurrentFloorData[m_CurrentStageNum];};
-	cocos2d::Rect						getStageRect(){return m_StageRect;}
+	const StageData&					getStageDataByStageNum(int stageNum) { return m_CurrentFloorStagesData[stageNum]; }
+	const StageData&					getStageDatas(){return m_CurrentFloorStagesData[m_CurrentStageNum];};
+	cocos2d::Rect						getStageRect();
 	int									getCurStageNum() {return m_CurrentStageNum; }
 	const std::vector<int>&				getVisitedStageNums(){return m_VisitedStageNums;}
 
@@ -48,21 +48,13 @@ public:
 
 
 private:
-	struct PlayerInfo
-	{
-		int Hp;
-		int Steam;
-		int MaxHp;
-		int MaxSteam;
-	};
-
-	cocos2d::Rect						m_StageRect;
 	cocos2d::Size						m_BoxSize;
 	std::vector<int>					m_VisitedStageNums;
 	int									m_CurrentStageNum;
-	int									m_CurrentFloor;
-	std::vector<StageData>				m_CurrentFloorData;
+	int									m_CurrentFloorNum;
+	std::vector<StageData>				m_CurrentFloorStagesData;
 	FloorData							m_FloorData;
-	WorldScene*							m_WorldScene;
+	std::map<int , WorldScene*>			m_WorldScenes;
+	WorldScene*							m_CurrentWorldScene;
 	PlayerInfo							m_PlayerInfo;
 };

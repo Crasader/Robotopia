@@ -7,6 +7,7 @@ cocos2d::Scene* LoadingScene::createScene()
 	LoadingScene* scene = LoadingScene::create();
 	return scene;
 }
+
 bool LoadingScene::init()
 {
 	auto layer = Layer::create();

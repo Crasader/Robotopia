@@ -8,59 +8,69 @@ USING_NS_CC;
 
 bool StageManager::init()
 {
-	m_WorldScene = nullptr;
-	m_CurrentFloor = 1;
-	m_CurrentStageNum = 0;
-	m_PlayerInfo.Hp = 100 , m_PlayerInfo.MaxHp = 100 , m_PlayerInfo.Steam = 20 , m_PlayerInfo.MaxSteam = 20;
-	GET_DATA_MANAGER()->getFloorData( m_CurrentFloor , &m_FloorData , &m_CurrentFloorData );
+	m_CurrentWorldScene = nullptr;
+	m_CurrentFloorNum = 1;
+	m_CurrentStageNum = 1;
+	m_PlayerInfo.hp = 100 , m_PlayerInfo.maxHp = 100 , m_PlayerInfo.steam = 20 , m_PlayerInfo.maxSteam = 20;
+	m_BoxSize = Size( 32 , 32 );
+
+	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
+
+	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
+	{
+		WorldScene* worldScene = WorldScene::createScene();
+		int StageMaxWidthIdx = m_CurrentFloorStagesData[stageNum].width;
+		int StageMaxHeightIdx = m_CurrentFloorStagesData[stageNum].height;
+		std::map<int , ObjectType> data = m_CurrentFloorStagesData[stageNum].data;
+		worldScene->initCurrentSceneWithData( Vec2( StageMaxWidthIdx , StageMaxHeightIdx ) , m_BoxSize , data , "background.png" );
+		worldScene->retain();
+		m_WorldScenes[stageNum] = worldScene;
+	}
 	return true;
 }
 
-void StageManager::changeStage( size_t stageNum , Point nextPlayerPosition)
+void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 {
+	_ASSERT( stageNum <= m_FloorData.stageNum );
 	addVisitedStage( stageNum );
 	savePlayerInfo();
+	//나중에 씬단위에서 아래 데이터 처리하도록 하자.
 	m_CurrentStageNum = stageNum;
-	int boxNumWidth = m_CurrentFloorData[stageNum].width;
-	int boxNumHeight = m_CurrentFloorData[stageNum].height;
-	m_BoxSize = Size( 32 , 32 );
-	m_StageRect = Rect( 0 , 0 , m_BoxSize.width * boxNumWidth , m_BoxSize.height * boxNumHeight );
-	std::map<int , ObjectType> data = m_CurrentFloorData[stageNum].data;
-	m_WorldScene = WorldScene::createScene();
-	m_WorldScene->initCurrentSceneWithData( Vec2( boxNumWidth , boxNumHeight ) , m_BoxSize , data , "background.png" );
-	Director::getInstance()->replaceScene( m_WorldScene );
+	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
+	Director::getInstance()->replaceScene( m_CurrentWorldScene );
+	m_CurrentWorldScene->resume();
 	loadPlayer(nextPlayerPosition);
 }
 
 Player* StageManager::getPlayer()
 {
-	if( m_WorldScene == nullptr )
+	if( m_CurrentWorldScene == nullptr )
 	{
 		return nullptr;
 	}
-	return ( m_WorldScene->getGameLayer() )->getPlayer();
+	return ( m_CurrentWorldScene->getGameLayer() )->getPlayer();
 }
 
 std::vector<InteractiveObject*> StageManager::getObjectsByRect( cocos2d::Rect checkRect )
 {
 	std::vector<InteractiveObject*> results;
 	results.clear();
-	if( m_WorldScene == nullptr )
+	if( m_CurrentWorldScene == nullptr )
 	{
 		return results;
 	}
-	return ( m_WorldScene->getGameLayer() )->getObjectsByRect( checkRect );
+	return ( m_CurrentWorldScene->getGameLayer() )->getObjectsByRect( checkRect );
 }
 
 std::vector<InteractiveObject*> StageManager::getObjectsByPosition( cocos2d::Point checkPosition )
 {
 	std::vector<InteractiveObject*> results;
 	results.clear();
-	if( m_WorldScene == nullptr )
+	if( m_CurrentWorldScene == nullptr )
 	{
 		return results;
 	}
-	return ( m_WorldScene->getGameLayer() )->getObjectsByPosition( checkPosition );
+	return ( m_CurrentWorldScene->getGameLayer() )->getObjectsByPosition( checkPosition );
 }
 
 ObjectType StageManager::getStageDataInPosition( cocos2d::Point position )
@@ -77,36 +87,39 @@ ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx )
 
 ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx , int stageNum )
 {
-	StageData stageData = m_CurrentFloorData[stageNum];
+	_ASSERT( stageNum <= m_FloorData.stageNum );
+	StageData stageData = m_CurrentFloorStagesData[stageNum];
+	_ASSERT( yIdx*stageData.width + xIdx < stageData.width*stageData.height );
 	return stageData.data[yIdx*stageData.width + xIdx];
 }
 
 InteractiveObject* StageManager::addObject( ObjectType type , cocos2d::Point position )
 {
 	InteractiveObject* resultType = nullptr;
-	if( m_WorldScene == nullptr )
+	if( m_CurrentWorldScene == nullptr )
 	{
 		return resultType;
 	}
-	return ( m_WorldScene->getGameLayer() )->addObject( type , position );
+	return ( m_CurrentWorldScene->getGameLayer() )->addObject( type , position );
 }
 
 void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect )
 {
-	m_WorldScene->getGameLayer()->addEffect( effect );
+	m_CurrentWorldScene->getGameLayer()->addEffect( effect );
 }
 
 void StageManager::addEffectOnGameLayer( cocos2d::Sprite* effect , Point position , Point AnchorPoint )
 {
 	effect->setAnchorPoint( AnchorPoint );
 	effect->setPosition( position );
-	m_WorldScene->getGameLayer()->addEffect( effect );
+	m_CurrentWorldScene->getGameLayer()->addEffect( effect );
 }
 
 cocos2d::Vec2 StageManager::positionToIdxOfStage( cocos2d::Point position )
 {
 	Vec2 curPosIdx = Vec2( -1 , -1 );
-	if( m_StageRect.containsPoint( position ) )
+	Rect curStageRect = getStageRect();
+	if( curStageRect.containsPoint( position ) )
 	{
 		curPosIdx.x = position.x / m_BoxSize.width;
 		curPosIdx.y = position.y / m_BoxSize.height;
@@ -118,8 +131,9 @@ cocos2d::Vec2 StageManager::positionToIdxOfFloor( cocos2d::Point position )
 {
 	int stageXIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( position ).x;
 	int stageYIdx = GET_STAGE_MANAGER()->positionToIdxOfStage( position ).y;
-	int floorXIdx = m_CurrentFloorData[m_CurrentStageNum].x + (stageXIdx - 1) / MODULE_BASE_WIDTH;
-	int curFloorY = m_CurrentFloorData[m_CurrentStageNum].y;
+	_ASSERT( m_CurrentStageNum <= m_FloorData.stageNum );
+	int floorXIdx = m_CurrentFloorStagesData[m_CurrentStageNum].x + (stageXIdx - 1) / MODULE_BASE_WIDTH;
+	int curFloorY = m_CurrentFloorStagesData[m_CurrentStageNum].y;
 	int curPositionAddY = (stageYIdx-1) / MODULE_BASE_HEIGHT;
 	int floorYIdx = curFloorY + curPositionAddY;
 
@@ -128,6 +142,7 @@ cocos2d::Vec2 StageManager::positionToIdxOfFloor( cocos2d::Point position )
 
 int StageManager::getFloorDataByIdx( int xIdx , int yIdx )
 {
+	_ASSERT( yIdx*m_FloorData.width + xIdx < m_FloorData.width * m_FloorData.height );
 	return m_FloorData.data[m_FloorData.width*yIdx + xIdx];
 }
 
@@ -160,19 +175,20 @@ void StageManager::savePlayerInfo()
 	{
 		return;
 	}
-	m_PlayerInfo.Hp = player->getHp();
-	m_PlayerInfo.MaxHp = player->getMaxHp();
-	m_PlayerInfo.Steam = player->getSteam();
-	m_PlayerInfo.MaxSteam = player->getMaxSteam();
-
+	m_PlayerInfo = player->getInfo();
 }
 
 void StageManager::loadPlayer( Point setPosition )
 {
 	addObject( OT_PLAYER , setPosition );
 	auto player = getPlayer();
-	player->setHp( m_PlayerInfo.Hp );
-	player->setMaxHp( m_PlayerInfo.MaxHp );
-	player->setSteam( m_PlayerInfo.Steam );
-	player->setMaxSteam( m_PlayerInfo.MaxSteam );
+	player->setInfo( m_PlayerInfo );
+}
+
+cocos2d::Rect StageManager::getStageRect()
+{
+	int StageMaxWidthIdx = m_CurrentFloorStagesData[m_CurrentStageNum].width;
+	int StageMaxHeightIdx = m_CurrentFloorStagesData[m_CurrentStageNum].height;
+
+	return Rect( 0 , 0 , m_BoxSize.width * StageMaxWidthIdx , m_BoxSize.width * StageMaxHeightIdx );
 }
