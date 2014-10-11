@@ -7,7 +7,7 @@
             <key>GatewayAct0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{742,326},{26,32}}</string>
+                <string>{{454,452},{26,32}}</string>
                 <key>offset</key>
                 <string>{-3,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>GatewayAct1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,360},{30,32}}</string>
+                <string>{{358,452},{30,32}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>GatewayAct2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{676,360},{30,32}}</string>
+                <string>{{390,452},{30,32}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>GatewayAct3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,394},{32,32}}</string>
+                <string>{{256,452},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>GatewayAct4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{678,394},{32,32}}</string>
+                <string>{{290,452},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>GatewayActive.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{766,124},{1,1}}</string>
+                <string>{{256,486},{1,1}}</string>
                 <key>offset</key>
                 <string>{-15.5,15.5}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>GatewayUnactive.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{712,394},{32,32}}</string>
+                <string>{{324,452},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -108,270 +108,10 @@
                 <key>sourceSize</key>
                 <string>{640,448}</string>
             </dict>
-            <key>gatewayActivate0.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{644,90},{32,64}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,64}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayActivate1.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{644,124},{32,64}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,64}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayActivate2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{644,226},{32,62}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,1},{32,62}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayActivate3.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{644,260},{32,62}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,1},{32,62}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayActivate4.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{644,294},{32,62}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,1},{32,62}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen0.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{644,158},{32,64}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,64}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen1.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{708,326},{32,62}}</string>
-                <key>offset</key>
-                <string>{0,1}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,62}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen10.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{742,360},{32,26}}</string>
-                <key>offset</key>
-                <string>{0,19}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,26}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen11.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{744,292},{32,22}}</string>
-                <key>offset</key>
-                <string>{0,21}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,22}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen12.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{748,258},{32,18}}</string>
-                <key>offset</key>
-                <string>{0,23}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,18}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen13.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{754,224},{32,14}}</string>
-                <key>offset</key>
-                <string>{0,25}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,14}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{710,90},{32,58}}</string>
-                <key>offset</key>
-                <string>{0,3}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,58}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen3.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{710,124},{32,54}}</string>
-                <key>offset</key>
-                <string>{0,5}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,54}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen4.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{710,158},{30,50}}</string>
-                <key>offset</key>
-                <string>{-1,7}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{30,50}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen5.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{710,190},{32,46}}</string>
-                <key>offset</key>
-                <string>{0,9}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,46}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen6.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{710,224},{32,42}}</string>
-                <key>offset</key>
-                <string>{0,11}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,42}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen7.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{708,258},{32,38}}</string>
-                <key>offset</key>
-                <string>{0,13}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,38}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen8.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{708,292},{32,34}}</string>
-                <key>offset</key>
-                <string>{0,15}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,34}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayOpen9.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{644,328},{32,30}}</string>
-                <key>offset</key>
-                <string>{0,17}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,30}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
-            <key>gatewayUnactivate.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{644,192},{32,64}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{32,64}}</string>
-                <key>sourceSize</key>
-                <string>{32,64}</string>
-            </dict>
             <key>menu_play0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,2},{125,42}}</string>
+                <string>{{2,452},{125,42}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -384,7 +124,7 @@
             <key>menu_play1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,46},{125,42}}</string>
+                <string>{{129,452},{125,42}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -394,6 +134,19 @@
                 <key>sourceSize</key>
                 <string>{125,42}</string>
             </dict>
+            <key>turret.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{422,452},{30,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{30,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -402,9 +155,9 @@
             <key>realTextureFileName</key>
             <string>ozt.png</string>
             <key>size</key>
-            <string>{771,452}</string>
+            <string>{644,496}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d9c164800c01b190949aac12afc9daff:675c3205bc496c94b13cc8b94462ea64:d3a240d8472909aae37610582f1d0455$</string>
+            <string>$TexturePacker:SmartUpdate:c09707ad891bdac7c319bd34e50ea04c:7bb44017a62cb26468725a07492e1e58:d3a240d8472909aae37610582f1d0455$</string>
             <key>textureFileName</key>
             <string>ozt.png</string>
         </dict>

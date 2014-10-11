@@ -14,7 +14,7 @@ bool LandTurret::init()
 	m_Range = 320.0f;
 	m_Damage = 5.0f;
 	m_IsOverlapable = true; //충돌 안함
-	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "turret.png" );
+	m_MainSprite = Sprite::create( "turret.png" );
 	this->setAnchorPoint( Point::ZERO );
 	this->addChild( m_MainSprite );
 

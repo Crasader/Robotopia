@@ -3,7 +3,8 @@
 #include "cocos2d.h"
 #include "WorldScene.h"
 #include "Player.h"
-
+#define MAX_STAGE_NUM 10
+#define MAX
 class StageManager
 {
 public:
@@ -55,6 +56,8 @@ private:
 	int									m_CurrentFloorNum;
 	std::vector<StageData>				m_CurrentFloorStagesData;
 	FloorData							m_FloorData;
+
+	int									m_StaticStageDatas[][];
 	std::map<int , WorldScene*>			m_WorldScenes;
 	WorldScene*							m_CurrentWorldScene;
 	PlayerInfo							m_PlayerInfo;
