@@ -14,6 +14,7 @@ bool LinearMissile::init()
 	}
 
 	m_Type = OT_LINEAR_MISSILE;
+	m_Degree = 4;
 	
 	m_MainSprite = Sprite::create();
 	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_LINEARMISSILE_FLYING, 0.05f);
@@ -27,13 +28,14 @@ bool LinearMissile::init()
 }
 
 
-void LinearMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, float degree)
+void LinearMissile::setAttribute(bool m_IsPlayerMissile, float velocity, float degree, float setDamage)
 {
 	if (velocity < 0)
 	{
 		m_MainSprite->setFlippedX(true);
 	}
 	m_Degree = degree;
+	m_Damage = setDamage;
 	m_Velocity.x = cos(PIE / 180 * degree) * velocity;
 	m_Velocity.y = sin(PIE / 180 * degree) * abs(velocity);
 }

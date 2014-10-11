@@ -346,7 +346,7 @@ void EffectManager::createEffectMeleeMissileCollision(cocos2d::Rect ownRect, Dir
 	float needEffectScale = 0.85f;
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_MELEE_MISSILE_COLLISION);
-	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_COLLISION, 0.02f);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_COLLISION, 0.01f);
 
 	float ratioX = ownRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = ownRect.size.height / effectSpr->getContentSize().height;
@@ -371,7 +371,7 @@ void EffectManager::createEffectMeleeMissileCollision(cocos2d::Rect ownRect, Dir
 		break;
 	case DIR_DOWN:
 		setPosX = ownRect.origin.x + (ownRect.size.width / 2);
-		setPosY = ownRect.origin.y;
+		setPosY = ownRect.origin.y + (ownRect.size.height / 4);
 		break;
 	case DIR_LEFT:
 		setPosX = ownRect.origin.x;
@@ -398,7 +398,7 @@ void EffectManager::createEffectMeleeMissileCollisionByUser(cocos2d::Rect effect
 {
 	float needEffectScale = 1.0f;
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_MELEE_MISSILE_COLLISION);
-	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_COLLISION, 0.02f);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_MELEE_MISSILE_COLLISION, 0.01f);
 
 	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;

@@ -304,11 +304,11 @@ void Player::act(float dTime)
 
 		if (m_IsRightDirection)
 		{
-			object->setMoveAttribute(true, 1, 0);
+			object->setAttribute(true, 1, 0);
 		}
 		else
 		{
-			object->setMoveAttribute(true, -1, 0);
+			object->setAttribute(true, -1, 0);
 		}
 
 		m_AttackEnd = true;

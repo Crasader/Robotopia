@@ -29,7 +29,7 @@ bool NewLinearMissile::init()
 }
 
 
-void NewLinearMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, float degree)
+void NewLinearMissile::setAttribute(bool m_IsPlayerMissile, float velocity, float degree, float setDamage)
 {
 	if (velocity < 0)
 	{
@@ -39,6 +39,8 @@ void NewLinearMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, 
 	m_Degree = degree;
 	m_Velocity.x = cos(PIE / 180 * degree) * velocity;
 	m_Velocity.y = sin(PIE / 180 * degree) * abs(velocity);
+
+	m_Damage = setDamage;
 }
 
 void NewLinearMissile::update(float dTime)

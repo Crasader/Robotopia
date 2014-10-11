@@ -17,10 +17,13 @@ class Missile : public InteractiveObject
 public:
 	OVERRIDE bool	init();
 	bool			IsPlayerMissile(){ return m_IsPlayerMissile; }
-	
+	float			getDamage() const { return m_Damage; }
+	void			setDamage(float setDamage) { m_Damage = setDamage; }
+
 	
 protected:
 	bool    m_IsPlayerMissile;
 	float	m_Degree;
+	float   m_Damage;
 	
 };

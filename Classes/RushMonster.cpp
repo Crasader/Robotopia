@@ -190,7 +190,7 @@ void RushMonster::update(float dTime)
 		auto object = (AimingMissile*)GET_STAGE_MANAGER()->addObject(OT_AIMING_MISSILE, pos);
 
 
-		object->setMoveAttribute(true, 200, pos, GET_STAGE_MANAGER()->getPlayer()->getPosition());
+		object->setAttribute(true, 200, pos, GET_STAGE_MANAGER()->getPlayer()->getPosition());
 	}
 
 	m_Velocity.y -= GRAVITY*dTime;

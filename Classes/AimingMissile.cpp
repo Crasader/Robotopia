@@ -13,6 +13,7 @@ bool AimingMissile::init()
 		return false;
 	}
 	m_Type = OT_AIMING_MISSILE;
+	m_Damage = 4;
 
 	m_MainSprite = Sprite::create();
 	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_AIMINGMISSILE_FLYING, 0.2f);
@@ -29,7 +30,7 @@ bool AimingMissile::init()
 
 
 
-void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Point myPos, Point targetPos)
+void AimingMissile::setAttribute(bool m_IsPlayerMissile, float velocity, Point myPos, Point targetPos, float setDamage)
 {
 	float distance = sqrt((myPos.x - targetPos.x)*(myPos.x - targetPos.x) + (myPos.y - targetPos.y) * (myPos.y - targetPos.y));
 	float degree = 0;
@@ -47,6 +48,7 @@ void AimingMissile::setMoveAttribute(bool m_IsPlayerMissile, float velocity, Poi
 		m_Velocity.y = 0;
 	}
 
+	m_Damage = setDamage;
 
 
 	m_MainSprite->setRotation(degree);
