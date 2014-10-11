@@ -8,6 +8,14 @@
 
 #include "InteractiveObject.h"
 
+struct PlayerInfo
+{
+	int			hp;
+	int			steam;
+	int			maxHp;
+	int			maxSteam;
+};
+
 class Player : public InteractiveObject
 {
 public:
@@ -20,14 +28,16 @@ public:
 
 	void					update(float dTime);
 
-	int						getHp() const { return m_Hp; }
-	int						getSteam() const { return m_Steam; }
-	int						getMaxHp() const { return m_MaxHp; }
-	int						getMaxSteam() const { return m_MaxSteam; }
-	void					setHp(int hp) { m_Hp = hp; }
-	void					setMaxHp(int maxHp) { m_MaxHp = maxHp; }
-	void					setSteam(int steam) { m_Steam = steam; }
-	void					setMaxSteam(int maxSteam){ m_MaxSteam = maxSteam; }
+	int						getHp() const { return m_Info.hp; }
+	int						getSteam() const { return m_Info.steam; }
+	int						getMaxHp() const { return m_Info.maxHp; }
+	int						getMaxSteam() const { return m_Info.maxSteam; }
+	PlayerInfo				getInfo() const { return m_Info; }
+	void					setHp(int hp) { m_Info.hp = hp; }
+	void					setMaxHp(int maxHp) { m_Info.maxHp = maxHp; }
+	void					setSteam(int steam) { m_Info.steam = steam; }
+	void					setMaxSteam(int maxSteam){ m_Info.maxSteam = maxSteam; }
+	void					setInfo(PlayerInfo info) { m_Info = info; }
 private:
 	enum State
 	{
@@ -35,20 +45,24 @@ private:
 		PS_WALK,
 		PS_JUMP,
 		PS_ATTACK,
+		PS_HIT,
 		PS_STATE_NUM,
 	};
 
+	PlayerInfo m_Info;
 	State		m_State;
 	bool		m_IsRightDirection;
-	int			m_Hp;
-	int			m_Steam;
-	int			m_MaxHp;
-	int			m_MaxSteam;
 	int			m_AttackNum;
 	bool		m_AttackEnd;
 	bool		m_IsActiveFly;
+	bool		m_IsInvincible;
 	float		m_ActiveFlyingTime;
+	float		m_HitTime;
 
+	void		startInvincible();
+	void		endInvincible(cocos2d::Ref* sender);
 	void		changeState(State state);
 	void		endAnimation(cocos2d::Ref* sender);
+	void		act(float dTime);
+	void		reset(float dTime);
 };
