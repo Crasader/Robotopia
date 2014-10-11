@@ -26,6 +26,7 @@ enum SoundType
 {
 	SO_SCENE1_BGM,
 	SO_SCENE2_BGM,
+	SO_SAGA_BGM,
 	SO_MELEE_MISSILE,
 };
 
