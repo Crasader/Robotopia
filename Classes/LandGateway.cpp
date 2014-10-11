@@ -74,6 +74,11 @@ void LandGateway::findNextStage()
 //다음 레벨로 이동할때 불리는 콜백함수.
 void LandGateway::gotoNextLevel(Ref* sender)
 {
+	m_isOpen = false;
+	m_IsActive = true;
+	this->removeChild( m_MainSprite );
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "GatewayActive.png" );
+	this->addChild( m_MainSprite );
 
 	//다음 월드 씬으로 변경해주는 함수호출
 	GET_STAGE_MANAGER()->changeStage( m_NextFloorNum, m_LinkingPoint );
@@ -82,11 +87,6 @@ void LandGateway::gotoNextLevel(Ref* sender)
 //현재 위치에서 센티넬이 있는 방향을 리턴해줍니다.
 Direction LandGateway::findCentinelNeighborDir( Vec2 stageIdx )
 {
-	m_isOpen = false;
-	m_IsActive = true;
-	this->removeChild( m_MainSprite );
-	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "GatewayActive.png" );
-	this->addChild( m_MainSprite );
 	return findCentinelNeighborDir( stageIdx , m_CurStageNum );
 }
 
