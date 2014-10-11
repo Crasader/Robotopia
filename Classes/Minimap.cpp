@@ -2,8 +2,8 @@
 
 USING_NS_CC;
 
-#define MINIMAP_SCALE 30
-#define MINIMAPWIN_SCALE 40
+#define MINIMAP_SCALE 35
+#define MINIMAP_WIN_SCALE 50
 #define ROOM_RECT_MARGIN 3
 
 bool Minimap::init()
@@ -18,6 +18,7 @@ bool Minimap::init()
 	auto sprMMOpen = Sprite::create("Minimap_Trigger.png");
 	auto sprMMWClose = Sprite::create("Minimap_Close.png");
 	auto sprMMPlayerPosition = Sprite::create("Minimap_Player.png");
+	auto sprMMWPlayerPosition = Sprite::create("Minimap_Player.png");
 
 	sprMM->setAnchorPoint(Point(1, 1));
 	sprMM->setOpacity(150);
@@ -40,8 +41,11 @@ bool Minimap::init()
 	m_fd = GET_STAGE_MANAGER()->getFloorData();
 
 	m_MMBgRect = createBgRect(MINIMAP_SCALE);
-	m_MMWBgRect = createBgRect(MINIMAP_WIN_BGRECT);
+	m_MMWBgRect = createBgRect(MINIMAP_WIN_SCALE);
+	
+	m_MMWBgRect->setPosition(Point((sprMMWinContainer->getContentSize().width - m_fd.width * MINIMAP_WIN_SCALE) / 2, (sprMMWinContainer->getContentSize().height - m_fd.height * MINIMAP_WIN_SCALE) / 2));
 
+	//AddChild
 	this->addChild(sprMM, 10, MINIMAP);
 	sprMM->addChild(sprMMOpen, 20, MINIMAP_WIN_OPEN);
 	sprMM->addChild(sprMMPlayerPosition, 15, MINIMAP_PLAYER);
@@ -50,6 +54,8 @@ bool Minimap::init()
 	this->addChild(sprMMWinContainer, 25, MINIMAP_WIN);
 	sprMMWinContainer->addChild(sprMMWClose, 26, MINIMAP_WIN_CLOSE);
 	sprMMWinContainer->addChild(m_MMWBgRect, 30, MINIMAP_WIN_BGRECT);
+	m_MMWBgRect->addChild(sprMMWPlayerPosition, 32, MINIMAP_WIN_PLAYER);
+	m_MMWBgRect->setAnchorPoint(Point(0.5, 0.5));
 
 	return true;
 }
@@ -62,7 +68,7 @@ void Minimap::update(float dTime)
 		return;
 	}
 	int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
-	Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
+	Point playerPosition = player->getPosition();
 	Vec2 playerRoomOrigin = GET_STAGE_MANAGER()->positionToIdxOfFloor(playerPosition);
 	Sprite* sprMM = (Sprite*)this->getChildByTag(MINIMAP);
 	Sprite* sprMMPlayerPosition = (Sprite*)sprMM->getChildByTag(MINIMAP_PLAYER);
@@ -154,8 +160,15 @@ void Minimap::showMinimapWin()
 	Sprite* sprMMWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
 	Sprite* sprMMWinOpen = (Sprite*)sprMM->getChildByTag(MINIMAP_WIN_OPEN);
 	Sprite* sprMMWinClose = (Sprite*)sprMMWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
+	//Sprite* sprMMWPlayerPosition = (Sprite*)m_MMWBgRect->getChildByTag(MINIMAP_WIN_PLAYER);
 	
+	m_MMWBgRect->removeAllChildren();
+	auto sprMMWPlayerPosition = Sprite::create("Minimap_Player.png");
+	Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
+	Vec2 playerRoomOrigin = GET_STAGE_MANAGER()->positionToIdxOfFloor(playerPosition);
+	sprMMWPlayerPosition->setPosition(Point(playerRoomOrigin.x * MINIMAP_WIN_SCALE + 6, playerRoomOrigin.y * MINIMAP_WIN_SCALE + 6));
 
+	drawRoomRect(m_MMWBgRect, MINIMAP_WIN_SCALE);
 
 	sprMMWinContainer->setVisible(true);
 	sprMMWinOpen->setVisible(false);
