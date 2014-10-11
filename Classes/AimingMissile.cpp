@@ -88,7 +88,9 @@ void AimingMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 			break;
 		case OT_RUSH_MONSTER:
 			m_IsDestroyed = true;
-
+			break;
+		case OT_BAT_MONSTER:
+			m_IsDestroyed = true;
 			break;
 		}
 	}

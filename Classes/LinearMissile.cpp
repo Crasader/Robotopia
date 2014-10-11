@@ -67,6 +67,9 @@ void LinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 			m_IsDestroyed = true;
 
 			break;
+		case OT_BAT_MONSTER:
+			m_IsDestroyed = true;
+			break;
 		}
 	}
 	else

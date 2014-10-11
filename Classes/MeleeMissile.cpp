@@ -53,6 +53,9 @@ void MeleeMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 	case OT_RUSH_MONSTER:
 		meleeEffectAdd = true;
 		break;;
+	case OT_BAT_MONSTER:
+		meleeEffectAdd = true;
+		break;
 	default:
 		break;
 	}
