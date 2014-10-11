@@ -11,7 +11,6 @@ bool Villager::init()
 	m_Type = OT_VILLAGER;
 	m_MainSprite = Sprite::createWithSpriteFrameName( "Villager.png" );
 	this->addChild( m_MainSprite );
-	this->scheduleUpdate();
 	return true;
 }
 

@@ -44,7 +44,6 @@ bool Player::init()
 	changeState(PS_STAND);
 
 	this->addChild(m_MainSprite);
-	this->scheduleUpdate();
 
 	return true;
 }

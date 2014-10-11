@@ -34,8 +34,6 @@ bool RushMonster::init()
 	m_Info.maxHp = 100;
 	m_Info.hp = m_Info.maxHp;
 
-	this->scheduleUpdate();
-
 	return true;
 }
 
