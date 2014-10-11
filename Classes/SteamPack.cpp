@@ -53,11 +53,11 @@ void SteamPack::update(float dTime)
 	static bool firstFlag = false;
 	static bool secondFlag = false;
 
-	if (CurTimeInMilli - m_CreateTimeInMilli > 10)
+	if (CurTimeInMilli - m_CreateTimeInMilli > 10000)
 	{
 		m_IsDestroyed = true;
 	}
-	else if (CurTimeInMilli - m_CreateTimeInMilli > 7.5)
+	else if (CurTimeInMilli - m_CreateTimeInMilli > 7500)
 	{
 		if (secondFlag == false)
 		{
@@ -71,7 +71,7 @@ void SteamPack::update(float dTime)
 		}
 		
 	}
-	else if (CurTimeInMilli - m_CreateTimeInMilli > 5)
+	else if (CurTimeInMilli - m_CreateTimeInMilli > 5000)
 	{
 		if (firstFlag == false)
 		{
