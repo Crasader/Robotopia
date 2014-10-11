@@ -124,6 +124,7 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 				m_Velocity.x = 300;
 			}
 			m_Velocity.y = 200;
+			GET_EFFECT_MANAGER()->createSound(SO_PLAYER_AND_MONSTER_COLLISION, false);
 		}
 		break;
 	case OT_AIMING_MISSILE:
@@ -298,7 +299,7 @@ void Player::act(float dTime)
 		{
 			if (m_State != PS_ATTACK && m_State != PS_ATTACK2)
 			{
-				if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
+				if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP) == KS_HOLD)
 				{
 					GET_EFFECT_MANAGER()->createSound(SO_JUMP, false);
 					m_Velocity.y = 600;
@@ -388,6 +389,7 @@ void Player::reset(float dTime)
 
 	if (m_ActiveFlyingTime >= 1)
 	{
+		GET_EFFECT_MANAGER()->createSound(SO_PLAYER_FLYING, false);
 		m_ActiveFlyingTime = 0;
 		m_Info.steam--;
 	}
