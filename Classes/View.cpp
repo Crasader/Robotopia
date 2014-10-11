@@ -61,3 +61,31 @@ void View::setViewPortWithHighlight(GameLayer* Scene, cocos2d::Point standardPoi
 
 }
 
+void View::setViewPortShake(GameLayer* Scene, Point standardPoint)
+{
+	Point anchorPoint;
+	anchorPoint.x = (10 + rand() % 90)/10;
+	anchorPoint.y = (10 + rand() % 90)/10;
+	setViewPort(Scene, standardPoint, anchorPoint);
+
+	anchorPoint.x = (10 + rand() % 90) / 10;
+	anchorPoint.y = (10 + rand() % 90) / 10;
+	setViewPort(Scene, standardPoint, anchorPoint);
+
+	anchorPoint.x = (10 + rand() % 90) / 10;
+	anchorPoint.y = (10 + rand() % 90) / 10;
+	setViewPort(Scene, standardPoint, anchorPoint);
+
+	anchorPoint.x = (10 + rand() % 90) / 10;
+	anchorPoint.y = (10 + rand() % 90) / 10;
+	setViewPort(Scene, standardPoint, anchorPoint);
+
+	anchorPoint.x = (10 + rand() % 90) / 10;
+	anchorPoint.y = (10 + rand() % 90) / 10;
+	setViewPort(Scene, standardPoint, anchorPoint);
+
+	anchorPoint.x = (10 + rand() % 90) / 10;
+	anchorPoint.y = (10 + rand() % 90) / 10;
+	setViewPort(Scene, standardPoint, anchorPoint);
+}
+

@@ -541,6 +541,7 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("saga.mp3", isRepeated);
 		break;
 	case SO_JUMP:
+		SimpleAudioEngine::getInstance()->setEffectsVolume(0.3f);
 		SimpleAudioEngine::getInstance()->playEffect("jump.wav", isRepeated);
 		break;
 	case SO_STEAM_GET:
@@ -557,6 +558,7 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		break;
 	case SO_PLAYER_AND_MONSTER_COLLISION:
 		SimpleAudioEngine::getInstance()->playEffect("CollisionPlayerAndMonster.wav", isRepeated);
+		
 		break;
 		
 	}

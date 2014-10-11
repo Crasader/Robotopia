@@ -13,6 +13,9 @@ public:
 	//그림이 윈도우 창을 꽉차게 만든다
 	static void setViewPortWithHighlight(GameLayer* Scene, cocos2d::Rect standardRect);
 	static void setViewPortWithHighlight(GameLayer* Scene, cocos2d::Point standardPoint, cocos2d::Size size);
+
+	//뷰를 현재지점을 중심으로 힌들어라
+	static void setViewPortShake(GameLayer* Scene, cocos2d::Point standardPoint);
 	
 	
 
