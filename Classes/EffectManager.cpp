@@ -536,6 +536,10 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav", false);
 		break;
 	case SO_SAGA_BGM:
+		if (m_IsOnBGM)
+		{
+			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+		}
 		SimpleAudioEngine::getInstance()->playEffect("saga.mp3", isRepeated);
 		break;
 	}
