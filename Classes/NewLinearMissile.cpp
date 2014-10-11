@@ -21,7 +21,7 @@ bool NewLinearMissile::init()
 	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_NEW_LINEAR_MISSILE_FLYING, 0.05f);
 	m_Animations[0] = animation;
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(m_Animations[0])));
-
+	GET_EFFECT_MANAGER()->createSound(SO_NEW_LINEAR_MISSILE_CREATING, false);
 	this->addChild(m_MainSprite);
 
 	return true;
@@ -70,6 +70,8 @@ void NewLinearMissile::collisionOccured(InteractiveObject* enemy, Directions dir
 			effectAdd = true;
 
 			break;
+		case OT_BAT_MONSTER:
+			effectAdd = true;
 		}
 	}
 	else

@@ -12,6 +12,7 @@ bool EffectManager::init()
 	SimpleAudioEngine::getInstance()->preloadEffect("MeleeMissile1.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("SteamGet.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("jump.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("NewLinearMissile.wav");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM1.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM2.mp3");
 	
@@ -515,6 +516,10 @@ void EffectManager::createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int e
 	auto fadeTo = FadeTo::create(0.3f, 80);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
 	effectSpr->runAction(Sequence::create(action,fadeTo, callback, NULL));
+
+
+	
+	return;
 }
 
 void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
@@ -530,19 +535,28 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM2.mp3", isRepeated);
 		break;
 	case SO_MELEE_MISSILE:
-		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav");
+		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav", isRepeated);
 		break;
 	case SO_SAGA_BGM:
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("saga.mp3", isRepeated);
 		break;
 	case SO_JUMP:
-		SimpleAudioEngine::getInstance()->playEffect("jump.wav");
+		SimpleAudioEngine::getInstance()->playEffect("jump.wav", isRepeated);
 		break;
 	case SO_STEAM_GET:
-		SimpleAudioEngine::getInstance()->playEffect("SteamGet.wav");
+		SimpleAudioEngine::getInstance()->playEffect("SteamGet.wav", isRepeated);
 		break;
 	case SO_AIMING_MISSILE_EXPLOSION:
-		SimpleAudioEngine::getInstance()->playEffect("AimingMissileExplosion.wav");
+		SimpleAudioEngine::getInstance()->playEffect("AimingMissileExplosion.wav", isRepeated);
+		break;
+	case SO_PLAYER_FLYING:
+		SimpleAudioEngine::getInstance()->playEffect("Flying.mp3", isRepeated);
+		break;
+	case SO_NEW_LINEAR_MISSILE_CREATING:
+		SimpleAudioEngine::getInstance()->playEffect("NewLinearMissile.wav", isRepeated);
+		break;
+	case SO_PLAYER_AND_MONSTER_COLLISION:
+		SimpleAudioEngine::getInstance()->playEffect("CollisionPlayerAndMonster.wav", isRepeated);
 		break;
 		
 	}
