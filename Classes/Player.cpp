@@ -135,6 +135,11 @@ void Player::update(float dTime)
 	pos.y += m_Velocity.y*dTime;
 
 	this->setPosition(pos);
+
+	if (m_Info.hp == 0 || m_Info.steam == 0)
+	{
+		Director::getInstance()->end();
+	}
 	
 	//키 입력이 따른 상태 처리
 	if (m_State != PS_HIT)
