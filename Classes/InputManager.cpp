@@ -28,6 +28,21 @@ bool InputManager::init()
 	return true;
 }
 
+bool KeyStateSentinel::init()
+{
+	if (!Node::init())
+	{
+		return false;
+	}
+
+	auto keyListener = EventListenerKeyboard::create();
+	keyListener->onKeyPressed = CC_CALLBACK_2(KeyStateSentinel::onKeyPressed, this);
+	keyListener->onKeyReleased = CC_CALLBACK_2(KeyStateSentinel::onKeyReleased, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
+
+	return true;
+}
+
 KeyStateSentinel* InputManager::receiveInputData(WorldScene* scene)
 {
 	return receiveKeyboardData(scene);
