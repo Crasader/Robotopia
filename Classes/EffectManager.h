@@ -28,6 +28,7 @@ enum SoundType
 	SO_SCENE2_BGM,
 	SO_SAGA_BGM,
 	SO_MELEE_MISSILE,
+	SO_JUMP,
 };
 
 class EffectManager

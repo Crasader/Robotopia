@@ -29,8 +29,9 @@ bool AimingMissile::init()
 
 
 
-void AimingMissile::setAttribute(bool m_IsPlayerMissile, float velocity, Point myPos, Point targetPos, float setDamage)
+void AimingMissile::setAttribute(bool IsPlayerMissile, float velocity, Point myPos, Point targetPos, float setDamage)
 {
+	m_IsPlayerMissile = IsPlayerMissile;
 	float distance = sqrt((myPos.x - targetPos.x)*(myPos.x - targetPos.x) + (myPos.y - targetPos.y) * (myPos.y - targetPos.y));
 	float degree = 0;
 
@@ -49,8 +50,15 @@ void AimingMissile::setAttribute(bool m_IsPlayerMissile, float velocity, Point m
 
 	m_Damage = setDamage;
 
+	if (myPos.y < targetPos.y)
+	{
+		m_MainSprite->setRotation(degree);
+	}
+	else
+	{
+		m_MainSprite->setRotation(-degree);
 
-	m_MainSprite->setRotation(degree);
+	}
 
 	return;
 }

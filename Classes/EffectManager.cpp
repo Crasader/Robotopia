@@ -533,6 +533,8 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 	case SO_SAGA_BGM:
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("saga.mp3", isRepeated);
 		break;
+	case SO_JUMP:
+		SimpleAudioEngine::getInstance()->playEffect("jump.wav");
 	}
 }
 
