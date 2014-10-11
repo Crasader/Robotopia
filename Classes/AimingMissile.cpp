@@ -97,7 +97,10 @@ void AimingMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 		switch (enemy->getType())
 		{
 		case OT_PLAYER:
-			m_IsDestroyed = true;
+			if (!((Player*)enemy)->isInvincible())
+			{
+				m_IsDestroyed = true;
+			}
 			break;
 		}
 	}
