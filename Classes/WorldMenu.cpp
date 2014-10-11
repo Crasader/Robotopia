@@ -10,7 +10,6 @@ bool WorldMenu::init()
 	m_sprWorldMenuContainer->setVisible(false);
 	this->addChild(m_sprWorldMenuContainer);
 	
-	this->scheduleUpdate();
 
 	return true;
 }

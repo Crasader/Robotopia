@@ -9,13 +9,17 @@ USING_NS_CC;
 
 bool UILayer::init()
 {
-	this->scheduleUpdate();
 	return true;
 }
 
 
 void UILayer::update(float dTime)
 {
+	m_BarContainer->update(dTime);
+	m_EquipmentWindow->update(dTime);
+	m_Minimap->update(dTime);
+	m_WorldMenu->update(dTime);
+
 	KeyState charWinKey = GET_INPUT_MANAGER()->getKeyState(KC_CHARACTER_UI);
 	KeyState enterKey = GET_INPUT_MANAGER()->getKeyState(KC_RETURN);
 	KeyState escKey = GET_INPUT_MANAGER()->getKeyState(KC_MENU);

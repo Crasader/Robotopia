@@ -18,7 +18,7 @@ bool Minimap::init()
 	this->addChild(sprMinimap);
 
 	auto sprMinimapFrame = Sprite::create();
-	Rect testRect = Rect(0, 0, 200, 150);
+	Rect testRect = Rect(0, 0, 50, 50);
 	m_MinimapFrame = SpriteFrame::create("Minimap_Frame.png", testRect);
 	sprMinimapFrame->setAnchorPoint(Point(0, 0));
 	sprMinimapFrame->setPosition(Point(10, 10));
@@ -76,7 +76,6 @@ bool Minimap::init()
 		}
 	}
 
-	this->scheduleUpdate();
 	return true;
 }
 
@@ -143,7 +142,7 @@ void Minimap::drawRoomRect(int xidx, int yidx)
 		}
 
 		roomRect->setAnchorPoint(Point(0, 0));
-		roomRect->setPosition(Point(xidx * MINIMAP_SCALE, yidx * MINIMAP_SCALE));
+		roomRect->setPosition(Point(0, 0));
 		
 		m_MinimapBgRect->addChild(roomRect);
 	}

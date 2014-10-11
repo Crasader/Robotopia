@@ -39,7 +39,6 @@ bool BarContainer::init()
 	this->addChild(hpLabel, 10, LABEL_HPSTATUS);
 	this->addChild(steLabel, 10, LABEL_STEAMSTATUS);
 
-	this->scheduleUpdate();
 	return true;
 }
 

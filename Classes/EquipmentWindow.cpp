@@ -20,7 +20,6 @@ bool EquipmentWindow::init()
 	m_sprCharWinTrigger->setPosition(Point(-30, 250));
 	m_sprCharWinContainer->addChild(m_sprCharWinTrigger);
 
-	this->scheduleUpdate();
 	return true;
 }
 
