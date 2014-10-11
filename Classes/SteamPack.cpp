@@ -27,7 +27,6 @@ bool SteamPack::init()
 	m_SteamVolume = 3;
 	////////////////
 
-	this->scheduleUpdate();
 	return true;
 }
 

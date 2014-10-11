@@ -24,7 +24,6 @@ bool NewLinearMissile::init()
 
 	this->addChild(m_MainSprite);
 
-	this->scheduleUpdate();
 	return true;
 }
 
