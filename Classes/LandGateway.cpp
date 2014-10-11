@@ -13,7 +13,7 @@ bool LandGateway::init()
 	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "GatewayUnactive.png" );
 	this->addChild( m_MainSprite );
 	m_Type = OT_GATEWAY;
-	m_OpenAnimaion = GET_RESOURCE_MANAGER()->createAnimation( AT_GATEWAY_ACT , 0.5f );
+	m_OpenAnimaion = GET_RESOURCE_MANAGER()->createAnimation( AT_GATEWAY_ACT , 0.1f );
 	m_OpenAnimaion->retain();
 	m_isOpen = false;
 	m_CurStageNum = GET_STAGE_MANAGER()->getCurStageNum();

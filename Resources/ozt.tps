@@ -191,26 +191,6 @@
             <filename>Loading.png</filename>
             <filename>menu_play0.png</filename>
             <filename>menu_play1.png</filename>
-            <filename>gatewayActivate3.png</filename>
-            <filename>gatewayActivate4.png</filename>
-            <filename>gatewayUnactivate.png</filename>
-            <filename>gatewayActivate0.png</filename>
-            <filename>gatewayActivate1.png</filename>
-            <filename>gatewayActivate2.png</filename>
-            <filename>gatewayOpen0.png</filename>
-            <filename>gatewayOpen1.png</filename>
-            <filename>gatewayOpen2.png</filename>
-            <filename>gatewayOpen3.png</filename>
-            <filename>gatewayOpen4.png</filename>
-            <filename>gatewayOpen5.png</filename>
-            <filename>gatewayOpen6.png</filename>
-            <filename>gatewayOpen7.png</filename>
-            <filename>gatewayOpen8.png</filename>
-            <filename>gatewayOpen9.png</filename>
-            <filename>gatewayOpen10.png</filename>
-            <filename>gatewayOpen11.png</filename>
-            <filename>gatewayOpen12.png</filename>
-            <filename>gatewayOpen13.png</filename>
             <filename>GatewayUnactive.png</filename>
             <filename>GatewayActive.png</filename>
             <filename>GatewayAct4.png</filename>
@@ -218,6 +198,7 @@
             <filename>GatewayAct1.png</filename>
             <filename>GatewayAct2.png</filename>
             <filename>GatewayAct3.png</filename>
+            <filename>turret.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
