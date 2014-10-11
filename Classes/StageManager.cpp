@@ -41,7 +41,6 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
 	loadPlayer( nextPlayerPosition );
-	m_CurrentWorldScene->scheduleUpdate();
 }
 
 Player* StageManager::getPlayer()
