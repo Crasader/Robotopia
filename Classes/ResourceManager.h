@@ -31,7 +31,6 @@ enum AnimationType
 	AT_RUSHMONSTER_MOVE,
 	AT_RUSHMONSTER_RUSH,
 	AT_STEAMPACK,
-
 };
 
 enum SpriteType
@@ -65,4 +64,5 @@ public:
 	cocos2d::Sprite* createSprite(SpriteType type);
 	
 private:
+	std::map <AnimationType, cocos2d::Animation*> m_Animations;
 };
