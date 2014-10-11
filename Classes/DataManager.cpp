@@ -41,7 +41,8 @@ bool DataManager::initModuleData()
 			}
 		}
 
-		m_ModuleData[closedDirections].push_back(module);
+		//m_ModuleData[closedDirections].push_back(module);
+		m_ModuleData[closedDirections][m_ModuleSize[closedDirections]++] = module;
 	}
 
 	return true;
@@ -49,6 +50,7 @@ bool DataManager::initModuleData()
 
 DataManager::DataManager()
 {
+	/*
 	m_ModuleData.clear();
 	for (int i = 0; i < 15; i++)
 	{
@@ -57,6 +59,11 @@ DataManager::DataManager()
 		moduleDataVector.clear();
 
 		m_ModuleData[i] = moduleDataVector;
+	}
+	*/
+	for (int i = 0; i < 16; i++)
+	{
+		m_ModuleSize[i] = 0;
 	}
 	m_FloorStageData.clear();
 }
@@ -68,6 +75,7 @@ DataManager::~DataManager()
 
 bool DataManager::initFloorData()
 {
+
 	Data data = FileUtils::getInstance()->getDataFromFile(FLOOR_FILE_NAME);
 	char* rawData = (char*)data.getBytes();
 	const char* tokenList = " \r\n\0";
@@ -75,9 +83,6 @@ bool DataManager::initFloorData()
 	int floorRawData[4][100][100] = {0,};
 	int originX = 0, originY = 0;
 	int endX = 0, endY = 0;
-
-	CCLOG("%s", rawData);
-
 
 	rawData = strtok(rawData, tokenList);
 
@@ -159,6 +164,7 @@ bool DataManager::initFloorData()
 
 				for (int p = 1; p < s; p++)
 				{
+
 					int enemyX = m_FloorStageData[i][p].x;
 					int enemyY = m_FloorStageData[i][p].y;
 					int enemyWidth = m_FloorStageData[i][p].width;
@@ -243,7 +249,8 @@ bool DataManager::initFloorData()
 						closedDirection |= DIR_RIGHT;
 					}
 
-					int moduleIdx = rand() % m_ModuleData[closedDirection].size();
+					//int moduleIdx = rand() % m_ModuleData[closedDirection].size();
+					int moduleIdx = rand() % m_ModuleSize[closedDirection];
 					int moduleWidth = m_ModuleData[closedDirection][moduleIdx].width;
 					int moduleHeight = m_ModuleData[closedDirection][moduleIdx].height;
 
@@ -254,6 +261,7 @@ bool DataManager::initFloorData()
 					{
 						for (int w = 0; w < moduleWidth; w++)
 						{
+	
 							int idx = ((m_FloorStageData[i][s].height / MODULE_BASE_HEIGHT - idxY - 1)*moduleHeight + h + 1)*(width + 2) + idxX*moduleWidth + w + 1;
 							m_FloorStageData[i][s].data[idx] =
 								(ObjectType)m_ModuleData[closedDirection][moduleIdx].data[h*moduleWidth + w];
@@ -300,6 +308,9 @@ bool DataManager::initFloorData()
 		m_FloorData[i].width = endX + 2;
 		m_FloorData[i].height = endY + 2;
 	}
+
+	CCLOG("aa");
+
 	return true;
 }
 

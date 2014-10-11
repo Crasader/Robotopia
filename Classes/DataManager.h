@@ -38,7 +38,9 @@ public:
 	~DataManager();
 
 private:	
-	std::map < int, std::vector<StageModuleData>> m_ModuleData;
+	StageModuleData m_ModuleData[16][200];
+	int	m_ModuleSize[16];
+	//std::map < int, std::vector<StageModuleData>> m_ModuleData;
 	std::map < int, std::map<int, StageData>> m_FloorStageData;
 	std::map <int, FloorData> m_FloorData;
 
