@@ -54,38 +54,29 @@ void View::setViewPortWithHighlight(GameLayer* scene, cocos2d::Rect standardRect
 	return;
 }
 
-void View::setViewPortWithHighlight(GameLayer* Scene, cocos2d::Point standardPoint, cocos2d::Size size)
+void View::setViewPortWithHighlight(GameLayer* scene, cocos2d::Point standardPoint, cocos2d::Size size)
 {
 	Rect rect = Rect(standardPoint.x, standardPoint.y, size.width, size.height);
-	setViewPortWithHighlight(Scene, rect);
+	setViewPortWithHighlight(scene, rect);
 
 }
 
-void View::setViewPortShake(GameLayer* Scene, Point standardPoint)
+void View::setViewPortShake(GameLayer* scene, Point standardPoint, Point anchorPoint)
 {
-	Point anchorPoint;
-	anchorPoint.x = (10 + rand() % 90)/10;
-	anchorPoint.y = (10 + rand() % 90)/10;
-	setViewPort(Scene, standardPoint, anchorPoint);
+	float windowWidth = Director::getInstance()->getWinSize().width;
+	float windowHeight = Director::getInstance()->getWinSize().height;
+	float anchorX = windowWidth * anchorPoint.x;
+	float anchorY = windowHeight * anchorPoint.y;
 
-	anchorPoint.x = (10 + rand() % 90) / 10;
-	anchorPoint.y = (10 + rand() % 90) / 10;
-	setViewPort(Scene, standardPoint, anchorPoint);
 
-	anchorPoint.x = (10 + rand() % 90) / 10;
-	anchorPoint.y = (10 + rand() % 90) / 10;
-	setViewPort(Scene, standardPoint, anchorPoint);
+	for (int i = 0; i < 5; ++i)
+	{
+		standardPoint.x = (10 + rand() % 90) / 5;
+		standardPoint.y = (10 + rand() % 90) / 5;
+		scene->setPosition(anchorX - standardPoint.x, anchorY - standardPoint.y);
+	}
 
-	anchorPoint.x = (10 + rand() % 90) / 10;
-	anchorPoint.y = (10 + rand() % 90) / 10;
-	setViewPort(Scene, standardPoint, anchorPoint);
+	return;
 
-	anchorPoint.x = (10 + rand() % 90) / 10;
-	anchorPoint.y = (10 + rand() % 90) / 10;
-	setViewPort(Scene, standardPoint, anchorPoint);
-
-	anchorPoint.x = (10 + rand() % 90) / 10;
-	anchorPoint.y = (10 + rand() % 90) / 10;
-	setViewPort(Scene, standardPoint, anchorPoint);
 }
 
