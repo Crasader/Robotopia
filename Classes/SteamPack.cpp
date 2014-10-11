@@ -14,6 +14,7 @@ bool SteamPack::init()
 
 	m_MainSprite = Sprite::create();
 
+	m_MainSprite->setScale(0.5);
 	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_STEAMPACK);
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(animation)));
 	m_MainSprite->setScale(0.5f);

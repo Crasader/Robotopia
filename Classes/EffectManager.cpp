@@ -422,7 +422,7 @@ void EffectManager::createEffectMeleeMissileCollisionByUser(cocos2d::Rect effect
 
 void EffectManager::createEffectNewLinearMissileCollsion(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
-	float needEffectScale = 1.0f;
+	float needEffectScale = 0.7f;
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_NEW_LINEAR_MISSILE_COLLISION);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_NEW_LINEAR_MISSILE_COLLISION, 0.2f);
@@ -520,28 +520,17 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 	switch (selectedSound)
 	{
 	case SO_SCENE1_BGM:
-		if (m_IsOnBGM)
-		{
-			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-			
-		}
+	
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM1.mp3", isRepeated);
 		break;
 	case SO_SCENE2_BGM:
-		if (m_IsOnBGM)
-		{
-			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-		}
+	
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM2.mp3", isRepeated);
 		break;
 	case SO_MELEE_MISSILE:
 		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav");
 		break;
 	case SO_SAGA_BGM:
-		if (m_IsOnBGM)
-		{
-			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-		}
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("saga.mp3", isRepeated);
 		break;
 	}
