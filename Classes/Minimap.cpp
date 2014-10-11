@@ -40,9 +40,9 @@ bool Minimap::init()
 	m_MinimapFrame = SpriteFrame::create("Minimap_Frame.png", testRect);
 	sprMinimapFrame->setAnchorPoint(Point(0, 0));
 	sprMinimapFrame->setPosition(Point(10, 10));
-	sprMinimapFrame->setOpacity(50);
+	sprMinimapFrame->setOpacity(0);
 	sprMinimapFrame->setSpriteFrame(m_MinimapFrame);
-	sprMinimap->addChild(sprMinimapFrame);
+	sprMinimap->addChild(sprMinimapFrame, 10, MINIMAP_FRAME);
 
 	auto sprPlayerPosition = Sprite::create("Minimap_Player.png");
 	sprPlayerPosition->setAnchorPoint(Point(0.5, 0.5));

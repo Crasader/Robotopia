@@ -35,6 +35,7 @@ private:
 
 	enum MiniMapEnum
 	{
+		MINIMAP_FRAME,
 		MINIMAP_PLAYER,
 		MINIMAP_WIN,
 		MINIMAP_WIN_OPEN,
