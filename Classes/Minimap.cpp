@@ -43,12 +43,11 @@ bool Minimap::init()
 	sprMinimapFrame->setOpacity(0);
 	sprMinimapFrame->setSpriteFrame(m_MinimapFrame);
 	sprMinimap->addChild(sprMinimapFrame, 10, MINIMAP_FRAME);
-
+	
 	auto sprPlayerPosition = Sprite::create("Minimap_Player.png");
 	sprPlayerPosition->setAnchorPoint(Point(0.5, 0.5));
 	sprPlayerPosition->setPosition(Point(sprMinimap->getContentSize().width / 2, sprMinimap->getContentSize().height / 2));
 	sprPlayerPosition->setOpacity(200);
-	sprMinimapFrame->addChild(sprPlayerPosition, 15, MINIMAP_PLAYER);
 
 	m_fd = GET_STAGE_MANAGER()->getFloorData();
 	m_VisitedRoom = GET_STAGE_MANAGER()->getVisitedStageNums();
@@ -64,7 +63,9 @@ bool Minimap::init()
 	m_MinimapBgRect->drawPolygon(points, 4, Color4F(Color4B(100, 20, 20, 0)), 0, Color4F(1.0f, 0.3f, 0.3f, 1)); //Color4F(Rf, Gf, Bf, Opacityf) or Color4F(Color4B(Rb, Gb, Bb, Opacityb))
 	m_MinimapBgRect->setAnchorPoint(Point(0.5, 0.5));
 	sprPlayerPosition->addChild(m_MinimapBgRect, -10);
-	
+	sprMinimapWinContainer->addChild(m_MinimapBgRect);
+	m_MinimapBgRect->addChild(sprPlayerPosition, 15, MINIMAP_PLAYER);
+
 	for (int j = 0; j < m_fd.height; ++j)
 	{
 		for (int i = 0; i < m_fd.width; ++i)
@@ -160,7 +161,7 @@ void Minimap::showMinimapWin()
 	Sprite* sprMinimapWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
 	Sprite* sprMinimapWinOpen = (Sprite*)this->getChildByTag(MINIMAP_WIN_OPEN);
 	Sprite* sprMinimapWinClose = (Sprite*)sprMinimapWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
-
+	
 	sprMinimapWinContainer->setVisible(true);
 	sprMinimapWinOpen->setVisible(false);
 	sprMinimapWinClose->setVisible(true);
