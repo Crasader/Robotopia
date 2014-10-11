@@ -71,8 +71,6 @@ bool KeyStateSentinel::init()
 	keyListener->onKeyReleased = CC_CALLBACK_2(KeyStateSentinel::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
 
-	this->scheduleUpdate();
-
 	return true;
 }
 
