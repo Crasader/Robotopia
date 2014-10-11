@@ -12,21 +12,20 @@ bool SteamPack::init()
 	//m_Type = OT_STEAMPACK;
 
 
-	//m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_STEAMPACK);
+	m_MainSprite = Sprite::create();
+
+	auto animation = GET_RESOURCE_MANAGER()->createAnimation(AT_STEAMPACK);
+	m_MainSprite->runAction(RepeatForever::create(Animate::create(animation)));
 	m_MainSprite->setScale(0.5f);
-
-	
-
-
-
 	this->addChild(m_MainSprite);
 
 	timeval tv;
 	cocos2d::gettimeofday(&tv, nullptr);
 	m_CreateTimeInMilli = (tv.tv_usec / 1000) + tv.tv_sec * 1000;
 	m_RemainGroundTime = 10;
+	/////////////////
 	m_SteamVolume = 3;
-
+	////////////////
 
 	this->scheduleUpdate();
 	return true;
@@ -63,29 +62,36 @@ void SteamPack::update(float dTime)
 	{
 		if (secondFlag == false)
 		{
-			m_MainSprite->stopAllActions();
+			m_MainSprite->setOpacity(120);
+			/*m_MainSprite->stopAllActions();
 			auto action2 = FadeTo::create(0.2f, 70);
 			auto action3 = FadeTo::create(0.2f, 150);
 			auto sequence1 = Sequence::create(action2, action3, NULL);
 			m_MainSprite->runAction(RepeatForever::create(sequence1));
-			secondFlag = true;
+			secondFlag = true;*/
 		}
 		
 	}
 	else if (CurTimeInMilli - m_CreateTimeInMilli > 5)
 	{
-		m_MainSprite->stopAllActions();
 		if (firstFlag == false)
 		{
+			m_MainSprite->setOpacity(180);
+			/*m_MainSprite->stopAllActions();
 			auto action0 = FadeTo::create(0.5f, 128);
 			auto action1 = FadeTo::create(0.5f, 190);
 			auto sequence0 = Sequence::create(action0, action1, NULL);
 			m_MainSprite->runAction(RepeatForever::create(sequence0));
-			firstFlag = true;
+			firstFlag = true;*/
 		}
 	}
 
 
 	return;
+}
+
+void SteamPack::setAttribute(float setSteamVolume)
+{
+	m_SteamVolume = setSteamVolume;
 }
 
