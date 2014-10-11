@@ -18,7 +18,8 @@ public:
 	void							showMinimapWin();
 	void							hideMinimapWin();
 	bool							getMinimapWinOn() { return m_MMWinOn; }
-
+	cocos2d::Rect					getWinOpenRect();
+	cocos2d::Rect					getWinCloseRect();
 
 	CREATE_FUNC(Minimap);
 

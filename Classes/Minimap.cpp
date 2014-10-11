@@ -160,8 +160,7 @@ void Minimap::showMinimapWin()
 	Sprite* sprMMWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
 	Sprite* sprMMWinOpen = (Sprite*)sprMM->getChildByTag(MINIMAP_WIN_OPEN);
 	Sprite* sprMMWinClose = (Sprite*)sprMMWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
-	//Sprite* sprMMWPlayerPosition = (Sprite*)m_MMWBgRect->getChildByTag(MINIMAP_WIN_PLAYER);
-	
+
 	m_MMWBgRect->removeAllChildren();
 	auto sprMMWPlayerPosition = Sprite::create("Minimap_Player.png");
 	Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
@@ -202,6 +201,24 @@ cocos2d::DrawNode* Minimap::createBgRect(int scale)
 	bgRect->drawPolygon(points, 4, Color4F(Color4B(100, 20, 20, 0)), 0, Color4F(1.0f, 0.3f, 0.3f, 1)); //Color4F(Rf, Gf, Bf, Opacityf) or Color4F(Color4B(Rb, Gb, Bb, Opacityb))
 	bgRect->setAnchorPoint(Point(0.5, 0.5));
 	return bgRect;
+}
+
+Rect Minimap::getWinOpenRect()
+{
+	auto triggerRect = Rect(m_WinWidth - 30, m_WinHeight - 30, 30, 30);
+	return triggerRect;
+}
+
+Rect Minimap::getWinCloseRect()
+{
+	//Sprite* sprMM = (Sprite*)this->getChildByTag(MINIMAP);
+	Sprite* sprMMWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
+// 	Sprite* sprMMWinOpen = (Sprite*)sprMM->getChildByTag(MINIMAP_WIN_OPEN);
+// 	Sprite* sprMMWinClose = (Sprite*)sprMMWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
+// 
+// 	Point buttonPosition = sprMMWinClose->getPosition();
+	auto triggerRect = Rect(sprMMWinContainer->getPosition().x + sprMMWinContainer->getContentSize().width / 2 - 30, sprMMWinContainer->getPosition().y + sprMMWinContainer->getContentSize().height / 2 - 30, 30, 30);
+	return triggerRect;
 }
 
 // 	Rect testRect = Rect(0, 0, 50, 50);

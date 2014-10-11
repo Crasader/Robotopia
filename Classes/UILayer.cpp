@@ -130,7 +130,23 @@ void UILayer::onMouseUp(Event *event)
 	{
 		case MOUSE_BUTTON_LEFT:
 		{
-			if (m_EquipmentWindow->getCharWinOn() == false)
+			if (m_Minimap->getMinimapWinOn() == false)
+			{
+				Rect openRect = m_Minimap->getWinOpenRect();
+				if (openRect.containsPoint(clickPoint))
+				{
+					m_Minimap->showMinimapWin();
+				}
+			}
+			else if (m_Minimap->getMinimapWinOn() == true)
+			{
+				Rect closeRect = m_Minimap->getWinCloseRect();
+				if (closeRect.containsPoint(clickPoint))
+				{
+					m_Minimap->hideMinimapWin();
+				}
+			}
+			if (m_EquipmentWindow->getCharWinOn() == false && m_Minimap->getMinimapWinOn() == false)
 			{
 				Rect triggerRect = m_EquipmentWindow->getTriggerRect();
 				if (triggerRect.containsPoint(clickPoint))
@@ -142,7 +158,11 @@ void UILayer::onMouseUp(Event *event)
 		}
 		case MOUSE_BUTTON_RIGHT:
 		{
-			if (m_EquipmentWindow->getCharWinOn() == true)
+			if (m_Minimap->getMinimapWinOn() == true)
+			{
+				m_Minimap->hideMinimapWin();
+			}
+			else if (m_EquipmentWindow->getCharWinOn() == true)
 			{
 				m_EquipmentWindow->hideCharacterWindow();
 			}
