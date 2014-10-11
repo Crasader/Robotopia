@@ -43,6 +43,7 @@ public:
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 	cocos2d::Point						idxOfStageDataToPosiion( cocos2d::Vec2 idx ); //인덱스값을 받아서 위치값으로 리턴
 
+	void								shakeFloor();
 	void								savePlayerInfo();
 	void								loadPlayer(cocos2d::Point setPosition);
 

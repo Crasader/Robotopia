@@ -18,6 +18,7 @@
 USING_NS_CC;
 
 #define MAX_BOX_OBJECTS 10
+#define MAX_GATEWAY_NUM 100
 #define	MAX_OBJECT_NUM 1024
 #define MAX_COLLISION_INFO 1024
 
@@ -33,6 +34,9 @@ bool GameLayer::init()
 	m_CollisionInformations.clear();
 	m_ObjectPositionsHash.clear();
 	m_AddObjects.clear();
+	m_Gateways.clear();
+
+	m_Gateways.reserve( MAX_GATEWAY_NUM );
 	m_InteractiveObjects.reserve( MAX_OBJECT_NUM );
 	m_CollisionInformations.reserve( MAX_COLLISION_INFO );
 	return true;
@@ -98,6 +102,7 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_GATEWAY:
 			object = LandGateway::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
+			m_Gateways.push_back( (LandGateway*)object );
 			break;
 		case OT_MELEE_MISSILE:
 			object = MeleeMissile::create();
@@ -107,7 +112,6 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			object = SteamPack::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
-
 		case OT_NEW_LINEAR_MISSILE:
 			object = NewLinearMissile::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
@@ -319,6 +323,14 @@ void GameLayer::addEffect( Sprite* sprite )
 bool GameLayer::isOutOfStageMap( cocos2d::Point checkPosition )
 {
 	return !m_MapRect.containsPoint( checkPosition );
+}
+
+void GameLayer::shakeStage()
+{
+	for( auto gateway : m_Gateways )
+	{
+		gateway->findNextStage();
+	}
 }
 
 

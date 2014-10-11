@@ -3,6 +3,7 @@
 #include "Utils.h"
 #include "Player.h"
 
+class LandGateway;
 class InteractiveObject;
 class GameLayer : public cocos2d::Layer
 {
@@ -23,6 +24,7 @@ public:
 	void							removeObjects();
 	void							removeObject(InteractiveObject* deleteObject);
 	void							makeHash();
+	void							shakeStage();
 
 	Player*							getPlayer() {return m_Player; }
 	std::vector<InteractiveObject*>	getObjectsByPosition( cocos2d::Point checkPosition ); //위치에 어떤 객체가 있는지를 리턴
@@ -58,6 +60,7 @@ private:
 	cocos2d::Size									m_BoxSize;
 	int												m_BoxWidthNum , m_BoxHeightNum;
 	Player*											m_Player;
+	std::vector<LandGateway*>						m_Gateways;
 	std::vector<CollisionInformation>				m_CollisionInformations;
 	std::map<int , ObjectType>						m_MapData;
 	std::vector<InteractiveObject*>					m_InteractiveObjects; 

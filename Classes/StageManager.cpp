@@ -23,7 +23,8 @@ bool StageManager::init()
 		int StageMaxWidthIdx = m_CurrentFloorStagesData[stageNum].width;
 		int StageMaxHeightIdx = m_CurrentFloorStagesData[stageNum].height;
 		std::map<int , ObjectType> data = m_CurrentFloorStagesData[stageNum].data;
-		m_CurrentWorldScene->initCurrentSceneWithData( Vec2( StageMaxWidthIdx , StageMaxHeightIdx ) , m_BoxSize , data , "background.png" );
+		m_CurrentWorldScene->initCurrentSceneWithData( Vec2( StageMaxWidthIdx , StageMaxHeightIdx ) , 
+													   m_BoxSize , data , "background.png" );
 		m_CurrentWorldScene->retain();
 		m_WorldScenes[stageNum] = m_CurrentWorldScene;
 	}
@@ -200,4 +201,13 @@ cocos2d::Rect StageManager::getStageRect()
 	int StageMaxHeightIdx = m_CurrentFloorStagesData[m_CurrentStageNum].height;
 
 	return Rect( 0 , 0 , m_BoxSize.width * StageMaxWidthIdx , m_BoxSize.width * StageMaxHeightIdx );
+}
+
+void StageManager::shakeFloor()
+{
+	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
+	for( int i = 1; i <= m_FloorData.stageNum; ++i )
+	{
+		m_WorldScenes[i]->getGameLayer()->shakeStage();
+	}
 }
