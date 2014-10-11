@@ -3,8 +3,10 @@
 #include "cocos2d.h"
 #include "WorldScene.h"
 #include "Player.h"
+
 #define MAX_STAGE_NUM 10
-#define MAX
+#define MAX_STAGE_SIZE 5000
+
 class StageManager
 {
 public:
@@ -47,7 +49,7 @@ public:
 	void								shakeFloor();
 	void								savePlayerInfo();
 	void								loadPlayer(cocos2d::Point setPosition);
-
+	void								makeStaticData();
 
 private:
 	cocos2d::Size						m_BoxSize;
@@ -56,8 +58,8 @@ private:
 	int									m_CurrentFloorNum;
 	std::vector<StageData>				m_CurrentFloorStagesData;
 	FloorData							m_FloorData;
-
-	int									m_StaticStageDatas[][];
+	//성능이슈로 정적 배열로 데이터 관리합니다.
+	int									m_StaticStageDatas[MAX_STAGE_NUM][MAX_STAGE_SIZE];
 	std::map<int , WorldScene*>			m_WorldScenes;
 	WorldScene*							m_CurrentWorldScene;
 	PlayerInfo							m_PlayerInfo;

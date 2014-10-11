@@ -211,3 +211,8 @@ void StageManager::shakeFloor()
 		m_WorldScenes[i]->getGameLayer()->initGateways();
 	}
 }
+
+void StageManager::makeStaticData()
+{
+
+}
