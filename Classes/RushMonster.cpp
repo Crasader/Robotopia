@@ -18,7 +18,7 @@ bool RushMonster::init()
 	m_Animations[RM_STAND] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_STAND);
 	m_Animations[RM_MOVE] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_MOVE);
 	m_Animations[RM_RUSH] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_RUSH);
-	m_Animations[RM_RUSH_WAIT] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_STAND);
+	m_Animations[RM_RUSH_WAIT] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_MOVE);
 	
 
 	m_MainSprite = Sprite::create();
@@ -89,7 +89,7 @@ void RushMonster::changeState(State state)
 		return;
 	}
 
-	if (m_State == RM_RUSH)
+	if (state == RM_RUSH)
 	{
 		m_WaitTime = 0;
 		auto playerX = GET_STAGE_MANAGER()->getPlayer()->getPosition().x;
@@ -153,7 +153,10 @@ void RushMonster::update(float dTime)
 
 	if (isSeePlayer())
 	{
-		changeState(RM_RUSH);
+		if (m_State != RM_RUSH_WAIT)
+		{
+			changeState(RM_RUSH);
+		}
 	}
 	else if(m_State == RM_RUSH_WAIT)
 	{
@@ -177,7 +180,7 @@ void RushMonster::update(float dTime)
 		else
 		{
 			auto playerX = GET_STAGE_MANAGER()->getPlayer()->getPosition().x;
-
+			
 			if (playerX < this->getPosition().x)
 			{
 				m_IsRightDirection = false;
@@ -187,7 +190,7 @@ void RushMonster::update(float dTime)
 				m_IsRightDirection = true;
 			}
 
-			if (m_WaitTime > 2)
+			if (m_WaitTime > 4)
 			{
 				m_WaitTime = 0;
 				changeState(RM_RUSH);
@@ -249,7 +252,7 @@ bool RushMonster::isSeePlayer()
 	vision.origin.x -= 100;
 	vision.origin.y += 20;
 	vision.size.width += 300;
-	vision.size.height += 50;
+	vision.size.height += 100;
 
 	auto objList = ((GameLayer*)this->getParent())->getObjectsByRect(vision);
 	auto player = ((GameLayer*)this->getParent())->getPlayer();
