@@ -96,10 +96,10 @@ ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx )
 
 ObjectType StageManager::getStageDataInPositionWithIdx( int xIdx , int yIdx , int stageNum )
 {
-	_ASSERT( stageNum <= m_FloorData.stageNum );
-	StageData stageData = m_CurrentFloorStagesData[stageNum];
-	_ASSERT( yIdx*stageData.width + xIdx < stageData.width*stageData.height );
-	return stageData.data[yIdx*stageData.width + xIdx];
+	_ASSERT( stageNum <= m_FloorData.stageNum && 
+			 yIdx*m_StaticStageWidths[stageNum] + xIdx < 
+			 m_StaticStageWidths[stageNum] * m_StaticStageHeights[stageNum] );
+	return ( ObjectType )m_StaticStageDatas[stageNum][yIdx*m_StaticStageWidths[stageNum] + xIdx];
 }
 
 InteractiveObject* StageManager::addObject( ObjectType type , cocos2d::Point position )
@@ -216,10 +216,14 @@ void StageManager::shakeFloor()
 void StageManager::makeStaticData()
 {
 	memset( m_StaticStageDatas , 0 , sizeof(int) * MAX_STAGE_NUM * MAX_STAGE_SIZE );
+	memset( m_StaticStageHeights , 0 , sizeof( int )*MAX_STAGE_NUM );
+	memset( m_StaticStageWidths , 0 , sizeof( int )*MAX_STAGE_NUM );
 
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
 		auto datas = m_CurrentFloorStagesData[stageNum];
+		m_StaticStageWidths[stageNum] = datas.width;
+		m_StaticStageHeights[stageNum] = datas.height;
 		auto stageData = datas.data;
 		for( int idx = 0; idx < datas.width* datas.height; ++idx )
 		{
