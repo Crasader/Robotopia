@@ -23,7 +23,7 @@ bool Player::init()
 	m_Animations[PS_WALK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_WALK);
 	m_Animations[PS_JUMP] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_JUMP);
 	m_Animations[PS_HIT] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_JUMP);
-	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK,0.3f);
+	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK,0.05f);
 	m_Animations[PS_ATTACK2] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK, 1.0f);
 	m_IsRightDirection = true;
 	m_AttackEnd = false;
@@ -145,7 +145,7 @@ void Player::update(float dTime)
 	}
 	
 	//키 입력이 따른 상태 처리
-	if (m_State != PS_HIT || m_State != PS_ATTACK2)
+	if (m_State != PS_HIT)
 	{
 		act(dTime);
 	}
@@ -201,90 +201,95 @@ cocos2d::Rect Player::getRect()
 
 void Player::act(float dTime)
 {
-	KeyState leftState = GET_INPUT_MANAGER()->getKeyState(KC_LEFT);
-	KeyState rightState = GET_INPUT_MANAGER()->getKeyState(KC_RIGHT);
-
-
-	if (leftState == KS_HOLD)
+	if (m_State != PS_ATTACK2)
 	{
-		m_Velocity.x = -m_MoveSpeed;
-		m_IsRightDirection = false;
-		m_MainSprite->setFlippedX(true);
+		KeyState leftState = GET_INPUT_MANAGER()->getKeyState(KC_LEFT);
+		KeyState rightState = GET_INPUT_MANAGER()->getKeyState(KC_RIGHT);
 
-	}
-	else if (rightState == KS_HOLD)
-	{
-		m_Velocity.x = m_MoveSpeed;
-		m_IsRightDirection = true;
-		m_MainSprite->setFlippedX(false);
-	}
-	else
-	{
-		m_Velocity.x = 0;
-	}
 
-	if (GET_INPUT_MANAGER()->getKeyState(KC_FLY) == KS_HOLD)
-	{
-		m_IsActiveFly = true;
-
-		if (m_Velocity.y <= -300)
+		if (leftState == KS_HOLD)
 		{
-			m_Velocity.y = -300;
+			m_Velocity.x = -m_MoveSpeed;
+			m_IsRightDirection = false;
+			m_MainSprite->setFlippedX(true);
+
+		}
+		else if (rightState == KS_HOLD)
+		{
+			m_Velocity.x = m_MoveSpeed;
+			m_IsRightDirection = true;
+			m_MainSprite->setFlippedX(false);
+		}
+		else
+		{
+			m_Velocity.x = 0;
 		}
 
-		if( m_Velocity.y <= 300 )
+		if (GET_INPUT_MANAGER()->getKeyState(KC_FLY) == KS_HOLD)
 		{
-			m_Velocity.y += 1500 * dTime;
-		}
+			m_IsActiveFly = true;
 
-		int x = rand() % (int)(m_Width / 1.5);
-		Point pos = Point(this->getPosition().x + x - m_Width / 2, this->getPosition().y - m_Height / 2);
-
-		GET_EFFECT_MANAGER()->createEffectSelectedSizeByUser(ET_ROUND_SMOKE, Rect(pos.x, pos.y, -1, -1), 1);
-	}
-
-	if (m_State != KC_ATTACK2)
-	{
-		if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) == KS_HOLD)
-		{
-			changeState(PS_ATTACK);
-		}
-	}
-
-	if (m_State == PS_WALK || m_State == PS_STAND)
-	{
-		if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK2) == KS_HOLD)
-		{
-			changeState(PS_ATTACK2);
-		}
-	}
-
-	if (m_IsFlying)
-	{
-		if (m_State != PS_ATTACK)
-		{
-			changeState(PS_JUMP);
-		}
-	}
-	else
-	{
-		if (m_State != PS_ATTACK && m_State != PS_ATTACK2)
-		{
-			if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
+			if (m_Velocity.y <= -300)
 			{
-				m_Velocity.y = 600;
+				m_Velocity.y = -300;
 			}
-			else if (leftState == KS_HOLD)
+
+			if (m_Velocity.y <= 300)
 			{
-				changeState(PS_WALK);
+				m_Velocity.y += 1500 * dTime;
 			}
-			else if (rightState == KS_HOLD)
+
+			int x = rand() % (int)(m_Width / 1.5);
+			Point pos = Point(this->getPosition().x + x - m_Width / 2, this->getPosition().y - m_Height / 2);
+
+			GET_EFFECT_MANAGER()->createEffectSelectedSizeByUser(ET_ROUND_SMOKE, Rect(pos.x, pos.y, -1, -1), 1);
+		}
+
+		if (m_State != KC_ATTACK2)
+		{
+			if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK) == KS_HOLD)
 			{
-				changeState(PS_WALK);
+				changeState(PS_ATTACK);
 			}
-			else
+		}
+
+		if (m_State == PS_WALK || m_State == PS_STAND)
+		{
+			if (GET_INPUT_MANAGER()->getKeyState(KC_ATTACK2) == KS_HOLD)
 			{
-				changeState(PS_STAND);
+				changeState(PS_ATTACK2);
+				m_Velocity.x = 0;
+				m_Info.steam--;
+			}
+		}
+
+		if (m_IsFlying)
+		{
+			if (m_State != PS_ATTACK)
+			{
+				changeState(PS_JUMP);
+			}
+		}
+		else
+		{
+			if (m_State != PS_ATTACK && m_State != PS_ATTACK2)
+			{
+				if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP))
+				{
+					m_Velocity.y = 600;
+				}
+				else if (leftState == KS_HOLD)
+				{
+					changeState(PS_WALK);
+				}
+				else if (rightState == KS_HOLD)
+				{
+					changeState(PS_WALK);
+				}
+				else
+				{
+					changeState(PS_STAND);
+				}
 			}
 		}
 	}
