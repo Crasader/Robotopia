@@ -20,6 +20,7 @@ bool EffectManager::init()
 
 void EffectManager::removeSprAfterAni(Ref* sender)
 {
+	
 	auto spr = (Sprite*)sender;
 	spr->removeFromParent();
 }
@@ -517,7 +518,7 @@ void EffectManager::createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int e
 	effectSpr->runAction(Sequence::create(action,fadeTo, callback, NULL));
 
 
-	createSound(SO_PLAYER_FLYING, false);
+	
 	return;
 }
 
