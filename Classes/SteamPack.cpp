@@ -45,7 +45,7 @@ void SteamPack::collisionOccured(InteractiveObject* enemy, Directions dir)
 		if (enemy->getType() == OT_PLAYER)
 		{
 			GET_STAGE_MANAGER()->getPlayer()->setSteam(m_SteamVolume, true);
-
+			GET_EFFECT_MANAGER()->createSound(SO_STEAM_GET, false);
 			m_IsDestroyed = true;
 		}
 	}

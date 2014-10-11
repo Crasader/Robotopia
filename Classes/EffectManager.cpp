@@ -10,6 +10,8 @@ bool EffectManager::init()
 {
 	m_IsOnBGM = false;
 	SimpleAudioEngine::getInstance()->preloadEffect("MeleeMissile1.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("SteamGet.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("jump.wav");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM1.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM2.mp3");
 	
@@ -535,6 +537,10 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		break;
 	case SO_JUMP:
 		SimpleAudioEngine::getInstance()->playEffect("jump.wav");
+		break;
+	case SO_STEAM_GET:
+		SimpleAudioEngine::getInstance()->playEffect("SteamGet.wav");
+		break;
 	}
 }
 
