@@ -14,46 +14,35 @@ bool Minimap::init()
 	m_WinHeight = winSize.height;
 
 	auto sprMinimap = Sprite::create("Minimap_Container.png");
+	auto sprMinimapTrigger = Sprite::create("Minimap_Trigger.png");
+	auto sprMinimapWinContainer = Sprite::create("Minimap_Win.png");
+	auto sprMinimapClose = Sprite::create("Minimap_Close.png");
+	auto sprPlayerPosition = Sprite::create("Minimap_Player.png");
+	m_MinimapBgRect = DrawNode::create();
+	Rect testRect = Rect(0, 0, 50, 50);
+	m_MinimapFrame = SpriteFrame::create("Minimap_Frame.png", testRect);
+
 	sprMinimap->setAnchorPoint(Point(1, 1));
 	sprMinimap->setOpacity(150);
 	sprMinimap->setPosition(Point(m_WinWidth, m_WinHeight));
-	this->addChild(sprMinimap);
 
-	auto sprMinimapTrigger = Sprite::create("Minimap_Trigger.png");
 	sprMinimapTrigger->setAnchorPoint(Point(1, 1));
-	sprMinimapTrigger->setPosition(Point(m_WinWidth, m_WinHeight));
-	this->addChild(sprMinimapTrigger, 20, MINIMAP_WIN_OPEN);
+	sprMinimapTrigger->setPosition(Point(sprMinimap->getContentSize().width, sprMinimap->getContentSize().height));
 
-	auto sprMinimapWinContainer = Sprite::create("Minimap_Win.png");
 	sprMinimapWinContainer->setAnchorPoint(Point(0.5, 0.5));
 	sprMinimapWinContainer->setPosition(Point(m_WinWidth / 2, m_WinHeight / 2));
 	sprMinimapWinContainer->setVisible(false);
-	this->addChild(sprMinimapWinContainer, 25, MINIMAP_WIN);
 
-	auto sprMinimapClose = Sprite::create("Minimap_Close.png");
 	sprMinimapClose->setAnchorPoint(Point(1, 1));
 	sprMinimapClose->setPosition(Point(sprMinimapWinContainer->getContentSize().width, sprMinimapWinContainer->getContentSize().height));
-	sprMinimapWinContainer->addChild(sprMinimapClose, 26, MINIMAP_WIN_CLOSE);
-	
-	auto sprMinimapFrame = Sprite::create();
-	Rect testRect = Rect(0, 0, 50, 50);
-	m_MinimapFrame = SpriteFrame::create("Minimap_Frame.png", testRect);
-	sprMinimapFrame->setAnchorPoint(Point(0, 0));
-	sprMinimapFrame->setPosition(Point(10, 10));
-	sprMinimapFrame->setOpacity(0);
-	sprMinimapFrame->setSpriteFrame(m_MinimapFrame);
-	sprMinimap->addChild(sprMinimapFrame, 10, MINIMAP_FRAME);
 
-	auto sprPlayerPosition = Sprite::create("Minimap_Player.png");
 	sprPlayerPosition->setAnchorPoint(Point(0.5, 0.5));
 	sprPlayerPosition->setPosition(Point(sprMinimap->getContentSize().width / 2, sprMinimap->getContentSize().height / 2));
 	sprPlayerPosition->setOpacity(200);
-	sprMinimapFrame->addChild(sprPlayerPosition, 15, MINIMAP_PLAYER);
 
 	m_fd = GET_STAGE_MANAGER()->getFloorData();
 	m_VisitedRoom = GET_STAGE_MANAGER()->getVisitedStageNums();
 
-	m_MinimapBgRect = DrawNode::create();
 	Vec2 points[] =
 	{
 		Vec2(0, m_fd.height * MINIMAP_SCALE),
@@ -63,7 +52,6 @@ bool Minimap::init()
 	};
 	m_MinimapBgRect->drawPolygon(points, 4, Color4F(Color4B(100, 20, 20, 0)), 0, Color4F(1.0f, 0.3f, 0.3f, 1)); //Color4F(Rf, Gf, Bf, Opacityf) or Color4F(Color4B(Rb, Gb, Bb, Opacityb))
 	m_MinimapBgRect->setAnchorPoint(Point(0.5, 0.5));
-	sprPlayerPosition->addChild(m_MinimapBgRect, -10);
 	
 	for (int j = 0; j < m_fd.height; ++j)
 	{
@@ -79,6 +67,14 @@ bool Minimap::init()
 			}
 		}
 	}
+
+// 	this->addChild(sprMinimap, 10, MINIMAP);
+// 	this->addChild(sprMinimapWinContainer, 25, MINIMAP_WIN);
+// 	sprMinimapWinContainer->addChild(sprMinimapClose, 26, MINIMAP_WIN_CLOSE);
+// 	sprMinimapWinContainer->addChild(sprPlayerPosition);
+// 	sprMinimap->addChild(sprMinimapTrigger, 20, MINIMAP_WIN_OPEN);
+// 	sprMinimap->addChild(sprPlayerPosition, 15, MINIMAP_PLAYER);
+// 	sprPlayerPosition->addChild(m_MinimapBgRect, -10);
 
 	return true;
 }
@@ -157,24 +153,26 @@ void Minimap::drawRoomRect(int xidx, int yidx)
 
 void Minimap::showMinimapWin()
 {
-	Sprite* sprMinimapWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
-	Sprite* sprMinimapWinOpen = (Sprite*)this->getChildByTag(MINIMAP_WIN_OPEN);
-	Sprite* sprMinimapWinClose = (Sprite*)sprMinimapWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
-	
-	sprMinimapWinContainer->setVisible(true);
-	sprMinimapWinOpen->setVisible(false);
-	sprMinimapWinClose->setVisible(true);
-	m_MinimapWinOn = true;
+// 	Sprite* sprMinimap = (Sprite*)this->getChildByTag(MINIMAP);
+// 	Sprite* sprMinimapWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
+// 	Sprite* sprMinimapWinOpen = (Sprite*)sprMinimap->getChildByTag(MINIMAP_WIN_OPEN);
+// 	Sprite* sprMinimapWinClose = (Sprite*)sprMinimapWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
+// 	
+// 	sprMinimapWinContainer->setVisible(true);
+// 	sprMinimapWinOpen->setVisible(false);
+// 	sprMinimapWinClose->setVisible(true);
+// 	m_MinimapWinOn = true;
 }
 
 void Minimap::hideMinimapWin()
 {
-	Sprite* sprMinimapWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
-	Sprite* sprMinimapWinOpen = (Sprite*)this->getChildByTag(MINIMAP_WIN_OPEN);
-	Sprite* sprMinimapWinClose = (Sprite*)sprMinimapWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
-
-	sprMinimapWinContainer->setVisible(false);
-	sprMinimapWinOpen->setVisible(true);
-	sprMinimapWinClose->setVisible(false);
-	m_MinimapWinOn = false;
+// 	Sprite* sprMinimap = (Sprite*)this->getChildByTag(MINIMAP);
+// 	Sprite* sprMinimapWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
+// 	Sprite* sprMinimapWinOpen = (Sprite*)sprMinimap->getChildByTag(MINIMAP_WIN_OPEN);
+// 	Sprite* sprMinimapWinClose = (Sprite*)sprMinimapWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
+// 
+// 	sprMinimapWinContainer->setVisible(false);
+// 	sprMinimapWinOpen->setVisible(true);
+// 	sprMinimapWinClose->setVisible(false);
+// 	m_MinimapWinOn = false;
 }
