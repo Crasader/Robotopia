@@ -35,3 +35,8 @@ void BatMonster::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
 
 }
+
+void BatMonster::update(float dTime)
+{
+
+}
