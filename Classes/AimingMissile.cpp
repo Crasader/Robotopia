@@ -125,6 +125,7 @@ void AimingMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 	if (m_IsDestroyed)
 	{
 		GET_EFFECT_MANAGER()->createEffect(ET_AIMING_MISSILE_COLLISION, this->getRect(), dir, 1);
+		GET_EFFECT_MANAGER()->createSound(SO_AIMING_MISSILE_EXPLOSION, false);
 	}
 	return;
 }

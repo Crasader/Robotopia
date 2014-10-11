@@ -30,6 +30,8 @@ enum SoundType
 	SO_MELEE_MISSILE,
 	SO_JUMP,
 	SO_STEAM_GET,
+	SO_AIMING_MISSILE_EXPLOSION,
+
 };
 
 class EffectManager

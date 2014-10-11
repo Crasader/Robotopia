@@ -541,6 +541,10 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 	case SO_STEAM_GET:
 		SimpleAudioEngine::getInstance()->playEffect("SteamGet.wav");
 		break;
+	case SO_AIMING_MISSILE_EXPLOSION:
+		SimpleAudioEngine::getInstance()->playEffect("AimingMissileExplosion.wav");
+		break;
+		
 	}
 }
 
