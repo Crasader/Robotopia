@@ -10,6 +10,7 @@ bool EffectManager::init()
 {
 	m_IsOnBGM = false;
 	SimpleAudioEngine::getInstance()->preloadEffect("MeleeMissile1.wav");
+	SimpleAudioEngine::getInstance()->setEffectsVolume(1.0);
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM1.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM2.mp3");
 	return true;
@@ -522,6 +523,7 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		if (m_IsOnBGM)
 		{
 			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+			
 		}
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM1.mp3", isRepeated);
 		break;
@@ -533,14 +535,14 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM2.mp3", isRepeated);
 		break;
 	case SO_MELEE_MISSILE:
-		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav", false);
+		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav");
 		break;
 	case SO_SAGA_BGM:
 		if (m_IsOnBGM)
 		{
 			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 		}
-		SimpleAudioEngine::getInstance()->playEffect("saga.mp3", isRepeated);
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("saga.mp3", isRepeated);
 		break;
 	}
 }

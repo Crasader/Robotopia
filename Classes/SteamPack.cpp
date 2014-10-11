@@ -32,6 +32,7 @@ bool SteamPack::init()
 
 void SteamPack::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
+	
 	if (enemy->getType() == OT_PLAYER)
 	{
 		GET_STAGE_MANAGER()->getPlayer()->setSteam(m_SteamVolume, true);
