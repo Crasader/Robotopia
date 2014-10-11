@@ -1,5 +1,6 @@
 #include "SteamPack.h"
 #include "GameManager.h"
+#include <math.h>
 
 USING_NS_CC;
 bool SteamPack::init()
@@ -33,12 +34,20 @@ bool SteamPack::init()
 
 void SteamPack::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
+	auto SteamPoint = this->getPosition();
+	auto enemyPoint = enemy->getPosition();
+
+	float distance = sqrt((SteamPoint.x - enemyPoint.x)*(SteamPoint.x - enemyPoint.x) + (SteamPoint.y - enemyPoint.y)*(SteamPoint.y - enemyPoint.y));
 	
-	if (enemy->getType() == OT_PLAYER)
+	if (distance < 50)
 	{
-		GET_STAGE_MANAGER()->getPlayer()->setSteam(m_SteamVolume, true);
-		
-		m_IsDestroyed = true;
+
+		if (enemy->getType() == OT_PLAYER)
+		{
+			GET_STAGE_MANAGER()->getPlayer()->setSteam(m_SteamVolume, true);
+
+			m_IsDestroyed = true;
+		}
 	}
 
 	return;
