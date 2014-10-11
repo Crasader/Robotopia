@@ -17,27 +17,30 @@ public:
 	void							update(float dTime);
 	void							showMinimapWin();
 	void							hideMinimapWin();
-	bool							getMinimapWinOn() { return m_MinimapWinOn; }
+	bool							getMinimapWinOn() { return m_MMWinOn; }
 
 
 	CREATE_FUNC(Minimap);
 
 private:
 	int								m_WinWidth, m_WinHeight;
-	cocos2d::DrawNode*				m_MinimapBgRect;
-	cocos2d::SpriteFrame*			m_MinimapFrame;
+	cocos2d::DrawNode*				m_MMBgRect;
+	cocos2d::DrawNode*				m_MMWBgRect;
 	FloorData						m_fd;
 	std::vector<int>				m_VisitedRoom;
 
-	bool							m_MinimapWinOn;
+	bool							m_MMWinOn;
 
- 	void							drawRoomRect(int xidx, int yidx);
+	void							drawRoomRect(cocos2d::DrawNode* bgRect, int scale);
+	cocos2d::DrawNode*				createBgRect(int scale);
 
 	enum MiniMapEnum
 	{
 		MINIMAP,
 		MINIMAP_PLAYER,
+		MINIMAP_BGRECT,
 		MINIMAP_WIN,
+		MINIMAP_WIN_BGRECT,
 		MINIMAP_WIN_OPEN,
 		MINIMAP_WIN_CLOSE,
 	};
