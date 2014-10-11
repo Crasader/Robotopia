@@ -31,6 +31,7 @@ enum ObjectType
 	OT_NEW_LINEAR_MISSILE = 11,
 	OT_MELEE_MISSILE = 12,
 	OT_STEAM_PACK = 13,
+	OT_TURRET = 14,
 };
 
 

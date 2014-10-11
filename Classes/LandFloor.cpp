@@ -11,10 +11,7 @@ bool LandFloor::init()
 	}
 	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( "floor.png" );
 	this->setAnchorPoint( Point::ZERO );
-	this->addChild( m_MainSprite, 10 );
-	m_PieceSprite = GET_RESOURCE_MANAGER()->createSprite("floorPiece.png" );
-	this->setAnchorPoint( Point::ZERO );
-	this->addChild( m_PieceSprite , 0);
+	this->addChild( m_MainSprite);
 
 	m_Type = OT_FLOOR;
 	m_Width = m_MainSprite->getContentSize().width;
