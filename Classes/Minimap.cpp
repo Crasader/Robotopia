@@ -10,6 +10,12 @@ bool Minimap::init()
 {
 	m_MMWinOn = false;
 
+	Player* player = GET_STAGE_MANAGER()->getPlayer();
+	if (player == nullptr)
+	{
+		return false;
+	}
+
 	auto winSize = Director::getInstance()->getWinSize();
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
@@ -17,7 +23,7 @@ bool Minimap::init()
 	auto sprMM = Sprite::create("Minimap_Container.png");
 	auto sprMMWinContainer = Sprite::create("Minimap_Win.png");
 	auto sprMMOpen = Sprite::create("Minimap_Trigger.png");
-	auto sprMMClose = Sprite::create("Minimap_Close.png");
+	auto sprMMWClose = Sprite::create("Minimap_Close.png");
 	auto sprMMPlayerPosition = Sprite::create("Minimap_Player.png");
 
 	sprMM->setAnchorPoint(Point(1, 1));
@@ -31,8 +37,8 @@ bool Minimap::init()
 	sprMMWinContainer->setPosition(Point(m_WinWidth / 2, m_WinHeight / 2));
 	sprMMWinContainer->setVisible(m_MMWinOn);
 
-	sprMMClose->setAnchorPoint(Point(1, 1));
-	sprMMClose->setPosition(Point(sprMMWinContainer->getContentSize().width, sprMMWinContainer->getContentSize().height));
+	sprMMWClose->setAnchorPoint(Point(1, 1));
+	sprMMWClose->setPosition(Point(sprMMWinContainer->getContentSize().width, sprMMWinContainer->getContentSize().height));
 
 	sprMMPlayerPosition->setAnchorPoint(Point(0.5, 0.5));
 	sprMMPlayerPosition->setPosition(Point(sprMM->getContentSize().width / 2, sprMM->getContentSize().height / 2));
@@ -44,12 +50,13 @@ bool Minimap::init()
 	m_MMWBgRect = createBgRect(MINIMAP_WIN_BGRECT);
 
 	this->addChild(sprMM, 10, MINIMAP);
-	this->addChild(sprMMWinContainer, 25, MINIMAP_WIN);
-	sprMMWinContainer->addChild(sprMMClose, 26, MINIMAP_WIN_CLOSE);
 	sprMM->addChild(sprMMOpen, 20, MINIMAP_WIN_OPEN);
 	sprMM->addChild(sprMMPlayerPosition, 15, MINIMAP_PLAYER);
-
 	sprMMPlayerPosition->addChild(m_MMBgRect, -10, MINIMAP_BGRECT);
+
+	this->addChild(sprMMWinContainer, 25, MINIMAP_WIN);
+	sprMMWinContainer->addChild(sprMMWClose, 26, MINIMAP_WIN_CLOSE);
+	sprMMWinContainer->addChild(m_MMWBgRect, 30, MINIMAP_WIN_BGRECT);
 
 	return true;
 }
@@ -150,6 +157,8 @@ void Minimap::showMinimapWin()
 	Sprite* sprMMWinOpen = (Sprite*)sprMM->getChildByTag(MINIMAP_WIN_OPEN);
 	Sprite* sprMMWinClose = (Sprite*)sprMMWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
 	
+
+
 	sprMMWinContainer->setVisible(true);
 	sprMMWinOpen->setVisible(false);
 	sprMMWinClose->setVisible(true);

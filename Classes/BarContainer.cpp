@@ -4,6 +4,12 @@ USING_NS_CC;
 
 bool BarContainer::init()
 {
+	Player* player = GET_STAGE_MANAGER()->getPlayer();
+	if (player == nullptr)
+	{
+		return false;
+	}
+
 	m_prevHP = 0;
 	m_STEs.clear();
 	auto winSize = Director::getInstance()->getWinSize();
