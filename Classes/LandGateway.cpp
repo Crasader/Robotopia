@@ -174,7 +174,7 @@ cocos2d::Point LandGateway::adjustSettingPosition( cocos2d::Vec2 Idx , Direction
 	switch( dir )
 	{
 		case DIR_RIGHT:
-			Idx.y += MODULE_BASE_HEIGHT/2 - 1;
+			Idx.y += MODULE_BASE_HEIGHT/2 + 1;
 			Idx.x += 2.5f;
 			break;
 		case DIR_UP:
@@ -183,7 +183,7 @@ cocos2d::Point LandGateway::adjustSettingPosition( cocos2d::Vec2 Idx , Direction
 			break;
 		case DIR_LEFT:
 			Idx.x += ( MODULE_BASE_WIDTH - 2.5f );
-			Idx.y += MODULE_BASE_HEIGHT/2 - 1;
+			Idx.y += MODULE_BASE_HEIGHT/2 + 1;
 			break;
 		case DIR_DOWN:
 			Idx.x += MODULE_BASE_WIDTH/2 - 1;

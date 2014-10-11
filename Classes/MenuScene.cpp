@@ -1,5 +1,5 @@
 #include "MenuScene.h"
-#include "GameManager.h"
+#include "LoadingScene.h"
 
 USING_NS_CC;
 
@@ -22,6 +22,6 @@ bool MenuScene::init()
 
 void MenuScene::menuCallback( Ref* sender )
 {
-	GET_STAGE_MANAGER()->changeStage(1, Point(90, 90));
+	Director::getInstance()->replaceScene(LoadingScene::createScene());
 }
 
