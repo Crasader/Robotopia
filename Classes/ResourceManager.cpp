@@ -99,38 +99,38 @@ cocos2d::Sprite* ResourceManager::createSprite(const char* spriteName)
 
 cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 {
-	switch (type)
-	{
-	case ST_AIMINGMISSILE_FLYING:
-		return createSprite("AimingMissile1.png");
-	case ST_AIMINGMISSILE_COLLISION:
-		return createSprite("ET_AimingMissile_Collision1.png");
-	case ST_GATEWAY_ACTIVE:
-		return createSprite("GatewayActive.png");
-	case ST_GATEWAY_UNACTIVE:
-		return createSprite("GatewayUnactive.png");
-	case ST_LINEARMISSILE_FLYING:
-		return createSprite("LinearMissile1.png");
-	case ST_LINEARMISSILE_COLLISION:
-		return createSprite("ETLinearMissileCollision1.png");
-	case ST_LOADING:
-		return createSprite("Loading.png");
-	case ST_MELEE_MISSILE_FLYING:
-		return createSprite("Melee_Missile3.png");
-	case ST_MELEE_MISSILE_COLLISION:
-		return createSprite("Melee_Missile_Collision1.png");
-	case ST_MONSTER_BAT:
-		return createSprite("monster_bat1.png");
-	case ST_NEW_LINEAR_MISSILE_FLYING:
-		return createSprite("New_Linear_Missile1.png");
-	case ST_NEW_LINEAR_MISSILE_COLLISION:
-		return createSprite("New_Linear_Missile_Collision1.png");
-	case ST_PLAYER_LANDING:
-		return createSprite("ET_PLAYER_LANDING1.png");
-	case ST_ROUND_SMOKE:
-		return createSprite("Round_Smoke1.png");
-	case ST_STEAMPACK:
-		return createSprite("SteamPack3.png");
-	}
+		switch (type)
+		{
+		case ST_AIMINGMISSILE_FLYING:
+			return createSprite("AimingMissile1.png");
+		case ST_AIMINGMISSILE_COLLISION:
+			return createSprite("ET_AimingMissile_Collision1.png");
+		case ST_GATEWAY_ACTIVE:
+			return createSprite("GatewayActive.png");
+		case ST_GATEWAY_UNACTIVE:
+			return createSprite("GatewayUnactive.png");
+		case ST_LINEARMISSILE_FLYING:
+			return createSprite("LinearMissile1.png");
+		case ST_LINEARMISSILE_COLLISION:
+			return createSprite("ETLinearMissileCollision1.png");
+		case ST_LOADING:
+			return createSprite("Loading.png");
+		case ST_MELEE_MISSILE_FLYING:
+			return createSprite("Melee_Missile3.png");
+		case ST_MELEE_MISSILE_COLLISION:
+			return createSprite("Melee_Missile_Collision1.png");
+		case ST_MONSTER_BAT:
+			return createSprite("monster_bat1.png");
+		case ST_NEW_LINEAR_MISSILE_FLYING:
+			return createSprite("New_Linear_Missile1.png");
+		case ST_NEW_LINEAR_MISSILE_COLLISION:
+			return createSprite("New_Linear_Missile_Collision1.png");
+		case ST_PLAYER_LANDING:
+			return createSprite("ET_PLAYER_LANDING1.png");
+		case ST_ROUND_SMOKE:
+			return createSprite("Round_Smoke1.png");
+		case ST_STEAMPACK:
+			return createSprite("SteamPack3.png");
+		}
 	return nullptr;
 }

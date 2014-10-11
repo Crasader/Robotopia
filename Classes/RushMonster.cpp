@@ -72,6 +72,7 @@ void RushMonster::collisionOccured(InteractiveObject* enemy, Directions dir)
 
 		if (m_Info.hp <= 0)
 		{
+			GET_STAGE_MANAGER()->addObject(OT_STEAM_PACK, this->getPosition());
 			m_IsDestroyed = true;
 		}
 		break;
