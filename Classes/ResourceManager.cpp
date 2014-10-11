@@ -14,6 +14,7 @@ bool ResourceManager::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Melee_Missile_Collision.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Round_Smoke.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("monsterBat.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("SteamPack.plist");
 	return true;
 }
 
@@ -75,6 +76,9 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		return createAnimation("rushMonster_move%d.png", 1, 4, 0.1f);
 	case AT_RUSHMONSTER_RUSH:
 		return createAnimation("rushMonster_rush%d.png", 1, 4, 0.1f);
+	case AT_STEAMPACK:
+		return createAnimation("SteamPack%d.png", 1, 5, delay);
+
 	}
 	return nullptr;
 }
@@ -117,6 +121,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 		return createSprite("ET_PLAYER_LANDING1.png");
 	case ST_ROUND_SMOKE:
 		return createSprite("Round_Smoke1.png");
+	case ST_STEAMPACK:
+		return createSprite("SteamPack3.png");
 	}
 	return nullptr;
 }
