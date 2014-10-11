@@ -32,6 +32,7 @@ enum ObjectType
 	OT_MELEE_MISSILE = 12,
 	OT_STEAM_PACK = 13,
 	OT_TURRET = 14,
+	OT_BAT_MONSTER = 15,
 };
 
 
@@ -44,3 +45,5 @@ enum Direction
 	DIR_DOWN = 8,
 };
 typedef int Directions;
+
+

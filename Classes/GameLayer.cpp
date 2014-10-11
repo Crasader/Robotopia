@@ -4,6 +4,7 @@
 #include "LandFloor.h"
 #include "LandBlock.h"
 #include "RushMonster.h"
+#include "BatMonster.h"
 #include "Villager.h"
 #include "NewLinearMissile.h"
 #include "AimingMissile.h"
@@ -120,6 +121,10 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			break;
 		case OT_TURRET:
 			object = LandTurret::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
+		case OT_BAT_MONSTER:
+			object = BatMonster::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
 		default:

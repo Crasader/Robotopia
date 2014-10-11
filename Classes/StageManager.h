@@ -7,10 +7,16 @@
 #define MAX_STAGE_NUM 10
 #define MAX_STAGE_SIZE 5000
 
+struct StaticStageData
+{
+	int x , y;
+	int width , height;
+	ObjectType data[MAX_STAGE_SIZE];
+};
+
 class StageManager
 {
 public:
-
 	bool								init();
 	//stage를 변경합니다.
 	void								changeStage(int stageNum, cocos2d::Point nextPlayerPosition);
@@ -35,8 +41,8 @@ public:
 	WorldScene*							getWorldScene(){return m_WorldScenes[m_CurrentStageNum];}
 	Player*								getPlayer();
 	const FloorData&					getFloorData(){return m_FloorData;};
-	const StageData&					getStageDataByStageNum(int stageNum) { return m_CurrentFloorStagesData[stageNum]; }
-	const StageData&					getStageDatas(){return m_CurrentFloorStagesData[m_CurrentStageNum];};
+	const StaticStageData&				getStageDataByStageNum( int stageNum );
+	const StaticStageData&				getStageDatas();
 	cocos2d::Rect						getStageRect();
 	int									getCurStageNum() {return m_CurrentStageNum; }
 	const std::vector<int>&				getVisitedStageNums(){return m_VisitedStageNums;}
@@ -59,10 +65,9 @@ private:
 	std::vector<StageData>				m_CurrentFloorStagesData;
 	FloorData							m_FloorData;
 	//성능이슈로 정적 배열로 데이터 관리합니다.
-	int									m_StaticStageHeights[MAX_STAGE_NUM];
-	int									m_StaticStageWidths[MAX_STAGE_NUM];
-	int									m_StaticStageDatas[MAX_STAGE_NUM][MAX_STAGE_SIZE];
-	std::map<int , WorldScene*>			m_WorldScenes;
+	StaticStageData						m_StaticStageDatas[MAX_STAGE_NUM];
+	WorldScene*							m_WorldScenes[MAX_STAGE_NUM];
+
 	WorldScene*							m_CurrentWorldScene;
 	PlayerInfo							m_PlayerInfo;
 };

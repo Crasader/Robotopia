@@ -215,19 +215,29 @@ void StageManager::shakeFloor()
 
 void StageManager::makeStaticData()
 {
-	memset( m_StaticStageDatas , 0 , sizeof(int) * MAX_STAGE_NUM * MAX_STAGE_SIZE );
-	memset( m_StaticStageHeights , 0 , sizeof( int )*MAX_STAGE_NUM );
-	memset( m_StaticStageWidths , 0 , sizeof( int )*MAX_STAGE_NUM );
-
+	memset( m_StaticStageDatas , 0 , sizeof( StaticStageData ) * MAX_STAGE_NUM );
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
 		auto datas = m_CurrentFloorStagesData[stageNum];
-		m_StaticStageWidths[stageNum] = datas.width;
-		m_StaticStageHeights[stageNum] = datas.height;
+		m_StaticStageDatas[stageNum].width = datas.width;
+		m_StaticStageDatas[stageNum].height = datas.height;
+
 		auto stageData = datas.data;
 		for( int idx = 0; idx < datas.width* datas.height; ++idx )
 		{
-			m_StaticStageDatas[stageNum][idx] = ( int )stageData[idx];
+			m_StaticStageDatas[stageNum].data[idx] = stageData[idx];
 		}
 	}
+}
+
+const StaticStageData& StageManager::getStageDataByStageNum( int stageNum )
+{
+	_ASSERT( stageNum < _countof( m_StaticStageDatas ) );
+	return m_StaticStageDatas[stageNum]; 
+}
+
+const StaticStageData& StageManager::getStageDatas()
+{
+	_ASSERT( m_CurrentStageNum < _countof( m_StaticStageDatas ) );
+	return m_StaticStageDatas[m_CurrentStageNum]; 
 }
