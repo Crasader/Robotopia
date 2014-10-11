@@ -27,8 +27,9 @@ bool LandTurret::init()
 
 void LandTurret::update( float dTime )
 {
+	auto player = GET_STAGE_MANAGER()->getPlayer();
 	Point myPosition = this->getPosition();
-		Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
+	Point playerPosition = player->getPosition();
 	if( isInRange( playerPosition ) )
 	{
 		static float accTime = 0;

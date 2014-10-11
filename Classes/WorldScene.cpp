@@ -49,8 +49,8 @@ void WorldScene::onEnter()
 void WorldScene::update(float dTime)
 {
 	m_KeySentinel->update( dTime );
-	m_GameLayer->update( dTime );
 	m_UILayer->update( dTime );
+	m_GameLayer->update( dTime );
 	m_BackgroundLayer->update( dTime );
 }
 

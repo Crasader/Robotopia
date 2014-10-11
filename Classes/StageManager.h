@@ -65,9 +65,9 @@ private:
 	int									m_CurrentFloorNum;
 	std::vector<StageData>				m_CurrentFloorStagesData;
 	FloorData							m_FloorData;
-	//성능이슈로 정적 배열로 데이터 관리합니다.
+	//성능이슈로 정적 배열로 데이터 따로 관리합니다.
 	StaticStageData						m_StaticStageDatas[MAX_STAGE_NUM];
-	WorldScene*							m_WorldScenes[MAX_STAGE_NUM];
+	std::map<int, WorldScene*>			m_WorldScenes;
 	WorldScene*							m_CurrentWorldScene;
 	PlayerInfo							m_PlayerInfo;
 };

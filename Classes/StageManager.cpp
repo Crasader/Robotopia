@@ -16,7 +16,6 @@ bool StageManager::init()
 	m_IsAvailable = false;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
 	makeStaticData();
-
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
 		m_CurrentStageNum = stageNum;
@@ -41,16 +40,15 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 		return;
 	}
 	addVisitedStage( stageNum );
-	m_IsAvailable = false;
 	savePlayerInfo();
-
+	m_IsAvailable = false;
 	//나중에 씬단위에서 아래 데이터 처리하도록 하자.
 	m_CurrentStageNum = stageNum;
 	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
 	loadPlayer( nextPlayerPosition );
-	m_CurrentWorldScene->scheduleUpdate();
 	m_IsAvailable = true;
+	m_CurrentWorldScene->scheduleUpdate();
 	//GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE2_BGM , true );
 }
 
@@ -182,7 +180,6 @@ cocos2d::Point StageManager::idxOfStageDataToPosiion( cocos2d::Vec2 idx )
 
 void StageManager::savePlayerInfo()
 {
-	_ASSERT( m_WorldScenes != nullptr);
 	auto player = getWorldScene()->getGameLayer()->getPlayer();
 	if( player == nullptr )
 	{
@@ -194,7 +191,6 @@ void StageManager::savePlayerInfo()
 
 void StageManager::loadPlayer( Point setPosition )
 {
-	_ASSERT( m_WorldScenes != nullptr);
 	addObject( OT_PLAYER , setPosition );
 	auto player = getWorldScene()->getGameLayer()->getPlayer();
 	_ASSERT( player != nullptr );
@@ -224,6 +220,8 @@ void StageManager::makeStaticData()
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
 		auto datas = m_CurrentFloorStagesData[stageNum];
+		m_StaticStageDatas[stageNum].x = datas.x;
+		m_StaticStageDatas[stageNum].y = datas.y;
 		m_StaticStageDatas[stageNum].width = datas.width;
 		m_StaticStageDatas[stageNum].height = datas.height;
 
@@ -249,6 +247,5 @@ const StaticStageData& StageManager::getStageDatas()
 
 WorldScene* StageManager::getWorldScene()
 {
-	_ASSERT( m_CurrentStageNum < _countof( m_WorldScenes ) );
 	return m_WorldScenes[m_CurrentStageNum]; 
 }
