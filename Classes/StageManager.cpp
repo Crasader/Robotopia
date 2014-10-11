@@ -18,13 +18,14 @@ bool StageManager::init()
 
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
-		WorldScene* worldScene = WorldScene::createScene();
+		m_CurrentStageNum = stageNum;
+		m_CurrentWorldScene = WorldScene::createScene();
 		int StageMaxWidthIdx = m_CurrentFloorStagesData[stageNum].width;
 		int StageMaxHeightIdx = m_CurrentFloorStagesData[stageNum].height;
 		std::map<int , ObjectType> data = m_CurrentFloorStagesData[stageNum].data;
-		worldScene->initCurrentSceneWithData( Vec2( StageMaxWidthIdx , StageMaxHeightIdx ) , m_BoxSize , data , "background.png" );
-		worldScene->retain();
-		m_WorldScenes[stageNum] = worldScene;
+		m_CurrentWorldScene->initCurrentSceneWithData( Vec2( StageMaxWidthIdx , StageMaxHeightIdx ) , m_BoxSize , data , "background.png" );
+		m_CurrentWorldScene->retain();
+		m_WorldScenes[stageNum] = m_CurrentWorldScene;
 	}
 	return true;
 }
@@ -32,14 +33,18 @@ bool StageManager::init()
 void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 {
 	_ASSERT( stageNum <= m_FloorData.stageNum );
+	if( m_CurrentWorldScene != nullptr )
+	{
+		m_CurrentWorldScene->cleanup();
+	}
 	addVisitedStage( stageNum );
 	savePlayerInfo();
 	//나중에 씬단위에서 아래 데이터 처리하도록 하자.
 	m_CurrentStageNum = stageNum;
 	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
-	m_CurrentWorldScene->resume();
-	loadPlayer(nextPlayerPosition);
+	loadPlayer( nextPlayerPosition );
+	//m_CurrentWorldScene->resume();
 }
 
 Player* StageManager::getPlayer()
@@ -176,6 +181,7 @@ void StageManager::savePlayerInfo()
 		return;
 	}
 	m_PlayerInfo = player->getInfo();
+	getWorldScene()->getGameLayer()->removeObject( player );
 }
 
 void StageManager::loadPlayer( Point setPosition )

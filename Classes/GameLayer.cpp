@@ -7,6 +7,7 @@
 #include "LinearMissile.h"
 #include "AimingMissile.h"
 #include "MeleeMissile.h"
+#include "SteamPack.h"
 #include "LandGateway.h"
 #include "View.h"
 #include "Player.h"
@@ -97,6 +98,9 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			object = MeleeMissile::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
+		case OT_STEAM_PACK:
+			object = SteamPack::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 		default:
 			return nullptr;
 	}
@@ -131,7 +135,7 @@ void GameLayer::update( float dTime )
 		View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
 		makeHash();
 		collisionCheck( dTime );
-		removeObject();
+		removeObjects();
 	}
 }
 
@@ -199,7 +203,7 @@ void GameLayer::makeHash()
 }
 
 
-void GameLayer::removeObject()
+void GameLayer::removeObjects()
 {
 	for( auto objectIter = m_InteractiveObjects.begin(); objectIter != m_InteractiveObjects.end(); )
 	{
@@ -214,6 +218,13 @@ void GameLayer::removeObject()
 			objectIter++;
 		}
 	}
+}
+
+void GameLayer::removeObject( InteractiveObject* deleteObject )
+{
+	m_InteractiveObjects.erase(std::find( 
+		m_InteractiveObjects.begin() , m_InteractiveObjects.end() , deleteObject ));
+	removeChild( deleteObject );
 }
 
 void GameLayer::addMovingBackground( char* BGpath )
@@ -282,4 +293,5 @@ bool GameLayer::isOutOfStageMap( cocos2d::Point checkPosition )
 {
 	return !m_MapRect.containsPoint( checkPosition );
 }
+
 

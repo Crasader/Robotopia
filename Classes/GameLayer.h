@@ -17,10 +17,10 @@ public:
 	InteractiveObject*				addObjectByMapdata( ObjectType type , int xIdx , int yIdx );
 	InteractiveObject*				addObjectByMapdata( int xIdx , int yIdx );
 	void							addMovingBackground(char* BGpath);
-
 	void							collisionCheck(float dTime);
 	void							collisionCheckbyHash(InteractiveObject* subject, float dTime);
-	void							removeObject();
+	void							removeObjects();
+	void							removeObject(InteractiveObject* deleteObject);
 	void							makeHash();
 
 	Player*							getPlayer() {return m_Player; }

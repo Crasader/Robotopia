@@ -30,7 +30,7 @@ enum ObjectType
 	OT_GATEWAY = 10,
 	OT_NEW_LINEAR_MISSILE = 11,
 	OT_MELEE_MISSILE = 12,
-
+	OT_STEAM_PACK = 13,
 };
 
 
