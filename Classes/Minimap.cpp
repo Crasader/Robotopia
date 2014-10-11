@@ -61,8 +61,8 @@ bool Minimap::init()
 		Vec2(m_fd.width * MINIMAP_SCALE, 0),
 		Vec2(0, 0),
 	};
-	m_MinimapBgRect->drawPolygon(points, 4, Color4F(Color4B(51, 51, 51, 0)), 0, Color4F(1.0f, 0.3f, 0.3f, 1)); //Color4F(Rf, Gf, Bf, Opacityf) or Color4F(Color4B(Rb, Gb, Bb, Opacityb))
-	sprPlayerPosition->setAnchorPoint(Point(0, 0));
+	m_MinimapBgRect->drawPolygon(points, 4, Color4F(Color4B(100, 20, 20, 0)), 0, Color4F(1.0f, 0.3f, 0.3f, 1)); //Color4F(Rf, Gf, Bf, Opacityf) or Color4F(Color4B(Rb, Gb, Bb, Opacityb))
+	m_MinimapBgRect->setAnchorPoint(Point(0.5, 0.5));
 	sprPlayerPosition->addChild(m_MinimapBgRect, -10);
 	
 	for (int j = 0; j < m_fd.height; ++j)
@@ -88,6 +88,8 @@ void Minimap::update(float dTime)
 	int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
 	Point playerPosition = GET_STAGE_MANAGER()->getPlayer()->getPosition();
 	Vec2 playerRoomOrigin = GET_STAGE_MANAGER()->positionToIdxOfFloor(playerPosition);
+	this->removeAllChildren();
+	init();
 	m_MinimapBgRect->setPosition(Point(-1 * (playerRoomOrigin.x * MINIMAP_SCALE + 6), -1 * (playerRoomOrigin.y * MINIMAP_SCALE + 6)));
 }
 
@@ -146,7 +148,7 @@ void Minimap::drawRoomRect(int xidx, int yidx)
 		}
 
 		roomRect->setAnchorPoint(Point(0, 0));
-		roomRect->setPosition(Point(0, 0));
+		roomRect->setPosition(Point(xidx * MINIMAP_SCALE, yidx * MINIMAP_SCALE));
 		
 		m_MinimapBgRect->addChild(roomRect);
 	}
