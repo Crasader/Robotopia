@@ -29,7 +29,6 @@ bool GameLayer::init()
 	m_CollisionInformations.clear();
 	m_ObjectPositionsHash.clear();
 
-	this->scheduleUpdate();
 	return true;
 }
 
@@ -133,6 +132,10 @@ void GameLayer::update( float dTime )
 	if( m_Player != nullptr )
 	{
 		View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
+// 		for( auto object : m_InteractiveObjects )
+// 		{
+// 			object->update( dTime );
+// 		}
 		makeHash();
 		collisionCheck( dTime );
 		removeObjects();

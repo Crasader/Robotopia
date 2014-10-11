@@ -228,7 +228,7 @@ void Player::act(float dTime)
 			m_Velocity.y = -300;
 		}
 
-		if (m_Velocity.y <= 300)
+		if( m_Velocity.y <= 300 )
 		{
 			m_Velocity.y += 1500 * dTime;
 		}

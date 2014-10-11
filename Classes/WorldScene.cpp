@@ -40,3 +40,18 @@ bool WorldScene::init()
 	m_UILayer->initializeUILayer();
 	return true;
 }
+
+void WorldScene::onEnter()
+{
+	Node::onEnter();
+	this->resume();
+}
+
+void WorldScene::update(float dTime)
+{
+	m_GameLayer->update( dTime );
+	m_UILayer->update( dTime );
+	m_BackgroundLayer->update( dTime );
+}
+
+

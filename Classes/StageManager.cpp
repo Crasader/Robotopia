@@ -27,16 +27,13 @@ bool StageManager::init()
 		m_CurrentWorldScene->retain();
 		m_WorldScenes[stageNum] = m_CurrentWorldScene;
 	}
+	m_CurrentWorldScene = nullptr;
 	return true;
 }
 
 void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 {
 	_ASSERT( stageNum <= m_FloorData.stageNum );
-	if( m_CurrentWorldScene != nullptr )
-	{
-		m_CurrentWorldScene->cleanup();
-	}
 	addVisitedStage( stageNum );
 	savePlayerInfo();
 	//나중에 씬단위에서 아래 데이터 처리하도록 하자.
@@ -44,7 +41,7 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
 	loadPlayer( nextPlayerPosition );
-	//m_CurrentWorldScene->resume();
+	m_CurrentWorldScene->scheduleUpdate();
 }
 
 Player* StageManager::getPlayer()
