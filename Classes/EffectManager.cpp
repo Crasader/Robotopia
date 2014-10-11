@@ -1,12 +1,14 @@
 #include "EffectManager.h"
 #include "GameManager.h"
 #include "GameLayer.h"
+
 USING_NS_CC;
+using namespace CocosDenshion;
 
 
 bool EffectManager::init()
 {
-	
+	m_IsOnBGM = false;
 	return true;
 }
 
@@ -507,6 +509,31 @@ void EffectManager::createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int e
 	auto fadeTo = FadeTo::create(0.3f, 80);
 	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
 	effectSpr->runAction(Sequence::create(action,fadeTo, callback, NULL));
+}
+
+void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
+{
+	switch (selectedSound)
+	{
+	case SO_SCENE1_BGM:
+		if (m_IsOnBGM)
+		{
+			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+		}
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM1.mp3", isRepeated);
+		break;
+	case SO_SCENE2_BGM:
+		if (m_IsOnBGM)
+		{
+			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+		}
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM2.mp3", isRepeated);
+		break;
+	case SO_MELEE_MISSILE:
+
+		break;
+
+	}
 }
 
 

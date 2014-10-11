@@ -9,6 +9,7 @@
 #pragma once
 
 #include "cocos2d.h"
+#include "SimpleAudioEngine.h"
 #include "Utils.h"
 
 enum EffectType
@@ -19,6 +20,13 @@ enum EffectType
 	ET_MELEE_MISIILE_COLLSION,
 	ET_PLAYER_LANDING,
 	ET_ROUND_SMOKE,
+};
+
+enum SoundType
+{
+	SO_SCENE1_BGM,
+	SO_SCENE2_BGM,
+	SO_MELEE_MISSILE,
 };
 
 class EffectManager
@@ -43,6 +51,9 @@ public:
 	void createEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Rect effectRect, int effectPlayNum);
 	void createEffectSelectedSizeByUser(EffectType selectedEffect, cocos2d::Point effectPoint, cocos2d::Size effectSize, int effectPlayNum);
 
+	void createSound(SoundType selectedSound, bool isRepeated);
+
+
 private:
 	void createEffectLinearMissileCollision(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
 	void createEffectLinearMissileCollisionSelectedSizeByUser(cocos2d::Rect effectRect, int effectPlayNum);
@@ -62,5 +73,7 @@ private:
 
 	//////////////////충돌 없는 애들
 	void createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int effectPlayNum);
+
+	bool m_IsOnBGM;
 };
 

@@ -9,7 +9,7 @@ bool SteamPack::init()
 		return false;
 	}
 
-	//m_Type = OT_STEAMPACK;
+	m_Type = OT_STEAM_PACK;
 
 
 	m_MainSprite = Sprite::create();
@@ -35,8 +35,8 @@ void SteamPack::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
 	if (enemy->getType() == OT_PLAYER)
 	{
-		float curPlayerSteam = GET_STAGE_MANAGER()->getPlayer()->getSteam();
-		GET_STAGE_MANAGER()->getPlayer()->setSteam(curPlayerSteam + m_SteamVolume);
+		GET_STAGE_MANAGER()->getPlayer()->setSteam(m_SteamVolume, true);
+		
 		m_IsDestroyed = true;
 	}
 
