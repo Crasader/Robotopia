@@ -47,7 +47,7 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
 	loadPlayer( nextPlayerPosition );
 	m_CurrentWorldScene->scheduleUpdate();
-	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE2_BGM , true );
+	//GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE2_BGM , true );
 }
 
 Player* StageManager::getPlayer()
