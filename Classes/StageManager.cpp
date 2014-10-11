@@ -15,6 +15,7 @@ bool StageManager::init()
 	m_BoxSize = Size( 32 , 32 );
 
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
+	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE1_BGM , true );
 
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
@@ -46,6 +47,7 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
 	loadPlayer( nextPlayerPosition );
 	m_CurrentWorldScene->scheduleUpdate();
+	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE2_BGM , true );
 }
 
 Player* StageManager::getPlayer()

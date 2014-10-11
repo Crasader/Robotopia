@@ -16,6 +16,8 @@
 USING_NS_CC;
 
 #define MAX_BOX_OBJECTS 10
+#define	MAX_OBJECT_NUM 1024
+#define MAX_COLLISION_INFO 1024
 
 bool GameLayer::init()
 {
@@ -28,7 +30,9 @@ bool GameLayer::init()
 	m_InteractiveObjects.clear();
 	m_CollisionInformations.clear();
 	m_ObjectPositionsHash.clear();
-
+	m_AddObjects.clear();
+	m_InteractiveObjects.reserve( MAX_OBJECT_NUM );
+	m_CollisionInformations.reserve( MAX_COLLISION_INFO );
 	return true;
 }
 
@@ -149,7 +153,10 @@ void GameLayer::collisionCheck(float dTime)
 {
 	for( auto subject: m_InteractiveObjects )
 	{
-		collisionCheckbyHash( subject , dTime );
+		if( subject->getType() != OT_BLOCK )
+		{
+			collisionCheckbyHash( subject , dTime );
+		}
 	}
 
 	for( auto collisionInfo : m_CollisionInformations )
