@@ -13,7 +13,7 @@ bool StageManager::init()
 	m_CurrentStageNum = 1;
 	m_PlayerInfo.hp = 100 , m_PlayerInfo.maxHp = 100 , m_PlayerInfo.steam = 20 , m_PlayerInfo.maxSteam = 20;
 	m_BoxSize = Size( 32 , 32 );
-	
+	m_IsAvailable = false;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
 	makeStaticData();
 
@@ -41,19 +41,22 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 		return;
 	}
 	addVisitedStage( stageNum );
+	m_IsAvailable = false;
 	savePlayerInfo();
+
 	//나중에 씬단위에서 아래 데이터 처리하도록 하자.
 	m_CurrentStageNum = stageNum;
 	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
 	loadPlayer( nextPlayerPosition );
 	m_CurrentWorldScene->scheduleUpdate();
+	m_IsAvailable = true;
 	//GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE2_BGM , true );
 }
 
 Player* StageManager::getPlayer()
 {
-	if( m_CurrentWorldScene == nullptr )
+	if( m_CurrentWorldScene == nullptr || m_IsAvailable == false )
 	{
 		return nullptr;
 	}
@@ -179,7 +182,8 @@ cocos2d::Point StageManager::idxOfStageDataToPosiion( cocos2d::Vec2 idx )
 
 void StageManager::savePlayerInfo()
 {
-	auto player = getPlayer();
+	_ASSERT( m_WorldScenes != nullptr);
+	auto player = getWorldScene()->getGameLayer()->getPlayer();
 	if( player == nullptr )
 	{
 		return;
@@ -190,8 +194,9 @@ void StageManager::savePlayerInfo()
 
 void StageManager::loadPlayer( Point setPosition )
 {
+	_ASSERT( m_WorldScenes != nullptr);
 	addObject( OT_PLAYER , setPosition );
-	auto player = getPlayer();
+	auto player = getWorldScene()->getGameLayer()->getPlayer();
 	_ASSERT( player != nullptr );
 	player->setInfo( m_PlayerInfo );
 }

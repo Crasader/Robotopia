@@ -58,6 +58,7 @@ public:
 	void								makeStaticData();
 
 private:
+	bool								m_IsAvailable;
 	cocos2d::Size						m_BoxSize;
 	std::vector<int>					m_VisitedStageNums;
 	int									m_CurrentStageNum;
