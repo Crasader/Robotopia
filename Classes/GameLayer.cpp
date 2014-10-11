@@ -246,12 +246,8 @@ void GameLayer::removeObjects()
 	{
 		auto object = *objectIter;
 		
-		if( object->isDestroyed() || isOutOfStageMap(object->getPosition()))
+		if( (object->isDestroyed() || isOutOfStageMap( object->getPosition() )) && object->getType() != OT_PLAYER )
 		{
-			if( object->getType() == OT_PLAYER )
-			{
-				int a = 0;
-			}
 			objectIter = m_InteractiveObjects.erase( objectIter );
 			removeChild( object );
 		}
