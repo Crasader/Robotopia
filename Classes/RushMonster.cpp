@@ -2,6 +2,7 @@
 #include "GameLayer.h"
 #include "GameManager.h"
 #include "AimingMissile.h"
+#include "MeleeMissile.h"
 
 USING_NS_CC;
 
@@ -67,7 +68,9 @@ void RushMonster::collisionOccured(InteractiveObject* enemy, Directions dir)
 	case OT_LINEAR_MISSILE:
 		break;
 	case OT_MELEE_MISSILE:
-		m_Info.hp--;
+		auto bullet = (MeleeMissile*)enemy;
+		m_Info.hp -= bullet->getDamage();
+
 		if (m_Info.hp <= 0)
 		{
 			m_IsDestroyed = true;
@@ -182,15 +185,6 @@ void RushMonster::update(float dTime)
 				m_Velocity.x = 0;
 			}
 		}
-	}
-
-	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST1) == KS_PRESS)
-	{
-
-		auto object = (AimingMissile*)GET_STAGE_MANAGER()->addObject(OT_AIMING_MISSILE, pos);
-
-
-		object->setAttribute(true, 200, pos, GET_STAGE_MANAGER()->getPlayer()->getPosition());
 	}
 
 	m_Velocity.y -= GRAVITY*dTime;
