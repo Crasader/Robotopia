@@ -16,6 +16,7 @@ bool ResourceManager::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Round_Smoke.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("monsterBat.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("SteamPack.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sweat.plist");
 	return true;
 }
 
@@ -90,7 +91,8 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 			return createAnimation("rushMonster_rush%d.png", 1, 4, delay);
 		case AT_STEAMPACK:
 			return createAnimation("SteamPack%d.png", 1, 5, delay);
-
+		case AT_SWEAT:
+			return createAnimation("sweat%d.png", 1, 4, delay);
 		}
 	}
 	return nullptr;
@@ -136,6 +138,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 			return createSprite("Round_Smoke1.png");
 		case ST_STEAMPACK:
 			return createSprite("SteamPack3.png");
+		case ST_SWEAT:
+			return createSprite("sweat4.png");
 		}
 	return nullptr;
 }
