@@ -573,7 +573,7 @@ void EffectManager::createEffectSweat(cocos2d::Rect ownRect, Directions collisio
 	float needEffectScale = 0.7f;
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_SWEAT);
-	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_SWEAT, 0.05f);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_SWEAT, 0.075f);
 
 	float ratioX = ownRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = ownRect.size.height / effectSpr->getContentSize().height;
