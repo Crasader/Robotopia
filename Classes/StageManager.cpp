@@ -11,6 +11,7 @@ float StageManager::m_accTimeForShake = 0.f;
 bool StageManager::init()
 {
 	m_CurrentWorldScene = nullptr;
+	m_LastHitMonster = nullptr;
 	m_CurrentFloorNum = 1;
 	m_CurrentStageNum = 1;
 	m_PlayerInfo.hp = 100 , m_PlayerInfo.maxHp = 100 , m_PlayerInfo.steam = 20 , m_PlayerInfo.maxSteam = 20;
@@ -280,3 +281,14 @@ void StageManager::initLastMonster( float dTime )
 		m_LastHitMonster = nullptr;
 	}
 }
+
+bool StageManager::isVisited()
+{
+	return isVisited( m_CurrentFloorNum );
+}
+
+bool StageManager::isVisited( int stageNum )
+{
+	return  m_VisitedStageNums.end() != std::find( m_VisitedStageNums.begin() , m_VisitedStageNums.end() , stageNum );
+}
+

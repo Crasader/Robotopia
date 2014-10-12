@@ -69,7 +69,6 @@ private:
 	cocos2d::Rect									m_MapRect;
 	cocos2d::Size									m_BoxSize;
 	int												m_BoxWidthNum , m_BoxHeightNum;
-	bool											m_isVisited;
 	Player*											m_Player;
 	std::vector<LandGateway*>						m_Gateways;
 	std::vector<CollisionInformation>				m_CollisionInformations;

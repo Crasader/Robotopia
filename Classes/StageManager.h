@@ -51,6 +51,9 @@ public:
 	cocos2d::Vec2						positionToIdxOfStage( cocos2d::Point position ); 
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 	cocos2d::Point						idxOfStageDataToPosiion( cocos2d::Vec2 idx ); //인덱스값을 받아서 위치값으로 리턴
+	bool								isVisited( int stageNum );
+	bool								isVisited();
+
 	bool								accumultateTime( float dTime );
 	void								initLastMonster( float dTime );
 	Monster*							getLastMonster() {return m_LastHitMonster; }
