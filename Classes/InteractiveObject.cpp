@@ -46,16 +46,12 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		myRect.origin.x >= enemyRect.origin.x + enemyRect.size.width ||
 		myRect.origin.y >= enemyRect.origin.y + enemyRect.size.height))
 	{
-		if (enemy->getType() == OT_FLOOR)
-		{
-			return DIR_NONE;
-		}
  		float dis = enemyRect.origin.x + enemyRect.size.width - myRect.origin.x;
 		float minDis;
 
-		if (this->getType() == OT_PLAYER && enemy->getType() == OT_BLOCK)
+		if (enemy->getType() == OT_FLOOR)
 		{
-			minDis = 0;
+			return DIR_NONE;
 		}
 
 		this->getAnchorPoint();

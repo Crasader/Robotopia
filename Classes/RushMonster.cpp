@@ -130,10 +130,8 @@ void RushMonster::update(float dTime)
 	Point pos = this->getPosition();
 	Rect rect = this->getRect();
 
-	if (m_Velocity.x > 0)
-		rect.origin.x += rect.size.width / 2;
-	else
-		rect.origin.x -= rect.size.width / 2;
+	rect.origin.x += rect.size.width / 2;
+	rect.origin.x += m_Velocity.x*dTime;
 
 	rect.origin.y -= rect.size.height/2;
 	
@@ -189,6 +187,7 @@ void RushMonster::update(float dTime)
 			{
 				m_IsRightDirection = true;
 			}
+			m_MainSprite->setFlippedX(m_IsRightDirection);
 
 			if (m_WaitTime > 4)
 			{
@@ -250,12 +249,14 @@ bool RushMonster::isSeePlayer()
 	Rect vision = this->getRect();
 
 	vision.origin.x -= 100;
-	vision.origin.y += 20;
+	vision.origin.y += 10;
 	vision.size.width += 300;
-	vision.size.height += 100;
+	vision.size.height += 80;
 
-	auto objList = ((GameLayer*)this->getParent())->getObjectsByRect(vision);
-	auto player = ((GameLayer*)this->getParent())->getPlayer();
+	CCLOG("x,y : %f,% f, vision = x,y,w,h : %f,%f,%f,%f", this->getPositionX(), this->getPositionY(), vision.origin.x, vision.origin.y, vision.size.width, vision.size.height);
+
+	auto objList = GET_STAGE_MANAGER()->getObjectsByRect(vision);
+	auto player = GET_STAGE_MANAGER()->getPlayer();
 
 	if (std::find(objList.begin(), objList.end(), player) == objList.end())
 	{
@@ -269,7 +270,9 @@ bool RushMonster::isSeePlayer()
 			auto playerX = player->getPositionX();
 			auto objectX = object->getPositionX();
 			auto myX = this->getPositionX();
-			if (( playerX - objectX) *(myX - objectX) <= 0)
+			auto playerY = player->getPositionY();
+			auto objectY = player->getPositionY();
+			if ((playerX - objectX) *(myX - objectX) <= 0 && playerY >= objectY)
 			{
 				return false;
 			}

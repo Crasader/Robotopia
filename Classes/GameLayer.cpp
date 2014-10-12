@@ -179,7 +179,7 @@ void GameLayer::collisionCheck(float dTime)
 {
 	for( auto subject: m_InteractiveObjects )
 	{
-		if( subject->getType() != OT_BLOCK )
+		if( subject->getType() != OT_BLOCK && subject->getType() != OT_FLOOR )
 		{
 			collisionCheckbyHash( subject , dTime );
 		}
