@@ -32,6 +32,7 @@ bool StageManager::init()
 		m_WorldScenes[stageNum] = m_CurrentWorldScene;
 	}
 	m_CurrentWorldScene = nullptr;
+	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE1_BGM , true );
 	return true;
 }
 
@@ -52,7 +53,7 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 	loadPlayer( nextPlayerPosition );
 	m_IsAvailable = true;
 	m_CurrentWorldScene->scheduleUpdate();
-	//GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE2_BGM , true );
+	
 }
 
 Player* StageManager::getPlayer()
