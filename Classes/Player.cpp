@@ -210,6 +210,7 @@ void Player::changeState(State state)
 
 	if (state == PS_HIT)
 	{
+		GET_EFFECT_MANAGER()->createEffect(ET_SWEAT, this->getRect(), DIR_NONE, 2);
 		auto blink = Blink::create(1, 5);
 		this->runAction(RepeatForever::create(blink));
 	}
