@@ -23,7 +23,7 @@ bool ItemLeg::init()
 	m_CreateTimeInMilli = (tv.tv_usec / 1000) + tv.tv_sec * 1000;
 	m_RemainGroundTime = 10;
 
-	m_AddSpeed = 10;
+	m_AddSpeed = 100;
 
 	return true;
 }
