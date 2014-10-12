@@ -20,6 +20,7 @@ enum EffectType
 	ET_MELEE_MISIILE_COLLSION,
 	ET_PLAYER_LANDING,
 	ET_ROUND_SMOKE,
+	ET_SWEAT,
 };
 
 enum SoundType
@@ -79,7 +80,8 @@ private:
 	void createEffectNewLinearMissileCollsion(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
 	void createEffectNewLinearMissileCollsionByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
-
+	void createEffectSweat(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum);
+	void createEffectSweatByUser(cocos2d::Rect effectRect, int effectPlayNum);
 	//////////////////충돌 없는 애들
 	void createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int effectPlayNum);
 

@@ -47,6 +47,8 @@ void EffectManager::createEffect(EffectType selectedEffect, cocos2d::Rect ownRec
 	case ET_PLAYER_LANDING:
 		createEffectPlayerLanding(ownRect, collisionDir, effectPlayNum);
 		break;
+	case ET_SWEAT:
+		
 
 	}
 }
@@ -129,6 +131,47 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Po
 
 //EndLine///////////////////////////////////////////////
 
+void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
+{
+	switch (selectedSound)
+	{
+	case SO_SCENE1_BGM:
+
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM1.mp3", isRepeated);
+		break;
+	case SO_SCENE2_BGM:
+
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM2.mp3", isRepeated);
+		break;
+	case SO_MELEE_MISSILE:
+		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav", isRepeated);
+		break;
+	case SO_SAGA_BGM:
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("saga.mp3", isRepeated);
+		break;
+	case SO_JUMP:
+		SimpleAudioEngine::getInstance()->setEffectsVolume(0.3f);
+		SimpleAudioEngine::getInstance()->playEffect("jump.wav", isRepeated);
+		break;
+	case SO_STEAM_GET:
+		SimpleAudioEngine::getInstance()->playEffect("SteamGet.wav", isRepeated);
+		break;
+	case SO_AIMING_MISSILE_EXPLOSION:
+		SimpleAudioEngine::getInstance()->playEffect("AimingMissileExplosion.wav", isRepeated);
+		break;
+	case SO_PLAYER_FLYING:
+		SimpleAudioEngine::getInstance()->playEffect("Flying.mp3", isRepeated);
+		break;
+	case SO_NEW_LINEAR_MISSILE_CREATING:
+		SimpleAudioEngine::getInstance()->playEffect("NewLinearMissile.wav", isRepeated);
+		break;
+	case SO_PLAYER_AND_MONSTER_COLLISION:
+		SimpleAudioEngine::getInstance()->playEffect("CollisionPlayerAndMonster.wav", isRepeated);
+
+		break;
+
+	}
+}
 
 void EffectManager::createEffectLinearMissileCollision(Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
@@ -522,46 +565,56 @@ void EffectManager::createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int e
 	return;
 }
 
-void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
+
+
+void EffectManager::createEffectSweat(cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
-	switch (selectedSound)
-	{
-	case SO_SCENE1_BGM:
+	float needEffectScale = 0.7f;
+
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_SWEAT);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_SWEAT, 0.2f);
+
+	float ratioX = ownRect.size.width / effectSpr->getContentSize().width;
+	float ratioY = ownRect.size.height / effectSpr->getContentSize().height;
+
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
+
+
+	float setPosX = ownRect.origin.x + (ownRect.size.width / 2);
+	float setPosY = ownRect.origin.y + (ownRect.size.height * 1.5);
 	
-		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM1.mp3", isRepeated);
-		break;
-	case SO_SCENE2_BGM:
-	
-		SimpleAudioEngine::getInstance()->playBackgroundMusic("BGM2.mp3", isRepeated);
-		break;
-	case SO_MELEE_MISSILE:
-		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav", isRepeated);
-		break;
-	case SO_SAGA_BGM:
-		SimpleAudioEngine::getInstance()->playBackgroundMusic("saga.mp3", isRepeated);
-		break;
-	case SO_JUMP:
-		SimpleAudioEngine::getInstance()->setEffectsVolume(0.3f);
-		SimpleAudioEngine::getInstance()->playEffect("jump.wav", isRepeated);
-		break;
-	case SO_STEAM_GET:
-		SimpleAudioEngine::getInstance()->playEffect("SteamGet.wav", isRepeated);
-		break;
-	case SO_AIMING_MISSILE_EXPLOSION:
-		SimpleAudioEngine::getInstance()->playEffect("AimingMissileExplosion.wav", isRepeated);
-		break;
-	case SO_PLAYER_FLYING:
-		SimpleAudioEngine::getInstance()->playEffect("Flying.mp3", isRepeated);
-		break;
-	case SO_NEW_LINEAR_MISSILE_CREATING:
-		SimpleAudioEngine::getInstance()->playEffect("NewLinearMissile.wav", isRepeated);
-		break;
-	case SO_PLAYER_AND_MONSTER_COLLISION:
-		SimpleAudioEngine::getInstance()->playEffect("CollisionPlayerAndMonster.wav", isRepeated);
-		
-		break;
-		
-	}
+	effectSpr->setPosition(setPosX, setPosY);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
+
+	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
+	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
+	effectSpr->runAction(Sequence::create(action, callback, NULL));
+
+	return;
+}
+
+void EffectManager::createEffectSweatByUser(cocos2d::Rect effectRect, int effectPlayNum)
+{
+	float needEffectScale = 1.0f;
+
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_SWEAT);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_SWEAT, 0.2f);
+
+	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
+	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
+
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
+
+	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
+
+	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
+	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
+	effectSpr->runAction(Sequence::create(action, callback, NULL));
+
+	return;
 }
 
 
