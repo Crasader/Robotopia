@@ -53,7 +53,6 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		switch (type)
 		{
 		case AT_AIMINGMISSILE_FLYING:
-
 			return createAnimation("AimingMissile%d.png", 1, 8, delay);
 		case AT_AIMINGMISSILE_COLLISION:
 			return createAnimation("ET_AimingMissile_Collision%d.png", 1, 4, delay);
@@ -97,7 +96,8 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 			return createAnimation("sweat%d.png", 1, 4, delay);
 		case AT_DUST_FOR_SHAKE:
 			return createAnimation("ET_dust_for_Shake%d.png", 1, 4, delay);
-			
+		case AT_TRAP_ACTIVATE:
+			return createAnimation("trap%d.png", 1, 24, delay);
 		}
 	}
 	return nullptr;
@@ -149,7 +149,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 			return createSprite("SteamPack3.png");
 		case ST_SWEAT:
 			return createSprite("sweat4.png");
-		
+		case ST_TRAP:
+			return createSprite("trap0.png");
 		}
 	return nullptr;
 }
