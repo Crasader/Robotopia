@@ -34,6 +34,7 @@ public:
 	bool initModuleData();
 	bool initFloorData();
 	bool getFloorData(int currentFloor, FloorData* floorData, std::vector<StageData>* stageData);
+	bool getShakeFloorData(int currentFloor, FloorData* floorData);
 	DataManager();
 	~DataManager();
 

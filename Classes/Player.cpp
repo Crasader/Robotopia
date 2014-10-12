@@ -241,6 +241,13 @@ cocos2d::Rect Player::getRect()
 
 void Player::act(float dTime)
 {
+
+	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST1) == KS_PRESS)
+	{
+		FloorData f;
+		GET_DATA_MANAGER()->getShakeFloorData(1, &f);
+	}
+
 	if (m_State != PS_ATTACK2)
 	{
 		KeyState leftState = GET_INPUT_MANAGER()->getKeyState(KC_LEFT);

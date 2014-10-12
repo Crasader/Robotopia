@@ -331,3 +331,130 @@ bool DataManager::getFloorData(int currentFloor, FloorData* floorData, std::vect
 
 	return true;
 }
+
+bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData)
+{
+	if (m_FloorData.find(currentFloor) == m_FloorData.end())
+	{
+		return false;
+	}
+
+	int originX = 0, originY = 0;
+	int endX = 0, endY = 0;
+	int stageNum;
+	int floorRawData[4][100][100] = { 0, };
+
+	stageNum = m_FloorData[currentFloor - 1].stageNum;
+
+	for (int s = 1; s <= stageNum; s++)
+	{
+		int x, y, width, height;
+		while (true)
+		{
+			bool passFlag = true;
+
+			width = m_FloorStageData[currentFloor - 1][s].width / MODULE_BASE_WIDTH;
+			height = m_FloorStageData[currentFloor - 1][s].height / MODULE_BASE_HEIGHT;
+
+			if (s == 1)
+			{
+				x = 0;
+				y = 0;
+			}
+			else
+			{
+				int nearRoom = 1 + rand() % (s - 1);
+				int dir = rand() % 4;
+
+				x = m_FloorStageData[currentFloor - 1][nearRoom].x;
+				y = m_FloorStageData[currentFloor - 1][nearRoom].y;
+
+				switch (dir)
+				{
+				case 0: //왼쪽
+					x -= width;
+					y += (rand() % height) - height + 1;
+					break;
+				case 1: //위
+					x += (rand() % width) - width + 1;
+					y -= height;
+					break;
+				case 2: //오른쪽
+					x += m_FloorStageData[currentFloor - 1][nearRoom].width / MODULE_BASE_WIDTH;
+					y += (rand() % height) - height + 1;
+					break;
+				case 3: //아래
+					x += (rand() % width) - width + 1;
+					y += m_FloorStageData[currentFloor - 1][nearRoom].height / MODULE_BASE_HEIGHT;
+					break;
+				}
+			}
+
+			for (int p = 1; p < s; p++)
+			{
+
+				int enemyX = m_FloorStageData[currentFloor - 1][p].x;
+				int enemyY = m_FloorStageData[currentFloor - 1][p].y;
+				int enemyWidth = m_FloorStageData[currentFloor - 1][p].width / MODULE_BASE_WIDTH;
+				int enemyHeight = m_FloorStageData[currentFloor - 1][p].height / MODULE_BASE_HEIGHT;
+
+				if (!(x + width <= enemyX || x >= enemyX + enemyWidth ||
+					y + height <= enemyY || y >= enemyY + enemyHeight))
+				{
+					passFlag = false;
+					break;
+				}
+			}
+
+			if (passFlag == true)
+				break;
+		}
+
+		if (x < originX) originX = x;
+		if (y < originY) originY = y;
+		if (x + width > endX) endX = x + width;
+		if (y + height > endY) endY = y + height;
+
+		m_FloorStageData[currentFloor - 1][s].x = x;
+		m_FloorStageData[currentFloor - 1][s].y = y;
+		
+	}
+
+	endX -= originX;
+	endY -= originY;
+
+	for (int s = 1; s <= stageNum; s++)
+	{
+		m_FloorStageData[currentFloor - 1][s].y -= originY;
+		m_FloorStageData[currentFloor - 1][s].x -= originX;
+
+		for (int y = m_FloorStageData[currentFloor - 1][s].y + 1; y <= m_FloorStageData[currentFloor - 1][s].y + m_FloorStageData[currentFloor - 1][s].height / MODULE_BASE_HEIGHT; y++)
+		{
+			for (int x = m_FloorStageData[currentFloor - 1][s].x + 1; x <= m_FloorStageData[currentFloor - 1][s].x + m_FloorStageData[currentFloor - 1][s].width / MODULE_BASE_WIDTH; x++)
+			{
+				floorRawData[currentFloor - 1][y][x] = s;
+			}
+		}
+	}
+
+	m_FloorData[currentFloor - 1].data.clear();
+
+	for (int y = endY + 1; y >= 0; y--)
+	{
+		for (int x = 0; x <= endX + 1; x++)
+		{
+			if (y == 0 || x == 0 || x == endX + 1 || y == endY + 1)
+			{
+				m_FloorData[currentFloor - 1].data.push_back(0);
+			}
+			else
+			{
+				m_FloorData[currentFloor - 1].data.push_back(floorRawData[currentFloor - 1][y][x]);
+			}
+		}
+	}
+	m_FloorData[currentFloor - 1].width = endX + 2;
+	m_FloorData[currentFloor - 1].height = endY + 2;
+
+	return true;
+}
