@@ -11,7 +11,7 @@ bool LandTrap::init()
 	}
 	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( ST_TRAP );
 	m_MainSprite->setAnchorPoint( Point(0.5, 0) );
-	m_MainSprite->setPosition( Point( 0 , this->getRect().size.height) );
+	m_MainSprite->setPosition( Point( 0 , -1*this->getRect().size.height) );
 	this->addChild( m_MainSprite );
 	m_ActivateAnimation = GET_RESOURCE_MANAGER()->createAnimation( AT_TRAP_ACTIVATE , 0.1f);
 	m_Type = OT_TRAP;
@@ -40,7 +40,7 @@ bool LandTrap::isActive()
 {
 	timeval curTime = GET_GAME_MANAGER()->getTime();
 	int firePeriod = 5;
-	if( ( m_InitTime.tv_sec - curTime.tv_sec ) % 10 > firePeriod )
+	if( ( curTime.tv_sec - m_InitTime.tv_sec ) % 10 > firePeriod )
 	{
 		return true;
 	}
@@ -48,5 +48,12 @@ bool LandTrap::isActive()
 	{
 		return false;
 	}
+}
+
+Rect LandTrap::getRect()
+{
+	Rect resultRt;
+	resultRt.setRect( this->getPosition().x , this->getPosition().y , 20 , 70 );
+	return resultRt;
 }
 

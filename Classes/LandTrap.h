@@ -5,11 +5,12 @@
 class LandTrap : public LandObject
 {
 public:
-	OVERRIDE bool		init();
-	OVERRIDE void		update( float dTime );
-	virtual void		collisionOccured( InteractiveObject* enemy , Directions dir ){};
-	bool				isActive();
-	void				endAnimation( cocos2d::Ref* sender );
+	OVERRIDE bool			init();
+	OVERRIDE void			update( float dTime );
+	virtual void			collisionOccured( InteractiveObject* enemy , Directions dir ){};
+	bool					isActive();
+	OVERRIDE cocos2d::Rect	getRect();
+	void					endAnimation( cocos2d::Ref* sender );
 	CREATE_FUNC( LandTrap );
 
 private:
