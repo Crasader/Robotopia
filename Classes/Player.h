@@ -15,6 +15,19 @@ struct PlayerInfo
 	int			maxHp;
 	int			maxSteam;
 	int			speed;
+
+	PlayerInfo()
+	{
+		maxHp = 100;
+		hp = maxHp;
+		maxSteam = 20000;
+		steam = maxSteam;
+		speed = 200;
+	}
+
+	~PlayerInfo()
+	{
+	}
 };
 
 class Player : public InteractiveObject
