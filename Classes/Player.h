@@ -34,9 +34,9 @@ public:
 	int						getMaxSteam() const { return m_Info.maxSteam; }
 	bool					isInvincible() const{ return m_IsInvincible; }
 	PlayerInfo				getInfo() const { return m_Info; }
-	void					setHp(int hp, bool isRelative = false) { if (!isRelative) m_Info.hp = hp; else m_Info.hp += hp; }
+	void					setHp(int hp, bool isRelative = false);
 	void					setMaxHp(int maxHp, bool isRelative = false) { if (!isRelative) m_Info.maxHp = maxHp; else m_Info.maxHp += maxHp; }
-	void					setSteam(int steam, bool isRelative = false) { if (!isRelative) m_Info.steam = steam; else m_Info.steam += steam; }
+	void					setSteam(int steam, bool isRelative = false);
 	void					setMaxSteam(int maxSteam, bool isRelative = false){ if (!isRelative) m_Info.maxSteam = maxSteam; else m_Info.maxSteam += maxSteam; }
 	void					setInfo(PlayerInfo info) { m_Info = info; }
 private:

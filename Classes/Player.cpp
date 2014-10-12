@@ -61,6 +61,16 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		if (dir & DIR_DOWN)
 		{
+			if (m_State == PS_JUMP)
+			{
+				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+			}
+			if (m_State == PS_HIT)
+			{
+				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+				changeState(PS_STAND);
+				startInvincible();
+			}
 			m_IsFlying = false;
 			m_Velocity.y = 0;
 		}
@@ -426,5 +436,33 @@ void Player::endInvincible(cocos2d::Ref* sender)
 	m_IsInvincible = false;
 	this->stopAllActions();
 	this->setVisible(true);
+}
+
+void Player::setHp(int hp, bool isRelative /*= false*/)
+{
+	int changeHp = hp;
+
+	if (isRelative)
+	{
+		changeHp += m_Info.hp;
+	}
+	if (!(changeHp > m_Info.maxHp || changeHp < 0))
+	{
+		m_Info.hp = changeHp;
+	}
+}
+
+void Player::setSteam(int steam, bool isRelative /*= false*/)
+{
+	int changeSteam = steam;
+
+	if (isRelative)
+	{
+		changeSteam += m_Info.steam;
+	}
+	if (!(changeSteam > m_Info.maxSteam || changeSteam < 0))
+	{
+		m_Info.steam = changeSteam;
+	}
 }
 
