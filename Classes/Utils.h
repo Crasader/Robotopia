@@ -33,6 +33,7 @@ enum ObjectType
 	OT_STEAM_PACK = 13,
 	OT_TURRET = 14,
 	OT_BAT_MONSTER = 15,
+	OT_ITEM_LEG = 16,
 };
 
 

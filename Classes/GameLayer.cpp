@@ -16,6 +16,7 @@
 #include "View.h"
 #include "Player.h"
 #include "InteractiveObject.h"
+#include "ItemLeg.h"
 
 USING_NS_CC;
 
@@ -126,6 +127,10 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			break;
 		case OT_BAT_MONSTER:
 			object = BatMonster::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
+		case OT_ITEM_LEG:
+			object = ItemLeg::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
 		default:
