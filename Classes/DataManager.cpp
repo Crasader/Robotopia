@@ -332,7 +332,7 @@ bool DataManager::getFloorData(int currentFloor, FloorData* floorData, std::vect
 	return true;
 }
 
-bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData)
+bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData, std::vector<StageData>* stageData)
 {
 	if (m_FloorData.find(currentFloor) == m_FloorData.end())
 	{
@@ -455,6 +455,13 @@ bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData)
 	}
 	m_FloorData[currentFloor - 1].width = endX + 2;
 	m_FloorData[currentFloor - 1].height = endY + 2;
+
+	stageData->clear();
+
+	for (int s = 0; s <= m_FloorData[currentFloor - 1].stageNum; s++)
+	{
+		stageData->push_back(m_FloorStageData[currentFloor - 1][s]);
+	}
 
 	return true;
 }
