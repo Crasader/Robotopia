@@ -190,7 +190,7 @@ void RushMonster::update(float dTime)
 			}
 			m_MainSprite->setFlippedX(m_IsRightDirection);
 
-			if (m_WaitTime > 4)
+			if (m_WaitTime > 3)
 			{
 				m_WaitTime = 0;
 				changeState(RM_RUSH);

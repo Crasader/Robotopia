@@ -234,6 +234,7 @@ void Player::changeState(State state)
 
 	if (state == PS_HIT)
 	{
+		m_HitTime = 0;
 		GET_EFFECT_MANAGER()->createEffect(ET_SWEAT, this->getRect(), DIR_NONE, 2);
 		auto blink = Blink::create(1, 5);
 		this->runAction(RepeatForever::create(blink));
@@ -265,14 +266,6 @@ cocos2d::Rect Player::getRect()
 
 void Player::act(float dTime)
 {
-	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST1) == KS_PRESS)
-	{
-		FloorData f;
-		std::vector<StageData> s;
-
-		GET_DATA_MANAGER()->getShakeFloorData(1, &f, &s);
-	}
-
 
 	if (m_State != PS_ATTACK2)
 	{
@@ -394,11 +387,11 @@ void Player::act(float dTime)
 
 			if (m_IsRightDirection)
 			{
-				object->setAttribute(true, 1, 0, 2);
+				object->setAttribute(true, 1, 0, 3);
 			}
 			else
 			{
-				object->setAttribute(true, -1, 0, 2);
+				object->setAttribute(true, -1, 0, 3);
 			}
 			m_Info.steam -= 150;
 		}
@@ -409,11 +402,11 @@ void Player::act(float dTime)
 
 			if (m_IsRightDirection)
 			{
-				object->setAttribute(true, 200, 0, 5);
+				object->setAttribute(true, 200, 0, 8);
 			}
 			else
 			{
-				object->setAttribute(true, -200, 0, 5);
+				object->setAttribute(true, -200, 0, 8);
 			}
 		}
 
@@ -434,13 +427,23 @@ void Player::reset(float dTime)
 	if (m_IsActiveFly)
 	{
 		m_ActiveFlyingTime += dTime;
-		m_Info.steam -= dTime * 1000;
+		m_Info.steam -= dTime * 800;
 	}
 
 	if (m_ActiveFlyingTime >= 1)
 	{
 		GET_EFFECT_MANAGER()->createSound(SO_PLAYER_FLYING, false);
 		m_ActiveFlyingTime = 0;
+	}
+
+	if (m_State == PS_HIT)
+	{
+		m_HitTime += dTime;
+		if (m_HitTime > 1)
+		{
+			changeState(PS_STAND);
+			startInvincible();
+		}
 	}
 
 
