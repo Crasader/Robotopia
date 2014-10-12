@@ -400,6 +400,7 @@ void Player::act(float dTime)
 			{
 				object->setAttribute(true, -1, 0, 2);
 			}
+			m_Info.steam -= 150;
 		}
 		else
 		{
@@ -441,8 +442,6 @@ void Player::reset(float dTime)
 		GET_EFFECT_MANAGER()->createSound(SO_PLAYER_FLYING, false);
 		m_ActiveFlyingTime = 0;
 	}
-
-	m_Info.steam -= 150;
 
 
 	m_IsActiveFly = false;
