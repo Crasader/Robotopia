@@ -63,18 +63,42 @@ void View::setViewPortWithHighlight(GameLayer* scene, cocos2d::Point standardPoi
 
 void View::setViewPortShake(GameLayer* scene, Point standardPoint, Point anchorPoint)
 {
+	Rect mapRect = scene->getMapRect();
 	float windowWidth = Director::getInstance()->getWinSize().width;
 	float windowHeight = Director::getInstance()->getWinSize().height;
 	float anchorX = windowWidth * anchorPoint.x;
 	float anchorY = windowHeight * anchorPoint.y;
 
 
-	for (int i = 0; i < 5; ++i)
+
+	
+
+
+	if (standardPoint.x + anchorX > mapRect.size.width)
 	{
-		standardPoint.x = (10 + rand() % 90) / 5;
-		standardPoint.y = (10 + rand() % 90) / 5;
-		scene->setPosition(anchorX - standardPoint.x, anchorY - standardPoint.y);
+		anchorX  = standardPoint.x - (mapRect.size.width - windowWidth);
 	}
+	if (standardPoint.x - anchorX < 0)
+	{
+		anchorX = standardPoint.x;
+		//만약에 0으로하면 왼쪽 빈 공간이 보이지 않는다. 
+		//anchorX = 0;
+	}
+	if (standardPoint.y + anchorY > mapRect.size.height)
+	{
+		anchorY = standardPoint.y - (mapRect.size.height - windowHeight);
+	}
+	if (standardPoint.y - anchorY < 0)
+	{
+		anchorY = standardPoint.y;
+	}
+
+
+	anchorX += (10 + rand() % 90) / 5;
+	anchorY += (10 + rand() % 90) / 5;
+
+	scene->setPosition(anchorX - standardPoint.x, anchorY - standardPoint.y);
+	
 
 	return;
 

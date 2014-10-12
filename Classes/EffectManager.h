@@ -21,6 +21,7 @@ enum EffectType
 	ET_PLAYER_LANDING,
 	ET_ROUND_SMOKE,
 	ET_SWEAT,
+	ET_DUST_FOR_SHAKE,
 };
 
 enum SoundType
@@ -84,6 +85,7 @@ private:
 	void createEffectSweatByUser(cocos2d::Rect effectRect, int effectPlayNum);
 	//////////////////충돌 없는 애들
 	void createEffectRoundSmokeByUser(cocos2d::Rect effectRect, int effectPlayNum);
+	void createEffectDustForViewShakeByUser(cocos2d::Rect effectRect, int effectPlayNum);
 
 	bool m_IsOnBGM;
 };

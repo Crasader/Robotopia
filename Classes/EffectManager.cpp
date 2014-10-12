@@ -85,8 +85,16 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 			break;
 		case ET_PLAYER_LANDING:
 			createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
+			break;
 		case ET_ROUND_SMOKE:
 			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
+			break;
+		case ET_SWEAT:
+			createEffectSweatByUser(effectRect, effectPlayNum);
+			break;
+		case ET_DUST_FOR_SHAKE:
+			createEffectDustForViewShakeByUser(effectRect, effectPlayNum);
+			break;
 
 		}
 	}
@@ -116,6 +124,12 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 		case ET_ROUND_SMOKE:
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_ROUND_SMOKE)->getContentSize();
 			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
+		case ET_SWEAT:
+			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_SWEAT)->getContentSize();
+			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
+		case ET_DUST_FOR_SHAKE:
+			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_DUST_FOR_SHAKE)->getContentSize();
+			createEffectDustForViewShakeByUser(effectRect, effectPlayNum);
 		}
 	}
 	
@@ -601,6 +615,29 @@ void EffectManager::createEffectSweatByUser(cocos2d::Rect effectRect, int effect
 
 	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_SWEAT);
 	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_SWEAT, 0.2f);
+
+	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
+	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;
+
+	effectSpr->setScaleX(ratioX * needEffectScale);
+	effectSpr->setScaleY(ratioY * needEffectScale);
+
+	effectSpr->setPosition(effectRect.origin.x, effectRect.origin.y);
+	GET_STAGE_MANAGER()->addEffectOnGameLayer(effectSpr);
+
+	auto action = Repeat::create(Animate::create(effectAni), effectPlayNum);
+	auto callback = CallFuncN::create(CC_CALLBACK_1(EffectManager::removeSprAfterAni, this));
+	effectSpr->runAction(Sequence::create(action, callback, NULL));
+
+	return;
+}
+
+void EffectManager::createEffectDustForViewShakeByUser(cocos2d::Rect effectRect, int effectPlayNum)
+{
+	float needEffectScale = 1.0f;
+
+	auto effectSpr = GET_RESOURCE_MANAGER()->createSprite(ST_DUST_FOR_SHAKE);
+	auto effectAni = GET_RESOURCE_MANAGER()->createAnimation(AT_DUST_FOR_SHAKE, 0.01f);
 
 	float ratioX = effectRect.size.width / effectSpr->getContentSize().width;
 	float ratioY = effectRect.size.height / effectSpr->getContentSize().height;

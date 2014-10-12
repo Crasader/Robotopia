@@ -17,6 +17,7 @@ bool ResourceManager::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("monsterBat.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("SteamPack.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sweat.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ET_dust_for_shake.plist");
 	return true;
 }
 
@@ -93,6 +94,9 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 			return createAnimation("SteamPack%d.png", 1, 5, delay);
 		case AT_SWEAT:
 			return createAnimation("sweat%d.png", 1, 4, delay);
+		case AT_DUST_FOR_SHAKE:
+			return createAnimation("ET_dust_for_Shake%d.png", 1, 4, delay);
+			
 		}
 	}
 	return nullptr;
@@ -140,6 +144,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 			return createSprite("SteamPack3.png");
 		case ST_SWEAT:
 			return createSprite("sweat4.png");
+		case ST_DUST_FOR_SHAKE:
+			return createSprite("ET_dust_for_Shake1.png");
 		}
 	return nullptr;
 }

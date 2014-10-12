@@ -32,6 +32,7 @@ enum AnimationType
 	AT_RUSHMONSTER_RUSH,
 	AT_STEAMPACK,
 	AT_SWEAT,
+	AT_DUST_FOR_SHAKE,
 };
 
 enum SpriteType
@@ -52,6 +53,8 @@ enum SpriteType
 	ST_ROUND_SMOKE,
 	ST_STEAMPACK,
 	ST_SWEAT,
+	ST_DUST_FOR_SHAKE,
+
 };
 
 
