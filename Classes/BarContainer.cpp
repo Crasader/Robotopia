@@ -69,17 +69,21 @@ void BarContainer::update(float dTime)
 
 		setLabels(playerInfo.hp, playerInfo.maxHp, playerInfo.steam, playerInfo.maxSteam);
 	}
-// 	auto monster = GET_STAGE_MANAGER()->getLastMonster();
-// 	if (monster != nullptr)
-// 	{
-// 		auto monsterInfo = monster->getInfo();
-// 		drawMonsterHP(monsterInfo.hp, monsterInfo.maxHp);
-// 		m_MonsterHPContainerSpr->setVisible(true);
-// 	}
-// 	else
-// 	{
-// 		m_MonsterHPContainerSpr->setVisible(false);
-// 	}
+	auto monster = GET_STAGE_MANAGER()->getLastMonster();
+	if (monster != nullptr)
+	{
+		auto monsterInfo = monster->getInfo();
+		drawMonsterHP(monsterInfo.hp, monsterInfo.maxHp);
+		m_MonsterHPContainerSpr->setVisible(true);
+		if (monsterInfo.hp <= 0)
+		{
+			m_MonsterHPContainerSpr->setVisible(false);
+		}
+	}
+	else
+	{
+		m_MonsterHPContainerSpr->setVisible(false);
+	}
 }
 
 
@@ -111,7 +115,7 @@ void BarContainer::drawCurrentSTE(int currentSTE, int maxSTE)
 void BarContainer::drawMonsterHP(int currentHP, int maxHP)
 {
 	float scaleSTE = (float)currentHP / maxHP;
-	m_MonsterHPSpr->setScale(scaleSTE);
+	m_MonsterHPSpr->setScaleX(scaleSTE);
 }
 
 void BarContainer::setLabels(int currentHP, int maxHP, int currentSTE, int maxSTE)
