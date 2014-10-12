@@ -68,6 +68,7 @@ void RushMonster::collisionOccured(InteractiveObject* enemy, Directions dir)
 	case OT_LINEAR_MISSILE:
 	case OT_MELEE_MISSILE:
 	case OT_NEW_LINEAR_MISSILE:
+		GET_STAGE_MANAGER()->setLastMonster(this);
 		auto bullet = (MeleeMissile*)enemy;
 
 		m_Info.hp -= bullet->getDamage();
