@@ -13,6 +13,6 @@ public:
 	CREATE_FUNC( LandTrap );
 
 private:
-	bool				m_IsActive;
-	Animation*			m_ActivateAnimation;
+	bool					m_IsActive;
+	cocos2d::Animation*		m_ActivateAnimation;
 };
