@@ -26,6 +26,7 @@ private:
 		GAMELAYER ,
 		UILAYER ,
 	};
+	float				m_ShakeTime;
 	GameLayer*			m_GameLayer;
 	BackgroundLayer*	m_BackgroundLayer;
 	UILayer*			m_UILayer;

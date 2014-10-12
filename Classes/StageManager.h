@@ -27,7 +27,6 @@ public:
 	//이펙트를 GameLayer에 추가합니다.
 	void								addEffectOnGameLayer(cocos2d::Sprite* effect);
 	void								addEffectOnGameLayer( cocos2d::Sprite* effect, cocos2d::Point position, cocos2d::Point anchorPoint );
-
 	//스테이지 데이터를 참조하여 특정 위치에 있는 오브젝트 타입을 불러냅니다.
 	ObjectType							getStageDataInPosition( cocos2d::Point position );
 	ObjectType							getStageDataInPositionWithIdx( int xIdx , int yIdx );
@@ -51,13 +50,17 @@ public:
 	cocos2d::Vec2						positionToIdxOfStage( cocos2d::Point position ); 
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 	cocos2d::Point						idxOfStageDataToPosiion( cocos2d::Vec2 idx ); //인덱스값을 받아서 위치값으로 리턴
+	void								accumultateTime( float dTime );
 
-	void								shakeFloor();
-	void								savePlayerInfo();
-	void								loadPlayer(cocos2d::Point setPosition);
-	void								makeStaticData();
 
 private:
+	void								savePlayerInfo();
+	void								loadPlayer( cocos2d::Point setPosition );
+	void								makeStaticData();
+	void								shakeFloor();
+
+private:
+	static float						m_accTimeForShake;
 	bool								m_IsAvailable;
 	cocos2d::Size						m_BoxSize;
 	std::vector<int>					m_VisitedStageNums;

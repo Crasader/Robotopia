@@ -25,7 +25,7 @@ bool WorldScene::init()
 	{
 		return false;
 	}
-	
+	m_ShakeTime = 500.f;
 	m_GameLayer = GameLayer::create();
 	m_GameLayer->setAnchorPoint( Point::ZERO );
 	m_BackgroundLayer = BackgroundLayer::create();
@@ -48,6 +48,7 @@ void WorldScene::onEnter()
 
 void WorldScene::update(float dTime)
 {
+	GET_STAGE_MANAGER()->accumultateTime( dTime );
 	m_KeySentinel->update( dTime );
 	m_UILayer->update( dTime );
 	m_GameLayer->update( dTime );

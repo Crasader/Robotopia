@@ -6,6 +6,8 @@
 
 USING_NS_CC;
 
+float StageManager::m_accTimeForShake = 0.f;
+
 bool StageManager::init()
 {
 	m_CurrentWorldScene = nullptr;
@@ -207,11 +209,11 @@ cocos2d::Rect StageManager::getStageRect()
 
 void StageManager::shakeFloor()
 {
-	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
-	for( int i = 1; i <= m_FloorData.stageNum; ++i )
-	{
-		m_WorldScenes[i]->getGameLayer()->initGateways();
-	}
+	m_VisitedStageNums.clear();
+	m_VisitedStageNums.push_back( m_CurrentStageNum );
+	GET_DATA_MANAGER()->getShakeFloorData( m_CurrentFloorNum , &m_FloorData ,&m_CurrentFloorStagesData);
+	makeStaticData();
+	m_WorldScenes[m_CurrentFloorNum]->getGameLayer()->initGateways();
 }
 
 void StageManager::makeStaticData()
@@ -249,4 +251,16 @@ WorldScene* StageManager::getWorldScene()
 {
 	_ASSERT( m_CurrentStageNum > 0 && m_CurrentStageNum <= m_FloorData.stageNum );
 	return m_WorldScenes[m_CurrentStageNum]; 
+}
+
+void StageManager::accumultateTime( float dTime )
+{
+	m_accTimeForShake += dTime;
+	int shakeDuration = 10.f;
+	if( m_accTimeForShake > shakeDuration )
+	{
+		CCLOG( "open sesami" );
+		m_accTimeForShake = 0.f;
+		shakeFloor();
+	}
 }
