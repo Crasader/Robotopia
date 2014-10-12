@@ -32,7 +32,7 @@ bool StageManager::init()
 		m_WorldScenes[stageNum] = m_CurrentWorldScene;
 	}
 	m_CurrentWorldScene = nullptr;
-	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SCENE1_BGM , true );
+	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SAGA_BGM , true );
 	return true;
 }
 
