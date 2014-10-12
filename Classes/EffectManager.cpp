@@ -126,7 +126,7 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
 		case ET_SWEAT:
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_SWEAT)->getContentSize();
-			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
+			createEffectSweatByUser(effectRect, effectPlayNum);
 		case ET_DUST_FOR_SHAKE:
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_DUST_FOR_SHAKE)->getContentSize();
 			createEffectDustForViewShakeByUser(effectRect, effectPlayNum);
