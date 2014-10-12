@@ -59,12 +59,18 @@ void ItemLeg::update(float dTime)
 
 	static bool firstFlag = false;
 	static bool secondFlag = false;
+	static bool thirdFlag = false;
+	
 
 	if (CurTimeInMilli - m_CreateTimeInMilli > 100000)
 	{
-		m_MainSprite->setOpacity(65);
-		auto action = Blink::create(5.0f, 20);
-		m_MainSprite->runAction(RepeatForever::create(action));
+		if (thirdFlag == false)
+		{
+			thirdFlag = true;
+			m_MainSprite->setOpacity(65);
+			auto action = Blink::create(5.0f, 20);
+			m_MainSprite->runAction(RepeatForever::create(action));
+		}
 
 	}
 	else if (CurTimeInMilli - m_CreateTimeInMilli > 75000)
@@ -77,8 +83,8 @@ void ItemLeg::update(float dTime)
 			auto action2 = FadeTo::create(0.2f, 70);
 			auto action3 = FadeTo::create(0.2f, 150);
 			auto sequence1 = Sequence::create(action2, action3, NULL);
-			m_MainSprite->runAction(RepeatForever::create(sequence1));
-			secondFlag = true;*/
+			m_MainSprite->runAction(RepeatForever::create(sequence1));*/
+			secondFlag = true;
 
 			auto action = Blink::create(5.0f, 20);
 			m_MainSprite->runAction(RepeatForever::create(action));
@@ -95,8 +101,8 @@ void ItemLeg::update(float dTime)
 			auto action0 = FadeTo::create(0.5f, 128);
 			auto action1 = FadeTo::create(0.5f, 190);
 			auto sequence0 = Sequence::create(action0, action1, NULL);
-			m_MainSprite->runAction(RepeatForever::create(sequence0));
-			firstFlag = true;*/
+			m_MainSprite->runAction(RepeatForever::create(sequence0));*/
+			firstFlag = true;
 			auto action = Blink::create(5.0f, 10);
 			m_MainSprite->runAction(RepeatForever::create(action));
 		}
