@@ -36,6 +36,16 @@ bool BarContainer::init()
 	m_STEbarSpr->setPosition(Point(250, m_WinHeight - 32));
 	this->addChild(m_STEbarSpr, 6);
 
+	m_MonsterHPContainerSpr = Sprite::create("MonsterHPContainer.png");
+	m_MonsterHPContainerSpr->setVisible(false);
+	m_MonsterHPContainerSpr->setPosition(Point(m_WinWidth / 2, m_WinHeight - 50));
+	this->addChild(m_MonsterHPContainerSpr);
+	
+	m_MonsterHPSpr = Sprite::create("MonsterHPBar.png");
+	m_MonsterHPSpr->setAnchorPoint(Point(0, 1));
+	m_MonsterHPSpr->setPosition(Point(3.5, m_MonsterHPContainerSpr->getContentSize().height - 3));
+	m_MonsterHPContainerSpr->addChild(m_MonsterHPSpr, -2);
+
 	//Label - 실제 개발에서는 문자를 이미지로 대체
 	auto hpLabel = Label::createWithSystemFont("", "Thonburi", 15);
 	hpLabel->setPosition(Point(155, m_WinHeight - 17));
@@ -59,6 +69,17 @@ void BarContainer::update(float dTime)
 
 		setLabels(playerInfo.hp, playerInfo.maxHp, playerInfo.steam, playerInfo.maxSteam);
 	}
+// 	auto monster = GET_STAGE_MANAGER()->getLastMonster();
+// 	if (monster != nullptr)
+// 	{
+// 		auto monsterInfo = monster->getInfo();
+// 		drawMonsterHP(monsterInfo.hp, monsterInfo.maxHp);
+// 		m_MonsterHPContainerSpr->setVisible(true);
+// 	}
+// 	else
+// 	{
+// 		m_MonsterHPContainerSpr->setVisible(false);
+// 	}
 }
 
 
@@ -85,6 +106,12 @@ void BarContainer::drawCurrentSTE(int currentSTE, int maxSTE)
 {
  	float scaleSTE = (float)currentSTE / maxSTE;
 	m_STEbarSpr->setPosition(Point(200 * scaleSTE + 50, m_WinHeight - 32));
+}
+
+void BarContainer::drawMonsterHP(int currentHP, int maxHP)
+{
+	float scaleSTE = (float)currentHP / maxHP;
+	m_MonsterHPSpr->setScale(scaleSTE);
 }
 
 void BarContainer::setLabels(int currentHP, int maxHP, int currentSTE, int maxSTE)

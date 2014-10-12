@@ -24,7 +24,8 @@ public:
 private:
 	int								m_WinWidth, m_WinHeight;
 	bool							m_WorldMenuOn;
-	cocos2d::Sprite*				m_sprWorldMenuContainer;
-
-
+	cocos2d::Sprite*				m_WorldMenuContainerSpr;
+	cocos2d::Sprite*				m_ButtonSaveQuitSpr;
+	cocos2d::Sprite*				m_ButtonSaveQuitClickedSpr;
+	cocos2d::Sprite*				m_ButtonSaveQuitHighlightSpr;
 };

@@ -32,9 +32,12 @@ private:
 	int									m_WinWidth, m_WinHeight;
 	int									m_prevHP;
 	cocos2d::Sprite*					m_STEbarSpr;
+	cocos2d::Sprite*					m_MonsterHPContainerSpr;
+	cocos2d::Sprite*					m_MonsterHPSpr;
 
 	void								drawCurrentHP(int currentHP, int maxHP);
 	void								drawCurrentSTE(int currentSTE, int maxSTE);
+	void								drawMonsterHP(int currentHP, int maxHP);
 	
 	void								setLabels(int currentHP, int maxHP, int currentSTE, int maxSTE);
 };

@@ -97,7 +97,7 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 		case AT_DUST_FOR_SHAKE:
 			return createAnimation("ET_dust_for_Shake%d.png", 1, 4, delay);
 		case AT_TRAP_ACTIVATE:
-			return createAnimation("trap%d.png", 1, 24, delay);
+			return createAnimation("trap%d.png", 0, 24, delay);
 		}
 	}
 	return nullptr;
