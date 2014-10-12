@@ -435,6 +435,8 @@ bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData, std:
 				floorRawData[currentFloor - 1][y][x] = s;
 			}
 		}
+		m_FloorStageData[currentFloor - 1][s].x++;
+		m_FloorStageData[currentFloor - 1][s].y = endY + 1 - m_FloorStageData[currentFloor - 1][s].y - m_FloorStageData[currentFloor - 1][s].height / MODULE_BASE_HEIGHT;
 	}
 
 	m_FloorData[currentFloor - 1].data.clear();
@@ -455,13 +457,6 @@ bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData, std:
 	}
 	m_FloorData[currentFloor - 1].width = endX + 2;
 	m_FloorData[currentFloor - 1].height = endY + 2;
-
-	stageData->clear();
-
-	for (int s = 0; s <= m_FloorData[currentFloor - 1].stageNum; s++)
-	{
-		stageData->push_back(m_FloorStageData[currentFloor - 1][s]);
-	}
 
 	return true;
 }
