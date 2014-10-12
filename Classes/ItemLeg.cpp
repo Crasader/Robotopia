@@ -24,6 +24,8 @@ bool ItemLeg::init()
 	m_RemainGroundTime = 10;
 
 	m_AddSpeed = 10;
+
+	return true;
 }
 
 void ItemLeg::collisionOccured(InteractiveObject* enemy, Directions dir)
