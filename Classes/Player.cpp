@@ -35,7 +35,7 @@ bool Player::init()
 	m_Info.maxHp = 100;
 	m_Info.hp = m_Info.maxHp;
 
-	m_Info.maxSteam = 20;
+	m_Info.maxSteam = 2000;
 	m_Info.steam = m_Info.maxSteam;
 	m_ActiveFlyingTime = 0;
 	m_AttackNum = 0;
