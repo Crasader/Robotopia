@@ -253,14 +253,17 @@ WorldScene* StageManager::getWorldScene()
 	return m_WorldScenes[m_CurrentStageNum]; 
 }
 
-void StageManager::accumultateTime( float dTime )
+bool StageManager::accumultateTime( float dTime )
 {
 	m_accTimeForShake += dTime;
-	int shakeDuration = 10.f;
+	int shakeDuration = 30.f;
 	if( m_accTimeForShake > shakeDuration )
 	{
+		getWorldScene()->getGameLayer()->IsItShake( true );
 		CCLOG( "open sesami" );
 		m_accTimeForShake = 0.f;
 		shakeFloor();
 	}
+
+	return true;
 }

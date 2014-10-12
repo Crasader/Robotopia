@@ -33,6 +33,7 @@ bool GameLayer::init()
 
 	m_Player = nullptr;
 	m_isVisited = false;
+	m_IsShaking = false;
 	m_InteractiveObjects.clear();
 	m_CollisionInformations.clear();
 	m_ObjectPositionsHash.clear();
@@ -152,6 +153,7 @@ InteractiveObject*	GameLayer::addObjectByMapdata( int xIdx , int yIdx )
 
 void GameLayer::update( float dTime )
 {
+	static float accTime = 0.f;
 	if( !m_isVisited )
 	{
 		m_isVisited = true;
@@ -160,7 +162,21 @@ void GameLayer::update( float dTime )
 
 	if( m_Player != nullptr )
 	{
-		View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
+		if( m_IsShaking )
+		{
+			int shakingTime = 2.0f;
+			accTime += dTime;
+			View::setViewPortShake( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) ); 
+			if( accTime > shakingTime )
+			{
+				m_IsShaking = false;
+				accTime = 0.f;
+			}
+		}
+		else
+		{
+			View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
+		}
 		makeHash();
 		collisionCheck( dTime );
 		collisionProc( dTime );

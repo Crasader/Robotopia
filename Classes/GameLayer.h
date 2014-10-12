@@ -9,33 +9,39 @@ class GameLayer : public cocos2d::Layer
 {
 public:
 	static cocos2d::Scene*			createScene();
+
 	OVERRIDE bool					init();  
 	OVERRIDE void					update(float dTime);
+
 	bool							initWorldFromData( cocos2d::Vec2 boxNum , cocos2d::Size boxSize , 
 													   std::map<int , ObjectType> MapData , char* BGpath);
 	void							addEffect( cocos2d::Sprite* sprite );
 	InteractiveObject*				addObject( ObjectType type , cocos2d::Point position );
-	InteractiveObject*				addObjectByMapdata( ObjectType type , int xIdx , int yIdx );
-	InteractiveObject*				addObjectByMapdata( int xIdx , int yIdx );
-	void							addMovingBackground(char* BGpath);
-
-	void							collisionCheck(float dTime);
-	void							collisionCheckbyHash(InteractiveObject* subject, float dTime);
-	void							collisionProc( float dTime );
-	void							removeObjects();
 	void							removeObject(InteractiveObject* deleteObject);
-	void							makeHash();
 	void							initGateways();
 
 	Player*							getPlayer() {return m_Player; }
 	std::vector<InteractiveObject*>	getObjectsByPosition( cocos2d::Point checkPosition ); //위치에 어떤 객체가 있는지를 리턴
 	std::vector<InteractiveObject*>	getObjectsByRect( cocos2d::Rect checkRect ); //Rect에 어떤 객체가 있는지를 리턴
 	cocos2d::Rect					getMapRect(){return m_MapRect; }
+
 	bool							isOutOfStageMap(cocos2d::Point checkPosition);
 	cocos2d::Vec2					positionToIdxOfStageData( cocos2d::Point position );
+	void							IsItShake(bool shakeOrNot) {m_IsShaking = shakeOrNot; }
 
 	CREATE_FUNC( GameLayer );
 private:
+	void							addMovingBackground( char* BGpath );
+	InteractiveObject*				addObjectByMapdata( ObjectType type , int xIdx , int yIdx );
+	InteractiveObject*				addObjectByMapdata( int xIdx , int yIdx );
+
+	void							makeHash();
+	void							removeObjects();
+
+	void							collisionCheck( float dTime );
+	void							collisionCheckbyHash( InteractiveObject* subject , float dTime );
+	void							collisionProc( float dTime );
+
 	enum ZOrder
 	{
 		BACKGROUND,
@@ -57,6 +63,7 @@ private:
 		Directions			directions;
 	};
 
+	bool											m_IsShaking;
 	cocos2d::Rect									m_MapRect;
 	cocos2d::Size									m_BoxSize;
 	int												m_BoxWidthNum , m_BoxHeightNum;
