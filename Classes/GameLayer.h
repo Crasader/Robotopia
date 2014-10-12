@@ -29,6 +29,7 @@ public:
 	cocos2d::Vec2					positionToIdxOfStageData( cocos2d::Point position );
 	void							IsItShake(bool shakeOrNot) {m_IsShaking = shakeOrNot; }
 
+	
 	CREATE_FUNC( GameLayer );
 private:
 	void							addMovingBackground( char* BGpath );
@@ -62,6 +63,7 @@ private:
 		InteractiveObject*	object;
 		Directions			directions;
 	};
+
 
 	bool											m_IsShaking;
 	cocos2d::Rect									m_MapRect;

@@ -51,7 +51,7 @@ public:
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 	cocos2d::Point						idxOfStageDataToPosiion( cocos2d::Vec2 idx ); //인덱스값을 받아서 위치값으로 리턴
 	bool								accumultateTime( float dTime );
-
+	Monster*							getLastMonster()
 
 private:
 	void								savePlayerInfo();
@@ -60,6 +60,7 @@ private:
 	void								shakeFloor();
 
 private:
+	Monster*							m_LastHitMonster;
 	static float						m_accTimeForShake;
 	bool								m_IsAvailable;
 	cocos2d::Size						m_BoxSize;
