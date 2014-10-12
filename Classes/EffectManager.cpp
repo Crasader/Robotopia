@@ -121,15 +121,19 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 		case ET_PLAYER_LANDING:
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_PLAYER_LANDING)->getContentSize();
 			createEffectPlayerLandingSizeByUser(effectRect, effectPlayNum);
+			break;
 		case ET_ROUND_SMOKE:
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_ROUND_SMOKE)->getContentSize();
 			createEffectRoundSmokeByUser(effectRect, effectPlayNum);
+			break;
 		case ET_SWEAT:
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_SWEAT)->getContentSize();
 			createEffectSweatByUser(effectRect, effectPlayNum);
+			break;
 		case ET_DUST_FOR_SHAKE:
 			effectRect.size = GET_RESOURCE_MANAGER()->createSprite(ST_DUST_FOR_SHAKE)->getContentSize();
 			createEffectDustForViewShakeByUser(effectRect, effectPlayNum);
+			break;
 		}
 	}
 	
