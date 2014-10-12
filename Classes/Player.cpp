@@ -434,7 +434,7 @@ void Player::reset(float dTime)
 	if (m_IsActiveFly)
 	{
 		m_ActiveFlyingTime += dTime;
-		m_Info.steam -= dTime * 2000;
+		m_Info.steam -= dTime * 1000;
 	}
 
 	if (m_ActiveFlyingTime >= 1)

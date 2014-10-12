@@ -26,7 +26,7 @@ bool SteamPack::init()
 	m_CreateTimeInMilli = (tv.tv_usec / 1000) + tv.tv_sec * 1000;
 	m_RemainGroundTime = 10;*/
 	/////////////////
-	m_SteamVolume = 3;
+	m_SteamVolume = 3000;
 	////////////////
 
 	return true;
