@@ -308,7 +308,7 @@ void Player::act(float dTime)
 			{
 				changeState(PS_ATTACK2);
 				m_Velocity.x = 0;
-				m_Info.steam-=3;
+				m_Info.steam-=2500;
 			}
 		}
 
@@ -409,20 +409,16 @@ void Player::reset(float dTime)
 	if (m_IsActiveFly)
 	{
 		m_ActiveFlyingTime += dTime;
+		m_Info.steam -= dTime * 2000;
 	}
 
 	if (m_ActiveFlyingTime >= 1)
 	{
 		GET_EFFECT_MANAGER()->createSound(SO_PLAYER_FLYING, false);
 		m_ActiveFlyingTime = 0;
-		m_Info.steam--;
 	}
 
-	if (m_AttackNum >= 5)
-	{
-		m_AttackNum = 0;
-		m_Info.steam--;
-	}
+	m_Info.steam -= 150;
 
 
 	m_IsActiveFly = false;
