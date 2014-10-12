@@ -13,7 +13,7 @@ bool ItemLeg::init()
 
 	m_Type = OT_ITEM_LEG;
 
-	/_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_ITEM_LEG);
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_ITEM_LEG);
 	m_MainSprite->setScale(0.5);
 	
 	this->addChild(m_MainSprite);
