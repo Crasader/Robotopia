@@ -1,21 +1,21 @@
-#include "Item_Leg.h"
+#include "ItemLeg.h"
 #include "GameManager.h"
 
 
 USING_NS_CC;
 
-bool Item_Leg::init()
+bool ItemLeg::init()
 {
 	if (!Item::init())
 	{
 		return false;
 	}
 
-	//m_Type = OT_ITEM_LEG;
+	m_Type = OT_ITEM_LEG;
 
-	//m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_ITEM_LEG);
+	/_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_ITEM_LEG);
 	m_MainSprite->setScale(0.5);
-	;
+	
 	this->addChild(m_MainSprite);
 
 	timeval tv;
@@ -26,7 +26,7 @@ bool Item_Leg::init()
 	m_AddSpeed = 10;
 }
 
-void Item_Leg::collisionOccured(InteractiveObject* enemy, Directions dir)
+void ItemLeg::collisionOccured(InteractiveObject* enemy, Directions dir)
 {
 	auto ItemPos = this->getPosition();
 	auto enemyPoint = enemy->getPosition();
@@ -45,13 +45,13 @@ void Item_Leg::collisionOccured(InteractiveObject* enemy, Directions dir)
 	//}
 }
 
-void Item_Leg::setAttribute(float setAddSpped)
+void ItemLeg::setAttribute(float setAddSpped)
 {
 	
 	m_AddSpeed = setAddSpped;
 }
 
-void Item_Leg::update(float dTime)
+void ItemLeg::update(float dTime)
 {
 	timeval tv;
 	cocos2d::gettimeofday(&tv, nullptr);
