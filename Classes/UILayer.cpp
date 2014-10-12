@@ -120,7 +120,7 @@ void UILayer::onMouseDown(Event *event)
 void UILayer::onMouseUp(Event *event)
 {
 	auto ev = static_cast<EventMouse*>(event);
-
+	
 	auto button = ev->getMouseButton();
 	Point clickPoint;
 	clickPoint.x = ev->getCursorX();

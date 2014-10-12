@@ -10,6 +10,9 @@ bool WorldMenu::init()
 	m_WorldMenuContainerSpr->setVisible(false);
 	this->addChild(m_WorldMenuContainerSpr);
 	
+	//메뉴가 많으면 배열에 스프라이트 넣고 돌리기
+	m_ButtonSaveQuitSpr = Sprite::create();
+	m_ButtonSaveQuitSpr->setPosition(Point(m_WorldMenuContainerSpr->getContentSize().width / 2, m_WorldMenuContainerSpr->getContentSize().height / 2));
 
 	return true;
 }
@@ -29,4 +32,20 @@ void WorldMenu::hideWorldMenu()
 {
 	m_WorldMenuContainerSpr->setVisible(false);
 	m_WorldMenuOn = false;
+}
+
+void WorldMenu::changeButtonState(ButtonState buttonState)
+{
+	switch (buttonState)
+	{
+	case NORMAL:
+		//m_ButtonSaveQuitSpr->set
+		break;
+	case HIGHLIGHT:
+
+		break;
+	case CLICKED:
+
+		break;
+	}
 }
