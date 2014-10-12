@@ -161,13 +161,15 @@ void GameLayer::update( float dTime )
 	if( m_Player != nullptr )
 	{
 		View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
+		makeHash();
+		collisionCheck( dTime );
+		collisionProc( dTime );
 		for( auto object : m_InteractiveObjects )
 		{
 			object->update( dTime );
 		}
-		makeHash();
-		collisionCheck( dTime );
 		removeObjects();
+		m_CollisionInformations.clear();
 		m_InteractiveObjects.insert( m_InteractiveObjects.end() , m_AddObjects.begin() , m_AddObjects.end() );
 		m_AddObjects.clear();
 	}
@@ -182,15 +184,19 @@ void GameLayer::collisionCheck(float dTime)
 			collisionCheckbyHash( subject , dTime );
 		}
 	}
+	m_ObjectPositionsHash.clear();
+}
 
+void GameLayer::collisionProc( float dTime )
+{
 	for( auto collisionInfo : m_CollisionInformations )
 	{
 		collisionInfo.subject->collisionOccured( collisionInfo.object , collisionInfo.directions );
 	}
 
 	m_CollisionInformations.clear();
-	m_ObjectPositionsHash.clear();
 }
+
 
 void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
 {

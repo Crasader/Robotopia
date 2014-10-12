@@ -21,6 +21,7 @@ public:
 
 	void							collisionCheck(float dTime);
 	void							collisionCheckbyHash(InteractiveObject* subject, float dTime);
+	void							collisionProc( float dTime );
 	void							removeObjects();
 	void							removeObject(InteractiveObject* deleteObject);
 	void							makeHash();
