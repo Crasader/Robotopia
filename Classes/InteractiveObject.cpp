@@ -47,18 +47,6 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 
 		if (enemy->getType() == OT_FLOOR)
 		{
-			if (myRect.origin.x < enemyRect.origin.x + enemyRect.size.height - 10 && this->getVelocity().y<-50)
-			{
-				dis = myRect.origin.y + myRect.size.height - enemyRect.origin.y;
-				myRect.origin.y += minDis;
-
-				myRect.origin.x += m_Width / 2;
-				myRect.origin.y += m_Height / 2;
-
-				this->setPosition(myRect.origin);
-				return DIR_DOWN;
-
-			}
 			return DIR_NONE;
 		}
 
