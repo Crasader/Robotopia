@@ -48,7 +48,7 @@ void EffectManager::createEffect(EffectType selectedEffect, cocos2d::Rect ownRec
 		createEffectPlayerLanding(ownRect, collisionDir, effectPlayNum);
 		break;
 	case ET_SWEAT:
-		
+		createEffectSweat(ownRect, collisionDir, effectPlayNum);
 
 	}
 }
