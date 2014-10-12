@@ -167,7 +167,7 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		break;
 	case OT_TRAP:
-		if (!((LandTrap*)enemy)->isActive())
+		if (((LandTrap*)enemy)->isActive())
 		{
 			if (m_State != PS_HIT && !m_IsInvincible)
 			{
