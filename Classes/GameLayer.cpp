@@ -34,6 +34,7 @@ bool GameLayer::init()
 
 	m_Player = nullptr;
 	m_IsShaking = false;
+	m_IsVisited = false;
 	m_InteractiveObjects.clear();
 	m_CollisionInformations.clear();
 	m_ObjectPositionsHash.clear();
@@ -158,8 +159,9 @@ InteractiveObject*	GameLayer::addObjectByMapdata( int xIdx , int yIdx )
 void GameLayer::update( float dTime )
 {
 	static float accTime = 0.f;
-	if( GET_STAGE_MANAGER()->isVisited())
+	if( m_IsVisited == false)
 	{
+		m_IsVisited = true;
 		initGateways();
 	}
 

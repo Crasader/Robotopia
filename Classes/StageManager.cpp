@@ -215,7 +215,10 @@ void StageManager::shakeFloor()
 	m_VisitedStageNums.push_back( m_CurrentStageNum );
 	GET_DATA_MANAGER()->getShakeFloorData( m_CurrentFloorNum , &m_FloorData ,&m_CurrentFloorStagesData);
 	makeStaticData();
-	m_WorldScenes[m_CurrentFloorNum]->getGameLayer()->initGateways();
+	for( int i = 1; i <= m_FloorData.stageNum; ++i )
+	{
+		m_WorldScenes[i]->getGameLayer()->setIsVisited( false );
+	}
 }
 
 void StageManager::makeStaticData()

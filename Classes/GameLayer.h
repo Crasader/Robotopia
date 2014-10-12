@@ -28,7 +28,8 @@ public:
 	bool							isOutOfStageMap(cocos2d::Point checkPosition);
 	cocos2d::Vec2					positionToIdxOfStageData( cocos2d::Point position );
 	void							IsItShake(bool shakeOrNot) {m_IsShaking = shakeOrNot; }
-
+	void							setIsVisited(bool isVisited) {m_IsVisited = isVisited; }
+	bool							getIsVisited() {return m_IsVisited; }
 	
 	CREATE_FUNC( GameLayer );
 private:
@@ -42,6 +43,7 @@ private:
 	void							collisionCheck( float dTime );
 	void							collisionCheckbyHash( InteractiveObject* subject , float dTime );
 	void							collisionProc( float dTime );
+	
 
 	enum ZOrder
 	{
@@ -64,7 +66,7 @@ private:
 		Directions			directions;
 	};
 
-
+	bool											m_IsVisited;
 	bool											m_IsShaking;
 	cocos2d::Rect									m_MapRect;
 	cocos2d::Size									m_BoxSize;
