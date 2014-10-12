@@ -140,7 +140,7 @@ void RushMonster::update(float dTime)
 
 	for (auto& obj : GET_STAGE_MANAGER()->getObjectsByPosition(rect.origin))
 	{
-		if (obj->getType() == OT_BLOCK)
+		if (obj->getType() == OT_BLOCK || obj->getType() == OT_FLOOR)
 		{
 			pos.x += m_Velocity.x*dTime;
 			break;
