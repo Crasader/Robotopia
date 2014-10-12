@@ -49,6 +49,7 @@ void WorldScene::onEnter()
 void WorldScene::update(float dTime)
 {
 	GET_STAGE_MANAGER()->accumultateTime( dTime );
+	GET_STAGE_MANAGER()->initLastMonster( dTime );
 	m_KeySentinel->update( dTime );
 	m_UILayer->update( dTime );
 	m_GameLayer->update( dTime );

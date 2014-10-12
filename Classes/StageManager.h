@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "WorldScene.h"
 #include "Player.h"
+#include "Monster.h"
 
 #define MAX_STAGE_NUM 10
 #define MAX_STAGE_SIZE 5000
@@ -51,7 +52,9 @@ public:
 	cocos2d::Vec2						positionToIdxOfFloor( cocos2d::Point position );
 	cocos2d::Point						idxOfStageDataToPosiion( cocos2d::Vec2 idx ); //인덱스값을 받아서 위치값으로 리턴
 	bool								accumultateTime( float dTime );
-	Monster*							getLastMonster()
+	void								initLastMonster( float dTime );
+	Monster*							getLastMonster() {return m_LastHitMonster; }
+	void								setLastMonster(Monster* monster) {m_LastHitMonster = monster;}
 
 private:
 	void								savePlayerInfo();

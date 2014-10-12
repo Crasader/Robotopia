@@ -268,3 +268,15 @@ bool StageManager::accumultateTime( float dTime )
 
 	return true;
 }
+
+void StageManager::initLastMonster( float dTime )
+{
+	static float accTime = 0.f;
+	accTime += dTime;
+	float initPeriod = 3.f;
+	if( accTime > initPeriod )
+	{
+		accTime = 0.f;
+		m_LastHitMonster = nullptr;
+	}
+}
