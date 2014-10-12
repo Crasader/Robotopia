@@ -60,13 +60,14 @@ void ItemLeg::update(float dTime)
 	static bool firstFlag = false;
 	static bool secondFlag = false;
 
-	if (CurTimeInMilli - m_CreateTimeInMilli > 10000)
+	if (CurTimeInMilli - m_CreateTimeInMilli > 100000)
 	{
-		m_IsDestroyed = true;
-		m_MainSprite->stopAllActions();
+		m_MainSprite->setOpacity(65);
+		auto action = Blink::create(5.0f, 20);
+		m_MainSprite->runAction(RepeatForever::create(action));
 
 	}
-	else if (CurTimeInMilli - m_CreateTimeInMilli > 7500)
+	else if (CurTimeInMilli - m_CreateTimeInMilli > 75000)
 	{
 		if (secondFlag == false)
 		{
@@ -84,7 +85,7 @@ void ItemLeg::update(float dTime)
 		}
 		
 	}
-	else if (CurTimeInMilli - m_CreateTimeInMilli > 5000)
+	else if (CurTimeInMilli - m_CreateTimeInMilli > 50000)
 	{
 		if (firstFlag == false)
 		{
