@@ -22,12 +22,12 @@ bool EquipmentWindow::init()
 
 	m_sprCharWinHP = Sprite::create("CharWindow_HP.png");
 	m_sprCharWinHP->setAnchorPoint(Point(0, 0));
-	m_sprCharWinHP->setPosition(Point(60, 342));
+	m_sprCharWinHP->setPosition(Point(59, 342));
 	m_sprCharWinContainer->addChild(m_sprCharWinHP, 13);
 
 	m_sprCharWinSTE = Sprite::create("CharWindow_STE.png");
 	m_sprCharWinSTE->setAnchorPoint(Point(0, 0));
-	m_sprCharWinSTE->setPosition(Point(60, 326));
+	m_sprCharWinSTE->setPosition(Point(59, 325));
 	m_sprCharWinContainer->addChild(m_sprCharWinSTE, 13);
 
 
