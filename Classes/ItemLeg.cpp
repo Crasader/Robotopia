@@ -38,7 +38,7 @@ void ItemLeg::collisionOccured(InteractiveObject* enemy, Directions dir)
 
 		if (enemy->getType() == OT_PLAYER && !m_IsDestroyed)
 		{
-			//GET_STAGE_MANAGER()->getPlayer()->setSpeed(m_AddSpeed, true);
+			GET_STAGE_MANAGER()->getPlayer()->setSpeed(m_AddSpeed, true);
 			GET_EFFECT_MANAGER()->createSound(SO_STEAM_GET, false);
 			m_IsDestroyed = true;
 		}
