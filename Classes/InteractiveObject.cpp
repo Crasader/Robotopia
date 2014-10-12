@@ -46,6 +46,10 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		myRect.origin.x >= enemyRect.origin.x + enemyRect.size.width ||
 		myRect.origin.y >= enemyRect.origin.y + enemyRect.size.height))
 	{
+		if (enemy->getType() == OT_FLOOR)
+		{
+			return DIR_NONE;
+		}
  		float dis = enemyRect.origin.x + enemyRect.size.width - myRect.origin.x;
 		float minDis;
 
@@ -248,7 +252,7 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			}
 		}
 
-		if (collisionDir != DIR_NONE && !this->isOverlapable() && !enemy->isOverlapable() && !enemy->isMovable() && m_IsMovable)
+		if (collisionDir != DIR_NONE && !this->isOverlapable() && !enemy->isMovable() && m_IsMovable)
 		{
 			Point changePos = this->getPosition();
 			Point pos = this->getPosition();
