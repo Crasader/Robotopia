@@ -446,10 +446,11 @@ void Player::setHp(int hp, bool isRelative /*= false*/)
 	{
 		changeHp += m_Info.hp;
 	}
-	if (!(changeHp > m_Info.maxHp || changeHp < 0))
+	if (changeHp > m_Info.maxHp)
 	{
-		m_Info.hp = changeHp;
+		changeHp = m_Info.maxHp;
 	}
+	m_Info.hp = changeHp;
 }
 
 void Player::setSteam(int steam, bool isRelative /*= false*/)
@@ -460,9 +461,11 @@ void Player::setSteam(int steam, bool isRelative /*= false*/)
 	{
 		changeSteam += m_Info.steam;
 	}
-	if (!(changeSteam > m_Info.maxSteam || changeSteam < 0))
+	if (changeSteam > m_Info.maxSteam)
 	{
-		m_Info.steam = changeSteam;
+		changeSteam = m_Info.maxSteam;
 	}
+
+	m_Info.steam = changeSteam;
 }
 
