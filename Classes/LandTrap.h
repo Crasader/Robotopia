@@ -8,11 +8,11 @@ public:
 	OVERRIDE bool		init();
 	OVERRIDE void		update( float dTime );
 	virtual void		collisionOccured( InteractiveObject* enemy , Directions dir ){};
-	bool				isActive() {return m_IsActive; }
+	bool				isActive();
 	void				endAnimation( cocos2d::Ref* sender );
 	CREATE_FUNC( LandTrap );
 
 private:
-	bool					m_IsActive;
+	timeval					m_InitTime;
 	cocos2d::Animation*		m_ActivateAnimation;
 };

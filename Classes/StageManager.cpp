@@ -14,8 +14,7 @@ bool StageManager::init()
 	m_LastHitMonster = nullptr;
 	m_CurrentFloorNum = 1;
 	m_CurrentStageNum = 1;
-	m_PlayerInfo.hp = 100 , m_PlayerInfo.maxHp = 100 , m_PlayerInfo.steam = 20 , m_PlayerInfo.maxSteam = 20;
-	m_PlayerInfo.speed = 200;
+	m_PlayerInfo = PlayerInfo();
 	m_BoxSize = Size( 32 , 32 );
 	m_IsAvailable = false;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );

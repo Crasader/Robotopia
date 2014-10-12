@@ -13,6 +13,7 @@
 #include "SteamPack.h"
 #include "LandGateway.h"
 #include "LandTurret.h"
+#include "LandTrap.h"
 #include "View.h"
 #include "Player.h"
 #include "InteractiveObject.h"
@@ -133,10 +134,14 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 			object = ItemLeg::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
+		case OT_TRAP:
+			object = LandTrap::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
 		default:
 			return nullptr;
 	}
-	object->setAnchorPoint( Point(0.5,0.5) );
+	object->setAnchorPoint( Point( 0.5 , 0.5 ) );
 	object->setPosition( position );
 	m_AddObjects.push_back( object );
 	this->addChild( object , zOrder );
@@ -200,7 +205,7 @@ void GameLayer::collisionCheck(float dTime)
 {
 	for( auto subject: m_InteractiveObjects )
 	{
-		if( subject->getType() != OT_BLOCK && subject->getType() != OT_FLOOR )
+		if( subject->getType() != OT_BLOCK && subject->getType() != OT_FLOOR && subject->getType() != OT_TRAP )
 		{
 			collisionCheckbyHash( subject , dTime );
 		}

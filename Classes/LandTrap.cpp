@@ -10,35 +10,43 @@ bool LandTrap::init()
 		return false;
 	}
 	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( ST_TRAP );
+	m_MainSprite->setAnchorPoint( Point(0.5, 0) );
+	m_MainSprite->setPosition( Point( 0 , this->getRect().size.height) );
 	this->addChild( m_MainSprite );
-	m_ActivateAnimation = GET_RESOURCE_MANAGER()->createAnimation( AT_TRAP_ACTIVATE , 0.2f);
-	m_IsActive = false;
+	m_ActivateAnimation = GET_RESOURCE_MANAGER()->createAnimation( AT_TRAP_ACTIVATE , 0.1f);
 	m_Type = OT_TRAP;
 	m_IsOverlapable = true;
+	m_InitTime = GET_GAME_MANAGER()->getTime();
 	return true;
 }
 
 void LandTrap::update( float dTime )
 {
-	if( !m_IsActive )
-	{
-		static float accTime = 0.f;
-		accTime += dTime;
-		float firePeriod = 3.f;
-		if( accTime > firePeriod )
+	if( isActive())
 		{
-			m_IsActive = true;
-			accTime = 0.f;
 			auto animate = Animate::create( m_ActivateAnimation );
 			auto callfunc = CallFuncN::create( CC_CALLBACK_1( LandTrap::endAnimation , this ) );
 			auto action = Sequence::create( animate , callfunc , NULL );
 			m_MainSprite->runAction( action );
 		}
-	}
 }
 
 void LandTrap::endAnimation( cocos2d::Ref* sender )
 {
-	m_IsActive = false;
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( ST_TRAP );
+}
+
+bool LandTrap::isActive()
+{
+	timeval curTime = GET_GAME_MANAGER()->getTime();
+	int firePeriod = 5;
+	if( ( m_InitTime.tv_sec - curTime.tv_sec ) % 10 > firePeriod )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
