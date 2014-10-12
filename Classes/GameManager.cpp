@@ -119,3 +119,12 @@ DataManager* GameManager::getDataManagerInstance()
 	
 	return m_pDataManager;
 }
+
+timeval GameManager::getTime()
+{
+	timeval tv;
+
+	cocos2d::gettimeofday(&tv, nullptr);
+
+	return tv;
+}

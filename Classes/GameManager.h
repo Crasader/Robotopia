@@ -29,6 +29,7 @@ public:
 	ResourceManager* getResourceManagerInstance();
 	StageManager* getStageManagerInstance();
 	DataManager* getDataManagerInstance();
+	timeval getTime();
 private:
 	static GameManager* m_pInstance;
 	InputManager* m_pInputManager;
