@@ -14,6 +14,7 @@ struct PlayerInfo
 	int			steam;
 	int			maxHp;
 	int			maxSteam;
+	int			speed;
 };
 
 class Player : public InteractiveObject
@@ -39,6 +40,7 @@ public:
 	void					setSteam(int steam, bool isRelative = false);
 	void					setMaxSteam(int maxSteam, bool isRelative = false){ if (!isRelative) m_Info.maxSteam = maxSteam; else m_Info.maxSteam += maxSteam; }
 	void					setInfo(PlayerInfo info) { m_Info = info; }
+	void					setSpeed(int speed, bool isRelative = false){ if (!isRelative)m_Info.speed = speed; else m_Info.speed += speed; }
 private:
 	enum State
 	{

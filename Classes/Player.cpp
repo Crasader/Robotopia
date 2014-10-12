@@ -17,7 +17,7 @@ bool Player::init()
 	}
 
 	m_Type = OT_PLAYER;
-	m_MoveSpeed = 200;
+	m_Info.speed = 200;
 	m_AnimationNum = PS_STATE_NUM;
 	m_Animations[PS_STAND] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_STAND);
 	m_Animations[PS_WALK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_WALK);
@@ -258,14 +258,14 @@ void Player::act(float dTime)
 
 		if (leftState == KS_HOLD)
 		{
-			m_Velocity.x = -m_MoveSpeed;
+			m_Velocity.x = -m_Info.speed;
 			m_IsRightDirection = false;
 			m_MainSprite->setFlippedX(true);
 
 		}
 		else if (rightState == KS_HOLD)
 		{
-			m_Velocity.x = m_MoveSpeed;
+			m_Velocity.x = m_Info.speed;
 			m_IsRightDirection = true;
 			m_MainSprite->setFlippedX(false);
 		}
@@ -308,7 +308,7 @@ void Player::act(float dTime)
 			{
 				changeState(PS_ATTACK2);
 				m_Velocity.x = 0;
-				m_Info.steam--;
+				m_Info.steam-=3;
 			}
 		}
 
