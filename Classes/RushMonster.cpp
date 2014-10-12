@@ -253,8 +253,6 @@ bool RushMonster::isSeePlayer()
 	vision.size.width += 300;
 	vision.size.height += 80;
 
-	CCLOG("x,y : %f,% f, vision = x,y,w,h : %f,%f,%f,%f", this->getPositionX(), this->getPositionY(), vision.origin.x, vision.origin.y, vision.size.width, vision.size.height);
-
 	auto objList = GET_STAGE_MANAGER()->getObjectsByRect(vision);
 	auto player = GET_STAGE_MANAGER()->getPlayer();
 

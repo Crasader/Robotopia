@@ -35,10 +35,6 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 	Rect myRect = this->getRect();
 	Rect enemyRect = enemy->getRect();
 
-	if (this->getType() == OT_PLAYER)
-	{
-		myRect = this->getRect();
-	}
 
 	//이미 충돌이 일어난 경우 최대한 포지션이 덜 이동하는 방향으로 이동시킨 후 해당 방향으로 충돌이 일어난 것으로 처리.
 	if (!(myRect.origin.x + myRect.size.width <= enemyRect.origin.x ||
@@ -47,14 +43,16 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 		myRect.origin.y >= enemyRect.origin.y + enemyRect.size.height))
 	{
  		float dis = enemyRect.origin.x + enemyRect.size.width - myRect.origin.x;
-		float minDis;
+		float minDis = 100;
 
 		if (enemy->getType() == OT_FLOOR)
 		{
+			if (myRect.origin.x<enemyRect.origin.x + enemyRect.size.height - 10 && this->getVelocity.y<0)
+			{
+			}
 			return DIR_NONE;
 		}
 
-		this->getAnchorPoint();
 
 		if (dis > 0)
 		{
@@ -278,8 +276,6 @@ Directions InteractiveObject::collisionCheck(InteractiveObject* enemy, float dTi
 			this->setPosition(changePos);
 		}
 	}
-
-	
 	
 	return collisionDir;
 }
