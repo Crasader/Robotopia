@@ -10,7 +10,7 @@ bool LandTurret::init()
 	{
 		return false;
 	}
-	m_AttackSpeed = 1.f;
+	m_AttackSpeed = 2.f;
 	m_Range = 320.0f;
 	m_Damage = 5.0f;
 	m_IsOverlapable = true; //충돌 안함
