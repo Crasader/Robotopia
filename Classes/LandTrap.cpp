@@ -11,7 +11,7 @@ bool LandTrap::init()
 	}
 	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( ST_TRAP );
 	m_MainSprite->setAnchorPoint( Point(0.5, 0) );
-	m_MainSprite->setPosition( Point( 0 , -1*this->getRect().size.height) );
+	m_MainSprite->setPosition( Point( 0 , -20 ));
 	this->addChild( m_MainSprite );
 	m_ActivateAnimation = GET_RESOURCE_MANAGER()->createAnimation( AT_TRAP_ACTIVATE , 0.1f);
 	m_Type = OT_TRAP;
@@ -22,18 +22,18 @@ bool LandTrap::init()
 
 void LandTrap::update( float dTime )
 {
-	if( isActive())
-		{
-			auto animate = Animate::create( m_ActivateAnimation );
-			auto callfunc = CallFuncN::create( CC_CALLBACK_1( LandTrap::endAnimation , this ) );
-			auto action = Sequence::create( animate , callfunc , NULL );
-			m_MainSprite->runAction( action );
-		}
+	if( isActive() && m_MainSprite->getNumberOfRunningActions() == 0)
+	{
+		auto animate = Animate::create( m_ActivateAnimation );
+		auto callfunc = CallFuncN::create( CC_CALLBACK_1( LandTrap::endAnimation , this ) );
+		auto action = Sequence::create( animate , callfunc , NULL );
+		m_MainSprite->runAction( action );
+	}
 }
 
 void LandTrap::endAnimation( cocos2d::Ref* sender )
 {
-	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite( ST_TRAP );
+	m_MainSprite->stopAllActions();
 }
 
 bool LandTrap::isActive()

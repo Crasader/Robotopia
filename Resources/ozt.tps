@@ -199,6 +199,16 @@
             <filename>GatewayAct2.png</filename>
             <filename>GatewayAct3.png</filename>
             <filename>turret.png</filename>
+            <filename>trap13.png</filename>
+            <filename>trap14.png</filename>
+            <filename>trap15.png</filename>
+            <filename>trap16.png</filename>
+            <filename>trap17.png</filename>
+            <filename>trap18.png</filename>
+            <filename>trap19.png</filename>
+            <filename>trap20.png</filename>
+            <filename>trap21.png</filename>
+            <filename>trap22.png</filename>
             <filename>trap0.png</filename>
             <filename>trap1.png</filename>
             <filename>trap2.png</filename>
@@ -212,16 +222,6 @@
             <filename>trap10.png</filename>
             <filename>trap11.png</filename>
             <filename>trap12.png</filename>
-            <filename>trap13.png</filename>
-            <filename>trap14.png</filename>
-            <filename>trap15.png</filename>
-            <filename>trap16.png</filename>
-            <filename>trap17.png</filename>
-            <filename>trap18.png</filename>
-            <filename>trap19.png</filename>
-            <filename>trap20.png</filename>
-            <filename>trap21.png</filename>
-            <filename>trap22.png</filename>
             <filename>trap23.png</filename>
         </array>
         <key>ignoreFileList</key>
