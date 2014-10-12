@@ -55,6 +55,10 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 	switch (enemy->getType())
 	{
 	case OT_FLOOR:
+		if (m_IsCrashed == true)
+		{
+			break;
+		}
 		if (dir & DIR_DOWN)
 		{
 			m_IsFlying = false;
