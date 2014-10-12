@@ -63,16 +63,12 @@ void View::setViewPortWithHighlight(GameLayer* scene, cocos2d::Point standardPoi
 
 void View::setViewPortShake(GameLayer* scene, Point standardPoint, Point anchorPoint)
 {
+
 	Rect mapRect = scene->getMapRect();
 	float windowWidth = Director::getInstance()->getWinSize().width;
 	float windowHeight = Director::getInstance()->getWinSize().height;
 	float anchorX = windowWidth * anchorPoint.x;
 	float anchorY = windowHeight * anchorPoint.y;
-
-
-
-	
-
 
 	if (standardPoint.x + anchorX > mapRect.size.width)
 	{
