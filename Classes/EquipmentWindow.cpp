@@ -36,9 +36,12 @@ bool EquipmentWindow::init()
 
 void EquipmentWindow::update(float dTime)
 {
+	if (m_CharWinOn)
+	{
 		PlayerInfo playerInfo = GET_STAGE_MANAGER()->getPlayer()->getInfo();
 		drawWinHP(playerInfo.hp, playerInfo.maxHp);
 		drawWInSTE(playerInfo.steam, playerInfo.maxSteam);
+	}
 }
 
 void EquipmentWindow::showCharacterWindow()

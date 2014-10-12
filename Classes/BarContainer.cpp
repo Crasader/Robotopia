@@ -4,9 +4,8 @@ USING_NS_CC;
 
 bool BarContainer::init()
 {
-
+  
 	m_prevHP = 0;
-	m_STEs.clear();
 	auto winSize = Director::getInstance()->getWinSize();
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
@@ -32,6 +31,11 @@ bool BarContainer::init()
 	sprHPBlock2->setPosition(Point(30, m_WinHeight - 3));
 	this->addChild(sprHPBlock2, 7, SPRITE_BACKHP);
 
+	m_STEbarSpr = Sprite::create("STE_Block.png");
+	m_STEbarSpr->setAnchorPoint(Point(1, 1));
+	m_STEbarSpr->setPosition(Point(250, m_WinHeight - 32));
+	this->addChild(m_STEbarSpr, 6);
+
 	//Label - 실제 개발에서는 문자를 이미지로 대체
 	auto hpLabel = Label::createWithSystemFont("", "Thonburi", 15);
 	hpLabel->setPosition(Point(155, m_WinHeight - 17));
@@ -48,17 +52,12 @@ void BarContainer::update(float dTime)
 	auto player = GET_STAGE_MANAGER()->getPlayer();
 	if (player != nullptr)
 	{
-		int currentHP = GET_STAGE_MANAGER()->getPlayer()->getHp();
-		int maxHP = GET_STAGE_MANAGER()->getPlayer()->getMaxHp();
-		int currentSTE = GET_STAGE_MANAGER()->getPlayer()->getSteam();
-		int maxSTE = GET_STAGE_MANAGER()->getPlayer()->getMaxSteam();
+		auto playerInfo = player->getInfo();
+		
+		drawCurrentHP(playerInfo.hp, playerInfo.maxHp);
+		drawCurrentSTE(playerInfo.steam, playerInfo.maxSteam);
 
-		drawCurrentHP(currentHP, maxHP);
-
-		setMaxSTE(maxSTE);
-		drawCurrentSTE(currentSTE);
-
-		setLabels(currentHP, maxHP, currentSTE, maxSTE);
+		setLabels(playerInfo.hp, playerInfo.maxHp, playerInfo.steam, playerInfo.maxSteam);
 	}
 }
 
@@ -82,38 +81,10 @@ void BarContainer::drawCurrentHP(int currentHP, int maxHP)
 	m_prevHP = currentHP;
 }
 
-void BarContainer::setMaxSTE(int maxSTE)
+void BarContainer::drawCurrentSTE(int currentSTE, int maxSTE)
 {
-	int sizeOfSTEs = m_STEs.size();
-	if (maxSTE != sizeOfSTEs)
-	{
-		m_STEs.clear();
-		for (int i = 0; i < maxSTE - sizeOfSTEs; ++i)
-		{
-			auto sprSTE = Sprite::create("STE_Block.png");
-			sprSTE->setVisible(false);
-			sprSTE->setPosition(Point(46 + (10 * i), m_WinHeight - 41));
-			m_STEs.pushBack(sprSTE);
-			this->addChild(sprSTE, 9);
-		}
-	}
-}
-
-void BarContainer::drawCurrentSTE(int currentSTE)
-{
-	int countSTE = 0;
-	for (auto sprSTE : m_STEs)
-	{
-		if (countSTE < currentSTE)
-		{
-			sprSTE->setVisible(true);
-		}
-		else
-		{
-			sprSTE->setVisible(false);
-		}
-		countSTE++;
-	}
+ 	float scaleSTE = (float)currentSTE / maxSTE;
+	m_STEbarSpr->setPosition(Point(200 * scaleSTE + 50, m_WinHeight - 32));
 }
 
 void BarContainer::setLabels(int currentHP, int maxHP, int currentSTE, int maxSTE)
