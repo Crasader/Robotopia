@@ -26,6 +26,8 @@ private:
 	int					m_WinWidth, m_WinHeight;
 	cocos2d::Sprite*	m_sprCharWinTrigger;
 	cocos2d::Sprite*	m_sprCharWinContainer;
+	cocos2d::Sprite*	m_sprCharWinHP;
+	cocos2d::Sprite*	m_sprCharWinSTE;
 
 	void				drawWinHP(int currentHP, int maxHP);
 	void				drawWInSTE(int currentSTE, int maxSTE);

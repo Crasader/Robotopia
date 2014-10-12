@@ -20,26 +20,31 @@ bool EquipmentWindow::init()
 	m_sprCharWinTrigger->setPosition(Point(-30, 250));
 	m_sprCharWinContainer->addChild(m_sprCharWinTrigger);
 
+	m_sprCharWinHP = Sprite::create("CharWindow_HP.png");
+	m_sprCharWinHP->setAnchorPoint(Point(0, 0));
+	m_sprCharWinHP->setPosition(Point(60, 342));
+	m_sprCharWinContainer->addChild(m_sprCharWinHP, 13);
+
+	m_sprCharWinSTE = Sprite::create("CharWindow_STE.png");
+	m_sprCharWinSTE->setAnchorPoint(Point(0, 0));
+	m_sprCharWinSTE->setPosition(Point(60, 326));
+	m_sprCharWinContainer->addChild(m_sprCharWinSTE, 13);
+
+
 	return true;
 }
 
 void EquipmentWindow::update(float dTime)
 {
-
+		PlayerInfo playerInfo = GET_STAGE_MANAGER()->getPlayer()->getInfo();
+		drawWinHP(playerInfo.hp, playerInfo.maxHp);
+		drawWInSTE(playerInfo.steam, playerInfo.maxSteam);
 }
 
 void EquipmentWindow::showCharacterWindow()
 {
 	if (m_sprCharWinContainer->getNumberOfRunningActions() == 0)
 	{
-		int currentHP = GET_STAGE_MANAGER()->getPlayer()->getHp();
-		int maxHP = GET_STAGE_MANAGER()->getPlayer()->getMaxHp();
-		int currentSTE = GET_STAGE_MANAGER()->getPlayer()->getSteam();
-		int maxSTE = GET_STAGE_MANAGER()->getPlayer()->getMaxSteam();
-
-		drawWinHP(currentHP, maxHP);
-		drawWInSTE(currentSTE, maxSTE);
-
 		//여기다 아이템 리스트 받아와서 이미지 올리기!!!
 
 		auto action_0 = MoveTo::create(0.5f, Point(m_WinWidth - 250, 25));
@@ -62,22 +67,14 @@ void EquipmentWindow::hideCharacterWindow()
 
 void EquipmentWindow::drawWinHP(int currentHP, int maxHP)
 {
-	float scaleHP = (float)currentHP / (maxHP * 2);
-	auto sprHP = Sprite::create("HP_Block1.png");
-	sprHP->setScale(0.4f);
-	sprHP->setScaleX(scaleHP);
-	sprHP->setPosition(Point(126, 347));
-	m_sprCharWinContainer->addChild(sprHP, 13);
+	float scaleHP = (float)currentHP / maxHP;
+	m_sprCharWinHP->setScaleX(scaleHP);
 }
 
 void EquipmentWindow::drawWInSTE(int currentSTE, int maxSTE)
 {
-	float scaleSTE = (float)currentSTE / (maxSTE * 2);
-	auto sprSTE = Sprite::create("HP_Block2.png");
-	sprSTE->setScale(0.4f);
-	sprSTE->setScaleX(scaleSTE);
-	sprSTE->setPosition(Point(126, 331));
-	m_sprCharWinContainer->addChild(sprSTE, 13);
+	float scaleSTE = (float)currentSTE / maxSTE;
+	m_sprCharWinSTE->setScaleX(scaleSTE);
 }
 
 Rect EquipmentWindow::getTriggerRect()

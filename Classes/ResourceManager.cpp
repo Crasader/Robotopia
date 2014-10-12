@@ -18,6 +18,7 @@ bool ResourceManager::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("SteamPack.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sweat.plist");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("ET_dust_for_shake.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Item_Leg.plist");
 	return true;
 }
 
@@ -116,10 +117,14 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 			return createSprite("AimingMissile1.png");
 		case ST_AIMINGMISSILE_COLLISION:
 			return createSprite("ET_AimingMissile_Collision1.png");
+		case ST_DUST_FOR_SHAKE:
+			return createSprite("ET_dust_for_Shake1.png");
 		case ST_GATEWAY_ACTIVE:
 			return createSprite("GatewayActive.png");
 		case ST_GATEWAY_UNACTIVE:
 			return createSprite("GatewayUnactive.png");
+		case ST_ITEM_LEG:
+			return createSprite("Item_Leg1.png");
 		case ST_LINEARMISSILE_FLYING:
 			return createSprite("LinearMissile1.png");
 		case ST_LINEARMISSILE_COLLISION:
@@ -144,8 +149,7 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 			return createSprite("SteamPack3.png");
 		case ST_SWEAT:
 			return createSprite("sweat4.png");
-		case ST_DUST_FOR_SHAKE:
-			return createSprite("ET_dust_for_Shake1.png");
+		
 		}
 	return nullptr;
 }
