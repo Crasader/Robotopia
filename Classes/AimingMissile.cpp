@@ -112,7 +112,7 @@ void AimingMissile::collisionOccured(InteractiveObject* enemy, Directions dir)
 	switch (enemy->getType())
 	{
 	case OT_FLOOR:
-		m_IsDestroyed = true;
+		//m_IsDestroyed = true;
 		break;
 	case OT_BLOCK:
 		m_IsDestroyed = true;
