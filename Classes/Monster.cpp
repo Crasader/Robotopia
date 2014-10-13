@@ -9,6 +9,7 @@ bool Monster::init()
 
 	m_Type = OT_MONSTER;
 	m_IsOverlapable = false;
+	m_IsMovable = true;
 
 	return true;
 }

@@ -57,6 +57,7 @@ enum SpriteType
 	ST_STEAMPACK,
 	ST_SWEAT,
 	ST_TRAP,
+	ST_RUSH_MONSTER,
 };
 
 

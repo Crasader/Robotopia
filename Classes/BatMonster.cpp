@@ -21,7 +21,10 @@ bool BatMonster::init()
 	m_AnimationNum = BM_STATE_NUM;
 
 
-	m_MainSprite = Sprite::create();
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_MONSTER_BAT);
+
+	m_Width = m_MainSprite->getContentSize().width;
+	m_Height = m_MainSprite->getContentSize().height;
 
 	this->addChild(m_MainSprite);
 	m_MoveSpeed = 70;

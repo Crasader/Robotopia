@@ -21,7 +21,11 @@ bool RushMonster::init()
 	m_Animations[RM_RUSH_WAIT] = GET_RESOURCE_MANAGER()->createAnimation(AT_RUSHMONSTER_MOVE);
 	
 
-	m_MainSprite = Sprite::create();
+	m_MainSprite = GET_RESOURCE_MANAGER()->createSprite(ST_RUSH_MONSTER);
+
+	m_Width = m_MainSprite->getContentSize().width * 2;
+	m_Height = m_MainSprite->getContentSize().height * 2;
+
 	m_MainSprite->setScale(2);
 
 	this->addChild(m_MainSprite);

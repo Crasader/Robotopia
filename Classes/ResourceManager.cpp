@@ -151,6 +151,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 			return createSprite("sweat4.png");
 		case ST_TRAP:
 			return createSprite("trap0.png");
+		case ST_RUSH_MONSTER:
+			return createSprite("rushMonster_stand1.png");
 		}
 	return nullptr;
 }
