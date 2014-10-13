@@ -11,9 +11,9 @@ bool WorldMenu::init()
 	this->addChild(m_WorldMenuContainerSpr);
 	
 	//메뉴가 많으면 배열에 스프라이트 넣고 돌리기
-	m_ButtonSaveQuitSpr = Sprite::create();
+	m_ButtonSaveQuitSpr = Sprite::create("WorldMenuSaveAndQuit.png");
 	m_ButtonSaveQuitSpr->setPosition(Point(m_WorldMenuContainerSpr->getContentSize().width / 2, m_WorldMenuContainerSpr->getContentSize().height / 2));
-
+	m_WorldMenuContainerSpr->addChild(m_ButtonSaveQuitSpr);
 	return true;
 }
 
@@ -39,13 +39,13 @@ void WorldMenu::changeButtonState(ButtonState buttonState)
 	switch (buttonState)
 	{
 	case NORMAL:
-		//m_ButtonSaveQuitSpr->set
+		m_ButtonSaveQuitSpr->setTexture(TextureCache::sharedTextureCache()->addImage("WorldMenuSaveAndQuit.png"));
 		break;
 	case HIGHLIGHT:
-
+		m_ButtonSaveQuitSpr->setTexture(TextureCache::sharedTextureCache()->addImage("WorldMenuSaveAndQuit_Highlight.png"));
 		break;
 	case CLICKED:
-
+		m_ButtonSaveQuitSpr->setTexture(TextureCache::sharedTextureCache()->addImage("WorldMenuSaveAndQuit_Clicked.png"));
 		break;
 	}
 }

@@ -28,12 +28,14 @@ private:
 		SPRITE_BACKHP,
 	};
 
-
+	int									m_ShowVersion;
 	int									m_WinWidth, m_WinHeight;
 	int									m_prevHP;
 	cocos2d::Sprite*					m_STEbarSpr;
 	cocos2d::Sprite*					m_MonsterHPContainerSpr;
 	cocos2d::Sprite*					m_MonsterHPSpr;
+	cocos2d::Sprite*					m_WindowHP;
+	cocos2d::Sprite*					m_WindowSTE;
 
 	void								drawCurrentHP(int currentHP, int maxHP);
 	void								drawCurrentSTE(int currentSTE, int maxSTE);
