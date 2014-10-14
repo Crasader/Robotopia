@@ -39,13 +39,13 @@ void WorldMenu::changeButtonState(ButtonState buttonState)
 	switch (buttonState)
 	{
 	case NORMAL:
-		m_ButtonSaveQuitSpr->setTexture(TextureCache::sharedTextureCache()->addImage("WorldMenuSaveAndQuit.png"));
+		m_ButtonSaveQuitSpr->setTexture(Director::getInstance()->getTextureCache()->addImage("WorldMenuSaveAndQuit.png"));
 		break;
 	case HIGHLIGHT:
-		m_ButtonSaveQuitSpr->setTexture(TextureCache::sharedTextureCache()->addImage("WorldMenuSaveAndQuit_Highlight.png"));
+		m_ButtonSaveQuitSpr->setTexture(Director::getInstance()->getTextureCache()->addImage("WorldMenuSaveAndQuit_Highlight.png"));
 		break;
 	case CLICKED:
-		m_ButtonSaveQuitSpr->setTexture(TextureCache::sharedTextureCache()->addImage("WorldMenuSaveAndQuit_Clicked.png"));
+		m_ButtonSaveQuitSpr->setTexture(Director::getInstance()->getTextureCache()->addImage("WorldMenuSaveAndQuit_Clicked.png"));
 		break;
 	}
 }

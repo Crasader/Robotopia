@@ -1,6 +1,6 @@
 //BarContainer.h
 //
-//HP bar, STE bar 备己
+//HP bar, STE bar 备己 (内靛 俺魄 5盒 傈)
 //
 //累己磊 : 快犁快
 //

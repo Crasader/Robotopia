@@ -56,6 +56,8 @@ cocos2d::Animation* ResourceManager::createAnimation(AnimationType type, float d
 			return createAnimation("AimingMissile%d.png", 1, 8, delay);
 		case AT_AIMINGMISSILE_COLLISION:
 			return createAnimation("ET_AimingMissile_Collision%d.png", 1, 4, delay);
+		case AT_FLOORGATEWAY_OPEN:
+			return createAnimation("FloorGateway%d.png", 0, 11, delay);
 		case AT_GATEWAY_ACT:
 			return createAnimation("GatewayAct%d.png", 0, 5, delay);
 		case AT_LINEARMISSILE_FLYING:
@@ -119,6 +121,8 @@ cocos2d::Sprite* ResourceManager::createSprite(SpriteType type)
 			return createSprite("ET_AimingMissile_Collision1.png");
 		case ST_DUST_FOR_SHAKE:
 			return createSprite("ET_dust_for_Shake1.png");
+		case ST_FLOORGATEWAY:
+			return createSprite("FloorGateway0.png");
 		case ST_GATEWAY_ACTIVE:
 			return createSprite("GatewayActive.png");
 		case ST_GATEWAY_UNACTIVE:

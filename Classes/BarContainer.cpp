@@ -2,7 +2,7 @@
 
 USING_NS_CC;
 
-#define ORIGINALVER 1
+#define OLDVER 1
 #define NEWVER 2
 
 bool BarContainer::init()
@@ -12,7 +12,7 @@ bool BarContainer::init()
 	m_WinWidth = winSize.width;
 	m_WinHeight = winSize.height;
 
-	if (m_ShowVersion == ORIGINALVER)
+	if (m_ShowVersion == OLDVER)
 	{
 		m_prevHP = 0;
 
@@ -82,6 +82,10 @@ bool BarContainer::init()
 		m_MonsterHPSpr->setPosition(Point(3.5, m_MonsterHPContainerSpr->getContentSize().height - 3));
 		m_MonsterHPContainerSpr->addChild(m_MonsterHPSpr, -2);
 
+		auto hpLabel = Label::createWithSystemFont("", "Thonburi", 15);
+		hpLabel->setPosition(Point(60, m_WinHeight - 115));
+		this->addChild(hpLabel, 10, LABEL_HPSTATUS);
+
 		this->addChild(m_WindowHP);
 		this->addChild(m_WindowSTE);
 
@@ -91,7 +95,7 @@ bool BarContainer::init()
 
 void BarContainer::update(float dTime)
 {
-	if (m_ShowVersion == ORIGINALVER)
+	if (m_ShowVersion == OLDVER)
 	{
 		auto player = GET_STAGE_MANAGER()->getPlayer();
 		if (player != nullptr)
@@ -161,6 +165,14 @@ void BarContainer::update(float dTime)
 			{
 				m_WindowHP->setTexture(Director::getInstance()->getTextureCache()->addImage("GameWindow_HP7.png"));
 			}
+			int hpConvert = (int)(scaleHP * 100);
+			std::string strHPPrint = std::to_string(hpConvert);
+			std::stringstream sumHP;
+			sumHP << strHPPrint << " % ";
+			std::string hpStr = sumHP.str();
+
+			Label* hpStatus = (Label*)this->getChildByTag(LABEL_HPSTATUS);
+			hpStatus->setString(hpStr);
 		}
 		auto monster = GET_STAGE_MANAGER()->getLastMonster();
 		if (monster != nullptr)
