@@ -19,8 +19,10 @@ class StageManager
 {
 public:
 	bool								init();
+	bool								initFloor(int floorNum);
 	//stage를 변경합니다.
 	void								changeStage(int stageNum, cocos2d::Point nextPlayerPosition);
+	void								changeFloor(int floorNum);
 	//방문한 장소를 추가합니다.
 	void								addVisitedStage(int stage);
 	//오브젝트의 타입과 위치 값을 받아 오브젝트를 GameLayer에 추가합니다.
@@ -68,6 +70,7 @@ private:
 private:
 	Monster*							m_LastHitMonster;
 	static float						m_accTimeForShake;
+	//플레이어 세이브 로드하는 과정에 잘못된 플레이어 참조를 막기위한 플래그
 	bool								m_IsAvailable;
 	cocos2d::Size						m_BoxSize;
 	std::vector<int>					m_VisitedStageNums;

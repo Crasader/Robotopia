@@ -12,11 +12,26 @@ bool StageManager::init()
 {
 	m_CurrentWorldScene = nullptr;
 	m_LastHitMonster = nullptr;
-	m_CurrentFloorNum = 1;
-	m_CurrentStageNum = 1;
+	m_CurrentStageNum = 0;
+	m_CurrentFloorNum = 0;
 	m_PlayerInfo = PlayerInfo();
 	m_BoxSize = Size( 32 , 32 );
-	m_IsAvailable = false;
+	m_IsAvailable = false; 
+	return true;
+}
+
+
+bool StageManager::initFloor( int floorNum )
+{
+	if( m_CurrentFloorNum != 0 )
+	{
+		for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
+		{
+			m_WorldScenes[stageNum]->release();
+		}
+	}
+
+	m_CurrentFloorNum = floorNum;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
 	makeStaticData();
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
@@ -26,15 +41,16 @@ bool StageManager::init()
 		int StageMaxWidthIdx = m_CurrentFloorStagesData[stageNum].width;
 		int StageMaxHeightIdx = m_CurrentFloorStagesData[stageNum].height;
 		std::map<int , ObjectType> data = m_CurrentFloorStagesData[stageNum].data;
-		m_CurrentWorldScene->initCurrentSceneWithData( Vec2( StageMaxWidthIdx , StageMaxHeightIdx ) , 
+		m_CurrentWorldScene->initCurrentSceneWithData( Vec2( StageMaxWidthIdx , StageMaxHeightIdx ) ,
 													   m_BoxSize , data , "background.png" );
 		m_CurrentWorldScene->retain();
 		m_WorldScenes[stageNum] = m_CurrentWorldScene;
 	}
 	m_CurrentWorldScene = nullptr;
-	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SAGA_BGM , true );
+
 	return true;
 }
+
 
 void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 {
@@ -46,14 +62,12 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 	addVisitedStage( stageNum );
 	savePlayerInfo();
 	m_IsAvailable = false;
-	//나중에 씬단위에서 아래 데이터 처리하도록 하자.
 	m_CurrentStageNum = stageNum;
 	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
 	loadPlayer( nextPlayerPosition );
 	m_IsAvailable = true;
 	m_CurrentWorldScene->scheduleUpdate();
-	
 }
 
 Player* StageManager::getPlayer()
@@ -295,3 +309,9 @@ bool StageManager::isVisited( int stageNum )
 	return  m_VisitedStageNums.end() != std::find( m_VisitedStageNums.begin() , m_VisitedStageNums.end() , stageNum );
 }
 
+void StageManager::changeFloor( int floorNum )
+{
+	initFloor(floorNum);
+	changeStage( 1 , Point( 100 , 100 ) );
+	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SAGA_BGM , true );
+}

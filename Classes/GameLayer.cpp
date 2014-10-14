@@ -3,6 +3,7 @@
 #include "GameLayer.h"
 #include "LandFloor.h"
 #include "LandBlock.h"
+#include "LandFloorGateway.h"
 #include "RushMonster.h"
 #include "BatMonster.h"
 #include "Villager.h"
@@ -137,6 +138,10 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_TRAP:
 			object = LandTrap::create();
 			zOrder = GameLayer::ZOrder::GAME_OBJECT;
+			break;
+		case OT_FLOOR_GATEWAY:
+			object = LandFloorGateway::create();
+			zOrder = GameLayer::ZOrder::LAND_OBJECT;
 			break;
 		default:
 			return nullptr;

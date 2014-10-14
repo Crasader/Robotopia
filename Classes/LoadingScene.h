@@ -6,7 +6,7 @@ class LoadingScene : public cocos2d::Scene
 public:
 	static cocos2d::Scene*	createScene();
 	virtual bool			init();
-	virtual void			update(float dTime);
+	void					initGame(float unused);
 	CREATE_FUNC( LoadingScene );
 
 private:
