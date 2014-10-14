@@ -41,9 +41,9 @@ public:
 	KeyStateSentinel*										receiveInputData(WorldScene* scene);	//호출하면 모든 인풋 정보가 자동으로 업데이트됨.
 	KeyStateSentinel*										receiveKeyboardData(WorldScene* scene); //호출하면 키보드 정보가 자동으로 업데이트됨.
 private:
-	std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_KeyStates;
-	std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_PrevKeyStates;
-	std::map<cocos2d::EventKeyboard::KeyCode, KeyState>		m_FinalKeyStates;
+	KeyState		m_KeyStates[200];
+	KeyState		m_PrevKeyStates[200];
+	KeyState		m_FinalKeyStates[200];
 };
 
 class KeyStateSentinel : public cocos2d::Node
