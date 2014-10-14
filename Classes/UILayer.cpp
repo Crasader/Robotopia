@@ -78,13 +78,13 @@ void UILayer::update(float dTime)
 			{
 				m_Minimap->hideMinimapWin();
 			}
-			else if (m_EquipmentWindow->getCharWinOn() == true)
-			{
-				m_EquipmentWindow->hideCharacterWindow();
-			}
 			else if (m_StoreWindow->getStoreWindowOn() == true)
 			{
 				m_StoreWindow->hideStore();
+			}
+			else if (m_EquipmentWindow->getCharWinOn() == true)
+			{
+				m_EquipmentWindow->hideCharacterWindow();
 			}
 			else
 			{
