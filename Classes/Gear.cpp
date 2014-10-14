@@ -2,7 +2,6 @@
 
 USING_NS_CC;
 
-
 bool Gear::init()
 {
 	m_Gear1 = Sprite::create("Gear1_Off.png");
@@ -20,6 +19,7 @@ bool Gear::init()
 	this->addChild(m_Gear1);
 	this->addChild(m_Gear2);
 	this->addChild(m_Gear3);
+
 	return true;
 }
 
