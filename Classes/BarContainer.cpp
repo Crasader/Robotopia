@@ -65,11 +65,13 @@ bool BarContainer::init()
 		m_WindowHP = Sprite::create("GameWindow_HP1.png");
 		m_WindowHP->setAnchorPoint(Point(0, 1));
 		m_WindowHP->setPosition(Point(0, m_WinHeight));
+		m_WindowHP->setOpacity(190);
 		m_WindowHP->setScale(1.5f);
 
 		m_WindowSTE = Sprite::create("GameWindow_HP_STE.png");
 		m_WindowSTE->setAnchorPoint(Point(0, 0));
 		m_WindowSTE->setPosition(Point(110, m_WinHeight - 120));
+		m_WindowSTE->setOpacity(170);
 		m_WindowSTE->setScale(1.2f);
 
 		m_MonsterHPContainerSpr = Sprite::create("MonsterHPContainer.png");
