@@ -61,8 +61,10 @@ public:
 	Monster*							getLastMonster() {return m_LastHitMonster; }
 	void								setLastMonster(Monster* monster) {m_LastHitMonster = monster;}
 
-private:
 	void								savePlayerInfo();
+
+private:
+	void								initData();
 	void								loadPlayer( cocos2d::Point setPosition );
 	void								makeStaticData();
 	void								shakeFloor();

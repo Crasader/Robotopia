@@ -23,14 +23,7 @@ bool StageManager::init()
 
 bool StageManager::initFloor( int floorNum )
 {
-	if( m_CurrentFloorNum != 0 )
-	{
-		for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
-		{
-			m_WorldScenes[stageNum]->release();
-		}
-	}
-
+	initData();
 	m_CurrentFloorNum = floorNum;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
 	makeStaticData();
@@ -61,7 +54,6 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 	}
 	m_CurrentStageNum = stageNum;
 	addVisitedStage( stageNum );
-	savePlayerInfo();
 	m_IsAvailable = false;
 	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
@@ -314,4 +306,17 @@ void StageManager::changeFloor( int floorNum )
 	initFloor(floorNum);
 	changeStage( 1 , Point( 100 , 100 ) );
 	GET_EFFECT_MANAGER()->createSound( SoundType::SO_SAGA_BGM , true );
+}
+
+void StageManager::initData()
+{
+	if( m_CurrentFloorNum != 0 )
+	{
+		for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
+		{
+			m_WorldScenes[stageNum]->release();
+		}
+	}
+	m_CurrentFloorStagesData.clear();
+	m_VisitedStageNums.clear();
 }

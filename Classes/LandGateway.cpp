@@ -80,6 +80,7 @@ void LandGateway::gotoNextLevel(Ref* sender)
 	this->addChild( m_MainSprite );
 
 	//다음 월드 씬으로 변경해주는 함수호출
+	GET_STAGE_MANAGER()->savePlayerInfo();
 	GET_STAGE_MANAGER()->changeStage( m_NextFloorNum, m_LinkingPoint );
 }
 

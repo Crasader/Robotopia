@@ -37,6 +37,7 @@ void LandFloorGateway::collisionOccured( InteractiveObject* enemy , Directions d
 
 void LandFloorGateway::gotoNextFloor( Ref* sender )
 {
+	GET_STAGE_MANAGER()->savePlayerInfo();
 	GET_STAGE_MANAGER()->changeFloor( GET_STAGE_MANAGER()->getCurStageNum() + 1);
 }
 
