@@ -8,6 +8,7 @@ class WorldMenu;
 class EquipmentWindow;
 class BarContainer;
 class Gear;
+class StoreWindow;
 
 class UILayer : public cocos2d::Layer
 {
@@ -28,6 +29,7 @@ protected:
 	Minimap*							m_Minimap;
 	WorldMenu*							m_WorldMenu;
 	Gear*								m_Gear;
+	StoreWindow*						m_StoreWindow;
 
 	bool								m_IsMouseDown;
 	void								onMouseDown(cocos2d::Event *event);

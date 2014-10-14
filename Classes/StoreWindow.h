@@ -17,6 +17,13 @@ public:
 
 	CREATE_FUNC(StoreWindow);
 
+	void				showStore();
+	void				hideStore();
+	bool				getStoreWindowOn() { return m_StoreWindowOn };
+
 private:
+	bool				m_StoreWindowOn;
+	
+	cocos2d::Sprite*	m_StoreWindowSpr;
 
 };

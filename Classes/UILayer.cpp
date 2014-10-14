@@ -5,6 +5,7 @@
 #include "BarContainer.h"
 #include "EquipmentWindow.h"
 #include "Gear.h"
+#include "StoreWindow.h"
 
 USING_NS_CC;
 
@@ -20,6 +21,7 @@ void UILayer::update(float dTime)
 	m_EquipmentWindow->update(dTime);
 	m_Minimap->update(dTime);
 	m_WorldMenu->update(dTime);
+	m_Gear->update(dTime);
 
 	KeyState charWinKey = GET_INPUT_MANAGER()->getKeyState(KC_CHARACTER_UI);
 	KeyState enterKey = GET_INPUT_MANAGER()->getKeyState(KC_RETURN);
@@ -27,6 +29,15 @@ void UILayer::update(float dTime)
 	KeyState escKey = GET_INPUT_MANAGER()->getKeyState(KC_MENU);
 	KeyState downKey = GET_INPUT_MANAGER()->getKeyState(KC_DOWN);
 	KeyState upKey = GET_INPUT_MANAGER()->getKeyState(KC_UP);
+
+	if (m_StoreWindow->getStoreWindowOn() == true)
+	{
+		m_EquipmentWindow->showCharacterWindow();
+	}
+	else
+	{
+		m_EquipmentWindow->hideCharacterWindow();
+	}
 
 	if (charWinKey == KS_PRESS)
 	{
@@ -106,12 +117,14 @@ void UILayer::initializeUILayer()
 	m_Minimap = Minimap::create();
 	m_WorldMenu = WorldMenu::create();
 	m_Gear = Gear::create();
+	m_StoreWindow = StoreWindow::create();
 
 	this->addChild( m_Gear );
 	this->addChild( m_BarContainer );
 	this->addChild( m_EquipmentWindow );
 	this->addChild( m_Minimap );
 	this->addChild( m_WorldMenu );
+	this->addChild( m_StoreWindow );
 }
 
 void UILayer::onMouseDown(Event *event)
