@@ -19,6 +19,7 @@ public:
 	CREATE_FUNC( UILayer );
 
 	void					initializeUILayer();
+	void					showStore();
 
 protected:
 
@@ -32,7 +33,6 @@ protected:
 	StoreWindow*						m_StoreWindow;
 
 	bool								m_IsMouseDown;
-	void								showStore();
 
 	void								onMouseDown(cocos2d::Event *event);
 	void								onMouseUp(cocos2d::Event *event);
