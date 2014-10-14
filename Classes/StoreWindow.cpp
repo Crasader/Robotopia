@@ -11,6 +11,7 @@ bool StoreWindow::init()
 	m_StoreWindowSpr->setPosition(Point(100, 100));
 	
 	this->addChild(m_StoreWindowSpr);
+	return true;
 }
 
 void StoreWindow::update(float dTime)
