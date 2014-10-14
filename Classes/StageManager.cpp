@@ -20,7 +20,6 @@ bool StageManager::init()
 	return true;
 }
 
-
 bool StageManager::initFloor( int floorNum )
 {
 	initData();
@@ -64,7 +63,7 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 
 Player* StageManager::getPlayer()
 {
-	if( m_CurrentWorldScene == nullptr || m_IsAvailable == false )
+	if( m_CurrentWorldScene == nullptr )
 	{
 		return nullptr;
 	}

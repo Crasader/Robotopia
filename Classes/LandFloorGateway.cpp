@@ -1,5 +1,6 @@
 #include "LandFloorGateway.h"
 #include "GameManager.h"
+#include "LoadingScene.h"
 
 USING_NS_CC;
 
@@ -38,6 +39,6 @@ void LandFloorGateway::collisionOccured( InteractiveObject* enemy , Directions d
 void LandFloorGateway::gotoNextFloor( Ref* sender )
 {
 	GET_STAGE_MANAGER()->savePlayerInfo();
-	GET_STAGE_MANAGER()->changeFloor( GET_STAGE_MANAGER()->getCurStageNum() + 1);
+	Director::getInstance()->replaceScene( LoadingScene::createScene() );
 }
 

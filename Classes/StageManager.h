@@ -46,6 +46,7 @@ public:
 	const StaticStageData&				getStageDataByStageNum( int stageNum );
 	const StaticStageData&				getStageDatas();
 	cocos2d::Rect						getStageRect();
+	int									getCurrentFloorNum() {return m_CurrentFloorNum; }
 	int									getCurStageNum() {return m_CurrentStageNum; }
 	const std::vector<int>&				getVisitedStageNums(){return m_VisitedStageNums;}
 
@@ -60,7 +61,6 @@ public:
 	void								initLastMonster( float dTime );
 	Monster*							getLastMonster() {return m_LastHitMonster; }
 	void								setLastMonster(Monster* monster) {m_LastHitMonster = monster;}
-
 	void								savePlayerInfo();
 
 private:

@@ -28,6 +28,6 @@ bool LoadingScene::init()
 //이걸 따로 안빼면 게임화면 뜰때까지 로딩화면, 노래먼저 안나옵니다.
 void LoadingScene::initGame(float unused)
 {
-	GET_STAGE_MANAGER()->changeFloor( 1 );
+	GET_STAGE_MANAGER()->changeFloor( GET_STAGE_MANAGER()->getCurrentFloorNum() + 1 );
 }
 
