@@ -399,7 +399,17 @@ bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData, std:
 			else
 			{
 				int nearRoom = 1 + rand() % (s - 1);
-				int dir = rand() % 4;
+				int dir;
+
+				if (s > 2)
+				{
+					nearRoom = 2 + rand() % (s - 2);
+					dir = rand() % 4;
+				}
+				else
+				{
+					dir = 2;
+				}
 
 				x = m_FloorStageData[currentFloor - 1][nearRoom].x;
 				y = m_FloorStageData[currentFloor - 1][nearRoom].y;
@@ -425,7 +435,15 @@ bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData, std:
 				}
 			}
 
-			for (int p = 1; p < s; p++)
+			if (s > 2 && !(x + width + 1 <= m_FloorStageData[currentFloor - 1][1].x ||
+				x - 1 >= m_FloorStageData[currentFloor - 1][1].x + m_FloorStageData[currentFloor - 1][1].width ||
+				y + height + 1 <= m_FloorStageData[currentFloor - 1][1].y ||
+				y - 1 >= m_FloorStageData[currentFloor - 1][1].y + m_FloorStageData[currentFloor - 1][1].height))
+			{
+				passFlag = false;
+			}
+
+			for (int p = 1; p < s && passFlag; p++)
 			{
 
 				int enemyX = m_FloorStageData[currentFloor - 1][p].x;
