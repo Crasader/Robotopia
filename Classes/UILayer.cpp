@@ -34,10 +34,6 @@ void UILayer::update(float dTime)
 	{
 		m_EquipmentWindow->showCharacterWindow();
 	}
-	else
-	{
-		m_EquipmentWindow->hideCharacterWindow();
-	}
 
 	if (charWinKey == KS_PRESS)
 	{
@@ -85,6 +81,10 @@ void UILayer::update(float dTime)
 			else if (m_EquipmentWindow->getCharWinOn() == true)
 			{
 				m_EquipmentWindow->hideCharacterWindow();
+			}
+			else if (m_StoreWindow->getStoreWindowOn() == true)
+			{
+				m_StoreWindow->hideStore();
 			}
 			else
 			{
@@ -195,4 +195,10 @@ void UILayer::onMouseMove(Event *event)
 void UILayer::onMouseScroll(Event *event)
 {
 
+}
+
+void UILayer::showStore()
+{
+	m_StoreWindow->showStore();
+	m_EquipmentWindow->showCharacterWindow();
 }
