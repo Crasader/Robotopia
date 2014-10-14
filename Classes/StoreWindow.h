@@ -19,7 +19,7 @@ public:
 
 	void				showStore();
 	void				hideStore();
-	bool				getStoreWindowOn() { return m_StoreWindowOn };
+	bool				getStoreWindowOn() { return m_StoreWindowOn; }
 
 private:
 	bool				m_StoreWindowOn;
