@@ -172,7 +172,7 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 			if (m_State != PS_HIT && !m_IsInvincible)
 			{
 				m_IsCrashed = true;
-				this->setHp(-((AimingMissile*)enemy)->getDamage(), true);
+				this->setHp(-5, true);
 				changeState(PS_HIT);
 				if (m_Velocity.x > 0)
 				{

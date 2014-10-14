@@ -282,7 +282,14 @@ bool DataManager::initFloorData()
 					}
 					else
 					{
-						moduleIdx = rand() % m_ModuleSize[closedDirection];
+						if (closedDirection == 15)
+						{
+							moduleIdx = rand() % (m_ModuleSize[closedDirection] - 2);
+						}
+						else
+						{
+							moduleIdx = rand() % m_ModuleSize[closedDirection];
+						}
 					}
 
 					int moduleWidth = m_ModuleData[closedDirection][moduleIdx].width;
