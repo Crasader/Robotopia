@@ -47,7 +47,7 @@ bool StageManager::initFloor( int floorNum )
 		m_WorldScenes[stageNum] = m_CurrentWorldScene;
 	}
 	m_CurrentWorldScene = nullptr;
-
+	m_CurrentStageNum = 0;
 	return true;
 }
 
@@ -59,10 +59,10 @@ void StageManager::changeStage( int stageNum , Point nextPlayerPosition)
 	{
 		return;
 	}
+	m_CurrentStageNum = stageNum;
 	addVisitedStage( stageNum );
 	savePlayerInfo();
 	m_IsAvailable = false;
-	m_CurrentStageNum = stageNum;
 	m_CurrentWorldScene = m_WorldScenes[m_CurrentStageNum];
 	Director::getInstance()->replaceScene( m_CurrentWorldScene );
 	loadPlayer( nextPlayerPosition );
