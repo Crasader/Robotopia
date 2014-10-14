@@ -274,11 +274,11 @@ bool DataManager::initFloorData()
 
 					if (i == 0 || i == 3)
 					{
-						moduleIdx = 4;
+						moduleIdx = 3;
 					}
 					else if (s == 1)
 					{
-						moduleIdx = 5;
+						moduleIdx = 4;
 					}
 					else
 					{
