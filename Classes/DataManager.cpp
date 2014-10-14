@@ -89,6 +89,11 @@ bool DataManager::initFloorData()
 	{
 		int stageNum, stageRandNum;
 		int maxStageWidth, maxStageHeight;
+
+		originX = 0;
+		originY = 0;
+		endX = 0;
+		endY = 0;
 		
 		rawData = strtok(nullptr, tokenList);
 		stageNum = atoi(rawData);
@@ -102,8 +107,11 @@ bool DataManager::initFloorData()
 		rawData = strtok(nullptr, tokenList);
 		maxStageHeight = atoi(rawData);
 
-		stageNum = stageNum + (rand() % (stageRandNum * 2)) - stageRandNum;
-
+		if (stageRandNum != 0)
+		{
+			stageNum = stageNum + (rand() % (stageRandNum * 2)) - stageRandNum;
+		}
+		
 		m_FloorData[i].stageNum = stageNum;
 
 		for (int s = 1; s <= stageNum; s++)
@@ -113,8 +121,16 @@ bool DataManager::initFloorData()
 			{
 				bool passFlag = true;
 
-				width = 1 + rand() % (maxStageWidth);
-				height = 1 + rand() % (maxStageHeight);
+				if (s == 1)
+				{
+					width = 1;
+					height = 1;
+				}
+				else
+				{
+					width = 1 + rand() % (maxStageWidth);
+					height = 1 + rand() % (maxStageHeight);
+				}
 
 				if (s == 1)
 				{
@@ -123,8 +139,18 @@ bool DataManager::initFloorData()
 				}
 				else
 				{
-					int nearRoom = 1 + rand() % (s-1);
-					int dir = rand() % 4;
+					int nearRoom = 1 + rand() % (s - 1);
+					int dir;
+
+					if (s > 2)
+					{
+						nearRoom = 2 + rand() % (s - 2);
+						dir = rand() % 4;
+					}
+					else
+					{
+						dir = 2;
+					}
 
 					x = m_FloorStageData[i][nearRoom].x;
 					y = m_FloorStageData[i][nearRoom].y;
@@ -150,7 +176,13 @@ bool DataManager::initFloorData()
 					}
 				}
 
-				for (int p = 1; p < s; p++)
+				if (s > 2 && !(x + width + 1 <= m_FloorStageData[i][1].x || x - 1 >= m_FloorStageData[i][1].x + m_FloorStageData[i][1].width ||
+					y + height + 1 <= m_FloorStageData[i][1].y || y - 1 >= m_FloorStageData[i][1].y + m_FloorStageData[i][1].height))
+				{
+					passFlag = false;
+				}
+
+				for (int p = 1; p < s && passFlag; p++)
 				{
 
 					int enemyX = m_FloorStageData[i][p].x;
@@ -164,6 +196,7 @@ bool DataManager::initFloorData()
 						passFlag = false;
 						break;
 					}
+					
 				}
 
 				if (passFlag == true)
@@ -237,9 +270,24 @@ bool DataManager::initFloorData()
 						closedDirection |= DIR_RIGHT;
 					}
 
-					int moduleIdx = rand() % m_ModuleSize[closedDirection];
+					int moduleIdx;
+
+					if (i == 0 || i == 3)
+					{
+						moduleIdx = 4;
+					}
+					else if (s == 1)
+					{
+						moduleIdx = 5;
+					}
+					else
+					{
+						moduleIdx = rand() % m_ModuleSize[closedDirection];
+					}
+
 					int moduleWidth = m_ModuleData[closedDirection][moduleIdx].width;
 					int moduleHeight = m_ModuleData[closedDirection][moduleIdx].height;
+
 
 					int idxX = x - m_FloorStageData[i][s].x - 1;
 					int idxY = y - m_FloorStageData[i][s].y - 1;
@@ -295,8 +343,6 @@ bool DataManager::initFloorData()
 		m_FloorData[i].width = endX + 2;
 		m_FloorData[i].height = endY + 2;
 	}
-
-	CCLOG("aa");
 
 	return true;
 }
