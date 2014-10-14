@@ -4,6 +4,7 @@
 #include "WorldMenu.h"
 #include "BarContainer.h"
 #include "EquipmentWindow.h"
+#include "Gear.h"
 
 USING_NS_CC;
 
@@ -104,13 +105,14 @@ void UILayer::initializeUILayer()
 	m_EquipmentWindow = EquipmentWindow::create();
 	m_Minimap = Minimap::create();
 	m_WorldMenu = WorldMenu::create();
+	m_Gear = Gear::create();
+
+	this->addChild( m_Gear );
 	this->addChild( m_BarContainer );
 	this->addChild( m_EquipmentWindow );
 	this->addChild( m_Minimap );
 	this->addChild( m_WorldMenu );
 }
-
-
 
 void UILayer::onMouseDown(Event *event)
 {

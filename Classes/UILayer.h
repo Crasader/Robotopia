@@ -7,6 +7,7 @@ class Minimap;
 class WorldMenu;
 class EquipmentWindow;
 class BarContainer;
+class Gear;
 
 class UILayer : public cocos2d::Layer
 {
@@ -26,6 +27,7 @@ protected:
 	EquipmentWindow*					m_EquipmentWindow;
 	Minimap*							m_Minimap;
 	WorldMenu*							m_WorldMenu;
+	Gear*								m_Gear;
 
 	bool								m_IsMouseDown;
 	void								onMouseDown(cocos2d::Event *event);
