@@ -39,9 +39,10 @@ bool GameLayer::init()
 	m_IsVisited = false;
 	m_InteractiveObjects.clear();
 	m_CollisionInformations.clear();
-	m_ObjectPositionsHash.clear();
 	m_AddObjects.clear();
 	m_Gateways.clear();
+	memset( m_MapData , 0 , sizeof( ObjectType )*MAX_POSITION_NUM );
+	memset( m_ObjectPositionsHash , 0 , sizeof( std::vector<InteractiveObject*> )*MAX_POSITION_NUM );
 
 	m_Gateways.reserve( MAX_GATEWAY_NUM );
 	m_InteractiveObjects.reserve( MAX_OBJECT_NUM );
@@ -54,13 +55,13 @@ bool GameLayer::initWorldFromData( Vec2 boxNum , Size boxSize , std::map<int , O
 	m_BoxWidthNum = boxNum.x;
 	m_BoxHeightNum = boxNum.y;
 	m_BoxSize = boxSize;
-	m_MapData = MapData;
 	m_MapRect.setRect( 0 , 0 , m_BoxSize.width * m_BoxWidthNum , m_BoxSize.height * m_BoxHeightNum );
 
 	for( int yIdx = 0; yIdx < m_BoxHeightNum; yIdx++ )
 	{
 		for( int xIdx = 0; xIdx < m_BoxWidthNum; xIdx++ )
 		{
+			m_MapData[yIdx*m_BoxWidthNum + xIdx] = MapData[yIdx*m_BoxWidthNum + xIdx];
 			addObjectByMapdata( xIdx , yIdx );
 		}
 	}
@@ -68,6 +69,8 @@ bool GameLayer::initWorldFromData( Vec2 boxNum , Size boxSize , std::map<int , O
 
 	return true;
 }
+
+
 
 
 //타입별 객체를 월드 위치좌표에 추가해준다.
@@ -215,7 +218,7 @@ void GameLayer::collisionCheck(float dTime)
 			collisionCheckbyHash( subject , dTime );
 		}
 	}
-	m_ObjectPositionsHash.clear();
+	memset( m_ObjectPositionsHash , 0 , sizeof( std::vector<InteractiveObject*> )*MAX_POSITION_NUM );
 }
 
 void GameLayer::collisionProc( float dTime )
@@ -243,7 +246,8 @@ void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
 			int sum = xIdx*yIdx + xIdx;
 			if( sum < m_BoxWidthNum*m_BoxHeightNum && sum >= 0 )
 			{
-				for( auto object : m_ObjectPositionsHash[sum] )
+				auto objects = m_ObjectPositionsHash[sum];
+				for( auto object : objects )
 				{
 					if( object != subject )
 					{

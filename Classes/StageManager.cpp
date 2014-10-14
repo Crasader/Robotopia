@@ -269,7 +269,7 @@ bool StageManager::accumultateTime( float dTime )
 	int shakeDuration = 180.f;
 	if( m_accTimeForShake > shakeDuration )
 	{
-		getWorldScene()->getGameLayer()->IsItShake( true );
+		getWorldScene()->getGameLayer()->isItShake( true );
 		CCLOG( "open sesami" );
 		m_accTimeForShake = 0.f;
 		shakeFloor();

@@ -10,7 +10,6 @@ bool Villager::init()
 	}
 	m_Type = OT_VILLAGER;
 	m_MainSprite = Sprite::createWithSpriteFrameName( "Villager.png" );
-	m_MainSprite->setAnchorPoint( Point::ZERO );
 	this->addChild( m_MainSprite );
 	return true;
 }

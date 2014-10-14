@@ -3,6 +3,8 @@
 #include "Utils.h"
 #include "Player.h"
 
+#define MAX_POSITION_NUM 1024*10
+
 class LandGateway;
 class InteractiveObject;
 class GameLayer : public cocos2d::Layer
@@ -27,7 +29,7 @@ public:
 
 	bool							isOutOfStageMap(cocos2d::Point checkPosition);
 	cocos2d::Vec2					positionToIdxOfStageData( cocos2d::Point position );
-	void							IsItShake(bool shakeOrNot) {m_IsShaking = shakeOrNot; }
+	void							isItShake(bool shakeOrNot) {m_IsShaking = shakeOrNot; }
 	void							setIsVisited(bool isVisited) {m_IsVisited = isVisited; }
 	bool							getIsVisited() {return m_IsVisited; }
 	
@@ -43,7 +45,6 @@ private:
 	void							collisionCheck( float dTime );
 	void							collisionCheckbyHash( InteractiveObject* subject , float dTime );
 	void							collisionProc( float dTime );
-	
 
 	enum ZOrder
 	{
@@ -74,9 +75,9 @@ private:
 	Player*											m_Player;
 	std::vector<LandGateway*>						m_Gateways;
 	std::vector<CollisionInformation>				m_CollisionInformations;
-	std::map<int , ObjectType>						m_MapData;
+	ObjectType										m_MapData[MAX_POSITION_NUM];
 	std::vector<InteractiveObject*>					m_InteractiveObjects; 
 	std::vector<InteractiveObject*>					m_AddObjects;
-	std::map<int, std::vector<InteractiveObject*>>	m_ObjectPositionsHash;
+	std::vector<InteractiveObject*>					m_ObjectPositionsHash[MAX_POSITION_NUM];
 };
 
