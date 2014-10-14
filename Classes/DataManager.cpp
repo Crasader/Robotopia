@@ -41,7 +41,6 @@ bool DataManager::initModuleData()
 			}
 		}
 
-		//m_ModuleData[closedDirections].push_back(module);
 		m_ModuleData[closedDirections][m_ModuleSize[closedDirections]++] = module;
 	}
 
@@ -50,17 +49,6 @@ bool DataManager::initModuleData()
 
 DataManager::DataManager()
 {
-	/*
-	m_ModuleData.clear();
-	for (int i = 0; i < 15; i++)
-	{
-		std::vector<StageModuleData> moduleDataVector;
-
-		moduleDataVector.clear();
-
-		m_ModuleData[i] = moduleDataVector;
-	}
-	*/
 	for (int i = 0; i < 16; i++)
 	{
 		m_ModuleSize[i] = 0;

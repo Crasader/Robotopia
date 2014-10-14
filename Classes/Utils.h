@@ -35,6 +35,7 @@ enum ObjectType
 	OT_BAT_MONSTER = 15,
 	OT_ITEM_LEG = 16,
 	OT_TRAP = 17,
+	OT_FLOOR_GATEWAY = 18,
 };
 
 
