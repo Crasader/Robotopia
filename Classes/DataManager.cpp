@@ -356,6 +356,8 @@ bool DataManager::getFloorData(int currentFloor, FloorData* floorData, std::vect
 
 	*floorData = m_FloorData[currentFloor - 1];
 
+	stageData->clear();
+
 	for (int s = 0; s <= m_FloorData[currentFloor - 1].stageNum; s++)
 	{
 		stageData->push_back(m_FloorStageData[currentFloor - 1][s]);
