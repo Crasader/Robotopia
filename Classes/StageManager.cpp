@@ -2,7 +2,9 @@
 #include <string>
 #include "GameManager.h"
 #include "GameLayer.h"
+#include "UILayer.h"
 #include "InteractiveObject.h"
+#include "StageManager.h"
 
 USING_NS_CC;
 
@@ -318,4 +320,9 @@ void StageManager::initData()
 	}
 	m_CurrentFloorStagesData.clear();
 	m_VisitedStageNums.clear();
+}
+
+void StageManager::showStore()
+{
+	m_CurrentWorldScene->getUILayer()->showStore();
 }

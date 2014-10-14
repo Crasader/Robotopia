@@ -12,5 +12,5 @@ public:
 
 	CREATE_FUNC( Villager );
 private:
-
+	bool			m_IsOnStore;
 };

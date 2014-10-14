@@ -1,4 +1,5 @@
 #include "Villager.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
@@ -10,6 +11,7 @@ bool Villager::init()
 	}
 	m_Type = OT_VILLAGER;
 	m_MainSprite = Sprite::createWithSpriteFrameName( "Villager.png" );
+	m_IsOnStore = false;
 	this->addChild( m_MainSprite );
 	return true;
 }
@@ -54,6 +56,12 @@ void Villager::collisionOccured( InteractiveObject* enemy , Directions dir )
 				m_Velocity.y = 0;
 			}
 			break;
+		case OT_PLAYER:
+			if( !m_IsOnStore && GET_INPUT_MANAGER()->getKeyState( KC_UP ) )
+			{
+				m_IsOnStore = true;
+				GET_STAGE_MANAGER()->showStore();
+			}
 	}
 }
 
