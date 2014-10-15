@@ -202,3 +202,9 @@ void UILayer::showStore()
 	m_StoreWindow->showStore();
 	m_EquipmentWindow->showCharacterWindow();
 }
+
+void UILayer::hideStore()
+{
+	m_StoreWindow->hideStore();
+	m_EquipmentWindow->hideCharacterWindow();
+}

@@ -9,6 +9,7 @@ public:
 	OVERRIDE void	collisionOccured( InteractiveObject* enemy , Directions dir );
 	void			update( float dTime );
 	cocos2d::Rect	getRect();
+	bool			isFarAway();
 
 	CREATE_FUNC( Villager );
 private:

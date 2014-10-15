@@ -20,6 +20,7 @@ public:
 
 	void					initializeUILayer();
 	void					showStore();
+	void					hideStore();
 
 protected:
 

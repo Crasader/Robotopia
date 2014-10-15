@@ -326,3 +326,8 @@ void StageManager::showStore()
 {
 	m_CurrentWorldScene->getUILayer()->showStore();
 }
+
+void StageManager::hideStore()
+{
+	m_CurrentWorldScene->getUILayer()->hideStore();
+}

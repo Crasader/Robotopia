@@ -63,6 +63,7 @@ public:
 	void								setLastMonster(Monster* monster) {m_LastHitMonster = monster;}
 	void								savePlayerInfo();
 	void								showStore();
+	void								hideStore();
 
 private:
 	void								initData();

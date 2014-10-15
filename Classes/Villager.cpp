@@ -23,10 +23,13 @@ void Villager::update( float dTime )
 	//좌표 변경 처리
 	pos.x += m_Velocity.x*dTime;
 	pos.y += m_Velocity.y*dTime;
-
+	if( m_IsOnStore && isFarAway() )
+	{
+		m_IsOnStore = false;
+		GET_STAGE_MANAGER()->hideStore();
+	}
 	m_Velocity.y -= GRAVITY*dTime;
 	m_IsFlying = true;
-
 	this->setPosition( pos );
 }
 
@@ -47,11 +50,11 @@ void Villager::collisionOccured( InteractiveObject* enemy , Directions dir )
 				m_IsFlying = false;
 				m_Velocity.y = 0;
 			}
-			if( dir&DIR_LEFT || dir&DIR_RIGHT )
+			if( dir & DIR_LEFT || dir & DIR_RIGHT )
 			{
 				m_Velocity.x = 0;
 			}
-			if( dir&DIR_UP )
+			if( dir & DIR_UP )
 			{
 				m_Velocity.y = 0;
 			}
@@ -71,5 +74,17 @@ cocos2d::Rect Villager::getRect()
 	m_Height = m_MainSprite->getContentSize().height;
 
 	return InteractiveObject::getRect();
+}
+
+bool Villager::isFarAway()
+{
+	for( auto object : GET_STAGE_MANAGER()->getObjectsByRect( getRect() ) )
+	{
+		if( object->getType() == OT_PLAYER )
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
