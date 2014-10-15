@@ -268,7 +268,7 @@ WorldScene* StageManager::getWorldScene()
 bool StageManager::accumultateTime( float dTime )
 {
 	m_accTimeForShake += dTime;
-	int shakeDuration = 180.f;
+	int shakeDuration = 100.f;
 	if( m_accTimeForShake > shakeDuration )
 	{
 		getWorldScene()->getGameLayer()->isItShake( true );
