@@ -202,6 +202,13 @@ void Player::update(float dTime)
 
 	this->setPosition(pos);
 
+	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST1) == KS_PRESS)
+	{
+		FloorData f;
+		std::vector<StageData> s;
+		GET_DATA_MANAGER()->getShakeFloorData(1, &f, &s);
+	}
+
 	if (m_Info.hp <= 0 || m_Info.steam <= 0)
 	{
 		Director::getInstance()->end();

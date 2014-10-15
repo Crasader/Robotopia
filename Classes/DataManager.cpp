@@ -176,12 +176,6 @@ bool DataManager::initFloorData()
 					}
 				}
 
-				if (s > 2 && !(x + width + 1 <= m_FloorStageData[i][1].x || x - 1 >= m_FloorStageData[i][1].x + m_FloorStageData[i][1].width ||
-					y + height + 1 <= m_FloorStageData[i][1].y || y - 1 >= m_FloorStageData[i][1].y + m_FloorStageData[i][1].height))
-				{
-					passFlag = false;
-				}
-
 				for (int p = 1; p < s && passFlag; p++)
 				{
 
@@ -440,14 +434,6 @@ bool DataManager::getShakeFloorData(int currentFloor, FloorData* floorData, std:
 					y += m_FloorStageData[currentFloor - 1][nearRoom].height / MODULE_BASE_HEIGHT;
 					break;
 				}
-			}
-
-			if (s > 2 && !(x + width + 1 <= m_FloorStageData[currentFloor - 1][1].x ||
-				x - 1 >= m_FloorStageData[currentFloor - 1][1].x + m_FloorStageData[currentFloor - 1][1].width ||
-				y + height + 1 <= m_FloorStageData[currentFloor - 1][1].y ||
-				y - 1 >= m_FloorStageData[currentFloor - 1][1].y + m_FloorStageData[currentFloor - 1][1].height))
-			{
-				passFlag = false;
 			}
 
 			for (int p = 1; p < s && passFlag; p++)
