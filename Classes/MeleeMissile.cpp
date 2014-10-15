@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "MeleeMissile.h"
 
+
 USING_NS_CC;
 
 bool MeleeMissile::init()
@@ -26,6 +27,7 @@ bool MeleeMissile::init()
 	auto callback = CallFunc::create(CC_CALLBACK_0(MeleeMissile::isDestroyedToTureAfterAni, this));
 	m_MainSprite->runAction(Sequence::create(action, callback, NULL));
 	GET_EFFECT_MANAGER()->createSound(SO_MELEE_MISSILE, false);
+	
 
 	this->addChild(m_MainSprite);
 	return true;

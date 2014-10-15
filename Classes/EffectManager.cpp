@@ -16,6 +16,7 @@ bool EffectManager::init()
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM1.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("BGM2.mp3");
 	
+
 	return true;
 }
 
@@ -166,6 +167,7 @@ void EffectManager::createSound(SoundType selectedSound, bool isRepeated)
 		SimpleAudioEngine::getInstance()->playEffect("MeleeMissile1.wav", isRepeated);
 		break;
 	case SO_SAGA_BGM:
+
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("saga.mp3", isRepeated);
 		break;
 	case SO_JUMP:
