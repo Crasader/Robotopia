@@ -195,6 +195,7 @@ void GameLayer::update( float dTime )
 		{
 			View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
 		}
+
 		makeHash();
 		collisionCheck( dTime );
 		collisionProc( dTime );

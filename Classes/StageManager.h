@@ -73,7 +73,7 @@ public:
 	void								savePlayerInfo();
 	void								showStore();
 	void								hideStore();
-
+	void								rebirth();
 private:
 	void								initData();
 	void								loadPlayer( cocos2d::Point setPosition );
