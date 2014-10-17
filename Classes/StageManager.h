@@ -63,8 +63,8 @@ public:
 	void								setLastMonster(Monster* monster) {m_LastHitMonster = monster;}
 	void								savePlayerInfo();
 
-	int									getTransmitterStageNum(){return m_TrasmitterStageNum;};
-	void								setTransmitterStageNum(){m_TrasmitterStageNum = m_CurrentStageNum;};
+	int									getTransmitterStageNum(){return m_TransmitterStageNum;};
+	void								setTransmitterStageNum(){m_TransmitterStageNum = m_CurrentStageNum;};
 
 	void								showStore();
 	void								hideStore();
@@ -91,7 +91,7 @@ private:
 	WorldScene*							m_CurrentWorldScene;
 	PlayerInfo							m_PlayerInfo;
 
-	int									m_TrasmitterStageNum;
+	int									m_TransmitterStageNum;
 	int									m_CurrentStageNum;
 	int									m_CurrentFloorNum;
 	bool								m_IsAvailable;

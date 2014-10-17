@@ -14,7 +14,7 @@ bool StageManager::init()
 {
 	m_CurrentWorldScene = nullptr;
 	m_LastHitMonster = nullptr;
-	m_TrasmitterStageNum = 0;
+	m_TransmitterStageNum = 0;
 	m_CurrentStageNum = 0;
 	m_CurrentFloorNum = 0;
 	m_PlayerInfo = PlayerInfo();
@@ -27,7 +27,7 @@ bool StageManager::initFloor( int floorNum )
 {
 	initData();
 	m_CurrentFloorNum = floorNum;
-	m_TrasmitterStageNum = 0;
+	m_TransmitterStageNum = 0;
 	GET_DATA_MANAGER()->getFloorData( m_CurrentFloorNum , &m_FloorData , &m_CurrentFloorStagesData );
 	makeStaticData();
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
