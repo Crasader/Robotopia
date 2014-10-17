@@ -16,6 +16,7 @@ struct PlayerInfo
 	int			maxSteam;
 	int			speed;
 	int			gear;
+	float		attackSpeed;
 	
 	PlayerInfo()
 	{
@@ -25,6 +26,7 @@ struct PlayerInfo
 		steam = maxSteam;
 		speed = 200;
 		gear = 2;
+		attackSpeed = 0.05f;
 	}
 
 	~PlayerInfo()
@@ -81,6 +83,7 @@ private:
 	bool		m_IsCrashed;
 	float		m_ActiveFlyingTime;
 	float		m_HitTime;
+	float		m_GearWeight[4];
 
 	void		startInvincible();
 	void		endInvincible(cocos2d::Ref* sender);

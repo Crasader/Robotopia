@@ -19,13 +19,14 @@ bool Player::init()
 
 	m_Type = OT_PLAYER;
 	m_Info.speed = 200;
+	m_Info.attackSpeed = 0.05f;
 	m_AnimationNum = PS_STATE_NUM;
 	m_Animations[PS_STAND] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_STAND);
 	m_Animations[PS_WALK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_WALK);
 	m_Animations[PS_JUMP] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_JUMP);
 	m_Animations[PS_HIT] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_JUMP);
-	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK,0.05f);
-	m_Animations[PS_ATTACK2] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK, 1.0f);
+	m_Animations[PS_ATTACK] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK, m_Info.attackSpeed);
+	m_Animations[PS_ATTACK2] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_ATTACK, m_Info.attackSpeed * 20);
 	m_IsRightDirection = true;
 	m_AttackEnd = false;
 	m_IsActiveFly = false;
@@ -41,6 +42,10 @@ bool Player::init()
 	m_ActiveFlyingTime = 0;
 	m_AttackNum = 0;
 	m_HitTime = 0;
+
+	m_GearWeight[1] = 0.8;
+	m_GearWeight[2] = 1;
+	m_GearWeight[3] = 1.2;
 
 	m_MainSprite = Sprite::create();
 
@@ -130,13 +135,13 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 			{
 				m_IsRightDirection = true;
 				m_MainSprite->setFlippedX(false);
-				m_Velocity.x = -300;
+				m_Velocity.x = -300/m_GearWeight[m_Info.gear];
 			}
 			else
 			{
 				m_IsRightDirection = false;
 				m_MainSprite->setFlippedX(true);
-				m_Velocity.x = 300;
+				m_Velocity.x = 300 / m_GearWeight[m_Info.gear];
 			}
 			m_Velocity.y = 200;
 			GET_EFFECT_MANAGER()->createSound(SO_PLAYER_AND_MONSTER_COLLISION, false);
@@ -154,15 +159,15 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 				{
 					m_IsRightDirection = true;
 					m_MainSprite->setFlippedX(false);
-					m_Velocity.x = -300;
+					m_Velocity.x = -300 / m_GearWeight[m_Info.gear];
 				}
 				else
 				{
 					m_IsRightDirection = false;
 					m_MainSprite->setFlippedX(true);
-					m_Velocity.x = 300;
+					m_Velocity.x = 300 / m_GearWeight[m_Info.gear];
 				}
-				m_Velocity.y = 200;
+				m_Velocity.y = 200 / m_GearWeight[m_Info.gear];
 			}
 		}
 		break;
@@ -172,21 +177,21 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 			if (m_State != PS_HIT && !m_IsInvincible)
 			{
 				m_IsCrashed = true;
-				this->setHp(-5, true);
+				this->setHp(-5 / m_GearWeight[m_Info.gear], true);
 				changeState(PS_HIT);
 				if (m_Velocity.x > 0)
 				{
 					m_IsRightDirection = true;
 					m_MainSprite->setFlippedX(false);
-					m_Velocity.x = -300;
+					m_Velocity.x = -300 / m_GearWeight[m_Info.gear];
 				}
 				else
 				{
 					m_IsRightDirection = false;
 					m_MainSprite->setFlippedX(true);
-					m_Velocity.x = 300;
+					m_Velocity.x = 300 / m_GearWeight[m_Info.gear];
 				}
-				m_Velocity.y = 200;
+				m_Velocity.y = 200 / m_GearWeight[m_Info.gear];
 			}
 		}
 	}
@@ -271,17 +276,24 @@ void Player::act(float dTime)
 		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR1) == KS_PRESS)
 		{
 			setGear(1);
+			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear]);
+			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear] * 20);
 		}
 		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR2) == KS_PRESS)
 		{
 			setGear(2);
+			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear]);
+			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear] * 20);
 		}
 		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR3) == KS_PRESS)
 		{
 			setGear(3);
+			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear]);
+			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear] * 20);
 		}
 		if (GET_INPUT_MANAGER()->getKeyState(KC_SET_TRANSMITTER) == KS_PRESS)
 		{
+			GET_STAGE_MANAGER()->setTrasmitterStageNum();
 		}
 	}
 
@@ -293,14 +305,14 @@ void Player::act(float dTime)
 
 		if (leftState == KS_HOLD)
 		{
-			m_Velocity.x = -m_Info.speed;
+			m_Velocity.x = -m_Info.speed * m_GearWeight[m_Info.gear];
 			m_IsRightDirection = false;
 			m_MainSprite->setFlippedX(true);
 
 		}
 		else if (rightState == KS_HOLD)
 		{
-			m_Velocity.x = m_Info.speed;
+			m_Velocity.x = m_Info.speed* m_GearWeight[m_Info.gear];
 			m_IsRightDirection = true;
 			m_MainSprite->setFlippedX(false);
 		}
@@ -313,14 +325,14 @@ void Player::act(float dTime)
 		{
 			m_IsActiveFly = true;
 
-			if (m_Velocity.y <= -300)
+			if (m_Velocity.y <= -300 * m_GearWeight[m_Info.gear])
 			{
-				m_Velocity.y = -300;
+				m_Velocity.y = -300 * m_GearWeight[m_Info.gear];
 			}
 
-			if (m_Velocity.y <= 300)
+			if (m_Velocity.y <= 300 * m_GearWeight[m_Info.gear])
 			{
-				m_Velocity.y += 1500 * dTime;
+				m_Velocity.y += 1500 * m_GearWeight[m_Info.gear] * dTime;
 			}
 
 			int x = rand() % (int)(m_Width / 1.5);
@@ -343,7 +355,7 @@ void Player::act(float dTime)
 			{
 				changeState(PS_ATTACK2);
 				m_Velocity.x = 0;
-				m_Info.steam-=2500;
+				m_Info.steam -= 2500 * m_GearWeight[m_Info.gear];
 			}
 		}
 
@@ -361,7 +373,7 @@ void Player::act(float dTime)
 				if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP) == KS_HOLD)
 				{
 					GET_EFFECT_MANAGER()->createSound(SO_JUMP, false);
-					m_Velocity.y = 600;
+					m_Velocity.y = 600 * m_GearWeight[m_Info.gear];
 				}
 				else if (leftState == KS_HOLD)
 				{
@@ -405,26 +417,26 @@ void Player::act(float dTime)
 
 			if (m_IsRightDirection)
 			{
-				object->setAttribute(true, 1, 0, 3);
+				object->setAttribute(true, 1, 0, 3 * m_GearWeight[m_Info.gear]);
 			}
 			else
 			{
-				object->setAttribute(true, -1, 0, 3);
+				object->setAttribute(true, -1, 0, 3 * m_GearWeight[m_Info.gear]);
 			}
 			m_Info.steam -= 150;
 		}
-		else
+		else if(m_State == PS_ATTACK2)
 		{
 			auto object = (NewLinearMissile*)gameLayer->addObject(OT_NEW_LINEAR_MISSILE, pos);
 
 
 			if (m_IsRightDirection)
 			{
-				object->setAttribute(true, 200, 0, 8);
+				object->setAttribute(true, 200, 0, 8 * m_GearWeight[m_Info.gear]);
 			}
 			else
 			{
-				object->setAttribute(true, -200, 0, 8);
+				object->setAttribute(true, -200, 0, 8 * m_GearWeight[m_Info.gear]);
 			}
 		}
 
@@ -445,7 +457,7 @@ void Player::reset(float dTime)
 	if (m_IsActiveFly)
 	{
 		m_ActiveFlyingTime += dTime;
-		m_Info.steam -= dTime * 800;
+		m_Info.steam -= dTime * 800 * m_GearWeight[m_Info.gear];
 	}
 
 	if (m_ActiveFlyingTime >= 1)
@@ -494,7 +506,7 @@ void Player::setHp(int hp, bool isRelative /*= false*/)
 
 	if (isRelative)
 	{
-		changeHp += m_Info.hp;
+		changeHp += m_Info.hp / m_GearWeight[m_Info.gear];
 	}
 	if (changeHp > m_Info.maxHp)
 	{
@@ -509,7 +521,7 @@ void Player::setSteam(int steam, bool isRelative /*= false*/)
 
 	if (isRelative)
 	{
-		changeSteam += m_Info.steam;
+		changeSteam += m_Info.steam / m_GearWeight[m_Info.gear];
 	}
 	if (changeSteam > m_Info.maxSteam)
 	{
