@@ -63,8 +63,8 @@ public:
 	void								setLastMonster(Monster* monster) {m_LastHitMonster = monster;}
 	void								savePlayerInfo();
 
-	int									getTrasmitterStageNum(){return m_TrasmitterStageNum;};
-	void								setTrasmitterStageNum(){m_TrasmitterStageNum = m_CurrentStageNum;};
+	int									getTransmitterStageNum(){return m_TrasmitterStageNum;};
+	void								setTransmitterStageNum(){m_TrasmitterStageNum = m_CurrentStageNum;};
 
 	void								showStore();
 	void								hideStore();
