@@ -289,7 +289,7 @@ bool DataManager::initFloorData()
 					{
 						if (closedDirection == 15)
 						{
-							moduleIdx = rand() % (m_ModuleSize[closedDirection] - 2);
+							moduleIdx = rand() % (m_ModuleSize[closedDirection] - 4);
 						}
 						else
 						{
