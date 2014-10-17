@@ -332,6 +332,8 @@ void StageManager::initData()
 			m_WorldScenes[stageNum]->release();
 		}
 	}
+	m_WorldScenes.clear();
+	m_CurrentFloorStagesData.clear();
 	m_VisitedStageNums.clear();
 }
 
