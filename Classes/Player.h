@@ -15,7 +15,8 @@ struct PlayerInfo
 	int			maxHp;
 	int			maxSteam;
 	int			speed;
-
+	int			gear;
+	
 	PlayerInfo()
 	{
 		maxHp = 100;
@@ -23,6 +24,7 @@ struct PlayerInfo
 		maxSteam = 20000;
 		steam = maxSteam;
 		speed = 200;
+		gear = 2;
 	}
 
 	~PlayerInfo()
@@ -46,6 +48,7 @@ public:
 	int						getSteam() const { return m_Info.steam; }
 	int						getMaxHp() const { return m_Info.maxHp; }
 	int						getMaxSteam() const { return m_Info.maxSteam; }
+	int						getGear() const { return m_Info.gear; }
 	bool					isInvincible() const{ return m_IsInvincible; }
 	PlayerInfo				getInfo() const { return m_Info; }
 	void					setHp(int hp, bool isRelative = false);
@@ -54,6 +57,8 @@ public:
 	void					setMaxSteam(int maxSteam, bool isRelative = false){ if (!isRelative) m_Info.maxSteam = maxSteam; else m_Info.maxSteam += maxSteam; }
 	void					setInfo(PlayerInfo info) { m_Info = info; }
 	void					setSpeed(int speed, bool isRelative = false){ if (!isRelative)m_Info.speed = speed; else m_Info.speed += speed; }
+	void					setGear(int gear){if (gear >= 1 && gear <= 3) m_Info.gear = gear;}
+
 private:
 	enum State
 	{

@@ -79,6 +79,7 @@ void KeyStateSentinel::update(float dTime)
 
 void KeyStateSentinel::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
+	cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE;
 	GET_INPUT_MANAGER()->m_KeyStates[(int)keyCode] = KS_PRESS;
 }
 

@@ -20,6 +20,10 @@ enum KeyCode
 	KC_CHARACTER_UI = cocos2d::EventKeyboard::KeyCode::KEY_C,
 	KC_RETURN = cocos2d::EventKeyboard::KeyCode::KEY_ENTER,
 	KC_MAP = cocos2d::EventKeyboard::KeyCode::KEY_M,
+	KC_GEAR1 = cocos2d::EventKeyboard::KeyCode::KEY_1,
+	KC_GEAR2 = cocos2d::EventKeyboard::KeyCode::KEY_2,
+	KC_GEAR3 = cocos2d::EventKeyboard::KeyCode::KEY_3,
+	KC_SET_TRANSMITTER = cocos2d::EventKeyboard::KeyCode::KEY_T,
 };
 
 enum KeyState

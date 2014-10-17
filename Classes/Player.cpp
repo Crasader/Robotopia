@@ -202,13 +202,6 @@ void Player::update(float dTime)
 
 	this->setPosition(pos);
 
-	if (GET_INPUT_MANAGER()->getKeyState(KC_TEST1) == KS_PRESS)
-	{
-		FloorData f;
-		std::vector<StageData> s;
-		GET_DATA_MANAGER()->getShakeFloorData(1, &f, &s);
-	}
-
 	if (m_Info.hp <= 0 || m_Info.steam <= 0)
 	{
 		Director::getInstance()->end();
@@ -273,6 +266,24 @@ cocos2d::Rect Player::getRect()
 
 void Player::act(float dTime)
 {
+	if (m_State == PS_STAND)
+	{
+		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR1) == KS_PRESS)
+		{
+			setGear(1);
+		}
+		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR2) == KS_PRESS)
+		{
+			setGear(2);
+		}
+		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR3) == KS_PRESS)
+		{
+			setGear(3);
+		}
+		if (GET_INPUT_MANAGER()->getKeyState(KC_SET_TRANSMITTER) == KS_PRESS)
+		{
+		}
+	}
 
 	if (m_State != PS_ATTACK2)
 	{
