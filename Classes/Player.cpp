@@ -147,13 +147,14 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 			GET_EFFECT_MANAGER()->createSound(SO_PLAYER_AND_MONSTER_COLLISION, false);
 		}
 		break;
+	case OT_NEW_LINEAR_MISSILE:
 	case OT_AIMING_MISSILE:
-		if (!((AimingMissile*)enemy)->IsPlayerMissile())
+		if (!((Missile*)enemy)->IsPlayerMissile())
 		{
 			if (m_State != PS_HIT && !m_IsInvincible)
 			{
 				m_IsCrashed = true;
-				this->setHp(-((AimingMissile*)enemy)->getDamage(), true);
+				this->setHp(-((Missile*)enemy)->getDamage(), true);
 				changeState(PS_HIT);
 				if (m_Velocity.x > 0)
 				{

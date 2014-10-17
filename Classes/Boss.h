@@ -16,7 +16,18 @@ private:
 	enum State
 	{
 		BO_STAND,
+		BO_ATTACK,
+		BO_MOVE,
+		BO_JUMP,
 		BO_STATE_NUM,
+	};
+
+	enum AIState
+	{
+		BA_WAIT,
+		BA_ATTACK,
+		BA_RUSH,
+		BA_STATE_NUM,
 	};
 
 	void		changeState(State state);
@@ -24,5 +35,11 @@ private:
 	void		update(float dTime);
 
 	State		m_State;
+	AIState		m_AIState;
 	bool		m_IsRightDirection;
+	bool		m_IsGotoBottom;
+	bool		m_IsAttackEnd;
+	float		m_WaitTime;
+	int			m_AttackNum;
+	int			m_RushNum;
 };
