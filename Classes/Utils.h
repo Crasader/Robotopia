@@ -36,6 +36,7 @@ enum ObjectType
 	OT_ITEM_LEG = 16,
 	OT_TRAP = 17,
 	OT_FLOOR_GATEWAY = 18,
+	OT_BOSS = 19,
 };
 
 

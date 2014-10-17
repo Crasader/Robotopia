@@ -266,7 +266,18 @@ bool DataManager::initFloorData()
 
 					int moduleIdx;
 
-					if (i == 0 || i == 3)
+					if (i == floorNum - 1)
+					{
+						if (s == 1)
+						{
+							moduleIdx = 5;
+						}
+						else
+						{
+							moduleIdx = 6;
+						}
+					}
+					else if (i == 0)
 					{
 						moduleIdx = 3;
 					}
@@ -350,7 +361,7 @@ bool DataManager::initFloorData()
 
 bool DataManager::getFloorData(int currentFloor, FloorData* floorData, std::vector<StageData>* stageData)
 {
-	if (m_FloorData.find(currentFloor) == m_FloorData.end())
+	if (m_FloorData.find(currentFloor - 1) == m_FloorData.end())
 	{
 		return false;
 	}
