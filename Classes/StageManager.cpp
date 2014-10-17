@@ -347,6 +347,7 @@ void StageManager::hideStore()
 
 void StageManager::rebirth()
 {
+	m_CurrentFloorNum = 0;
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
 		m_WorldScenes[stageNum]->release();

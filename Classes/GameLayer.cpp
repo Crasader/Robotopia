@@ -6,6 +6,7 @@
 #include "LandFloorGateway.h"
 #include "RushMonster.h"
 #include "BatMonster.h"
+#include "Boss.h"
 #include "Villager.h"
 #include "NewLinearMissile.h"
 #include "AimingMissile.h"
@@ -145,6 +146,10 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		case OT_FLOOR_GATEWAY:
 			object = LandFloorGateway::create();
 			zOrder = GameLayer::ZOrder::LAND_OBJECT;
+			break;
+		case OT_BOSS:
+			object = Boss::create();
+			zOrder = GameLayer::ZOrder::GAME_OBJECT;
 			break;
 		default:
 			return nullptr;

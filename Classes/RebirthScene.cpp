@@ -1,4 +1,5 @@
 #include "RebirthScene.h"
+#include "UILayer.h"
 #include "LoadingScene.h"
 
 USING_NS_CC;
@@ -11,12 +12,9 @@ cocos2d::Scene* RebirthScene::createScene()
 
 bool RebirthScene::init()
 {
-	auto layer = Layer::create();
+	auto layer = UILayer::create();
+	layer->initializeRobotSetting();
 	this->addChild( layer );
-	auto playButton = MenuItemImage::create( "menu_play0.png" , "menu_play1.png" ,
-											 CC_CALLBACK_1( RebirthScene::menuCallback , this ) );
-	auto menu = Menu::create( playButton , NULL );
-	layer->addChild( menu );
 	return true;
 }
 
