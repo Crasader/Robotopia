@@ -30,16 +30,20 @@ private:
 		BA_STATE_NUM,
 	};
 
-	void		changeState(State state);
-	void		endAnimation(cocos2d::Ref* sender);
-	void		update(float dTime);
-
-	State		m_State;
-	AIState		m_AIState;
-	bool		m_IsRightDirection;
-	bool		m_IsGotoBottom;
-	bool		m_IsAttackEnd;
-	float		m_WaitTime;
-	int			m_AttackNum;
-	int			m_RushNum;
+	void				changeState(State state);
+	void				endAnimation(cocos2d::Ref* sender);
+	void				update(float dTime);
+	
+	State				m_State;
+	AIState				m_AIState;
+	bool				m_IsRightDirection;
+	bool				m_IsGotoBottom;
+	bool				m_IsAttackEnd;
+	bool				m_IsRushing;
+	float				m_WaitTime;
+	float				m_RushTime;
+	float				m_RushTargetTime;
+	cocos2d::Point		m_StartPos;
+	int					m_AttackNum;
+	int					m_RushNum;
 };

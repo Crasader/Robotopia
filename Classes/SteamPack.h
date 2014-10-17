@@ -11,6 +11,7 @@ public:
 	void		  setAttribute(float setSteamVolume);
 	CREATE_FUNC(SteamPack);
 private:
-	float m_SteamVolume;
+	float	m_SteamVolume;
+	bool	m_IsSteampack;
 	
 };

@@ -40,7 +40,22 @@ void ItemLeg::collisionOccured(InteractiveObject* enemy, Directions dir)
 
 		if (enemy->getType() == OT_PLAYER && !m_IsDestroyed)
 		{
-			GET_STAGE_MANAGER()->getPlayer()->setSpeed(m_AddSpeed, true);
+			int type = rand() % 3;
+			switch (type)
+			{
+			case 0:
+				GET_STAGE_MANAGER()->getPlayer()->setSpeed(m_AddSpeed, true);
+				break;
+			case 1:
+				GET_STAGE_MANAGER()->getPlayer()->setMaxHp(10, true);
+				GET_STAGE_MANAGER()->getPlayer()->setHp(10, true);
+				break;
+			case 2:
+				GET_STAGE_MANAGER()->getPlayer()->setMaxSteam(1000, true);
+				GET_STAGE_MANAGER()->getPlayer()->setSteam(1000, true);
+				break;
+			}
+			
 			GET_EFFECT_MANAGER()->createSound(SO_STEAM_GET, false);
 			m_IsDestroyed = true;
 		}

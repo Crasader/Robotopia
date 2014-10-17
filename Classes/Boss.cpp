@@ -37,8 +37,10 @@ bool Boss::init()
 	m_WaitTime = 0;
 	m_AttackNum = 0;
 	m_RushNum = 0;
+	m_RushTime = 0;
+	m_RushTargetTime = 0;
 
-	m_MoveSpeed = 300;
+	m_MoveSpeed = 500;
 	m_IsOnGravity = true;
 	m_IsGotoBottom = false;
 	m_IsAttackEnd = false;
@@ -47,6 +49,7 @@ bool Boss::init()
 	m_Info.hp = m_Info.maxHp;
 
 	m_IsRightDirection = false;
+	m_IsRushing = false;
 	m_MainSprite->setFlippedX(true);
 
 	return true;
@@ -86,6 +89,13 @@ void Boss::endAnimation(cocos2d::Ref* sender)
 			changeState(BO_JUMP);
 			m_IsGotoBottom = true;
 		}
+
+		if (m_AttackNum >= 10)
+		{
+			m_IsOverlapable = true;
+			m_AIState = BA_RUSH;
+			m_AttackNum = 0;
+		}
 	}
 }
 
@@ -97,7 +107,17 @@ void Boss::update(float dTime)
 	pos.y += m_Velocity.y*dTime;
 	this->setPosition(pos);
 
-	m_Velocity.y -= GRAVITY*dTime;
+	if (m_AIState != BA_RUSH)
+	{
+		m_Velocity.y -= GRAVITY*dTime;
+	}
+	else
+	{
+		int x = rand() % (int)(m_Width / 1.5);
+		Point pos = Point(this->getPosition().x + x - m_Width / 2, this->getPosition().y - m_Height / 2);
+
+		GET_EFFECT_MANAGER()->createEffectSelectedSizeByUser(ET_ROUND_SMOKE, Rect(pos.x, pos.y, -1, -1), 1);
+	}
 
 
 	switch (m_AIState)
@@ -106,6 +126,8 @@ void Boss::update(float dTime)
 		m_WaitTime += dTime;
 		if (m_WaitTime >= 3)
 		{
+			m_StartPos = getPosition();
+			m_StartPos.y += 30;
 			m_WaitTime = 0;
 			m_AIState = BA_ATTACK;
 		}
@@ -135,6 +157,62 @@ void Boss::update(float dTime)
 		}
 		break;
 	case BA_RUSH:
+		if (!m_IsRushing)
+		{
+			m_WaitTime += dTime;
+			if (m_WaitTime >= 1)
+			{
+				auto pos = GET_STAGE_MANAGER()->getPlayer()->getPosition();
+
+				if (m_RushNum >= 5)
+				{
+					pos = m_StartPos;
+				}
+				auto myPos = getPosition();
+				float length = sqrt((pos.x - myPos.x)*(pos.x - myPos.x) + (pos.y - myPos.y)*(pos.y - myPos.y));
+
+				m_RushTargetTime = length / m_MoveSpeed;
+				m_Velocity.x = (pos.x - myPos.x) / m_RushTargetTime;
+				if (m_Velocity.x <= 0)
+				{
+					m_IsRightDirection = false;
+					m_MainSprite->setFlippedX(true);
+				}
+				else
+				{
+					m_IsRightDirection = true;
+					m_MainSprite->setFlippedX(false);
+				}
+				m_Velocity.y = (pos.y - myPos.y) / m_RushTargetTime;
+
+				m_IsRushing = true;
+				m_WaitTime = 0;
+			}
+		}
+		else
+		{
+			m_RushTime += dTime;
+
+			if (m_RushTime >= m_RushTargetTime)
+			{
+				m_Velocity.x = 0;
+				m_Velocity.y = 0;
+				m_RushTime = 0;
+				m_IsRushing = false;
+				if (m_RushNum == 5)
+				{
+					m_IsOverlapable = false;
+					m_IsRightDirection = false;
+					m_MainSprite->setFlippedX(true);
+					m_AIState = BA_ATTACK;
+					m_RushNum = 0;
+				}
+				else
+				{
+					m_RushNum++;
+				}
+			}
+		}
 		break;
 	}
 
@@ -142,8 +220,6 @@ void Boss::update(float dTime)
 	Rect targetRect = SpriteFrameCache::getInstance()->getSpriteFrameByName("player_attack2.png")->getRect();
 	if (nowRect.origin.x == targetRect.origin.x &&nowRect.origin.y == targetRect.origin.y&& !m_IsAttackEnd)
 	{
-		m_AttackNum++;
-
 		Point pos = this->getPosition();
 
 		pos.y += 3;
@@ -176,7 +252,7 @@ void Boss::collisionOccured(InteractiveObject* enemy, Directions dir)
 	switch (enemy->getType())
 	{
 	case OT_FLOOR:
-		if (!m_IsGotoBottom)
+		if (!m_IsGotoBottom && m_AIState != BA_RUSH)
 		{
 			if (dir & DIR_DOWN)
 			{
@@ -190,22 +266,25 @@ void Boss::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		break;
 	case OT_BLOCK:
-		if (dir & DIR_DOWN)
+		if (m_AIState != BA_RUSH)
 		{
-			m_IsFlying = false;
-			m_Velocity.y = 0;
-			if (m_State == BO_JUMP)
+			if (dir & DIR_DOWN)
 			{
-				changeState(BO_STAND);
+				m_IsFlying = false;
+				m_Velocity.y = 0;
+				if (m_State == BO_JUMP)
+				{
+					changeState(BO_STAND);
+				}
 			}
-		}
-		if (dir&DIR_LEFT || dir&DIR_RIGHT)
-		{
-			m_Velocity.x = 0;
-		}
-		if (dir&DIR_UP)
-		{
-			m_Velocity.y = 0;
+			if (dir&DIR_LEFT || dir&DIR_RIGHT)
+			{
+				m_Velocity.x = 0;
+			}
+			if (dir&DIR_UP)
+			{
+				m_Velocity.y = 0;
+			}
 		}
 		break;
 	case OT_LINEAR_MISSILE:

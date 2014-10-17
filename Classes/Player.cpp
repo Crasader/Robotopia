@@ -158,14 +158,14 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 				changeState(PS_HIT);
 				if (m_Velocity.x > 0)
 				{
-					m_IsRightDirection = true;
-					m_MainSprite->setFlippedX(false);
+					m_IsRightDirection = false;
+					m_MainSprite->setFlippedX(true);
 					m_Velocity.x = -300 / m_GearWeight[m_Info.gear];
 				}
 				else
 				{
-					m_IsRightDirection = false;
-					m_MainSprite->setFlippedX(true);
+					m_IsRightDirection = true;
+					m_MainSprite->setFlippedX(false);
 					m_Velocity.x = 300 / m_GearWeight[m_Info.gear];
 				}
 				m_Velocity.y = 200 / m_GearWeight[m_Info.gear];
@@ -194,6 +194,27 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 				}
 				m_Velocity.y = 200 / m_GearWeight[m_Info.gear];
 			}
+		}
+		break;
+	case OT_BOSS:
+		if (m_State != PS_HIT && !m_IsInvincible)
+		{
+			m_IsCrashed = true;
+			this->setHp(-5 / m_GearWeight[m_Info.gear], true);
+			changeState(PS_HIT);
+			if (m_Velocity.x > 0)
+			{
+				m_IsRightDirection = true;
+				m_MainSprite->setFlippedX(false);
+				m_Velocity.x = -300 / m_GearWeight[m_Info.gear];
+			}
+			else
+			{
+				m_IsRightDirection = false;
+				m_MainSprite->setFlippedX(true);
+				m_Velocity.x = 300 / m_GearWeight[m_Info.gear];
+			}
+			m_Velocity.y = 200 / m_GearWeight[m_Info.gear];
 		}
 	}
 }

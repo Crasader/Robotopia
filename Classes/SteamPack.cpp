@@ -20,13 +20,19 @@ bool SteamPack::init()
 	m_MainSprite->runAction(RepeatForever::create(Animate::create(animation)));
 	m_MainSprite->setScale(0.5f);
 	this->addChild(m_MainSprite);
+	m_IsSteampack = rand() % 2;
+
+	if (!m_IsSteampack)
+	{
+		m_MainSprite->setColor(Color3B(128, 64, 64));
+	}
 
 	/*timeval tv;
 	cocos2d::gettimeofday(&tv, nullptr);
 	m_CreateTimeInMilli = (tv.tv_usec / 1000) + tv.tv_sec * 1000;
 	m_RemainGroundTime = 10;*/
 	/////////////////
-	m_SteamVolume = 3500;
+	m_SteamVolume = 3000;
 	////////////////
 
 	return true;
@@ -44,7 +50,14 @@ void SteamPack::collisionOccured(InteractiveObject* enemy, Directions dir)
 
 		if (enemy->getType() == OT_PLAYER && !m_IsDestroyed)
 		{
-			GET_STAGE_MANAGER()->getPlayer()->setSteam(m_SteamVolume, true);
+			if (m_IsSteampack)
+			{
+				GET_STAGE_MANAGER()->getPlayer()->setSteam(m_SteamVolume, true);
+			}
+			else
+			{
+				GET_STAGE_MANAGER()->getPlayer()->setHp(10, true);
+			}
 			GET_EFFECT_MANAGER()->createSound(SO_STEAM_GET, false);
 			m_IsDestroyed = true;
 		}
