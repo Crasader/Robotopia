@@ -26,7 +26,7 @@ cocos2d::Animation* ResourceManager::createAnimation(const char* format, int sta
 {
 	auto animation = Animation::create();
 	animation->setDelayPerUnit(delay);
-
+	
 	for (size_t i = 0; i < frameNum; ++i)
 	{
 		auto frame = SpriteFrameCache::getInstance()->

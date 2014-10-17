@@ -8,7 +8,7 @@ bool Gear::init()
 	m_Gear1->setScale(0.4f);
 	m_Gear1->setPosition(Point(50, 50));
 	
-	m_Gear2 = Sprite::create("Gear2_On.png");
+	m_Gear2 = Sprite::create("Gear2_Off.png");
 	m_Gear2->setScale(0.4f);
 	m_Gear2->setPosition(Point(50, 100));
 
@@ -25,7 +25,7 @@ bool Gear::init()
 
 void Gear::update(float dTime)
 {
-	/*auto player = GET_STAGE_MANAGER()->getPlayer();
+	auto player = GET_STAGE_MANAGER()->getPlayer();
 	if (player != nullptr)
 	{
 		auto playerInfo = player->getInfo();
@@ -47,5 +47,5 @@ void Gear::update(float dTime)
 			m_Gear3->setTexture(Director::getInstance()->getTextureCache()->addImage("Gear3_On.png"));
 			break;
 		}
-	}*/
+	}
 }

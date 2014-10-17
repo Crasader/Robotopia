@@ -134,7 +134,11 @@ void Minimap::drawRoomRect(cocos2d::DrawNode* bgRect, int scale)
 
 						//플레이어 현재 방 색깔 구분
 						int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
-						if (currentRoom == roomNum)
+// 						if (roomNum == GET_STAGE_MANAGER()->getTrasmitterStageNum)
+// 						{
+// 							roomRect->drawPolygon(points, 4, Color4F(Color4B(134, 134, 134, 100)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
+// 						}
+						if (roomNum == currentRoom)
 						{
 							roomRect->drawPolygon(points, 4, Color4F(Color4B(212, 24, 26, 100)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
 						}
@@ -211,15 +215,7 @@ Rect Minimap::getWinOpenRect()
 
 Rect Minimap::getWinCloseRect()
 {
-	//Sprite* sprMM = (Sprite*)this->getChildByTag(MINIMAP);
 	Sprite* sprMMWinContainer = (Sprite*)this->getChildByTag(MINIMAP_WIN);
-// 	Sprite* sprMMWinOpen = (Sprite*)sprMM->getChildByTag(MINIMAP_WIN_OPEN);
-// 	Sprite* sprMMWinClose = (Sprite*)sprMMWinContainer->getChildByTag(MINIMAP_WIN_CLOSE);
-// 
-// 	Point buttonPosition = sprMMWinClose->getPosition();
 	auto triggerRect = Rect(sprMMWinContainer->getPosition().x + sprMMWinContainer->getContentSize().width / 2 - 30, sprMMWinContainer->getPosition().y + sprMMWinContainer->getContentSize().height / 2 - 30, 30, 30);
 	return triggerRect;
 }
-
-// 	Rect testRect = Rect(0, 0, 50, 50);
-// 	m_MinimapFrame = SpriteFrame::create("Minimap_Frame.png", testRect);

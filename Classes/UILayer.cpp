@@ -1,4 +1,4 @@
-#include "UILayer.h"
+﻿#include "UILayer.h"
 
 #include "Minimap.h"
 #include "WorldMenu.h"
@@ -205,6 +205,5 @@ void UILayer::showStore()
 
 void UILayer::hideStore()
 {
-	m_StoreWindow->hideStore();
-	m_EquipmentWindow->hideCharacterWindow();
+
 }
