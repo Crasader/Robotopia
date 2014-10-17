@@ -1,5 +1,5 @@
 #include "MenuScene.h"
-#include "LoadingScene.h"
+#include "RebirthScene.h"
 
 USING_NS_CC;
 
@@ -16,12 +16,12 @@ bool MenuScene::init()
 	auto playButton = MenuItemImage::create( "menu_play0.png" , "menu_play1.png" , 
 											 CC_CALLBACK_1( MenuScene::menuCallback , this ) );
 	auto menu = Menu::create( playButton , NULL );
-	this->addChild( menu );
+	layer->addChild( menu );
 	return true;
 }
 
 void MenuScene::menuCallback( Ref* sender )
 {
-	Director::getInstance()->replaceScene(LoadingScene::createScene());
+	Director::getInstance()->replaceScene(RebirthScene::createScene());
 }
 

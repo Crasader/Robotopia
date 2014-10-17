@@ -9,6 +9,17 @@
 USING_NS_CC;
 
 float StageManager::m_accTimeForShake = 0.f;
+StageManager::StageManager()
+{
+}
+
+StageManager::~StageManager()
+{
+	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
+	{
+		m_WorldScenes[stageNum]->release();
+	}
+}
 
 bool StageManager::init()
 {
@@ -333,3 +344,4 @@ void StageManager::hideStore()
 {
 	m_CurrentWorldScene->getUILayer()->hideStore();
 }
+
