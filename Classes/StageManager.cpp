@@ -1,10 +1,10 @@
-
 #include <string>
 #include "GameManager.h"
 #include "GameLayer.h"
 #include "UILayer.h"
 #include "InteractiveObject.h"
 #include "StageManager.h"
+#include "RebirthScene.h"
 
 USING_NS_CC;
 
@@ -343,5 +343,10 @@ void StageManager::showStore()
 void StageManager::hideStore()
 {
 	m_CurrentWorldScene->getUILayer()->hideStore();
+}
+
+void StageManager::rebirth()
+{
+	Director::getInstance()->replaceScene( RebirthScene::createScene() );
 }
 
