@@ -24,4 +24,5 @@ private:
 	void		update(float dTime);
 
 	State		m_State;
+	bool		m_IsRightDirection;
 };

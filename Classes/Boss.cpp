@@ -18,12 +18,12 @@ bool Boss::init()
 	m_Animations[BO_STAND] = GET_RESOURCE_MANAGER()->createAnimation(AT_PLAYER_STAND);
 
 
-	m_MainSprite = Sprite::create("");
+	m_MainSprite = Sprite::create();
 
 	m_Width = m_MainSprite->getContentSize().width;
 	m_Height = m_MainSprite->getContentSize().height;
 
-	m_MainSprite->setScale(2);
+	m_MainSprite->setColor(Color3B(185, 30, 30));
 
 	this->addChild(m_MainSprite);
 
@@ -34,6 +34,9 @@ bool Boss::init()
 
 	m_Info.maxHp = 2200;
 	m_Info.hp = m_Info.maxHp;
+
+	m_IsRightDirection = false;
+	m_MainSprite->setFlippedX(true);
 
 	return true;
 }
@@ -63,7 +66,13 @@ void Boss::endAnimation(cocos2d::Ref* sender)
 
 void Boss::update(float dTime)
 {
+	auto pos = getPosition();
+	
+	pos.x += m_Velocity.x*dTime;
+	pos.y += m_Velocity.y*dTime;
+	this->setPosition(pos);
 
+	m_Velocity.y -= GRAVITY*dTime;
 }
 
 void Boss::collisionOccured(InteractiveObject* enemy, Directions dir)
@@ -107,4 +116,15 @@ void Boss::collisionOccured(InteractiveObject* enemy, Directions dir)
 		}
 		break;
 	}
+}
+
+cocos2d::Rect Boss::getRect()
+{
+	m_Width = m_MainSprite->getContentSize().width;
+	m_Height = m_MainSprite->getContentSize().height;
+
+	Point pos = this->getPosition();
+	Point Anchor = this->getAnchorPoint();
+
+	return Rect(pos.x - Anchor.x*m_Width, pos.y - Anchor.y*m_Height, m_Width, m_Height);
 }
