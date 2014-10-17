@@ -248,5 +248,6 @@ void UILayer::onMouseUp2(cocos2d::Event *event)
 	{
 
 	}
+	}
 }
 
