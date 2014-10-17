@@ -62,6 +62,10 @@ public:
 	Monster*							getLastMonster() {return m_LastHitMonster; }
 	void								setLastMonster(Monster* monster) {m_LastHitMonster = monster;}
 	void								savePlayerInfo();
+
+	int									getTrasmitterStageNum(){return m_TrasmitterStageNum;};
+	void								setTrasmitterStageNum(){m_TrasmitterStageNum = m_CurrentStageNum;};
+
 	void								showStore();
 	void								hideStore();
 
@@ -75,11 +79,8 @@ private:
 	Monster*							m_LastHitMonster;
 	static float						m_accTimeForShake;
 	//플레이어 세이브 로드하는 과정에 잘못된 플레이어 참조를 막기위한 플래그
-	bool								m_IsAvailable;
 	cocos2d::Size						m_BoxSize;
 	std::vector<int>					m_VisitedStageNums;
-	int									m_CurrentStageNum;
-	int									m_CurrentFloorNum;
 	std::vector<StageData>				m_CurrentFloorStagesData;
 	FloorData							m_FloorData;
 	//성능이슈로 정적 배열로 데이터 따로 관리합니다.
@@ -87,4 +88,10 @@ private:
 	std::map<int, WorldScene*>			m_WorldScenes;
 	WorldScene*							m_CurrentWorldScene;
 	PlayerInfo							m_PlayerInfo;
+
+	int									m_TrasmitterStageNum;
+	int									m_CurrentStageNum;
+	int									m_CurrentFloorNum;
+	bool								m_IsAvailable;
+
 };

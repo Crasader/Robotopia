@@ -223,6 +223,17 @@
             <filename>trap11.png</filename>
             <filename>trap12.png</filename>
             <filename>trap23.png</filename>
+            <filename>FloorGateway0.png</filename>
+            <filename>FloorGateway1.png</filename>
+            <filename>FloorGateway2.png</filename>
+            <filename>FloorGateway3.png</filename>
+            <filename>FloorGateway4.png</filename>
+            <filename>FloorGateway5.png</filename>
+            <filename>FloorGateway6.png</filename>
+            <filename>FloorGateway7.png</filename>
+            <filename>FloorGateway8.png</filename>
+            <filename>FloorGateway9.png</filename>
+            <filename>FloorGateway10.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
