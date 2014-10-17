@@ -331,7 +331,6 @@ void StageManager::initData()
 			m_WorldScenes[stageNum]->release();
 		}
 	}
-	m_CurrentFloorStagesData.clear();
 	m_VisitedStageNums.clear();
 }
 
@@ -347,6 +346,10 @@ void StageManager::hideStore()
 
 void StageManager::rebirth()
 {
+	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
+	{
+		m_WorldScenes[stageNum]->release();
+	}
 	Director::getInstance()->replaceScene( RebirthScene::createScene() );
 }
 
