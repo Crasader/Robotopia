@@ -82,17 +82,64 @@ void Minimap::update(float dTime)
 void Minimap::drawRoomRect(cocos2d::DrawNode* bgRect, int scale)
 {
 	m_VisitedRoom = GET_STAGE_MANAGER()->getVisitedStageNums();
+	int transMitterRoom = GET_STAGE_MANAGER()->getTrasmitterStageNum();
+
 	for (int j = 0; j < m_fd.height; ++j)
 	{
 		for (int i = 0; i < m_fd.width; ++i)
 		{
 			int roomNum = GET_STAGE_MANAGER()->getFloorDataByIdx(i, j);
-			for (auto room : m_VisitedRoom)
+			if (transMitterRoom != 0 && roomNum == transMitterRoom)
 			{
-				if (room == roomNum)
+				auto roomRect = DrawNode::create();
+				Vec2 vertices1 = Vec2(0, scale);
+				Vec2 vertices2 = Vec2(scale, scale);
+				Vec2 vertices3 = Vec2(scale, 0);
+				Vec2 vertices4 = Vec2(0, 0);
+
+				if (i != 0 && i != m_fd.width && j != 0 && j != m_fd.height)
 				{
-					int roomNum = GET_STAGE_MANAGER()->getFloorDataByIdx(i, j);
-					if (roomNum != 0)
+					if (roomNum != GET_STAGE_MANAGER()->getFloorDataByIdx(i - 1, j)) //Left
+					{
+						vertices1.x += ROOM_RECT_MARGIN;
+						vertices4.x += ROOM_RECT_MARGIN;
+					}
+					if (roomNum != GET_STAGE_MANAGER()->getFloorDataByIdx(i, j + 1)) //Up
+					{
+						vertices1.y -= ROOM_RECT_MARGIN;
+						vertices2.y -= ROOM_RECT_MARGIN;
+					}
+					if (roomNum != GET_STAGE_MANAGER()->getFloorDataByIdx(i + 1, j)) //Right
+					{
+						vertices2.x -= ROOM_RECT_MARGIN;
+						vertices3.x -= ROOM_RECT_MARGIN;
+					}
+					if (roomNum != GET_STAGE_MANAGER()->getFloorDataByIdx(i, j - 1)) //Down
+					{
+						vertices3.y += ROOM_RECT_MARGIN;
+						vertices4.y += ROOM_RECT_MARGIN;
+					}
+				}
+
+				Vec2 points[] =
+				{
+					vertices1,
+					vertices2,
+					vertices3,
+					vertices4
+				};
+
+				roomRect->drawPolygon(points, 4, Color4F(Color4B(134, 134, 134, 100)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
+				roomRect->setAnchorPoint(Point(0, 0));
+				roomRect->setPosition(Point(i * scale, j * scale));
+
+				bgRect->addChild(roomRect, 25);
+			}
+			else
+			{
+				for (auto room : m_VisitedRoom)
+				{
+					if (room == roomNum)
 					{
 						auto roomRect = DrawNode::create();
 						Vec2 vertices1 = Vec2(0, scale);
@@ -134,10 +181,7 @@ void Minimap::drawRoomRect(cocos2d::DrawNode* bgRect, int scale)
 
 						//플레이어 현재 방 색깔 구분
 						int currentRoom = GET_STAGE_MANAGER()->getCurStageNum();
-// 						if (roomNum == GET_STAGE_MANAGER()->getTrasmitterStageNum)
-// 						{
-// 							roomRect->drawPolygon(points, 4, Color4F(Color4B(134, 134, 134, 100)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
-// 						}
+
 						if (roomNum == currentRoom)
 						{
 							roomRect->drawPolygon(points, 4, Color4F(Color4B(212, 24, 26, 100)), 0, Color4F(0.2f, 0.7f, 0.3f, 1));
