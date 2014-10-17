@@ -209,7 +209,7 @@ void Player::update(float dTime)
 
 	if (m_Info.hp <= 0 || m_Info.steam <= 0)
 	{
-		Director::getInstance()->end();
+		GET_STAGE_MANAGER()->rebirth();
 	}
 	
 	//키 입력이 따른 상태 처리
