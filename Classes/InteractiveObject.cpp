@@ -21,9 +21,6 @@ bool InteractiveObject::init()
 	m_IsFlying = false;
 	m_IsOverlapable = true;
 	m_IsMovable = true;
-	EventMouse* a;
-
-	a->getMouseButton();
 
 	return true;
 }
