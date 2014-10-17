@@ -18,7 +18,9 @@ public:
 
 	CREATE_FUNC( UILayer );
 
+	void					initializeRobotSetting();
 	void					initializeUILayer();
+	
 	void					showStore();
 	void					hideStore();
 
@@ -37,6 +39,7 @@ protected:
 
 	void								onMouseDown(cocos2d::Event *event);
 	void								onMouseUp(cocos2d::Event *event);
+	void								onMouseUp2(cocos2d::Event *event);
 	void								onMouseMove(cocos2d::Event *event);
 	void								onMouseScroll(cocos2d::Event *event);
 };

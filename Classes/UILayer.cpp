@@ -98,6 +98,23 @@ void UILayer::update(float dTime)
 	}
 }
 
+void UILayer::initializeRobotSetting()
+{
+	auto winSize = Director::getInstance()->getWinSize();
+	m_WinWidth = winSize.width;
+	m_WinHeight = winSize.height;
+
+	auto mouseListener = EventListenerMouse::create();
+	mouseListener->onMouseUp = CC_CALLBACK_1(UILayer::onMouseUp2, this);
+	
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+
+	auto robotSettingSprite = Sprite::create("RobotSetting.png");
+	robotSettingSprite->setAnchorPoint(Point(0, 0));
+	robotSettingSprite->setPosition(Point(0, 0));
+	this->addChild(robotSettingSprite);
+}
+
 void UILayer::initializeUILayer()
 {
 	auto winSize = Director::getInstance()->getWinSize();
@@ -207,3 +224,29 @@ void UILayer::hideStore()
 {
 
 }
+
+void UILayer::onMouseUp2(cocos2d::Event *event)
+{
+	auto ev = static_cast<EventMouse*>(event);
+
+	auto button = ev->getMouseButton();
+	Point clickPoint;
+	clickPoint.x = ev->getCursorX();
+	clickPoint.y = m_WinHeight + ev->getCursorY();
+
+	switch (button)
+	{
+	case MOUSE_BUTTON_LEFT:
+	{
+							  auto confirmButton = Rect(m_WinWidth - 120, 0, 120, 80);
+							  if (confirmButton.containsPoint(clickPoint))
+							  {
+								  GET_STAGE_MANAGER()->loadingGame();
+							  }
+	}
+	case MOUSE_BUTTON_RIGHT:
+	{
+
+	}
+}
+
