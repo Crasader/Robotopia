@@ -276,24 +276,24 @@ void Player::act(float dTime)
 		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR1) == KS_PRESS)
 		{
 			setGear(1);
-			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear]);
-			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear] * 20);
+			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed / (m_GearWeight[m_Info.gear]*1.2));
+			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed / m_GearWeight[m_Info.gear] * 20);
 		}
 		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR2) == KS_PRESS)
 		{
 			setGear(2);
-			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear]);
-			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear] * 20);
+			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed / m_GearWeight[m_Info.gear]);
+			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed / m_GearWeight[m_Info.gear] * 20);
 		}
 		if (GET_INPUT_MANAGER()->getKeyState(KC_GEAR3) == KS_PRESS)
 		{
 			setGear(3);
-			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear]);
-			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed*m_GearWeight[m_Info.gear] * 20);
+			m_Animations[PS_ATTACK]->setDelayPerUnit(m_Info.attackSpeed / (m_GearWeight[m_Info.gear]*1.2));
+			m_Animations[PS_ATTACK2]->setDelayPerUnit(m_Info.attackSpeed / m_GearWeight[m_Info.gear] * 20);
 		}
 		if (GET_INPUT_MANAGER()->getKeyState(KC_SET_TRANSMITTER) == KS_PRESS)
 		{
-			GET_STAGE_MANAGER()->setTrasmitterStageNum();
+			GET_STAGE_MANAGER()->setTransmitterStageNum();
 		}
 	}
 
