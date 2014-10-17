@@ -18,6 +18,9 @@ struct StageData
 	int x, y;
 	int width, height;
 	std::map<int, ObjectType> data;
+
+	StageData(){}
+	~StageData(){}
 };
 
 struct FloorData
@@ -25,6 +28,9 @@ struct FloorData
 	int width, height;
 	int stageNum;
 	std::vector<int> data;
+
+	FloorData(){}
+	~FloorData(){}
 };
 
 class DataManager

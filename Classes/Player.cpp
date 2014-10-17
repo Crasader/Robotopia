@@ -355,7 +355,7 @@ void Player::act(float dTime)
 			{
 				changeState(PS_ATTACK2);
 				m_Velocity.x = 0;
-				m_Info.steam -= 2500 * m_GearWeight[m_Info.gear];
+				m_Info.steam -= 2500 * ((m_Info.gear == 2) ? m_GearWeight[m_Info.gear] : m_GearWeight[m_Info.gear] * 1.2);
 			}
 		}
 
@@ -373,7 +373,7 @@ void Player::act(float dTime)
 				if (GET_INPUT_MANAGER()->getKeyState(KC_JUMP) == KS_HOLD)
 				{
 					GET_EFFECT_MANAGER()->createSound(SO_JUMP, false);
-					m_Velocity.y = 600 * m_GearWeight[m_Info.gear];
+					m_Velocity.y = 500 * m_GearWeight[m_Info.gear];
 				}
 				else if (leftState == KS_HOLD)
 				{
@@ -423,7 +423,7 @@ void Player::act(float dTime)
 			{
 				object->setAttribute(true, -1, 0, 3 * m_GearWeight[m_Info.gear]);
 			}
-			m_Info.steam -= 150;
+			m_Info.steam -= 150 * ((m_Info.gear == 2) ? m_GearWeight[m_Info.gear] : m_GearWeight[m_Info.gear] * 1.2);
 		}
 		else if(m_State == PS_ATTACK2)
 		{
@@ -457,7 +457,7 @@ void Player::reset(float dTime)
 	if (m_IsActiveFly)
 	{
 		m_ActiveFlyingTime += dTime;
-		m_Info.steam -= dTime * 800 * m_GearWeight[m_Info.gear];
+		m_Info.steam -= dTime * 800 * ((m_Info.gear == 2) ? m_GearWeight[m_Info.gear] : m_GearWeight[m_Info.gear] * 1.2);
 	}
 
 	if (m_ActiveFlyingTime >= 1)
