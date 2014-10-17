@@ -19,11 +19,7 @@ KeyStateSentinel* InputManager::receiveKeyboardData(WorldScene* scene)
 
 bool InputManager::init()
 {
-	for (EventKeyboard::KeyCode i = EventKeyboard::KeyCode::KEY_NONE; i < EventKeyboard::KeyCode::KEY_PLAY; i = (EventKeyboard::KeyCode)((int)i + 1))
-	{
-		m_PrevKeyStates[(int)i] = KS_NONE;
-		m_KeyStates[(int)i] = KS_NONE;
-	}
+	initKeyState();
 
 	return true;
 }
@@ -46,6 +42,15 @@ bool KeyStateSentinel::init()
 KeyStateSentinel* InputManager::receiveInputData(WorldScene* scene)
 {
 	return receiveKeyboardData(scene);
+}
+
+void InputManager::initKeyState()
+{
+	for (EventKeyboard::KeyCode i = EventKeyboard::KeyCode::KEY_NONE; i < EventKeyboard::KeyCode::KEY_PLAY; i = (EventKeyboard::KeyCode)((int)i + 1))
+	{
+		m_PrevKeyStates[(int)i] = KS_NONE;
+		m_KeyStates[(int)i] = KS_NONE;
+	}
 }
 
 void KeyStateSentinel::update(float dTime)

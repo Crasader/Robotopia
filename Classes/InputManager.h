@@ -41,6 +41,7 @@ class InputManager
 
 public:	
 	bool													init();
+	void													initKeyState();
 	KeyState												getKeyState(KeyCode keyCode);
 	KeyStateSentinel*										receiveInputData(WorldScene* scene);	//호출하면 모든 인풋 정보가 자동으로 업데이트됨.
 	KeyStateSentinel*										receiveKeyboardData(WorldScene* scene); //호출하면 키보드 정보가 자동으로 업데이트됨.
