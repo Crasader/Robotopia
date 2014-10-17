@@ -74,6 +74,7 @@ public:
 	void								showStore();
 	void								hideStore();
 	void								rebirth();
+	void								loadingGame();
 
 private:
 	void								initData();

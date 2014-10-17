@@ -5,6 +5,7 @@
 #include "InteractiveObject.h"
 #include "StageManager.h"
 #include "RebirthScene.h"
+#include "LoadingScene.h"
 
 USING_NS_CC;
 
@@ -351,5 +352,10 @@ void StageManager::rebirth()
 		m_WorldScenes[stageNum]->release();
 	}
 	Director::getInstance()->replaceScene( RebirthScene::createScene() );
+}
+
+void StageManager::loadingGame()
+{
+	Director::getInstance()->replaceScene( LoadingScene::createScene() );
 }
 
