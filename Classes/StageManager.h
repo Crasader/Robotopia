@@ -78,11 +78,13 @@ private:
 private:
 	Monster*							m_LastHitMonster;
 	static float						m_accTimeForShake;
+
 	//플레이어 세이브 로드하는 과정에 잘못된 플레이어 참조를 막기위한 플래그
 	cocos2d::Size						m_BoxSize;
 	std::vector<int>					m_VisitedStageNums;
 	std::vector<StageData>				m_CurrentFloorStagesData;
 	FloorData							m_FloorData;
+
 	//성능이슈로 정적 배열로 데이터 따로 관리합니다.
 	StaticStageData						m_StaticStageDatas[MAX_STAGE_NUM];
 	std::map<int, WorldScene*>			m_WorldScenes;
@@ -93,5 +95,4 @@ private:
 	int									m_CurrentStageNum;
 	int									m_CurrentFloorNum;
 	bool								m_IsAvailable;
-
 };

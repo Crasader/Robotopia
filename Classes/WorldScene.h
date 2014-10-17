@@ -19,7 +19,6 @@ public:
 	UILayer*					getUILayer() {return m_UILayer; }
 	CREATE_FUNC( WorldScene );
 
-	cocos2d::Node node;
 private:
 	enum ZOrder
 	{
