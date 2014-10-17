@@ -37,9 +37,17 @@ protected:
 
 	bool								m_IsMouseDown;
 
+	bool								m_DragOn;
+	cocos2d::Sprite*					m_DragItem;
+	cocos2d::Point						m_prevPoint;
+	cocos2d::Sprite*					m_TestItem;
+
+	cocos2d::Rect						getRectWithVertice(float v1, float v2, float v3, float v4);
 	void								onMouseDown(cocos2d::Event *event);
+	void								onMouseDown2(cocos2d::Event *event);
 	void								onMouseUp(cocos2d::Event *event);
 	void								onMouseUp2(cocos2d::Event *event);
 	void								onMouseMove(cocos2d::Event *event);
+	void								onMouseMove2(cocos2d::Event *event);
 	void								onMouseScroll(cocos2d::Event *event);
 };

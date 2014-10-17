@@ -7,6 +7,8 @@
 #include "Gear.h"
 #include "StoreWindow.h"
 
+#define DROPSPACE 15
+
 USING_NS_CC;
 
 bool UILayer::init()
@@ -106,6 +108,8 @@ void UILayer::initializeRobotSetting()
 
 	auto mouseListener = EventListenerMouse::create();
 	mouseListener->onMouseUp = CC_CALLBACK_1(UILayer::onMouseUp2, this);
+	mouseListener->onMouseDown = CC_CALLBACK_1(UILayer::onMouseDown2, this);
+	mouseListener->onMouseMove = CC_CALLBACK_1(UILayer::onMouseMove2, this);
 	
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 
@@ -113,6 +117,37 @@ void UILayer::initializeRobotSetting()
 	robotSettingSprite->setAnchorPoint(Point(0, 0));
 	robotSettingSprite->setPosition(Point(0, 0));
 	this->addChild(robotSettingSprite);
+
+	auto testItem1 = Sprite::create("TestItem1.png");
+	testItem1->setAnchorPoint(Point(0, 1));
+	testItem1->setPosition(Point(122, 212));
+	testItem1->setOpacity(170);
+	this->addChild(testItem1);
+
+	auto testItem2 = Sprite::create("TestItem1.png");
+	testItem2->setAnchorPoint(Point(0, 1));
+	testItem2->setPosition(Point(547, 213));
+	testItem2->setOpacity(170);
+	this->addChild(testItem2);
+
+	auto testItem3 = Sprite::create("TestItem2.png");
+	testItem3->setAnchorPoint(Point(0, 1));
+	testItem3->setPosition(Point(122, 275));
+	testItem3->setOpacity(170);
+	this->addChild(testItem3);
+
+	auto testItem4 = Sprite::create("TestItem2.png");
+	testItem4->setAnchorPoint(Point(0, 1));
+	testItem4->setPosition(Point(612, 352));
+	testItem4->setOpacity(170);
+	this->addChild(testItem4);
+
+	m_TestItem = Sprite::create("TestItem3.png");
+	m_TestItem->setAnchorPoint(Point(0.5, 0.5));
+	m_TestItem->setPosition(Point(142, 192));
+	this->addChild(m_TestItem);
+
+	m_DragOn = false;
 }
 
 void UILayer::initializeUILayer()
@@ -157,6 +192,7 @@ void UILayer::onMouseUp(Event *event)
 	Point clickPoint;
 	clickPoint.x = ev->getCursorX();
 	clickPoint.y = m_WinHeight + ev->getCursorY();
+
 
 	switch (button)
 	{
@@ -225,6 +261,46 @@ void UILayer::hideStore()
 
 }
 
+void UILayer::onMouseDown2(cocos2d::Event *event)
+{
+	auto ev = static_cast<EventMouse*>(event);
+
+	auto button = ev->getMouseButton();
+	Point clickPoint;
+	clickPoint.x = ev->getCursorX();
+	clickPoint.y = m_WinHeight + ev->getCursorY();
+	
+	switch (button)
+	{
+		case MOUSE_BUTTON_LEFT:
+		{
+			Point currentPosition = m_TestItem->getPosition();
+			if (clickPoint.x >= currentPosition.x - 20 && clickPoint.x <= currentPosition.x + 20 && clickPoint.y >= currentPosition.y - 20 && clickPoint.y <= currentPosition.y + 20)
+			{
+				m_prevPoint = Point(142, 192);
+				m_DragOn = true;
+			}
+		}
+	}
+}
+
+void UILayer::onMouseMove2(cocos2d::Event *event)
+{
+	auto ev = static_cast<EventMouse*>(event);
+
+	Point mousePosition;
+	mousePosition.x = ev->getCursorX();
+	mousePosition.y = m_WinHeight + ev->getCursorY();
+	
+	if (m_DragOn == true)
+	{
+		if (mousePosition.x < m_WinWidth && mousePosition.x > 0 && mousePosition.y > 0 && mousePosition.y < m_WinHeight)
+		{
+			m_TestItem->setPosition(Point(mousePosition.x, mousePosition.y));
+		}
+	}
+}
+
 void UILayer::onMouseUp2(cocos2d::Event *event)
 {
 	auto ev = static_cast<EventMouse*>(event);
@@ -234,20 +310,28 @@ void UILayer::onMouseUp2(cocos2d::Event *event)
 	clickPoint.x = ev->getCursorX();
 	clickPoint.y = m_WinHeight + ev->getCursorY();
 
+	if (m_DragOn == true)
+	{
+		if (clickPoint.x >= 547 - DROPSPACE && clickPoint.x <= 587 + DROPSPACE && clickPoint.y >= 173 - DROPSPACE && clickPoint.y <= 213 + DROPSPACE)
+		{
+			m_TestItem->setPosition(Point(567, 193));
+		}
+		else
+		{
+			m_TestItem->setPosition(m_prevPoint);
+		}
+	}
+
 	switch (button)
 	{
-	case MOUSE_BUTTON_LEFT:
-	{
-							  auto confirmButton = Rect(m_WinWidth - 120, 0, 120, 80);
-							  if (confirmButton.containsPoint(clickPoint))
-							  {
-								  GET_STAGE_MANAGER()->loadingGame();
-							  }
+		case MOUSE_BUTTON_LEFT:
+		{
+			auto confirmButton = Rect(m_WinWidth - 120, 0, 120, 80);
+			if (confirmButton.containsPoint(clickPoint))
+			{
+				GET_STAGE_MANAGER()->loadingGame();
+			}
+		}
 	}
-	case MOUSE_BUTTON_RIGHT:
-	{
-
-	}
-	}
+	m_DragOn = false;
 }
-
