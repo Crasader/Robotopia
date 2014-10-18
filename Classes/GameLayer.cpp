@@ -27,6 +27,7 @@ USING_NS_CC;
 #define MAX_GATEWAY_NUM 100
 #define	MAX_OBJECT_NUM 1024
 #define MAX_COLLISION_INFO 1024
+#define BUFFER_AREA_SIZE 100
 
 bool GameLayer::init()
 {
@@ -35,24 +36,25 @@ bool GameLayer::init()
 		return false;
 	}
 
-	m_Player = nullptr;
 	m_IsShaking = false;
 	m_IsVisited = false;
-	m_InteractiveObjects.clear();
+	m_Objects.clear();
+	m_ActiveObjects.clear();
 	m_CollisionInformations.clear();
 	m_AddObjects.clear();
 	m_Gateways.clear();
 	memset( m_MapData , 0 , sizeof( ObjectType )*MAX_POSITION_NUM );
-	memset( m_ObjectPositionsHash , 0 , sizeof( std::vector<InteractiveObject*> )*MAX_POSITION_NUM );
+	memset( m_PassiveObjectsHash , 0 , sizeof( std::vector<InteractiveObject*> )*MAX_POSITION_NUM );
 
 	m_Gateways.reserve( MAX_GATEWAY_NUM );
-	m_InteractiveObjects.reserve( MAX_OBJECT_NUM );
 	m_CollisionInformations.reserve( MAX_COLLISION_INFO );
+
 	return true;
 }
 
 bool GameLayer::initWorldFromData( Vec2 boxNum , Size boxSize , std::map<int , ObjectType> MapData , char* BGpath )
 {
+	m_IsInit = true;
 	m_BoxWidthNum = boxNum.x;
 	m_BoxHeightNum = boxNum.y;
 	m_BoxSize = boxSize;
@@ -67,7 +69,7 @@ bool GameLayer::initWorldFromData( Vec2 boxNum , Size boxSize , std::map<int , O
 		}
 	}
 	addMovingBackground( BGpath );
-
+	m_IsInit = false;
 	return true;
 }
 
@@ -154,9 +156,25 @@ InteractiveObject*	 GameLayer::addObject( ObjectType type , Point position )
 		default:
 			return nullptr;
 	}
+
+	object->retain();
 	object->setAnchorPoint( Point( 0.5 , 0.5 ) );
 	object->setPosition( position );
-	m_AddObjects.push_back( object );
+
+	Vec2 posIdx = positionToIdxOfStageData( position );
+	int xIdx = posIdx.x;
+	int yIdx = posIdx.y;
+	int hashIdx = xIdx + m_BoxWidthNum*yIdx;
+
+	if( isVisible(position))
+	{
+		m_PassiveObjectsHash[hashIdx].push_back( object );
+	}
+	else
+	{
+		m_ActiveObjects.push_back( object );
+	}
+
 	this->addChild( object , zOrder );
 	return object;
 }
@@ -201,35 +219,55 @@ void GameLayer::update( float dTime )
 			View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
 		}
 
-		makeHash();
+		makeCollisionHashTable();
 		collisionCheck( dTime );
 		collisionProc( dTime );
-		for( auto object : m_InteractiveObjects )
+		for( auto& object : m_ActiveObjects )
 		{
 			object->update( dTime );
 		}
+		checkActive();
 		removeObjects();
 		m_CollisionInformations.clear();
-		m_InteractiveObjects.insert( m_InteractiveObjects.end() , m_AddObjects.begin() , m_AddObjects.end() );
-		m_AddObjects.clear();
 	}
+}
+
+void GameLayer::makeCollisionHashTable()
+{
+	int x = 0;
+	int y = 0;
+	int sum = 0;
+	for( auto object : m_ActiveObjects )
+	{
+		x = positionToIdxOfStageData( object->getPosition() ).x;
+		y = positionToIdxOfStageData( object->getPosition() ).y;
+		sum = y*m_BoxWidthNum + x;
+		if( sum >= 0 && sum < m_BoxHeightNum*m_BoxWidthNum )
+		{
+			m_CollisionCheckHash[sum].push_back( object );
+		}
+	}
+}
+
+void GameLayer::findActiveObjects()
+{
+
 }
 
 void GameLayer::collisionCheck(float dTime)
 {
-	for( auto subject: m_InteractiveObjects )
+	for( auto& subject: m_ActiveObjects )
 	{
 		if( subject->getType() != OT_BLOCK && subject->getType() != OT_FLOOR && subject->getType() != OT_TRAP )
 		{
 			collisionCheckbyHash( subject , dTime );
 		}
 	}
-	memset( m_ObjectPositionsHash , 0 , sizeof( std::vector<InteractiveObject*> )*MAX_POSITION_NUM );
 }
 
 void GameLayer::collisionProc( float dTime )
 {
-	for( auto collisionInfo : m_CollisionInformations )
+	for( auto& collisionInfo : m_CollisionInformations )
 	{
 		collisionInfo.subject->collisionOccured( collisionInfo.object , collisionInfo.directions );
 	}
@@ -249,11 +287,11 @@ void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
 	{
 		for( int yIdx = curY - 2; yIdx < curY + 3; ++yIdx )
 		{
-			int sum = xIdx*yIdx + xIdx;
+			int sum = yIdx*m_BoxWidthNum + xIdx;
 			if( sum < m_BoxWidthNum*m_BoxHeightNum && sum >= 0 )
 			{
-				auto objects = m_ObjectPositionsHash[sum];
-				for( auto object : objects )
+				auto objects = m_CollisionCheckHash[sum];
+				for( auto& object : objects )
 				{
 					if( object != subject )
 					{
@@ -269,33 +307,24 @@ void GameLayer::collisionCheckbyHash( InteractiveObject* subject, float dTime )
 	}
 }
 
-void GameLayer::makeHash()
+
+void GameLayer::checkActive()
 {
-	int x = 0;
-	int y = 0;
-	int sum = 0;
-	for( auto object : m_InteractiveObjects )
-	{
-		x = positionToIdxOfStageData( object->getPosition() ).x;
-		y = positionToIdxOfStageData( object->getPosition() ).y;
-		sum = x*y + x;
-		if( sum >= 0 && sum < m_BoxHeightNum*m_BoxWidthNum )
-		{
-			m_ObjectPositionsHash[sum].push_back(object);
-		}
-	}
+	addToActiveObjects();
+	addToObjectHash();
 }
+
 
 
 void GameLayer::removeObjects()
 {
-	for( auto objectIter = m_InteractiveObjects.begin(); objectIter != m_InteractiveObjects.end(); )
+	for( auto objectIter = m_Objects.begin(); objectIter != m_Objects.end(); )
 	{
 		auto object = *objectIter;
 		
 		if( (object->isDestroyed() || isOutOfStageMap( object->getPosition() )) && object->getType() != OT_PLAYER )
 		{
-			objectIter = m_InteractiveObjects.erase( objectIter );
+			objectIter = m_Objects.erase( objectIter );
 			removeChild( object );
 		}
 		else
@@ -311,12 +340,10 @@ void GameLayer::removeObject( InteractiveObject* deleteObject )
 	{
 		m_Player = nullptr;
 	}
-	auto deleteIter = std::find(m_InteractiveObjects.begin() , m_InteractiveObjects.end() , deleteObject );
-	if( deleteIter != m_InteractiveObjects.end() )
-	{
-		m_InteractiveObjects.erase(deleteIter);
-		removeChild( deleteObject );
-	}
+	m_ActiveObjects.remove(deleteObject);
+	removeChild( deleteObject );
+	//문제있을지도
+	deleteObject->release(); 
 }
 
 void GameLayer::addMovingBackground( char* BGpath )
@@ -340,11 +367,8 @@ void GameLayer::addMovingBackground( char* BGpath )
 cocos2d::Vec2 GameLayer::positionToIdxOfStageData( cocos2d::Point position )
 {
 	Vec2 curPosIdx = Vec2(-1 , -1); 
-	if( m_MapRect.containsPoint( position ) )
-	{
-		curPosIdx.x = position.x / m_BoxSize.width;
-		curPosIdx.y = position.y / m_BoxSize.height;
-	}
+	curPosIdx.x = position.x / m_BoxSize.width;
+	curPosIdx.y = position.y / m_BoxSize.height;
 	return curPosIdx;
 }
 
@@ -352,7 +376,7 @@ std::vector<InteractiveObject*> GameLayer::getObjectsByPosition( cocos2d::Point 
 {
 	std::vector<InteractiveObject*> collectObjects;
 
-	for( auto object : m_InteractiveObjects )
+	for( auto& object : m_ActiveObjects )
 	{
 		if( object->getRect().containsPoint( position ) )
 		{
@@ -366,7 +390,7 @@ std::vector<InteractiveObject*> GameLayer::getObjectsByRect( cocos2d::Rect check
 {
 	std::vector<InteractiveObject*> collectObjects;
 
-	for( auto object : m_InteractiveObjects )
+	for( auto& object : m_ActiveObjects )
 	{
 		if( checkRect.intersectsRect( object->getRect() ) )
 		{
@@ -388,9 +412,81 @@ bool GameLayer::isOutOfStageMap( cocos2d::Point checkPosition )
 
 void GameLayer::initGateways()
 {
-	for( auto gateway : m_Gateways )
+	for( auto& gateway : m_Gateways )
 	{
 		gateway->findNextStage();
+	}
+}
+
+bool GameLayer::isVisible( Vec2 position )
+{
+	return getCurWinRect().containsPoint( position ) ? true : false;
+}
+
+bool GameLayer::isVisibleByIdx( int xIdx , int yIdx )
+{
+	
+	return getCurWinRectByIdx().containsPoint( Vec2( xIdx , yIdx ) ) ? true : false;
+}
+
+cocos2d::Rect GameLayer::getCurWinRect()
+{
+	Size winSize = Director::getInstance()->getWinSize();
+	Rect winRect = Rect( -this->getPosition().x - BUFFER_AREA_SIZE , -this->getPosition().y - BUFFER_AREA_SIZE ,
+						 winSize.width + BUFFER_AREA_SIZE * 2 , winSize.height + BUFFER_AREA_SIZE * 2 );
+
+	return winRect;
+}
+
+cocos2d::Rect GameLayer::getCurWinRectByIdx()
+{
+	Size winSize = Director::getInstance()->getWinSize();
+	Vec2 Idx = positionToIdxOfStageData( this->getPosition() );
+	Rect winRectByIdx = Rect( Idx.x - 3 , Idx.y - 3 , winSize.width / m_BoxSize.width + 6 , winSize.height / m_BoxSize.height + 6 );
+	return winRectByIdx;
+}
+
+
+void GameLayer::addToObjectHash()
+{
+	for( auto objectIter = m_ActiveObjects.begin(); objectIter != m_ActiveObjects.end(); )
+	{
+		auto object = *objectIter;
+		Vec2 position = object->getPosition();
+		if( !isVisible( position ) )
+		{
+			Vec2 idx = positionToIdxOfStageData( position );
+			int sum = idx.x + idx.y*m_BoxWidthNum;
+			m_PassiveObjectsHash[sum].push_back( object );
+			objectIter = m_ActiveObjects.erase( objectIter );
+		}
+		else
+		{
+			++objectIter;
+		}
+	}
+}
+
+void GameLayer::addToActiveObjects()
+{
+	Rect winRectIdx = getCurWinRectByIdx();
+	for( int xIdx = winRectIdx.origin.x; xIdx < winRectIdx.origin.x + winRectIdx.size.width; ++xIdx )
+	{
+		for( int yIdx = winRectIdx.origin.y; yIdx < winRectIdx.origin.y + winRectIdx.size.height; ++yIdx )
+		{
+			int sum = xIdx + yIdx*m_BoxWidthNum;
+			if( sum < 0 || sum > m_BoxHeightNum*m_BoxWidthNum )
+				continue;
+			std::vector<InteractiveObject*> objects = m_PassiveObjectsHash[sum];
+			if( !objects.empty() )
+			{
+				for( auto& object : objects )
+				{
+					m_ActiveObjects.push_back( object );
+				}
+				m_PassiveObjectsHash[sum].clear();
+			}
+		}
 	}
 }
 

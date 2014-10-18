@@ -4,6 +4,7 @@
 #include "Player.h"
 
 #define MAX_POSITION_NUM 1024*10
+#define	MAX_ACTIVE_BOX_NUM 1024*10
 
 class LandGateway;
 class InteractiveObject;
@@ -39,12 +40,23 @@ private:
 	InteractiveObject*				addObjectByMapdata( ObjectType type , int xIdx , int yIdx );
 	InteractiveObject*				addObjectByMapdata( int xIdx , int yIdx );
 
-	void							makeHash();
+	void							findActiveObjects();
+	void							makeCollisionHashTable();
+	void							checkActive();
 	void							removeObjects();
 
 	void							collisionCheck( float dTime );
 	void							collisionCheckbyHash( InteractiveObject* subject , float dTime );
 	void							collisionProc( float dTime );
+	
+	cocos2d::Rect					getCurWinRect();
+	cocos2d::Rect					getCurWinRectByIdx();
+
+	bool							isVisible(cocos2d::Vec2 position);
+	bool							isVisibleByIdx( int xIdx , int yIdx );
+
+	void							addToObjectHash();
+	void							addToActiveObjects();
 
 	enum ZOrder
 	{
@@ -69,16 +81,19 @@ private:
 
 	bool											m_IsVisited;
 	bool											m_IsShaking;
+	bool											m_IsInit;
 	cocos2d::Rect									m_MapRect;
 	cocos2d::Size									m_BoxSize;
 	int												m_BoxWidthNum , m_BoxHeightNum;
 	Player*											m_Player;
 
+	std::vector<InteractiveObject*>					m_Objects;
 	std::vector<LandGateway*>						m_Gateways;
 	std::vector<CollisionInformation>				m_CollisionInformations;
 	ObjectType										m_MapData[MAX_POSITION_NUM];
-	std::vector<InteractiveObject*>					m_InteractiveObjects; 
+	std::list<InteractiveObject*>					m_ActiveObjects; 
 	std::vector<InteractiveObject*>					m_AddObjects;
-	std::vector<InteractiveObject*>					m_ObjectPositionsHash[MAX_POSITION_NUM];
+	std::vector<InteractiveObject*>					m_PassiveObjectsHash[MAX_POSITION_NUM];
+	std::vector<InteractiveObject*>					m_CollisionCheckHash[MAX_ACTIVE_BOX_NUM];
 };
 

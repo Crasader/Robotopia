@@ -69,11 +69,11 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 		{
 			if (m_State == PS_JUMP)
 			{
-				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+				//GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
 			}
 			if (m_State == PS_HIT)
 			{
-				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+				//GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
 				changeState(PS_STAND);
 				startInvincible();
 			}
@@ -90,11 +90,11 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 		{
 			if (m_State == PS_JUMP)
 			{
-				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+				//GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
 			}
 			if (m_State == PS_HIT)
 			{
-				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+				//GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
 				changeState(PS_STAND);
 				startInvincible();
 			}

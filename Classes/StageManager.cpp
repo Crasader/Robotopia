@@ -10,6 +10,7 @@
 USING_NS_CC;
 
 float StageManager::m_accTimeForShake = 0.f;
+
 StageManager::StageManager()
 {
 }
@@ -350,6 +351,7 @@ void StageManager::hideStore()
 void StageManager::rebirth()
 {
 	m_CurrentFloorNum = 0;
+	m_PlayerInfo = PlayerInfo();
 	for( int stageNum = 1; stageNum <= m_FloorData.stageNum; ++stageNum )
 	{
 		m_WorldScenes[stageNum]->release();
