@@ -70,6 +70,7 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 			if (m_State == PS_JUMP)
 			{
 				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+				changeState(PS_STAND);
 			}
 			if (m_State == PS_HIT)
 			{
@@ -91,6 +92,7 @@ void Player::collisionOccured(InteractiveObject* enemy, Directions dir)
 			if (m_State == PS_JUMP)
 			{
 				GET_EFFECT_MANAGER()->createEffect(ET_PLAYER_LANDING, this->getRect(), DIR_DOWN, 1);
+				changeState(PS_STAND);
 			}
 			if (m_State == PS_HIT)
 			{
