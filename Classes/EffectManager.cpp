@@ -31,6 +31,7 @@ void EffectManager::removeSprAfterAni(Ref* sender)
 
 void EffectManager::createEffect(EffectType selectedEffect, cocos2d::Rect ownRect, Directions collisionDir, int effectPlayNum)
 {
+	return;
 	switch (selectedEffect)
 	{
 	case ET_LINEAR_MISSILE_COLLISION:
@@ -58,7 +59,7 @@ void EffectManager::createEffect(EffectType selectedEffect, cocos2d::Rect ownRec
 
 void EffectManager::createEffect(EffectType selectedEffect, Point ownPoint, Size ownSize, Directions collisionDir, int effectPlayNum)
 {
-	
+	return;
 	Rect ownRect(ownPoint.x, ownPoint.y, ownSize.width, ownSize.width);
 	createEffect(selectedEffect, ownRect, collisionDir, effectPlayNum);
 	return;
@@ -68,6 +69,7 @@ void EffectManager::createEffect(EffectType selectedEffect, Point ownPoint, Size
 
 void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Rect effectRect, int effectPlayNum)
 {
+	return;
 	if (effectRect.size.width >= 0)
 	{
 		switch (selectedEffect)
@@ -144,6 +146,7 @@ void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Re
 
 void EffectManager::createEffectSelectedSizeByUser(EffectType selectedEffect, Point effectPoint, Size effectSize, int effectPlayNum)
 {
+	return;
 	Rect effectRect(effectPoint.x, effectPoint.y, effectSize.width, effectSize.height);
 	createEffectSelectedSizeByUser(selectedEffect, effectRect, effectPlayNum);
 	return;

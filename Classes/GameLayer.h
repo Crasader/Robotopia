@@ -94,6 +94,6 @@ private:
 	std::list<InteractiveObject*>					m_ActiveObjects; 
 	std::vector<InteractiveObject*>					m_AddObjects;
 	std::vector<InteractiveObject*>					m_PassiveObjectsHash[MAX_POSITION_NUM];
-	std::vector<InteractiveObject*>					m_CollisionCheckHash[MAX_ACTIVE_BOX_NUM];
+	std::list<InteractiveObject*>					m_CollisionCheckHash[MAX_ACTIVE_BOX_NUM];
 };
 

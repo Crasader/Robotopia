@@ -244,6 +244,7 @@ void GameLayer::makeCollisionHashTable()
 		sum = y*m_BoxWidthNum + x;
 		if( sum >= 0 && sum < m_BoxHeightNum*m_BoxWidthNum )
 		{
+			m_CollisionCheckHash[sum].clear();
 			m_CollisionCheckHash[sum].push_back( object );
 		}
 	}
@@ -318,14 +319,17 @@ void GameLayer::checkActive()
 
 void GameLayer::removeObjects()
 {
-	for( auto objectIter = m_Objects.begin(); objectIter != m_Objects.end(); )
+	for( auto objectIter = m_ActiveObjects.begin(); objectIter != m_ActiveObjects.end(); )
 	{
 		auto object = *objectIter;
 		
 		if( (object->isDestroyed() || isOutOfStageMap( object->getPosition() )) && object->getType() != OT_PLAYER )
 		{
-			objectIter = m_Objects.erase( objectIter );
+			objectIter = m_ActiveObjects.erase( objectIter );
 			removeChild( object );
+			Vec2 idx = positionToIdxOfStageData( object->getPosition() );
+			int sum = idx.x + idx.y * m_BoxWidthNum;
+			m_CollisionCheckHash[sum].remove( object );
 		}
 		else
 		{
@@ -340,10 +344,12 @@ void GameLayer::removeObject( InteractiveObject* deleteObject )
 	{
 		m_Player = nullptr;
 	}
+	Vec2 idx = positionToIdxOfStageData( deleteObject->getPosition() );
+	int sum = idx.x + idx.y * m_BoxWidthNum;
+	m_CollisionCheckHash[sum].remove( deleteObject );
 	m_ActiveObjects.remove(deleteObject);
 	removeChild( deleteObject );
 	//문제있을지도
-	deleteObject->release(); 
 }
 
 void GameLayer::addMovingBackground( char* BGpath )
@@ -441,7 +447,7 @@ cocos2d::Rect GameLayer::getCurWinRect()
 cocos2d::Rect GameLayer::getCurWinRectByIdx()
 {
 	Size winSize = Director::getInstance()->getWinSize();
-	Vec2 Idx = positionToIdxOfStageData( this->getPosition() );
+	Vec2 Idx = positionToIdxOfStageData( -this->getPosition() );
 	Rect winRectByIdx = Rect( Idx.x - 3 , Idx.y - 3 , winSize.width / m_BoxSize.width + 6 , winSize.height / m_BoxSize.height + 6 );
 	return winRectByIdx;
 }
