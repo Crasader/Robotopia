@@ -528,7 +528,7 @@ void Player::setHp(int hp, bool isRelative /*= false*/)
 
 	if (isRelative)
 	{
-		changeHp += m_Info.hp / m_GearWeight[m_Info.gear];
+		changeHp += m_Info.hp;
 	}
 	if (changeHp > m_Info.maxHp)
 	{
@@ -543,7 +543,7 @@ void Player::setSteam(int steam, bool isRelative /*= false*/)
 
 	if (isRelative)
 	{
-		changeSteam += m_Info.steam / m_GearWeight[m_Info.gear];
+		changeSteam += m_Info.steam;
 	}
 	if (changeSteam > m_Info.maxSteam)
 	{
