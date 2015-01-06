@@ -198,7 +198,7 @@ void GameLayer::update( float dTime )
 		}
 		else
 		{
-			View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
+			//View::setViewPort( this , m_Player->getRect().origin , Point( 0.5 , 0.5 ) );
 		}
 
 		makeHash();
